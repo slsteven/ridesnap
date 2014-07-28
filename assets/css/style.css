@@ -1,16 +1,10 @@
-/* Open Sans */
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,600);
-
-/* Lobster Two */
-@import url(http://fonts.googleapis.com/css?family=Lobster+Two);
-
-/* Droid Serif */
-@import url(http://fonts.googleapis.com/css?family=Droid+Serif:400,400italic);
+/*Roboto*/
+@import url(http://fonts.googleapis.com/css?family=Roboto:300,300italic,400,400italic);
 
 /* Basic CSS starts */
 
 body{
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Roboto', sans-serif;
 	-webkit-font-smoothing: antialiased;
 }
 
@@ -23,9 +17,6 @@ p{
 	padding:0;
 }
 
-a{
-
-}
 
 a:hover{
 	text-decoration:none;
@@ -33,10 +24,6 @@ a:hover{
 
 a:hover,a:active,a:focus {
 	outline: 0;
-}
-
-hr{
-	
 }
 
 :focus {
@@ -105,7 +92,7 @@ hr{
 /* Page Title */
 
 .page-title h3{
-	font-family: 'Lobster Two', cursive;
+	font-family: 'Roboto', sans-serif;
 	font-size:45px;
 	font-weight:400 !important;
 	color:#555;
@@ -118,7 +105,7 @@ hr{
 	line-height:30px;
 	font-weight:normal;
 	color:#555;
-	font-family: 'Droid Serif', serif;
+	font-family: 'Roboto', serif;
 	font-style:italic;
 	max-width:700px;
 	margin:0px auto;
@@ -134,16 +121,13 @@ hr{
 
 /* Basic CSS ends */
 
-.container{
-	width:900px;
-}
-
 .tblue{
 	color:#672cdf;
 }
 
 .backgroundblue{
 	background-color:#672cdf;
+	color: #fff;
 }
 
 .top{
@@ -167,10 +151,10 @@ header{
 }
 
 header .logo h1{
-	font-size:40px;
-	line-height:45px;
+	font-size:20px;
+	line-height:40px;
 	color:#fff;
-	font-family: 'Lobster Two', cursive;
+	font-family: 'Roboto', sans-serif;
 	margin-top:20px !important;
 	text-shadow:1px 1px 1px #777;
 }
@@ -185,27 +169,19 @@ header .navigation a{
 	color:#fff;
 	text-decoration:none;
 	font-size:15px;
-	font-weight:bold;
 	line-height:80px;
 	margin-right:16px;
-	background:rgba(0,0,0,0.3);
-	padding:10px 15px;
-	border-radius:5px;
-	-webkit-transition: background 1s ease;
-	-moz-transition: background 1s ease;
-	-o-transition: background 1s ease;
-	-ms-transition: background 1s ease;
-	transition: background 1s ease;
 }
 
-header .navigation a:hover{
-	color:#fff;
-	background:#333;
-	-webkit-transition: background 1s ease;
-   -moz-transition: background 1s ease;
-   -o-transition: background 1s ease;
-   -ms-transition: background 1s ease;
-   transition: background 1s ease;
+
+header .navigation ul li{
+	display: inline;
+	list-style-type:none;
+    list-style-position: inside;
+    padding:10px 15px;
+}
+header .navigation ul li:hover{
+    border-bottom: 4px solid #672cdf;
 }
 
 /* Hero */
@@ -336,7 +312,6 @@ header .navigation a:hover{
 	border-radius:50%;
 	border:3px solid #672cdf;
 	font-size:18px;
-	color:#000;
 	line-height:100px;
 	text-align:center;
 	text-decoration:none;
@@ -541,7 +516,7 @@ header .navigation a:hover{
 	line-height:28px;
 	font-weight:normal;
 	font-style:italic;
-	font-family: 'Droid Serif', serif;
+	font-family: 'Roboto', serif;
 }
 
 /* Features */
@@ -647,7 +622,7 @@ header .navigation a:hover{
 }
 .service .service-item h4{
 	font-size:20px;
-	font-family: 'Droid Serif', serif;
+	font-family: 'Roboto', serif;
 	color:#672cdf;
 	margin-top:10px !important;
 }
@@ -665,6 +640,9 @@ header .navigation a:hover{
 
 .testimonials.block{
 	padding-bottom:0px !important;
+	background-color: #f2f2f2; 
+	border-top: 1px solid #e2e2e2;
+	padding-bottom: 60px;
 }
 
 .testimonials .item{
@@ -716,6 +694,19 @@ header .navigation a:hover{
 	border-bottom:0px;
 }
 
+.testimonials .carousel-indicators li{
+	margin: 10px;
+	box-shadow: 0 0 0 1px #313447;
+}
+
+.testimonials .carousel-indicators li:hover,
+.testimonials .carousel-indicators li.active {
+	opacity: 1;
+	background-color: #672cdf;
+	box-shadow: 0 0 0 2px #313447;
+	filter: alpha(opacity=100);
+}
+
 .testimonials a span{
 	width:30px;
 	height:60px;
@@ -723,8 +714,7 @@ header .navigation a:hover{
 	line-height:60px;
 	color:#fff;
 	text-align:center;
-	font-size:18px;
-	background:#f75353;
+	font-size:50px;
 }
 
 .testimonials a span.larrow{
@@ -735,7 +725,7 @@ header .navigation a:hover{
 
 .testimonials a span.rarrow{
 	position:absolute;
-	right:0px;
+	right:-15px;
 	margin-top:-165px;
 }
 
