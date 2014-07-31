@@ -210,7 +210,7 @@ header .navigation ul li:hover{
 
 .hero .intro p{
 	color:#eee;
-	font-size:22px;
+	font-size:16px;
 }
 
 .hero .intro a.download{
@@ -231,7 +231,7 @@ header .navigation ul li:hover{
 }
 
 .hero .intro a.download:hover{
-	background:#1c97dd;
+	background:#672cdf;
 	-webkit-transition: background 1s ease;
    -moz-transition: background 1s ease;
    -o-transition: background 1s ease;
@@ -642,7 +642,7 @@ header .navigation ul li:hover{
 	padding-bottom:0px !important;
 	background-color: #f2f2f2; 
 	border-top: 1px solid #e2e2e2;
-	padding-bottom: 60px;
+	padding-top: 20px;
 }
 
 .testimonials .item{
@@ -650,7 +650,7 @@ header .navigation ul li:hover{
 }
 
 .testimonials .carousel-inner{
-	height:200px;
+	height:325px;
 }
 
 .testimonials .item img{
@@ -664,36 +664,61 @@ header .navigation ul li:hover{
 	z-index:100 !important;
 }
 
-.testimonials .carousel-caption img{
-	margin:0 auto;
-	width:150px;
-	border-radius:100px !important;	
-}
 
-.testimonials .content-right p{
-	font-size:25px;	
-	text-align:left;
+.testimonials .carousel-caption p{
+	font-size:15px;	
+	text-align:center;
 	line-height:35px;
-	font-family: 'Droid Serif', serif;
+	font-family: 'Roboto', sans-serif;
 	text-shadow:none;
-	color:#666;
+	color:#000;
+	text-decoration: none;
+	padding-top: 20px;
 }
 
-.testimonials .content-right small{
-	float:left !important;
-	margin-top:15px;
-	font-size:14px;
+.testimonials .carousel-caption small{
+	text-align:center;
+	font-family: 'Roboto', sans-serif;
 	text-shadow:none;
-	padding:5px 10px;
-	font-family: 'Droid Serif', serif;
-	color:#fff;
-	background:#f75353;
+	text-decoration: none;
+}
+
+.testimonials .carousel-caption h2{
+	font-size:40px;	
+	text-align:center;
+	line-height:35px;
+	font-family: 'Roboto', sans-serif;
+	text-shadow:none;
+	color:#672cdf;
+	text-decoration: none;
+	padding-top: 20px;
+	text-transform: uppercase;
 }
 
 .testimonials .carousel a{
 	border-bottom:0px;
 }
 
+.left, .right{
+	right: 0;
+	left: auto;
+	background-image: none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 15%;
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+	filter: alpha(opacity=50);
+	opacity: .5;
+}
+
+.testimonials .carousel-indicators{
+	bottom: 10px;
+}
 .testimonials .carousel-indicators li{
 	margin: 10px;
 	box-shadow: 0 0 0 1px #313447;
