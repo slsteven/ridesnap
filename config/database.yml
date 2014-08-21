@@ -1,0 +1,24 @@
+# Copy this file to database.yml, and make sure database name and authentication info
+# match with your environment.
+# You may need to add a password property if your db is configured to require that.
+
+default: &default
+  adapter:    postgresql
+  encoding:   utf8
+  host:       localhost
+  port:       5432
+  username:   postgres
+  password:   Asdf!234
+  reconnect:  true
+  pool:       25
+
+development: &development
+  <<: *default
+  database:   ridesnap_dev
+
+test: &test
+  <<: *default
+  database:   ridesnap_test
+
+# heroku takes care of this automagically
+# production: &production

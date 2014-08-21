@@ -1,0 +1,122 @@
+.navbar {
+  padding: 0px 25px !important;
+}
+
+.navbar-brand {
+  color: white !important;
+}
+
+.btn {
+  border-radius: 0 !important;
+}
+
+.btn-wide {
+  padding: 6px 40px !important;
+}
+
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active,
+.btn-default.active,
+.open .dropdown-toggle.btn-default {
+  color: #333 !important;
+  background-color: #ebebeb !important;
+  border-color: #adadad !important;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  color: #fff !important;
+  background-color: #3276b1 !important;
+  border-color: #285e8e !important;
+}
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active,
+.open .dropdown-toggle.btn-success {
+  color: #fff !important;
+  background-color: #47a447 !important;
+  border-color: #398439 !important;
+}
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active,
+.btn-info.active,
+.open .dropdown-toggle.btn-info {
+  color: #fff !important;
+  background-color: #39b3d7 !important;
+  border-color: #269abc !important;
+}
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active,
+.btn-warning.active,
+.open .dropdown-toggle.btn-warning {
+  color: #fff !important;
+  background-color: #ed9c28 !important;
+  border-color: #d58512 !important;
+}
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active,
+.btn-danger.active,
+.open .dropdown-toggle.btn-danger {
+  color: #fff !important;
+  background-color: #d2322d !important;
+  border-color: #ac2925 !important;
+}
+
+.btn-purple {
+  color: #fff !important;
+  background-color: $purple !important;
+  border-color: #5a1fd2 !important;
+}
+.btn-purple:hover,
+.btn-purple:focus,
+.btn-purple:active,
+.btn-purple.active,
+.open .dropdown-toggle.btn-purple {
+  color: #fff !important;
+  background-color: #571ccf !important;
+  border-color: #4a0fc2 !important;
+}
+.btn:active,
+.btn.active,
+.open .dropdown-toggle.btn {
+  background-image: none !important;
+}
+.btn-purple.disabled,
+.btn-purple[disabled],
+fieldset[disabled] .btn-purple,
+.btn-purple.disabled:hover,
+.btn-purple[disabled]:hover,
+fieldset[disabled] .btn-purple:hover,
+.btn-purple.disabled:focus,
+.btn-purple[disabled]:focus,
+fieldset[disabled] .btn-purple:focus,
+.btn-purple.disabled:active,
+.btn-purple[disabled]:active,
+fieldset[disabled] .btn-purple:active,
+.btn-purple.disabled.active,
+.btn-purple[disabled].active,
+fieldset[disabled] .btn-purple.active {
+  background-color: $purple !important;
+  border-color: #5a1fd2 !important;
+}
+.btn-purple .badge {
+  color: $purple !important;
+  background-color: #fff !important;
+}
+
+.btn-circle {
+  height: 80px;
+  width: 80px;
+  border-radius: 40px !important;
+  border-width: 2px;
+  background-color: white !important;
+  color: #333 !important;
+  font-weight: bold;
+}

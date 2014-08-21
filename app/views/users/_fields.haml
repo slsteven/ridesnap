@@ -1,0 +1,13 @@
+= render 'shared/error_messages', object: f.object
+.form-group
+  = f.label :name, class: "col-lg-2 control-label"
+  .col-lg-8
+    = f.text_field :name, class: 'form-control', placeholder: 'John Smith'
+.form-group
+  = f.label :email, class: "col-lg-2 control-label"
+  .col-lg-8
+    = f.text_field :email, class: 'form-control', placeholder: 'john.smith@email.com'
+.form-group
+  = f.label :password, class: "col-lg-2 control-label"
+  .col-lg-8
+    = f.password_field :password, class: 'form-control'

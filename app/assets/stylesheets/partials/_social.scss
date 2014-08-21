@@ -1,0 +1,15 @@
+svg.social-icon {
+  fill: white;
+  &.facebook:hover {
+    fill: #3B5998;
+  }
+  &.twitter:hover {
+    fill: #55ACEE;
+  }
+  &.linkedin:hover {
+    fill: #0976b4;
+  }
+  &.google:hover {
+    fill: #DD4B39;
+  }
+}
