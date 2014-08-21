@@ -1,3 +1,75 @@
-.container
-  %h1.text-center
-    Home
+.jumbotron.black
+  .container.text-center
+    %h1 AT YOUR SERVICE
+    %p We are RideSnap, a concierge service that takes care of all the worry and work that comes with selling a car.
+    = link_to 'Get Started', start_path, class: 'btn btn-purple btn-wide btn-lg'
+
+.jumbotron.white
+  .container.text-center
+    %h1.purple Sell your car with RideSnap
+    %p because you value your:
+    %ul.nav#time-money{role: 'tablist'}
+      %li
+        = link_to 'Time', '#time', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple btn-circle'
+      %li
+        = link_to 'Money', '#money', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple btn-circle'
+    .tab-content
+      .tab-pane.active#or
+        %p.purple Whether it's your time or your money, you can count on us to make sure neither is wasted.
+        %p
+          %small
+            Click on one of the buttons above to see how we do our part to save you time and money.
+      .tab-pane#time
+        time
+      .tab-pane#money
+        money
+
+.jumbotron.purple
+  .container.text-center
+    %p
+      %small
+        %b
+          NOW AVAILABLE IN
+        %br
+        _______
+    %h1 The San Francisco Bay Area
+    %p
+      COMING SOON:
+      %b
+        CHICAGO
+    %p
+      %small
+        Don't see your city? Let us know where you'd like to see RideSnap next!
+    .col-lg-6.col-lg-offset-3
+      = form_tag city_path do
+        .input-group
+          = text_field_tag :suggestion, nil, placeholder: 'Tim Buk Too', class: 'form-control'
+          %span.input-group-btn
+            = submit_tag 'Submit', class: 'btn btn-purple'
+
+.jumbotron.whitesmoke
+  .container.text-center
+    %p
+      %small
+        %b
+          HOW IT WORKS
+        %br
+        _______
+      %ul.nav#how-it-works{role: 'tablist'}
+        %li.active
+          = link_to 'STEP 1', '#step_1', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple'
+        %li
+          = link_to 'STEP 2', '#step_2', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple'
+        %li
+          = link_to 'STEP 3', '#step_3', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple'
+        %li
+          = link_to 'STEP 4', '#step_4', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple'
+      .tab-content
+        .tab-pane.active#step_1
+          hello
+        .tab-pane#step_2
+          world
+        .tab-pane#step_3
+          nice to
+        .tab-pane#step_4
+          meet you

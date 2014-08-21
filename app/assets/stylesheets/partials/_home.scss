@@ -1,0 +1,18 @@
+ul#time-money {
+  font-size: 0px;
+  li {
+    display: inline-block;
+    margin: 0 5px;
+  }
+}
+ul#how-it-works {
+  font-size: 0px;
+  li {
+    display: inline-block;
+    margin-left: -1px;
+    &:not(.active) a.btn {
+      background-color: whitesmoke !important;
+      color: #333 !important;
+    }
+  }
+}

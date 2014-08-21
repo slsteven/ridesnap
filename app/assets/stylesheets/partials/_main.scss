@@ -3,7 +3,6 @@ html, body {
   height: 100%;
   .wrapper {
     min-height: 100%;
-    padding-top: 20px;
   }
   header {
     background-color: rgba(0,0,0,0.2) !important;
@@ -30,4 +29,8 @@ html, body {
   bottom: 82px;
   float: left;
   display: none;
+}
+
+.purple {
+  color: $purple
 }
