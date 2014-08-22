@@ -130,18 +130,18 @@ fieldset[disabled] .btn-purple.active {
 
 .jumbotron {
   margin: 0px;
-  &.white {
+  &.white-bg {
     background-color: white;
   }
-  &.black {
+  &.black-bg {
     background-color: black;
     color: white;
   }
-  &.purple {
+  &.purple-bg {
     background-color: $purple;
     color: white;
   }
-  &.whitesmoke {
+  &.whitesmoke-bg {
     background-color: whitesmoke;
   }
 }
