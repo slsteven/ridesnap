@@ -1,0 +1,76 @@
+- provide(:title, 'Agent')
+
+.jumbotron.black-bg
+  .container.text-center
+    %h1 BECOME AND AGENT.
+    %p Earning money couldn't be easier.
+
+.jumbotron.white-bg
+  .container.text-center
+    %h2.purple
+      JOINING THE
+      %b A
+      TEAM
+    %p Don't worry about listing prices, negotiations, and finding your own sellers and buyers - we at RideSnap take care of that for you. Simply coordinate with a buyer, give a test drive, and earn money.
+    %hr
+    %p Getting started is easy! Just do the following 3 steps:
+    %ol
+      %li.purple Tell us about yourself and provide the necessary documents.
+      %li.purple Wait for clearance and approval.
+      %li.purple You're set!
+    %p
+      %small You'll then be ready to photograph cars and schedule test drives with potential buyers!
+
+.jumbotron.whitesmoke-bg
+  .container.text-center
+    %h2.purple Agent Responsibilities
+    .row
+      .col-md-6.col-xs-12
+        %p
+          %b REQUIREMENTS
+        %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        %ul
+          %li Your own car
+          %li iPhone or Android smartphone
+          %li Driver's license and valid insurance
+          %li Clean driving record
+          %li Attentive to details and always on time
+          %li Friendly, outgoing, genuinely kind
+          %li Must be 18 or older
+      .col-md-6.col-xs-12
+        %p
+          %b DUTIES
+        %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        %ul
+          %li Be the face of the company by interacting with customers
+          %li Make up to 20% of the profit RideSnap makes!
+          %li Choose when you want to work
+          %li Manage the cars we assign to you
+          %li Coordinate test drives around the buyer's schedule
+
+.jumbotron.white-bg
+  .container.text-center
+    %h2.purple Apply Today.
+    %br
+    %br
+    = form_tag agent_users_path, class: 'form-inline', id: 'vehicle-inspection', role: 'form', remote: true do
+      .form-group
+        = label_tag :name, nil, class: 'sr-only'
+        = text_field_tag :name, nil, placeholder: 'Full Name', class: 'form-control'
+      .form-group
+        = label_tag :zip_code, nil, class: 'sr-only'
+        = text_field_tag :zip_code, nil, placeholder: 'Zip Code', class: 'form-control'
+      %br
+      .form-group
+        = label_tag :phone, nil, class: 'sr-only'
+        = text_field_tag :phone, nil, placeholder: 'Phone', class: 'form-control'
+      .form-group
+        = label_tag :email, nil, class: 'sr-only'
+        = text_field_tag :email, nil, placeholder: 'Email', class: 'form-control'
+      %br
+      .form-group
+        = label_tag :reference, nil, class: 'sr-only'
+        = text_field_tag :reference, nil, placeholder: 'Referred By (optional)', class: 'form-control'
+      %br
+      .form-group
+        = submit_tag 'Apply', class: 'btn btn-purple btn-wide'

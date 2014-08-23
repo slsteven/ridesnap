@@ -6,19 +6,23 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   # Example of regular route:
-  get '/how'          => 'pages#how'
+  get '/how'          => 'pages#home'
   get '/start'        => 'pages#start'
   get '/about'        => 'pages#about'
   get '/contact'      => 'pages#contact'
   get '/faq'          => 'pages#faq'
-  get '/agent'        => 'users#agent'
+  get '/agent'        => 'pages#agent'
   get '/city'         => 'pages#city'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
-  resources :users
+  resources :users do
+    collection do
+      post 'agent'
+    end
+  end
   resources :vehicles do
     collection do
       get 'query'
