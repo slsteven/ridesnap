@@ -58,13 +58,18 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'better_errors'
   gem 'pry-rails'
-  # Use debugger
   # gem 'debugger'
 end
 
-gem 'httparty'
-gem 'nokogiri'
+group :production do
+  # necessary for heroku
+  gem 'rails_12factor'
+  gem 'rails_serve_static_assets'
+end
+
+gem 'httparty' # used for making zipcode requests to google to find city/state
+gem 'nokogiri' # scraper... but only using internally to build inline SVGs
 gem 'meta-tags'
-gem 'rails_12factor'
-gem 'rails_serve_static_assets'
+
 gem 'rails_config'
+
