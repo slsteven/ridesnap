@@ -1,7 +1,8 @@
 !!!
 %html
   %head
-    %title= full_title(yield(:title))
+    %title
+      = full_title(yield(:title))
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
@@ -11,7 +12,7 @@
     = render 'layouts/shim'
     - if Settings.google_analytics.enabled
       = render 'shared/ga'
-  %body
+  = content_tag :body, body_attributes do
     .wrapper
       = render 'layouts/header'
       .content

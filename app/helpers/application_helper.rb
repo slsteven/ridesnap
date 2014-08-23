@@ -1,4 +1,13 @@
 module ApplicationHelper
+
+  def body_attributes popup_window=nil, dashboard=nil
+    action     = params[:action]
+    controller = params[:controller]
+    {
+      class: ["main", action, controller].join(" ")
+    }
+  end
+
   # Returns the full title on a per-page basis.
   def full_title(page_title)
     base_title = 'RideSnap'
