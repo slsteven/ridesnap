@@ -1,0 +1,146 @@
+- provide(:title, 'Home')
+
+.jumbotron.black-bg
+  .container.text-center
+    %h1 AT YOUR SERVICE.
+    %p We are RideSnap, a concierge service that takes care of all the worry and work that comes with selling a car.
+    = link_to 'Get Started', start_path, class: 'btn btn-purple btn-wide btn-lg'
+
+.jumbotron.white-bg
+  .container.text-center
+    %h1.purple Sell your car with RideSnap.
+    %p because you value your:
+    %ul.nav#time-money{role: 'tablist'}
+      %li
+        = link_to 'Time', '#time', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple btn-circle'
+      %li
+        = link_to 'Money', '#money', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple btn-circle'
+    %br
+    %br
+    .tab-content
+      .tab-pane.fade.in.active#or
+        .col-sm-8.col-sm-offset-2
+          %p.purple Whether it's your time or your money, you can count on us to make sure neither is wasted.
+          %p
+            %small
+              Click on one of the buttons above to see how we do our part to save you time and money.
+      .tab-pane.fade#time
+        .col-sm-8.col-sm-offset-2
+          %p.purple We understand that everybody lives a busy lifestyle. That's why we've designed our service to be simple.
+        .row
+          .col-sm-4.col-xs-12
+            %h2
+              %span.glyphicon.glyphicon-time
+            %p.purple Time saver.
+            %p
+              %small
+                No more posting ads and filtering through low ball offers, organizing test drives, and meetings with inspectors.
+          .col-sm-4.col-xs-12
+            %h2
+              %span.glyphicon.glyphicon-calendar
+            %p.purple We work with your schedule.
+            %p
+              %small
+                Not sure when or where you can pencil us in for a car inspection? You pick the location and we come to you to get started.
+          .col-sm-4.col-xs-12
+            %h2
+              %span.glyphicon.glyphicon-bell
+            %p.purple Stay informed.
+            %p
+              %small
+                We find your buyers and handle all the logistics while keeping you updated along the way.
+      .tab-pane.fade#money
+        .col-sm-8.col-sm-offset-2
+          %p.purple We want to help you get the highest value for your car, because we don't buy cars to resell like a dealership &#8212; we are actually on your side.
+        .row
+          .col-sm-4.col-xs-12
+            %h2
+              %span.glyphicon.glyphicon-eye-open
+            %p.purple Total transparency.
+            %p
+              %small
+                No upfront costs or hidden fees. Don't pay us until your car is sold.
+          .col-sm-4.col-xs-12
+            %h2
+              %span.glyphicon.glyphicon-usd
+            %p.purple The more, the better.
+            %p
+              %small
+                The more the car sells for, the more money there is for both of us. It's as simple as that!
+          .col-sm-4.col-xs-12
+            %h2
+              %span.glyphicon.glyphicon-lock
+            %p.purple Secure transactions.
+            %p
+              %small
+                We write a check to you, not the buyer. So don't worry about getting counterfeit money or bad cashier checks.
+
+.jumbotron.purple-bg
+  .container.text-center
+    %p
+      %small
+        %b
+          NOW AVAILABLE IN
+        %br
+        %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    %h1 The San Francisco Bay Area.
+    %p
+      COMING SOON:
+      %b
+        CHICAGO
+    %p
+      %small
+        Don't see your city? Let us know where you'd like to see RideSnap next!
+    .col-lg-4.col-lg-offset-4
+      = form_tag city_path do
+        .input-group
+          = text_field_tag :suggestion, nil, placeholder: 'Timbuktu', class: 'form-control'
+          %span.input-group-btn
+            = submit_tag 'Submit', class: 'btn btn-default'
+
+.jumbotron.whitesmoke-bg
+  .container.text-center
+    %p
+      %small
+        %b
+          HOW IT WORKS
+        %br
+        %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      %ul.nav#how-it-works{role: 'tablist'}
+        %li.active
+          = link_to 'STEP 1', '#step_1', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple'
+        %li
+          = link_to 'STEP 2', '#step_2', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple'
+        %li
+          = link_to 'STEP 3', '#step_3', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple'
+        %li
+          = link_to 'STEP 4', '#step_4', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple'
+      .tab-content
+        .tab-pane.fade.in.active#step_1
+          %h1.purple GIVE US THE BASICS.
+          %p We start by getting basic information about your car, like its make, model, and year so we can give you an idea of a potential listing price compared to a dealership.
+          = link_to 'Get Started', start_path, class: 'btn btn-purple btn-wide btn-lg'
+        .tab-pane.fade#step_2
+          %h1.purple MAKE AN APPOINTMENT.
+          %p Schedule an appointment at any location and we will come to you. We want to meet to do a few things in person.
+          %p.purple 1. Inspect your car and discuss a competitive listing price based on your needs.
+          %p.purple 2. Collect the car title and additional paperwork so we can have it prepared for prospective buyers.
+          %p.purple
+            3. Give you a
+            %b
+              BUY IT NOW
+            price.
+        .tab-pane.fade#step_3
+          %h1.purple SIT BACK AND RELAX.
+          %p Continue using your car if you need to. We take care of everything from here. We clean your car, photograph it, inspect it, post ads, and schedule test drives. We want to manage the complete process so you don't lift a finger.
+        .tab-pane.fade#step_4
+          %h1.purple COLLECT YOUR MONEY.
+          %p
+            Once your car is sold, we will write you a check. We
+            %b
+              guarantee that your car will sell in 31 days
+            or we give you the option of having us purchase it from you for the
+            %b
+              BUY IT NOW
+            price. You make money no matter what.
+          = link_to 'Get Started', start_path, class: 'btn btn-purple btn-wide btn-lg'

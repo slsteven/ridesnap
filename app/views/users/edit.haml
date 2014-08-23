@@ -1,0 +1,11 @@
+- provide(:title, 'Edit user')
+
+.container
+  .row
+    .col-lg-8.col-lg-offset-2.well
+      %h1.col-lg-offset-2.text-center Update your profile
+      = form_for @user, html: {class: 'form-horizontal', role: 'form'} do |f|
+        = render 'fields', f: f
+        .form-group
+          .col-lg-offset-2.col-lg-8
+            = f.submit 'Save changes', class: 'btn btn-primary'

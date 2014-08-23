@@ -1,0 +1,29 @@
+%h1.purple Here's what we found.
+%p
+  = "#{'year'} #{'make'} #{'model'} - #{'number'} miles in #{'condition'} condition"
+  = link_to 'Edit', '#query', role: 'tab', data: {toggle: 'tab'}
+%br
+%br
+.row
+  .col-sm-4.col-xs-12
+    .circle.grey-border
+      .words
+        %h4 Trade in
+        %h2= "$9,500"
+  .col-sm-4.col-xs-12
+    .circle.purple-border
+      .words
+        %h4 RideSnap
+        %h2= "$11,000"
+  .col-sm-4.col-xs-12
+    .circle.black-border
+      .words
+        %h4 Buy it Now
+        %h2= "$10,500"
+%br
+%br
+= link_to 'New Quote', '#query', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-default btn-wide', onclick: "$('form#vehicle-query').reset;"
+= link_to 'Schedule with RideSnap', '#schedule', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple btn-wide btn-lg'
+%br
+%br
+%br

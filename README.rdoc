@@ -1,0 +1,9 @@
+== RideSnap
+
+This is a private repo for RideSnap.
+
+* Ruby 2.1
+
+* Rails 4.1
+
+* PostgreSQL

@@ -1,0 +1,10 @@
+# global settings
+
+# ex:
+# my_section:
+#   some_entry: some_value
+
+# Settings.my_section.some_entry == some_value
+
+google_analytics:
+  enabled: false

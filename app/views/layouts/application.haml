@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %title= full_title(yield(:title))
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    = render 'layouts/shim'
+    - if Settings.google_analytics.enabled
+      = render 'shared/ga'
+  %body
+    .wrapper
+      = render 'layouts/header'
+      .content
+        = render 'shared/page_alerts'
+        = yield
+        = debug(params) if Rails.env.development?
+    = render 'layouts/footer'
+

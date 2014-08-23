@@ -1,0 +1,36 @@
+// keeps footer stuck to bottom
+html, body {
+  height: 100%;
+  .wrapper {
+    min-height: 100%;
+  }
+  header {
+    background-color: rgba(0,0,0,0.2) !important;
+    border: none !important;
+    border-radius: 0 !important;
+    li a { color: white !important; }
+  }
+  footer {
+    margin: -75px auto 0 auto;
+    border: none !important;
+    border-radius: 0 !important;
+    &.navbar {
+      margin-bottom: 0px !important;
+      li a { color: white !important; }
+    }
+  }
+  .content {
+    padding-bottom: 70px;
+  }
+}
+
+.debug_dump {
+  position: absolute;
+  bottom: 82px;
+  float: left;
+  display: none;
+}
+
+.purple {
+  color: $purple !important;
+}

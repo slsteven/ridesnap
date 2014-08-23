@@ -1,0 +1,17 @@
+- provide(:title, 'Start')
+
+.jumbotron.black-bg
+  .container.text-center
+    %h1 GET STARTED.
+    %p Get a quote. Schedule an inspection. Simple.
+
+.container.text-center
+  .tab-content#vehicle_query
+    .tab-pane.fade#query
+      = render 'vehicles/query'
+    .tab-pane.fade.in.active#query_result
+      = render 'vehicles/query_result'
+    .tab-pane.fade#schedule
+      = render 'vehicles/schedule'
+    .tab-pane.fade#schedule_confirm
+      = render 'vehicles/schedule_confirm'
