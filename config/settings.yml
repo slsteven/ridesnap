@@ -8,3 +8,11 @@
 
 google_analytics:
   enabled: false
+
+meta_tags:
+  - sell
+  - sale
+  - car
+  - vehicle
+  - concierge
+  - full service

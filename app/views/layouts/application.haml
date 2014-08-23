@@ -5,6 +5,9 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    - set_meta_tags viewport: 'width=device-width, initial-scale=1.0'
+    - set_meta_tags keywords: Settings.meta_tags
+    = display_meta_tags
     = render 'layouts/shim'
     - if Settings.google_analytics.enabled
       = render 'shared/ga'
