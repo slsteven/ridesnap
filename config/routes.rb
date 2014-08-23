@@ -9,11 +9,11 @@ Rails.application.routes.draw do
   get '/agent'        => 'users#agent'
   get '/city'         => 'pages#city'
 
+  resources :users
   resources :vehicles do
     collection do
       get 'query'
       post 'schedule_inspection'
     end
   end
-  resources :users
 end

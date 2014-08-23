@@ -11,7 +11,7 @@
     = render 'layouts/shim'
     - if Settings.google_analytics.enabled
       = render 'shared/ga'
-  %body
+  = content_tag :body, body_attributes do
     .wrapper
       = render 'layouts/header'
       .content
