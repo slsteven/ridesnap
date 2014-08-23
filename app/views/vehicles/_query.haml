@@ -1,0 +1,29 @@
+%h1.purple Tell us about your ride.
+%p Get an estimate of what your car listing price could be.
+%br
+%br
+= form_tag query_vehicles_path, method: :get, class: 'form-inline', id: 'vehicle-query', role: 'form', remote: true do
+  .form-group
+    = label_tag :year, nil, class: 'sr-only'
+    = select_tag :year, options_for_select(@years, Date.today.year), class: 'form-control', prompt: 'Year'
+  .form-group
+    = label_tag :make, nil, class: 'sr-only'
+    = select_tag :make, options_for_select(@makes), prompt: 'Make', class: 'form-control', disabled: true
+  .form-group
+    = label_tag :model, nil, class: 'sr-only'
+    = select_tag :model, options_for_select(@models), prompt: 'Model', class: 'form-control', disabled: true
+  .form-group
+    = label_tag :trim, nil, class: 'sr-only'
+    = select_tag :trim, options_for_select(@trims), prompt: 'Trim', class: 'form-control', disabled: true
+  %br
+  .form-group
+    = label_tag :mileage, nil, class: 'sr-only'
+    = select_tag :mileage, options_for_select(@miles), prompt: 'Mileage', class: 'form-control'
+  .form-group
+    = label_tag :condition, nil, class: 'sr-only'
+    = select_tag :condition, options_for_select(@conditions), prompt: 'Condition', class: 'form-control'
+  %br
+  .form-group
+    = submit_tag 'Get a Quote', class: 'btn btn-purple btn-wide'
+%br
+%br

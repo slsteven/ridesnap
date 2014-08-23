@@ -1,3 +1,5 @@
+- provide(:title, 'Home')
+
 .jumbotron.black-bg
   .container.text-center
     %h1 AT YOUR SERVICE.
@@ -16,13 +18,13 @@
     %br
     %br
     .tab-content
-      .tab-pane.active#or
+      .tab-pane.fade.in.active#or
         .col-sm-8.col-sm-offset-2
           %p.purple Whether it's your time or your money, you can count on us to make sure neither is wasted.
           %p
             %small
               Click on one of the buttons above to see how we do our part to save you time and money.
-      .tab-pane#time
+      .tab-pane.fade#time
         .col-sm-8.col-sm-offset-2
           %p.purple We understand that everybody lives a busy lifestyle. That's why we've designed our service to be simple.
         .row
@@ -47,7 +49,7 @@
             %p
               %small
                 We find your buyers and handle all the logistics while keeping you updated along the way.
-      .tab-pane#money
+      .tab-pane.fade#money
         .col-sm-8.col-sm-offset-2
           %p.purple We want to help you get the highest value for your car, because we don't buy cars to resell like a dealership &#8212; we are actually on your side.
         .row
@@ -114,11 +116,11 @@
         %li
           = link_to 'STEP 4', '#step_4', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple'
       .tab-content
-        .tab-pane.active#step_1
+        .tab-pane.fade.in.active#step_1
           %h1.purple GIVE US THE BASICS.
           %p We start by getting basic information about your car, like its make, model, and year so we can give you an idea of a potential listing price compared to a dealership.
           = link_to 'Get Started', start_path, class: 'btn btn-purple btn-wide btn-lg'
-        .tab-pane#step_2
+        .tab-pane.fade#step_2
           %h1.purple MAKE AN APPOINTMENT.
           %p Schedule an appointment at any location and we will come to you. We want to meet to do a few things in person.
           %p.purple 1. Inspect your car and discuss a competitive listing price based on your needs.
@@ -128,10 +130,10 @@
             %b
               BUY IT NOW
             price.
-        .tab-pane#step_3
+        .tab-pane.fade#step_3
           %h1.purple SIT BACK AND RELAX.
           %p Continue using your car if you need to. We take care of everything from here. We clean your car, photograph it, inspect it, post ads, and schedule test drives. We want to manage the complete process so you don't lift a finger.
-        .tab-pane#step_4
+        .tab-pane.fade#step_4
           %h1.purple COLLECT YOUR MONEY.
           %p
             Once your car is sold, we will write you a check. We

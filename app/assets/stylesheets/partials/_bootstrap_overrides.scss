@@ -121,7 +121,7 @@ fieldset[disabled] .btn-purple.active {
 .btn-circle {
   height: 80px;
   width: 80px;
-  border-radius: 40px !important;
+  border-radius: 50% !important;
   border-width: 2px;
   background-color: white !important;
   color: #333 !important;
@@ -144,4 +144,8 @@ fieldset[disabled] .btn-purple.active {
   &.whitesmoke-bg {
     background-color: whitesmoke;
   }
+}
+
+.btn:focus {
+  outline: none !important;
 }
