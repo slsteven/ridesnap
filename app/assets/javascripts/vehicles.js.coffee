@@ -1,4 +1,4 @@
-jQuery ->
+$(document).on 'ready page:load', ->
   circleSize()
   $(window).resize ->
     circleSize()

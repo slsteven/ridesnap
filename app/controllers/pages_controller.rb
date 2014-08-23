@@ -3,6 +3,9 @@ class PagesController < ApplicationController
   def about
   end
 
+  def agent
+  end
+
   def contact
   end
 
@@ -10,9 +13,6 @@ class PagesController < ApplicationController
   end
 
   def home
-  end
-
-  def how
   end
 
   def start

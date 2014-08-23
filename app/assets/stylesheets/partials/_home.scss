@@ -9,6 +9,7 @@ ul#how-it-works {
   font-size: 0px;
   li {
     display: inline-block;
+    margin-top: -1px;
     margin-left: -1px;
     &:not(.active) a.btn {
       background-color: whitesmoke !important;

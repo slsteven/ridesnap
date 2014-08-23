@@ -1,4 +1,4 @@
-%h1.purple Here's what we found.
+%h2.purple Here's what we found.
 %p
   = "#{'year'} #{'make'} #{'model'} - #{'number'} miles in #{'condition'} condition"
   = link_to 'Edit', '#query', role: 'tab', data: {toggle: 'tab'}
@@ -24,6 +24,3 @@
 %br
 = link_to 'New Quote', '#query', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-default btn-wide', onclick: "$('form#vehicle-query').reset;"
 = link_to 'Schedule with RideSnap', '#schedule', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple btn-wide btn-lg'
-%br
-%br
-%br

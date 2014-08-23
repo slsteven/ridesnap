@@ -1,7 +1,9 @@
 - provide(:title, 'Contact')
 
-.container
-  %h1.text-center
-    Contact
-  %p
-    = mail_to 'blah@blah.com'
+.jumbotron.black-bg
+  .container.text-center
+    %h1 Contact us.
+
+.jumbotron.white-bg
+  .container.text-center
+    %p= mail_to 'info@ridesnap.com'
