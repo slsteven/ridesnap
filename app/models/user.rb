@@ -1,4 +1,4 @@
-class User < ActionRecord::Base
+class User < ActiveRecord::Base
   include ActiveModel::SecurePassword
 
   before_save { self.email = email.downcase.strip }
