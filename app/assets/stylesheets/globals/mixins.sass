@@ -1,8 +1,3 @@
-@mixin browser($property, $value) 
-  -webkit-#$property: #$value
-  -moz-#$property: #$value
-  -ms-#$property: #$value
-  #$property: #$value
 @mixin display-flex 
   display: -webkit-flex
   display: -moz-flex
@@ -17,6 +12,6 @@
   background-position: center
   background-repeat: no-repeat
   background-size: cover
-@mixin border-box 
-  @include browser(box-sizing, border-box)
+@mixin border-box
+  box-sizing: border-box
 
