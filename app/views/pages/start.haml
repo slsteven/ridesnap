@@ -7,12 +7,21 @@
 
 .jumbotron.white-bg
   .container.text-center
-    .tab-content#vehicle_query
-      .tab-pane.fade#query
+    %ul#vehicle-query-nav.nav.nav-tabs.hidden{role: 'tablist'}
+      %li.active
+        = link_to '', '#query', role: 'tab', data: {toggle: 'tab'}
+      %li
+        = link_to '', '#query-result', role: 'tab', data: {toggle: 'tab'}
+      %li
+        = link_to '', '#schedule', role: 'tab', data: {toggle: 'tab'}
+      %li
+        = link_to '', '#schedule-confirm', role: 'tab', data: {toggle: 'tab'}
+    .tab-content#vehicle-query
+      .tab-pane.fade.in.active#query
         = render 'vehicles/query'
-      .tab-pane.fade.in.active#query_result
+      .tab-pane.fade#query-result
         = render 'vehicles/query_result'
       .tab-pane.fade#schedule
         = render 'vehicles/schedule'
-      .tab-pane.fade#schedule_confirm
+      .tab-pane.fade#schedule-confirm
         = render 'vehicles/schedule_confirm'

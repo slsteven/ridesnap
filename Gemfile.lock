@@ -123,6 +123,8 @@ GEM
     rake (10.3.2)
     rdoc (4.1.1)
       json (~> 1.4)
+    responders (1.1.1)
+      railties (>= 3.2, < 4.2)
     rspec-core (3.0.3)
       rspec-support (~> 3.0.0)
     rspec-expectations (3.0.3)
@@ -202,6 +204,7 @@ DEPENDENCIES
   rails_12factor
   rails_config
   rails_serve_static_assets
+  responders
   rspec-rails (~> 3.0.0)
   sass-rails (>= 3.2)
   sdoc (~> 0.4.0)

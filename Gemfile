@@ -45,6 +45,9 @@ gem 'bcrypt', '~> 3.1.7'
 # Use thin as the app server
 gem 'thin' # this can go into the dev group if using passenger / nginx in production
 
+# This was taken out of Rails 4.2
+gem 'responders'
+
 group :development do
   # Use Capistrano for deployment
   # gem 'capistrano',  '~> 3.1'

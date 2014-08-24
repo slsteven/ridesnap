@@ -27,7 +27,15 @@ class VehiclesController < ApplicationController
   end
 
   def query
+    respond_to do |format|
+      format.js { render layout: false }
+    end
+  end
 
+  def schedule_inspection
+    respond_to do |format|
+      format.js { render layout: false }
+    end
   end
 
   def show
