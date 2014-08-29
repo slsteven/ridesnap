@@ -24,4 +24,4 @@
     = select_tag :condition, options_for_select(@conditions), prompt: 'Condition', class: 'form-control'
   %br
   .form-group
-    = submit_tag 'Get a Quote', class: 'btn btn-purple btn-wide'
+    = submit_tag 'Get a Quote', class: 'btn btn-purple btn-wide', data: { disable_with: "Please wait..." }

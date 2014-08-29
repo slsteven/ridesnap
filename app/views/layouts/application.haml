@@ -9,7 +9,7 @@
     - set_meta_tags viewport: 'width=device-width, initial-scale=1.0'
     - set_meta_tags keywords: Settings.meta_tags
     = display_meta_tags
-    = render 'layouts/shim'
+    = render 'layouts/shim.html.erb'
     - if Settings.google_analytics.enabled
       = render 'shared/ga'
   = content_tag :body, body_attributes do

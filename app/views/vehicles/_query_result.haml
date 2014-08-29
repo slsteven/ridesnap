@@ -5,21 +5,24 @@
 %br
 %br
 .row
-  .col-sm-4.col-xs-12
-    .circle.grey-border
-      .words
-        %h4 Trade in
-        %h2= "$9,500"
-  .col-sm-4.col-xs-12
-    .circle.purple-border
-      .words
-        %h4 RideSnap
-        %h2= "$11,000"
-  .col-sm-4.col-xs-12
-    .circle.black-border
-      .words
-        %h4 Buy it Now
-        %h2= "$10,500"
+  .col-sm-4.col-xs-12.left
+    %svg.circle.grey{viewBox:'0 0 100 100'}
+      %circle{cx:'50', cy:'50', r:'49', 'stroke-width' => 1}
+    .words
+      %h4 Trade in
+      %h2= "$9,500"
+  .col-sm-4.col-xs-12.center
+    %svg.circle.purple{viewBox:'0 0 100 100'}
+      %circle{cx:'50', cy:'50', r:'49', 'stroke-width' => 1}
+    .words
+      %h4 RideSnap
+      %h2= "$11,000"
+  .col-sm-4.col-xs-12.right
+    %svg.circle.black{viewBox:'0 0 100 100'}
+      %circle{cx:'50', cy:'50', r:'49', 'stroke-width' => 1}
+    .words
+      %h4 Buy it Now
+      %h2= "$10,500"
 %br
 %br
 = link_to 'New Quote', '#query', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-default btn-wide', onclick: "$('form#vehicle-query').reset;"

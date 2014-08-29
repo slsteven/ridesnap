@@ -10,26 +10,21 @@ form#vehicle-inspection {
   }
 }
 
-.circle {
-  border-radius: 50%;
-  margin: 20px auto;
-  min-width: 160px;
-  min-height: 160px;
-  max-width: 260px;
-  max-height: 260px;
-  h1,h2,h3,h4,h5,h6 {
-    margin: 0;
+svg.circle {
+  fill: none;
+  &:hover {
+
   }
-  &.grey-border {
-    width: 50%;
-    border: 2px solid grey;
+  &.grey {
+    stroke: lightgrey;
+    color: lightgrey !important;
   }
-  &.purple-border {
-    width: 70%;
-    border: 2px solid $purple;
+  &.purple {
+    stroke: $purple;
+    color: $purple !important;
   }
-  &.black-border {
-    width: 50%;
-    border: 2px solid black;
+  &.black {
+    stroke: black;
+    color: black !important;
   }
 }
