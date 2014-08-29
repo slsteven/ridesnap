@@ -4,14 +4,14 @@
 %br
 = form_tag query_vehicles_path, method: :get, class: 'form-inline', id: 'vehicle-query', role: 'form', remote: true do
   .form-group
-    = label_tag :year, nil, class: 'sr-only'
-    = select_tag :year, options_for_select(@years, Date.today.year), class: 'form-control', prompt: 'Year'
-  .form-group
     = label_tag :make, nil, class: 'sr-only'
-    = select_tag :make, options_for_select(@makes), prompt: 'Make', class: 'form-control', disabled: true
+    = select_tag :make, options_for_select(@makes), prompt: 'Make', class: 'form-control'
   .form-group
     = label_tag :model, nil, class: 'sr-only'
     = select_tag :model, options_for_select(@models), prompt: 'Model', class: 'form-control', disabled: true
+  .form-group
+    = label_tag :year, nil, class: 'sr-only'
+    = select_tag :year, options_for_select(@years), prompt: 'Year', class: 'form-control', disabled: true
   .form-group
     = label_tag :trim, nil, class: 'sr-only'
     = select_tag :trim, options_for_select(@trims), prompt: 'Trim', class: 'form-control', disabled: true

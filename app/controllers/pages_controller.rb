@@ -16,9 +16,11 @@ class PagesController < ApplicationController
   end
 
   def start
-    @years      = Date.today.year.downto(1994)
-    @makes      = ['honda', 'ford', 'dodge']
+    Settings.vehicle_makes.to_hash.each_with_object(@makes=[]) do |(k,v),o|
+      o << [v,k]
+    end
     @models     = ['blah', 'blah']
+    @years      = Date.today.year.downto(1994)
     @trims      = ['swiggity', 'swooty']
     @miles      = ['0-29k', '30k-59k', '60k-89k', '90k-119k', '120k+']
     @conditions = ['excellent', 'very good', 'good', 'fair', 'poor']

@@ -37,7 +37,12 @@ html, body {
 }
 
 .jumbotron:first-child {
-  background-image: image-url('home_background_1.jpg');
   @include background-image-default;
   height: 500px;
+  .container {
+    margin-top: 140px;
+  }
+  &.home1 {
+    background-image: image-url('driver_mobile_bw.jpg');
+  }
 }

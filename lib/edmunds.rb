@@ -8,16 +8,66 @@ module Edmunds
   def self.images(styleid)
   end
 
+  def self.query_makes(options={})
+    Rails.logger.info "some options left out, using default values" if options.blank?
+
+    endpoint = 'api/vehicle/v2/makes'
+    options[:state] ||= 'used'
+    options[:view] ||= 'basic'
+
+    doc = fetch(endpoint, options)
+    doc[:makes].each_with_object(makes={}){ |h,o| o[h[:niceName]] = h[:name] }
+    makes.with_indifferent_access
+  end
+
+  def self.query_models(make, options={})
+    raise 'make necessary to talk with API' if make.blank?
+    Rails.logger.info "some options left out, using default values" if options.blank?
+
+    endpoint = "api/vehicle/v2/#{make}/models"
+    options[:state] ||= 'used'
+    options[:view] ||= 'basic'
+
+    doc = fetch(endpoint, options)
+    doc[:models].each_with_object(models={}){ |h,o| o[h[:niceName]] = h[:name] }
+    models.with_indifferent_access
+  end
+
+  def self.query_years(make, model, options={})
+    raise 'make and model necessary to talk with API' if make.blank? || model.blank?
+    Rails.logger.info "some options left out, using default values" if options.blank?
+
+    endpoint = "api/vehicle/v2/#{make}/#{model}/years"
+    options[:state] ||= 'used'
+    options[:view] ||= 'basic'
+
+    doc = fetch(endpoint, options)
+    doc[:years].each_with_object(years=[]){ |h,o| o << h[:year] }
+    years.reverse
+  end
+
+  def self.query_styles(make, model, year, options={})
+    raise 'make, model, and year necessary to talk with API' if make.blank? || model.blank? || year.blank?
+    Rails.logger.info "some options left out, using default values" if options.blank?
+
+    endpoint = "api/vehicle/v2/#{make}/#{model}/#{year}/styles"
+    options[:state] ||= 'used'
+    options[:view] ||= 'basic'
+
+    doc = fetch(endpoint, options)
+    doc[:styles].each_with_object(styles={}){ |h,o| o[h[:id]] = h[:name] }
+    styles.with_indifferent_access
+  end
+
   def self.typical_value(styleid, options={})
     raise 'styleid necessary to talk with API' if styleid.blank?
     Rails.logger.info "some options left out, using default values" if options.blank?
 
     endpoint = 'v1/api/tmv/tmvservice/calculatetypicallyequippedusedtmv'
-    params = {
-      styleid: styleid,
-      zip: options[:zip] || Settings.locals.zip_code
-    }
-    doc = fetch(endpoint, params).with_indifferent_access
+    options[:styleid] = styleid
+    options[:zip] ||= Settings.locals.zip_code
+
+    doc = fetch(endpoint, options)
 
     return_values(doc[:tmv][:totalWithOptions])
   end
@@ -27,15 +77,14 @@ module Edmunds
     Rails.logger.info "some options left out, using default values" if options.blank?
 
     endpoint = 'v1/api/tmv/tmvservice/calculateusedtmv'
-    params = {
-      styleid: styleid,
-      condition: options[:condition] || 'Average', # Outstanding | Clean | Average | Rough | Damaged
-      mileage: options[:mileage] || 75000,
-      zip: options[:zip] || Settings.locals.zip_code,
-      optionid: options[:options] || [], # options: [xxx,xxx]
-      colorid: options[:colors] || [] # colors: [xxx]
-    }
-    doc = fetch(endpoint, params).with_indifferent_access
+    options[:styleid] = styleid
+    options[:condition] ||= 'Average' # Outstanding | Clean | Average | Rough | Damaged
+    options[:mileage] ||= 75000
+    options[:zip] ||= Settings.locals.zip_code
+    # options: 'xxx,xxx' # csv
+    # colors: 'xxx' # csv
+
+    doc = fetch(endpoint, options)
 
     return_values(doc[:tmv][:totalWithOptions])
   end
@@ -48,9 +97,9 @@ module Edmunds
       params[:fmt] = 'json'
       params[:api_key] = Settings.edmunds.key
       params.slice!(:optionid, :colorid).each_with_object(parameters = []){ |(k,v),o| o << "#{k}=#{v}" }
-      params.each{ |k,v| v.each{ |i| parameters << "#{k}=#{i}" } }
+      params.each{ |k,v| v.delete(' ').split(',').each{ |i| parameters << "#{k}=#{i}" } }
       parameters = parameters.join('&')
-      HTTParty.get("#{base}/#{endpoint}?#{parameters}")
+      HTTParty.get("#{base}/#{endpoint}?#{parameters}").with_indifferent_access
     end
 
     def self.return_values(prices={})
@@ -58,6 +107,6 @@ module Edmunds
         retail: prices[:usedTmvRetail],
         private_party: prices[:usedPrivateParty],
         trade_in: prices[:usedTradeIn]
-      }.with_indifferent_access
+      }
     end
 end
