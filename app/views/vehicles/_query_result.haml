@@ -1,6 +1,10 @@
 %h2.purple Here's what we found.
 %p
-  = "#{'year'} #{'make'} #{'model'} - #{'number'} miles in #{'condition'} condition"
+  %span#selected-year
+  %span#selected-make
+  %span#selected-model
+  \-
+  %span#selected-style
   = link_to 'Edit', '#query', role: 'tab', data: {toggle: 'tab'}
 %br
 %br
@@ -25,5 +29,5 @@
       %h2#buy-it-now-value
 %br
 %br
-= link_to 'New Quote', '#query', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-default btn-wide', onclick: "$('form#vehicle-query').reset;"
+= link_to 'New Quote', start_path, class: 'btn btn-default btn-wide'
 = link_to 'Schedule with RideSnap', '#schedule', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple btn-wide btn-lg'

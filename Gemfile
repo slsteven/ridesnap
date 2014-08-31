@@ -76,3 +76,5 @@ gem 'meta-tags'
 
 gem 'rails_config'
 
+gem 'annotate'
+

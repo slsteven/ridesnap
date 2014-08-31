@@ -35,7 +35,10 @@ class VehiclesController < ApplicationController
   end
 
   def query
-    render json: Edmunds.typical_value(params[:style], zip: params[:zip].presence)
+    value = Edmunds.typical_value params[:style], zip: params[:zip].presence
+    params[:preliminary_value] = value
+    @vehicle = Vehicle.create params.except(:action, :controller).permit!
+    render json: value
   end
 
   def new

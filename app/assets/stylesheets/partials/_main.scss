@@ -5,19 +5,33 @@ html, body {
   .wrapper {
     min-height: 100%;
   }
-  header {
-    background-color: rgba(0,0,0,0.2) !important;
+  header, footer {
     border: none !important;
     border-radius: 0 !important;
     li a { color: white !important; }
+    &.navbar-inverse .navbar-nav .active a,
+    &.navbar-inverse .navbar-nav .active a:hover,
+    &.navbar-inverse .navbar-nav .active a:focus {
+      background-color: rgba(0,0,0,0) !important;
+    }
+    li.active a:after,
+    li:not(.social) a:hover:after {
+      content: '';
+      border-bottom: $purple solid 2px;
+      padding: 0 50%;
+      margin: 0 auto;
+      position: absolute;
+      left: 15px;
+      top: 75%;
+    }
+  }
+  header {
+    background-color: $header !important;
   }
   footer {
     margin: -75px auto 0 auto;
-    border: none !important;
-    border-radius: 0 !important;
-    &.navbar {
-      margin-bottom: 0px !important;
-      li a { color: white !important; }
+    .social a{
+      padding: 0px 5px;
     }
   }
   .content {

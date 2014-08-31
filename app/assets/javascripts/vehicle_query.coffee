@@ -1,4 +1,4 @@
-$ ->
+ready = ->
   update_select = (what, where) ->
     $(where + ' option:gt(0)').remove()
     for k, v of JSON.parse(what.responseText)
@@ -58,6 +58,9 @@ $ ->
       dataType: 'json'
       url: '/vehicles/query'
       data:
+        make: $('#vehicle-query #make').val()
+        model: $('#vehicle-query #model').val()
+        year: $('#vehicle-query #year').val()
         style: $('#vehicle-query #style').val()
         zip: $('#vehicle-query #zip').val()
     .complete (prices) ->
@@ -65,3 +68,10 @@ $ ->
       $('#trade-in-value').text '$' + prices.trade_in
       $('#ridesnap-value').text '$' + prices.retail
       $('#buy-it-now-value').text '$' + prices.private_party
+      $('span#selected-make').text $('#vehicle-query #make option:selected').text()
+      $('span#selected-model').text $('#vehicle-query #model option:selected').text()
+      $('span#selected-year').text $('#vehicle-query #year option:selected').text()
+      $('span#selected-style').text $('#vehicle-query #style option:selected').text()
+
+$(document).ready(ready)
+$(document).on('page:load', ready)
