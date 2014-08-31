@@ -9,8 +9,8 @@
   / Collect the nav links, forms, and other content for toggling
   .collapse.navbar-collapse#bottom-collapse
     %ul.nav.navbar-nav.navbar-right
-      %li{class: ('active' if defined?(@faq))}= link_to 'FAQ', faq_url, title: 'frequently asked questions'
-      %li{class: ('active' if defined?(@contact))}= mail_to 'http://info@ridesnap.co', 'Contact Us', subject: 'Info request', title: 'Talk to us!', target: '_blank'
+      %li{class: ('active' if @menu == 'faq')}= link_to 'FAQ', faq_url, title: 'frequently asked questions'
+      %li{class: ('active' if @menu == 'contact')}= mail_to 'http://info@ridesnap.co', 'Contact Us', subject: 'Info request', title: 'Talk to us!', target: '_blank'
       %li.social= link_to embedded_svg('facebook.svg', class: 'social-icon facebook', size: 45), 'http://facebook.com', title: 'Facebook'
       %li.social= link_to embedded_svg('twitter.svg', class: 'social-icon twitter', size: 45), 'http://twitter.com', title: 'Twitter'
       %li.social= link_to embedded_svg('linkedin.svg', class: 'social-icon linkedin', size: 45), 'http://linkedin.com', title: 'LinkedIn'

@@ -1,27 +1,27 @@
 class PagesController < ApplicationController
 
   def about
-    @about = true
+    @menu = 'about'
   end
 
   def agent
-    @agent = true
+    @menu = 'agent'
   end
 
   def contact
-    @contact = true
+    @menu = 'contact'
   end
 
   def faq
-    @faq = true
+    @menu = 'faq'
   end
 
   def home
-    @home = true
+    @menu = 'home'
   end
 
   def start
-    @start = true
+    @menu = 'start'
     Settings.vehicle_makes.to_hash.each_with_object(@makes=[]) do |(k,v),o|
       o << [v,k]
     end

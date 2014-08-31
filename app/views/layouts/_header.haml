@@ -11,9 +11,9 @@
     / Collect the nav links, forms, and other content for toggling
     #top-collapse.collapse.navbar-collapse
       %ul.nav.navbar-nav
-        %li{class: ('active' if defined?(@home))}= link_to 'Home', root_url
-        %li{class: ('active' if defined?(@how))}= link_to 'How it Works', '#' # this will scroll down the page
-        %li{class: ('active' if defined?(@start))}= link_to 'Get Started', start_url
-        %li{class: ('active' if defined?(@about))}= link_to 'About Us', about_url
+        %li{class: ('active' if @menu == 'home')}= link_to 'Home', root_url
+        %li{class: ('active' if @menu == 'how')}= link_to 'How it Works', '#' # this will scroll down the page
+        %li{class: ('active' if @menu == 'start')}= link_to 'Get Started', start_url
+        %li{class: ('active' if @menu == 'about')}= link_to 'About Us', about_url
       %ul.nav.navbar-nav.navbar-right
         %li= link_to 'BECOME AN AGENT', agent_url, class: 'btn btn-purple navbar-btn btn-wide'
