@@ -18,6 +18,10 @@ Rails.application.routes.draw do
 
   resources :vehicles do
     collection do
+      get 'make_query'
+      get 'model_query'
+      get 'year_query'
+      get 'style_query'
       get 'query'
       post 'schedule_inspection'
     end

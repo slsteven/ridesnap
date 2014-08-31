@@ -22,14 +22,24 @@ class VehiclesController < ApplicationController
   def index
   end
 
-  def new
-    @vehicle = Vehicle.new
+  def model_query
+    render json: Edmunds.query_models(params[:make])
+  end
+
+  def year_query
+    render json: Edmunds.query_years(params[:make], params[:model])
+  end
+
+  def style_query
+    render json: Edmunds.query_styles(params[:make], params[:model], params[:year])
   end
 
   def query
-    respond_to do |format|
-      format.js { render layout: false }
-    end
+    render json: Edmunds.typical_value(params[:style], zip: params[:zip].presence)
+  end
+
+  def new
+    @vehicle = Vehicle.new
   end
 
   def schedule_inspection

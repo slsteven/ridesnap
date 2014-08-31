@@ -42,8 +42,8 @@ module Edmunds
     options[:view] ||= 'basic'
 
     doc = fetch(endpoint, options)
-    doc[:years].each_with_object(years=[]){ |h,o| o << h[:year] }
-    years.reverse
+    doc[:years].each_with_object(years={}){ |h,o| o[h[:year]] = h[:year] }
+    years.with_indifferent_access
   end
 
   def self.query_styles(make, model, year, options={})
