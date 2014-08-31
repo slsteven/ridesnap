@@ -64,4 +64,4 @@ $ ->
       prices = JSON.parse(prices.responseText)
       $('#trade-in-value').text '$' + prices.trade_in
       $('#ridesnap-value').text '$' + prices.retail
-      $('#buy-it-now').text '$' + prices.private_party
+      $('#buy-it-now-value').text '$' + prices.private_party

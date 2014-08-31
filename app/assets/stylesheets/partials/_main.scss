@@ -42,7 +42,16 @@ html, body {
   .container {
     margin-top: 140px;
   }
-  &.home1 {
+  &#home1 {
     background-image: image-url('driver_mobile_bw.jpg');
+  }
+  &#home2 {
+    // background-image: image-url('');
+  }
+  &#start1 {
+    background-image: image-url('dashboard_bw.jpg');
+  }
+  &#faq1 {
+    background-image: image-url('bridge_bw.jpg');
   }
 }
