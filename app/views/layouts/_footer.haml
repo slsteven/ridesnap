@@ -10,7 +10,7 @@
   .collapse.navbar-collapse#bottom-collapse
     %ul.nav.navbar-nav.navbar-right
       %li= link_to 'FAQ', faq_url, title: 'frequently asked questions'
-      %li= link_to 'Contact Us', contact_url, title: 'Talk to us!'
+      %li= mail_to 'http://info@ridesnap.co', 'Contact Us', subject: 'Info request', title: 'Talk to us!', target: '_blank'
       %li= link_to embedded_svg('facebook.svg', class: 'social-icon facebook', size: 40), 'http://facebook.com', title: 'Facebook'
       %li= link_to embedded_svg('twitter.svg', class: 'social-icon twitter', size: 40), 'http://twitter.com', title: 'Twitter'
       %li= link_to embedded_svg('linkedin.svg', class: 'social-icon linkedin', size: 40), 'http://linkedin.com', title: 'LinkedIn'
