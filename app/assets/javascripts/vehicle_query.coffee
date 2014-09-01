@@ -68,10 +68,15 @@ ready = ->
       $('#trade-in-value').text '$' + prices.trade_in
       $('#ridesnap-value').text '$' + prices.retail
       $('#buy-it-now-value').text '$' + prices.private_party
+      max = Math.max(prices.trade_in, prices.retail, prices.private_party)
+      $('.circle.trade-in-value').width Math.round(prices.trade_in/max*100) + '%'
+      $('.circle.ridesnap-value').width Math.round(prices.retail/max*100) + '%'
+      $('.circle.buy-it-now-value').width Math.round(prices.private_party/max*100) + '%'
       $('span#selected-make').text $('#vehicle-query #make option:selected').text()
       $('span#selected-model').text $('#vehicle-query #model option:selected').text()
       $('span#selected-year').text $('#vehicle-query #year option:selected').text()
       $('span#selected-style').text $('#vehicle-query #style option:selected').text()
+      $('form#vehicle-inspection #vehicle_id').val prices.vehicle_id
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

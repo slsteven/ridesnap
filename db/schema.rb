@@ -20,8 +20,11 @@ ActiveRecord::Schema.define(version: 20140831200231) do
   create_table "rides", force: true do |t|
     t.integer  "user_id"
     t.integer  "vehicle_id"
+    t.datetime "datetime"
     t.string   "relation"
     t.boolean  "owner"
+    t.string   "address"
+    t.string   "zip_code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -29,6 +32,7 @@ ActiveRecord::Schema.define(version: 20140831200231) do
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"
+    t.integer  "phone"
     t.string   "password_digest"
     t.string   "remember_token"
     t.boolean  "admin",           default: false

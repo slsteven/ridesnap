@@ -1,7 +1,7 @@
 - provide(:title, 'Home')
 
 .jumbotron.black-bg#home1
-  .container.text-center
+  .container.text-center#header-threshold
     %h1 AT YOUR SERVICE.
     %p We are RideSnap, a concierge service that takes care of all the worry and work that comes with selling a car.
     = link_to 'Get Started', start_path, class: 'btn btn-purple btn-wide btn-lg'
@@ -68,28 +68,7 @@
             %p
               %small We write a check to you, not the buyer. So don't worry about getting counterfeit money or bad cashier checks.
 
-.jumbotron.purple-bg#home2
-  .container.text-center
-    %p
-      %small
-        %b
-          NOW AVAILABLE IN
-        %br
-        %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    %h2 The San Francisco Bay Area.
-    %p
-      COMING SOON:
-      %b CHICAGO
-    %p
-      %small Don't see your city? Let us know where you'd like to see RideSnap next!
-    .col-lg-4.col-lg-offset-4
-      = form_tag city_path do
-        .input-group
-          = text_field_tag :suggestion, nil, placeholder: 'Timbuktu', class: 'form-control'
-          %span.input-group-btn
-            = submit_tag 'Submit', class: 'btn btn-default'
-
-.jumbotron.whitesmoke-bg
+.jumbotron.whitesmoke-bg#how-link
   .container.text-center
     %p
       %small
@@ -131,3 +110,30 @@
             %b BUY IT NOW
             price. You make money no matter what.
           = link_to 'Get Started', start_path, class: 'btn btn-purple btn-wide btn-lg'
+
+.jumbotron.purple-bg#home2
+  .container.text-center
+    %p
+      %small
+        %b
+          NOW AVAILABLE IN
+        %br
+        %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    %h2 The San Francisco Bay Area.
+    %p
+      COMING SOON:
+      %b CHICAGO
+    %p
+      %small Don't see your city? Let us know where you'd like to see RideSnap next!
+    .col-lg-4.col-lg-offset-4
+      = form_tag city_path do
+        .input-group
+          = text_field_tag :suggestion, nil, placeholder: 'Zip Code', class: 'form-control'
+          %span.input-group-btn
+            = submit_tag 'Submit', class: 'btn btn-default'
+
+- if action_name == 'how'
+  :coffee
+    $('body').animate(
+      scrollTop: $('#how-link').offset().top - 80
+    , 'slow')

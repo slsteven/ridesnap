@@ -38,6 +38,7 @@ class VehiclesController < ApplicationController
     value = Edmunds.typical_value params[:style], zip: params[:zip].presence
     params[:preliminary_value] = value
     @vehicle = Vehicle.create params.except(:action, :controller).permit!
+    value[:vehicle_id] = @vehicle.id
     render json: value
   end
 
@@ -45,9 +46,35 @@ class VehiclesController < ApplicationController
     @vehicle = Vehicle.new
   end
 
-  def schedule_inspection
-    respond_to do |format|
-      format.js { render layout: false }
+  def schedule_confirm
+    @user = User.where(email: params[:email]).first_or_initialize
+    @user.name = params[:name]
+    @user.phone = params[:phone]
+
+    # @ride = Ride.new
+    #   datetime
+    #   address
+    #   zip_code
+    #   vehicle_id
+
+    if @user.save
+      @ride = @user.rides
+                   .where(vehicle_id: params[:vehicle_id], relation: 'seller')
+                   .first_or_initialize
+      @ride.datetime = params[:datetime]
+      @ride.address = params[:address]
+      @ride.zip_code = params[:zip_code]
+      @ride.owner = true
+
+      if @ride.save
+        flash[:success] = "Appointment confirmed!"
+      else
+        flash[:error] = "Something went wrong... please try again"
+        render 'pages/start'
+      end
+    else
+      flash[:error] = "Something went wrong... please try again"
+      render 'pages/start'
     end
   end
 
@@ -56,13 +83,7 @@ class VehiclesController < ApplicationController
   end
 
   def update
-    if @vehicle.update_attributes(vehicle_params)
-      flash[:success] = "Vehicle updated"
-      sign_in @vehicle
-      redirect_to @vehicle
-    else
-      render 'edit'
-    end
+
   end
 
   private

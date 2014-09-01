@@ -1,7 +1,7 @@
 - provide(:title, 'Start')
 
 .jumbotron.black-bg#start1
-  .container.text-center
+  .container.text-center#header-threshold
     %h1 GET STARTED.
     %p Get a quote. Schedule an inspection. Simple.
 
@@ -14,8 +14,6 @@
         = link_to '', '#query-result', role: 'tab', data: {toggle: 'tab'}
       %li
         = link_to '', '#schedule', role: 'tab', data: {toggle: 'tab'}
-      %li
-        = link_to '', '#schedule-confirm', role: 'tab', data: {toggle: 'tab'}
     .tab-content#vehicle-query
       .tab-pane.fade.in.active#query
         = render 'vehicles/query'
@@ -23,5 +21,3 @@
         = render 'vehicles/query_result'
       .tab-pane.fade#schedule
         = render 'vehicles/schedule'
-      .tab-pane.fade#schedule-confirm
-        = render 'vehicles/schedule_confirm'

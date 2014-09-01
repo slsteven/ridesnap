@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   # Example of regular route:
-  get '/how'          => 'pages#home'
+  get '/how'          => 'pages#how'
   get '/start'        => 'pages#start'
   get '/about'        => 'pages#about'
   get '/contact'      => 'pages#contact'
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       get 'year_query'
       get 'style_query'
       get 'query'
-      post 'schedule_inspection'
+      post 'schedule_confirm'
     end
   end
 end

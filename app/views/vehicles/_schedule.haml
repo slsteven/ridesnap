@@ -2,13 +2,13 @@
 %p Pick a time and place where we can personally inspect your car, and we will come to you!
 %br
 %br
-= form_tag schedule_inspection_vehicles_path, class: 'form-inline', id: 'vehicle-inspection', role: 'form', remote: true do
+= form_tag schedule_confirm_vehicles_path, class: 'form-inline', id: 'vehicle-inspection', role: 'form' do
   .form-group
     = label_tag :name, nil, class: 'sr-only'
     = text_field_tag :name, nil, placeholder: 'Full Name', class: 'form-control'
   .form-group
     = label_tag :phone, nil, class: 'sr-only'
-    = text_field_tag :phone, nil, placeholder: 'Phone', class: 'form-control'
+    = text_field_tag :phone, nil, placeholder: 'Phone', class: 'form-control phone'
   .form-group
     = label_tag :email, nil, class: 'sr-only'
     = text_field_tag :email, nil, placeholder: 'Email', class: 'form-control'
@@ -17,11 +17,13 @@
     = label_tag :date_time, nil, class: 'sr-only'
     = text_field_tag :date_time, nil, placeholder: 'Date/Time', class: 'form-control'
   .form-group
-    = label_tag :street_address, nil, class: 'sr-only'
+    = label_tag :address, nil, class: 'sr-only'
     = text_field_tag :street_address, nil, placeholder: 'Street', class: 'form-control'
   .form-group
     = label_tag :zip_code, nil, class: 'sr-only'
     = text_field_tag :zip_code, nil, placeholder: 'Zip', class: 'form-control'
+  .form-group
+    = hidden_field_tag :vehicle_id
   %br
   .form-group
     = submit_tag 'Schedule Inspection', class: 'btn btn-purple btn-wide'

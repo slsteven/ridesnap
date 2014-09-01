@@ -7,12 +7,12 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      = link_to 'RIDESNAP', root_path, class: 'navbar-brand'
+      = link_to image_tag('logo+brand.png'), root_path, class: 'navbar-brand'
     / Collect the nav links, forms, and other content for toggling
     #top-collapse.collapse.navbar-collapse
       %ul.nav.navbar-nav
-        %li{class: ('active' if @menu == 'home')}= link_to 'Home', root_url
-        %li{class: ('active' if @menu == 'how')}= link_to 'How it Works', '#' # this will scroll down the page
+        %li#home{class: ('active' if @menu == 'home')}= link_to 'Home', root_url
+        %li#how{class: ('active' if @menu == 'how')}= link_to 'How it Works', how_url
         %li{class: ('active' if @menu == 'start')}= link_to 'Get Started', start_url
         %li{class: ('active' if @menu == 'about')}= link_to 'About Us', about_url
       .nav.navbar-nav.navbar-right

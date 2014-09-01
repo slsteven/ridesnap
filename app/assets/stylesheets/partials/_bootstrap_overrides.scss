@@ -129,6 +129,7 @@ fieldset[disabled] .btn-purple.active {
 }
 
 .jumbotron {
+  min-height: 100%;
   margin: 0px;
   &.white-bg {
     background-color: white;

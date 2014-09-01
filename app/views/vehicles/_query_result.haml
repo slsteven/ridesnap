@@ -9,24 +9,24 @@
 %br
 %br
 .row
-  .col-sm-4.col-xs-12.left
-    %svg.circle.grey{viewBox:'0 0 100 100'}
-      %circle{cx:'50', cy:'50', r:'49', 'stroke-width' => 1}
-    .words
-      %h4 Trade in
-      %h2#trade-in-value
-  .col-sm-4.col-xs-12.center
-    %svg.circle.purple{viewBox:'0 0 100 100'}
-      %circle{cx:'50', cy:'50', r:'49', 'stroke-width' => 1}
-    .words
-      %h4 RideSnap
-      %h2#ridesnap-value
-  .col-sm-4.col-xs-12.right
-    %svg.circle.black{viewBox:'0 0 100 100'}
-      %circle{cx:'50', cy:'50', r:'49', 'stroke-width' => 1}
-    .words
-      %h4 Buy it Now
-      %h2#buy-it-now-value
+  .col-sm-4.col-xs-12
+    .circle.trade-in-value
+      = embedded_svg('circle.svg', class: 'grey')
+      .words
+        %h4 Trade in
+        %h2#trade-in-value
+  .col-sm-4.col-xs-12
+    .circle.ridesnap-value
+      = embedded_svg('circle.svg', class: 'purple')
+      .words
+        %h4 RideSnap
+        %h2#ridesnap-value
+  .col-sm-4.col-xs-12
+    .circle.buy-it-now-value
+      = embedded_svg('circle.svg', class: 'black')
+      .words
+        %h4 Buy it Now
+        %h2#buy-it-now-value
 %br
 %br
 = link_to 'New Quote', start_path, class: 'btn btn-default btn-wide'

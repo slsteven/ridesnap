@@ -24,12 +24,20 @@ html, body {
       left: 15px;
       top: 75%;
     }
+    .navbar-brand img{
+      max-width: 200px;
+      margin-top: -10px;
+    }
   }
   header {
+    transition-duration: 1s;
     background-color: $header !important;
+    &.override {
+      background-color: $header-override !important;
+    }
   }
   footer {
-    margin: -75px auto 0 auto;
+    margin: -75px auto 0 auto !important;
     .social a{
       padding: 0px 5px;
     }
@@ -57,15 +65,19 @@ html, body {
     margin-top: 140px;
   }
   &#home1 {
-    background-image: image-url('driver_mobile_bw.jpg');
+    background-image: image-url('home.jpg');
   }
   &#home2 {
     // background-image: image-url('');
   }
   &#start1 {
-    background-image: image-url('dashboard_bw.jpg');
+    background-image: image-url('start.jpg');
   }
-  &#faq1 {
-    background-image: image-url('bridge_bw.jpg');
+  &#faq1, &#about1 {
+    background-image: image-url('about.jpg');
+  }
+  &#agent1 {
+    background-image: image-url('agent.jpg');
+    background-position: top;
   }
 }

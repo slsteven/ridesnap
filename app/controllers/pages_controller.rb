@@ -20,6 +20,11 @@ class PagesController < ApplicationController
     @menu = 'home'
   end
 
+  def how
+    @menu = 'how'
+    render :home
+  end
+
   def start
     @menu = 'start'
     Settings.vehicle_makes.to_hash.each_with_object(@makes=[]) do |(k,v),o|

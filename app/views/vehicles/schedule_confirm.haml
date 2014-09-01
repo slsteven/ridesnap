@@ -1,0 +1,26 @@
+- provide(:title, 'Confirmation')
+
+.jumbotron.black-bg#confirm1
+  .container.text-center#header-threshold
+    %h1 Thanks!
+    %p We'll be in touch.
+
+.jumbotron.white-bg
+  .container.text-center
+    %h2.purple= "Thank you, #{'name'}!"
+    %p An appointment confirmation has been sent to your email. We look forward to meeting you!
+    %br
+    %br
+    %b= 'name'
+    %p= 'phone'
+    %p= 'email'
+    %br
+    %br
+    %b INSPECTION APPOINTMENT FOR:
+    %p= 'date_time'
+    %p= 'street_address'
+    %p= 'zip_code interpolation'
+    %br
+    %br
+    %b VEHICLE INFORMATION
+    %p= "#{'year'} #{'make'} #{'model'} - #{'number'} miles"
