@@ -7,20 +7,20 @@
 
 .jumbotron.white-bg
   .container.text-center
-    %h2.purple= "Thank you, #{'name'}!"
+    %h2.purple= "Thank you, #{@user.name}!"
     %p An appointment confirmation has been sent to your email. We look forward to meeting you!
     %br
     %br
-    %b= 'name'
-    %p= 'phone'
-    %p= 'email'
+    %b= @user.name
+    %p= number_to_phone(@user.phone, area_code: true)
+    %p= @user.email
     %br
     %br
     %b INSPECTION APPOINTMENT FOR:
-    %p= 'date_time'
-    %p= 'street_address'
-    %p= 'zip_code interpolation'
+    %p= @ride.datetime.to_formatted_s :long_ordinal
+    %p= @ride.address
+    %p= "#{@location[:city]}, #{@location[:state]} #{@location[:zip]}"
     %br
     %br
-    %b VEHICLE INFORMATION
-    %p= "#{'year'} #{'make'} #{'model'} - #{'number'} miles"
+    / %b VEHICLE INFORMATION
+    / %p= "#{@vehicle.year} #{@vehicle.make} #{@vehicle.model} - #{@vehicle.style}"

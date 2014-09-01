@@ -47,26 +47,23 @@ class VehiclesController < ApplicationController
   end
 
   def schedule_confirm
+    @vehicle = Vehicle.find(params[:vehicle_id])
+
     @user = User.where(email: params[:email]).first_or_initialize
     @user.name = params[:name]
     @user.phone = params[:phone]
 
-    # @ride = Ride.new
-    #   datetime
-    #   address
-    #   zip_code
-    #   vehicle_id
-
     if @user.save
       @ride = @user.rides
-                   .where(vehicle_id: params[:vehicle_id], relation: 'seller')
+                   .where(vehicle_id: @vehicle.id, relation: 'seller')
                    .first_or_initialize
-      @ride.datetime = params[:datetime]
+      @ride.datetime = params[:datetime] || Time.now
       @ride.address = params[:address]
       @ride.zip_code = params[:zip_code]
       @ride.owner = true
 
       if @ride.save
+        @location = Location.from_zip(@ride.zip_code)
         flash[:success] = "Appointment confirmed!"
       else
         flash[:error] = "Something went wrong... please try again"
