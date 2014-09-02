@@ -51,7 +51,7 @@ class VehiclesController < ApplicationController
 
     @user = User.where(email: params[:email]).first_or_initialize
     @user.name = params[:name]
-    @user.phone = params[:phone]
+    @user.phone = params[:phone].delete('^0-9').to_i
 
     if @user.save
       @ride = @user.rides

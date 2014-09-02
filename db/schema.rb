@@ -32,10 +32,10 @@ ActiveRecord::Schema.define(version: 20140902001036) do
   create_table "users", force: true do |t|
     t.string   "name"
     t.string   "email"
-    t.integer  "phone"
+    t.integer  "phone",           limit: 8
     t.string   "password_digest"
     t.string   "remember_token"
-    t.boolean  "admin",           default: false
+    t.boolean  "admin",                     default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
