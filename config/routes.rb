@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   get '/contact'      => 'pages#contact'
   get '/faq'          => 'pages#faq'
   get '/agent'        => 'pages#agent'
-  get '/city'         => 'pages#city'
 
   resources :users do
     collection do
@@ -26,4 +25,6 @@ Rails.application.routes.draw do
       post 'schedule_confirm'
     end
   end
+
+  resources :zip_codes, only: [:create]
 end

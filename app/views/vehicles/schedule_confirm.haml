@@ -19,7 +19,7 @@
     %b INSPECTION APPOINTMENT FOR:
     %p= @ride.datetime.to_formatted_s :long_ordinal
     %p= @ride.address
-    %p= "#{@location[:city]}, #{@location[:state]} #{@location[:zip]}"
+    %p= "#{@location[:city]}, #{@location[:state]} #{@location[:zip_code]}"
     %br
     %br
     / %b VEHICLE INFORMATION

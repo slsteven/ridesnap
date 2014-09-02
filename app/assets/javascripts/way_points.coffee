@@ -5,7 +5,7 @@ $(window).load ->
       $('header').addClass 'override'
     else if direction == 'up'
       $('header').removeClass 'override'
-  , { offset: 50 }
+  , { offset: 60 }
 
   $('#how-link').waypoint (direction) ->
     if direction == 'down'

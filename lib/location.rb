@@ -5,7 +5,7 @@ module Location
     {
          city: loc['results'][0]['address_components'][1]['long_name'],
         state: loc['results'][0]['address_components'][3]['long_name'],
-          zip: code,
+     zip_code: code,
       country: loc['results'][0]['address_components'][4]['long_name']
     }
   end
