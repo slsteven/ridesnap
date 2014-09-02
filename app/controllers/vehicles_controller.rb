@@ -3,7 +3,7 @@ class VehiclesController < ApplicationController
     @vehicle = Vehicle.new(vehicle_params)
     if @vehicle.save
       sign_in @vehicle
-      flash[:success] = "Vehicle created"
+      flash.now[:success] = "Vehicle created"
       redirect_to @vehicle
     else
       render 'new'
@@ -12,7 +12,7 @@ class VehiclesController < ApplicationController
 
   def destroy
     Vehicle.find(params[:id]).destroy
-    flash[:success] = "Vehicle destroyed"
+    flash.now[:success] = "Vehicle destroyed"
     redirect_to vehicles_url
   end
 
@@ -51,7 +51,7 @@ class VehiclesController < ApplicationController
 
     @user = User.where(email: params[:email]).first_or_initialize
     @user.name = params[:name]
-    @user.phone = params[:phone].delete('^0-9').to_i
+    @user.phone = params[:phone].delete('^0-9')
 
     if @user.save
       @ride = @user.rides
@@ -64,13 +64,13 @@ class VehiclesController < ApplicationController
 
       if @ride.save
         @location = Location.from_zip(@ride.zip_code)
-        flash[:success] = "Appointment confirmed!"
+        flash.now[:success] = "Appointment confirmed!"
       else
-        flash[:error] = "Something went wrong... please try again"
+        flash.now[:error] = "Something went wrong... please try again"
         render 'pages/start'
       end
     else
-      flash[:error] = "Something went wrong... please try again"
+      flash.now[:error] = "Something went wrong... please try again"
       render 'pages/start'
     end
   end

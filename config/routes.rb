@@ -37,5 +37,5 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :zip_codes, only: [:create]
+  resources :cities, only: [:create]
 end

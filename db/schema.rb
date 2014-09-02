@@ -17,6 +17,16 @@ ActiveRecord::Schema.define(version: 20140902001036) do
   enable_extension "plpgsql"
   enable_extension "hstore"
 
+  create_table "cities", force: true do |t|
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
+    t.integer  "requests",   default: 0
+    t.boolean  "available",  default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "rides", force: true do |t|
     t.integer  "user_id"
     t.integer  "vehicle_id"
@@ -54,15 +64,6 @@ ActiveRecord::Schema.define(version: 20140902001036) do
     t.string   "status"
     t.boolean  "inspection"
     t.string   "zip_code"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "zip_codes", force: true do |t|
-    t.string   "city"
-    t.string   "state"
-    t.string   "zip_code"
-    t.string   "country"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

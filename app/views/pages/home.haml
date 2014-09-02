@@ -126,7 +126,7 @@
     %p
       %small Don't see your city? Let us know where you'd like to see RideSnap next!
     .col-lg-4.col-lg-offset-4
-      = form_tag zip_codes_path do
+      = form_tag cities_path do
         .input-group
           = text_field_tag :zip_code, nil, placeholder: 'Zip Code', class: 'form-control'
           %span.input-group-btn
