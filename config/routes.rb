@@ -1,3 +1,5 @@
+require 'api_constraints'
+
 Rails.application.routes.draw do
   root 'pages#home'
 
@@ -8,6 +10,15 @@ Rails.application.routes.draw do
   get '/contact'      => 'pages#contact'
   get '/faq'          => 'pages#faq'
   get '/agent'        => 'pages#agent'
+
+  namespace :api, defaults: {format: 'json'} do
+    scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
+      resources :tests
+    end
+    # scope module: :v2, constraints: ApiConstraints.new(version: 2) do
+    #   resources :tests
+    # end
+  end
 
   resources :users do
     collection do
