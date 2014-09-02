@@ -147,7 +147,7 @@ fieldset[disabled] .btn-purple.active {
   }
 }
 
-.btn:focus {
+.btn:focus, .btn:active {
   outline: none !important;
 }
 

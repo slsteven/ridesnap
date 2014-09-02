@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   # Example of regular route:
+  get '/signup'       => 'users#new'
   get '/how'          => 'pages#how'
   get '/start'        => 'pages#start'
   get '/about'        => 'pages#about'
@@ -37,5 +38,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :cities, only: [:create]
+  resources :sessions, only: [:create, :destroy]
+
+  resources :cities, only: [:create, :index, :update]
 end

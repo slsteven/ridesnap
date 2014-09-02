@@ -1,0 +1,6 @@
+%li.list-group-item{class: (city.available? ? 'list-group-item-success' : 'list-group-item-warning')}
+  %span.badge= city.requests
+  = "#{city.city},"
+  = city.state
+  = "- #{city.country}" unless city.country == 'United States'
+  %span.pull-right{style: "padding-right: 15px"}= best_in_place city, :available, type: :checkbox, collection: ['Not yet...', 'Available!']

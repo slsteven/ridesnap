@@ -1,4 +1,6 @@
 class CitiesController < ApplicationController
+  before_filter :admin_user,        only: [:index, :update]
+
   def create
     loc = Location.from_zip params[:zip_code]
     @city = City.where(city: loc[:city], state: loc[:state]).first_or_initialize
@@ -11,4 +13,20 @@ class CitiesController < ApplicationController
     end
     redirect_to :back
   end
+
+  def index
+    @cities = City.order(requests: :desc)
+  end
+
+  def update
+    @city = City.find params[:id]
+    @city.update_attributes(params[:city].permit(:available))
+    render json: @city
+  end
+
+  private
+
+    def admin_user
+      redirect_to(root_path) unless current_user.try(:admin?)
+    end
 end
