@@ -3,8 +3,8 @@ require 'api_constraints'
 Rails.application.routes.draw do
   root 'pages#home'
 
-  # Example of regular route:
-  get '/signup'       => 'users#new'
+  resources :sessions, only: [:create, :destroy]
+  delete '/signout'   => 'sessions#destroy'
   get '/how'          => 'pages#how'
   get '/start'        => 'pages#start'
   get '/about'        => 'pages#about'
@@ -37,8 +37,6 @@ Rails.application.routes.draw do
       post 'schedule_confirm'
     end
   end
-
-  resources :sessions, only: [:create, :destroy]
 
   resources :cities, only: [:create, :index, :update]
 end

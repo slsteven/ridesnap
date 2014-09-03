@@ -1,30 +1,26 @@
-<div class='modal fade' id='signin-modal' tabindex='-1' role='dialog' aria-labelledby='Sign in' aria-hidden='true'>
-  <div class='modal-dialog'>
-    <div class='modal-content'>
-      <div class='modal-header'>
-        <button class='close' data-dismiss='modal' type='button'>
-          <span aria-hidden='true'>&times;</span>
-          <span class='sr-only'>Close</span>
-        </button>
-        <h4 class='modal-title'>Sign in</h4>
-      </div>
-      <%= form_for :session, url: sessions_path, html: { role: 'form' } do |f| %>
-      <div class='modal-body'>
-        <div class='form-group'>
-          <%= f.label :email, nil, class: 'sr-only' %>
-          <%= f.text_field :email, class: 'form-control', placeholder: 'john.smith@email.com' %>
-        </div>
-        <div class='form-group'>
-          <%= f.label :password, nil, class: 'sr-only' %>
-          <%= f.password_field :password, class: 'form-control', placeholder: 'Pa55w0rd' %>
-        </div>
-      </div>
-      <div class='modal-footer'>
-        <%= link_to 'forgot password?', '', class: 'btn btn-default btn-xs', disabled: true %>
-        <%= f.submit 'Sign in', class: 'btn btn-purple' %>
-          <!-- \- or - #{link_to 'Sign up', signup_path} -->
-      </div>
-      <% end %>
+<div class='modal-header'>
+  <button class='close' data-dismiss='modal' type='button'>
+    <span aria-hidden='true'>&times;</span>
+    <span class='sr-only'>Close</span>
+  </button>
+  <h4 class='modal-title'>Sign in</h4>
+</div>
+<%= form_for :session, url: sessions_path, html: { role: 'form', remote: true, data: {model: 'session'}} do |f| %>
+  <div class='modal-body'>
+    <div class='form-group'>
+      <%= f.label :email, nil, class: 'sr-only' %>
+      <%= f.text_field :email, class: 'form-control', placeholder: 'email address' %>
+      <span class="help-block"></span>
+    </div>
+    <div class='form-group'>
+      <%= f.label :password, nil, class: 'sr-only' %>
+      <%= f.password_field :password, class: 'form-control', placeholder: 'Pa55w0rd' %>
+      <span class="help-block"></span>
     </div>
   </div>
-</div>
+  <div class='modal-footer'>
+    <%= link_to 'forgot password?', '', class: 'btn btn-default pull-left', disabled: true %>
+    <%= link_to 'Sign up', '', class: 'btn btn-default btn-sm', disabled: true %>
+    <%= f.submit 'Sign in', class: 'btn btn-purple' %>
+  </div>
+<% end %>

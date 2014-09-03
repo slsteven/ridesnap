@@ -21,13 +21,28 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase.strip }
   before_create :create_remember_token
 
-  # validates :name, length: { maximum: 50 }
+  validates :name, presence: true, length: { maximum: 50 }
   # validates :password, length: { minimum: 6 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence:   true,
                     format:     { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   has_secure_password validations: false
+
+  def first_name
+    if %w[mr mr. dr dr. ms ms. mrs mrs.].include? self.name.split(' ').first.downcase
+      self.name.split(' ')[1]
+    else
+      self.name.split(' ').first
+    end
+  end
+  def last_name
+    if %w[jr jr. sr sr. ii iii iv v].include? self.name.split(' ').last.downcase
+      self.name.split(' ')[-2]
+    else
+      self.name.split(' ').last
+    end
+  end
 
   def self.digest(token)
     Digest::SHA1.hexdigest(token.to_s)

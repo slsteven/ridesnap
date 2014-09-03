@@ -3,8 +3,7 @@ module SessionsHelper
   def sign_in(user)
     remember_token = User.new_remember_token
     cookies.permanent[:remember_token] = remember_token
-    user.update_attribute(:remember_token,
-                          User.digest(remember_token))
+    user.update_attribute(:remember_token, User.digest(remember_token))
     self.current_user = user
   end
   def sign_out
@@ -25,7 +24,7 @@ module SessionsHelper
   end
   def current_user
     remember_token = User.digest(cookies[:remember_token])
-    @current_user ||= User.where(remember_token: remember_token).first
+    @current_user ||= User.find_by(remember_token: remember_token)
   end
 
   # compare a user against the current user
@@ -42,7 +41,7 @@ module SessionsHelper
   def signed_in_user
     unless signed_in?
       store_location
-      redirect_to signin_url, notice: "Please sign in."
+      redirect_to :back, notice: "Please sign in."
     end
   end
 

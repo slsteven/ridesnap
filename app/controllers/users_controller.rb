@@ -10,13 +10,17 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
-      sign_in @user
-      flash.now[:success] = "Welcome, #{@user.name}!"
-      redirect_to @user
-    else
-      render 'new'
+    @user = User.where(email: params[:user][:email]).first_or_initialize
+    @user.name = params[:user][:name]
+    @user.password = params[:user][:password]
+
+    respond_to do |format|
+      if @user.save
+        format.html { redirect_to :back, success: "#{@user.name}'s account added to RideSnap" }
+        format.js { render json: nil, status: :created, layout: false }
+      else
+        format.js { render json: @user.errors, status: :unprocessable_entity }
+      end
     end
   end
 
