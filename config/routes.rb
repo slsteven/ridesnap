@@ -1,6 +1,7 @@
 require 'api_constraints'
 
 Rails.application.routes.draw do
+
   root 'pages#home'
 
   resources :sessions, only: [:create, :destroy]
@@ -39,4 +40,5 @@ Rails.application.routes.draw do
   end
 
   resources :cities, only: [:create, :index, :update]
+  resources :password_resets, only: [:create, :edit, :update]
 end

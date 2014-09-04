@@ -8,12 +8,6 @@
 .jumbotron.white-bg
   .container.text-center
     %ul#vehicle-query-nav.nav.nav-tabs.hidden{role: 'tablist'}
-      %li.active
-        = link_to '', '#query', role: 'tab', data: {toggle: 'tab'}
-      %li
-        = link_to '', '#query-result', role: 'tab', data: {toggle: 'tab'}
-      %li
-        = link_to '', '#schedule', role: 'tab', data: {toggle: 'tab'}
     .tab-content#vehicle-query
       .tab-pane.fade.in.active#query
         = render 'vehicles/query'

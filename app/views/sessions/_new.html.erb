@@ -3,6 +3,7 @@
     <span aria-hidden='true'>&times;</span>
     <span class='sr-only'>Close</span>
   </button>
+  <%= image_tag 'black_logo.png', class: 'modal-logo' %>
   <h4 class='modal-title'>Sign in</h4>
 </div>
 <%= form_for :session, url: sessions_path, html: { role: 'form', remote: true, data: {model: 'session'}} do |f| %>
@@ -19,8 +20,9 @@
     </div>
   </div>
   <div class='modal-footer'>
-    <%= link_to 'forgot password?', '', class: 'btn btn-default pull-left', disabled: true %>
-    <%= link_to 'Sign up', '', class: 'btn btn-default btn-sm', disabled: true %>
+    <%= link_to 'forgotten password?', '#password-reset', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-default pull-left' %>
+    <%= link_to 'Sign up', '#sign-up', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-default btn-sm' %>
     <%= f.submit 'Sign in', class: 'btn btn-purple' %>
   </div>
 <% end %>
+

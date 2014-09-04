@@ -3,6 +3,7 @@
     <span aria-hidden='true'>&times;</span>
     <span class='sr-only'>Close</span>
   </button>
+  <%= image_tag 'black_logo.png', class: 'modal-logo' %>
   <h4 class='modal-title'>Sign up</h4>
 </div>
 <%= form_for User.new, html: {role: 'form', data: {model: 'user', remote: true}} do |f| %>
@@ -10,7 +11,7 @@
     <%= render 'users/fields', f: f %>
   </div>
   <div class='modal-footer'>
-    <%= link_to 'Sign in', '', class: 'btn btn-default btn-sm', disabled: true %>
+    <%= link_to 'Sign in', '#sign-in', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-default btn-sm' %>
     <%= f.submit 'Sign up', class: 'btn btn-purple' %>
   </div>
 <% end %>

@@ -4,7 +4,6 @@ ready = ->
     $form = switch settings.url
       when '/users' then $("form[data-model='user']")
       when '/sessions' then $("form[data-model='session']")
-    debugger
     $form.render_form_errors JSON.parse(jqxhr.responseText)
 
   $(document).ajaxSuccess (event, xhr, settings) ->

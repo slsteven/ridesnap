@@ -1,0 +1,26 @@
+<div class="modal fade" id="password-modal" tabindex="-1" role="dialog" aria-labelledby="RideSnap Modal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class='modal-header'>
+        <button class='close' data-dismiss='modal' type='button'>
+          <span aria-hidden='true'>&times;</span>
+          <span class='sr-only'>Close</span>
+        </button>
+        <%= image_tag 'black_logo.png', class: 'modal-logo' %>
+        <h4 class='modal-title'>Update Password</h4>
+      </div>
+      <%= form_for @user, url: password_reset_path(params[:id]), html: {role: 'form'} do |f| %>
+        <div class='modal-body'>
+          <div class='form-group'>
+            <%= f.label :password, nil, class: 'sr-only' %>
+            <%= f.password_field :password, class: 'form-control', placeholder: 'new Pa55w0rd' %>
+            <span class="help-block"></span>
+          </div>
+        </div>
+        <div class='modal-footer'>
+          <%= f.submit 'Update Password', class: 'btn btn-purple' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

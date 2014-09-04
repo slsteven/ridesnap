@@ -6,6 +6,11 @@
 
 # Settings.my_section.some_entry == some_value
 
+app:
+  name: RideSnap
+  email:
+    info: info@ridesnap.co
+
 google_analytics:
   enabled: false
 

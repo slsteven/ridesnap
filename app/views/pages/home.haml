@@ -3,7 +3,7 @@
 .jumbotron.black-bg#home1
   .container.text-center#header-threshold
     %h1 AT YOUR SERVICE.
-    %p We are RideSnap, a concierge service that takes care of all the worry and work that comes with selling a car.
+    %p= word_wrap 'We are RideSnap, a concierge service that takes care of all the worry and work that comes with selling a car.', line_width: 80
     = link_to 'Get Started', start_path, class: 'btn btn-purple btn-wide btn-lg'
 
 .jumbotron.white-bg
@@ -138,3 +138,8 @@
     $('body').animate(
       scrollTop: $('#how-link').offset().top - 80
     , 'slow')
+
+- if controller_name == 'password_resets' && action_name == 'edit'
+  = render 'password_resets/edit'
+  :coffee
+    $('#password-modal').modal 'show'

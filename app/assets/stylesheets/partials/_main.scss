@@ -14,8 +14,8 @@ html, body {
     &.navbar-inverse .navbar-nav .active a:focus {
       background-color: rgba(0,0,0,0) !important;
     }
-    li.active a:after,
-    li:not(.social) a:hover:after {
+    ul.navbar-nav > li.active > a:after,
+    ul.navbar-nav > li:not(.social) > a:hover:after {
       content: '';
       border-bottom: $purple solid 2px;
       padding: 0 50%;
@@ -38,6 +38,7 @@ html, body {
   }
   footer {
     margin: -75px auto 0 auto !important;
+    background-color: $header-override !important;
     .social a{
       padding: 0px 5px;
     }
@@ -58,35 +59,21 @@ html, body {
   color: $purple !important;
 }
 
-.jumbotron:first-child {
-  @include background-image-default;
-  height: 500px;
-  .container {
-    margin-top: 140px;
-  }
-  &#home1 {
-    background-image: image-url('home.jpg');
-  }
-  &#home2 {
-    // background-image: image-url('');
-  }
-  &#start1 {
-    background-image: image-url('start.jpg');
-  }
-  &#faq1, &#about1 {
-    background-image: image-url('about.jpg');
-  }
-  &#agent1 {
-    background-image: image-url('agent.jpg');
-    background-position: top;
-  }
-}
-
 #alerts {
-  position: relative;
-  top: 120px;
+  position: fixed;
+  top: 90px;
+  z-index: 100000;
+  .alert {
+    border-radius: 0px;
+  }
 }
 
 .best_in_place {
   cursor: pointer;
+}
+
+.modal-logo {
+  max-width: 25px;
+  float: left;
+  margin-right: 10px;
 }

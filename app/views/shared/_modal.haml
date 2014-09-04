@@ -1,4 +1,10 @@
 .modal.fade{id: "#{type}-modal", tabindex: -1, role: 'dialog', 'aria-labelledby' => 'RideSnap Modal', 'aria-hidden' => 'true'}
   .modal-dialog
     .modal-content
-      = render 'sessions/new'
+      .tab-content
+        .tab-pane.fade.in.active#sign-in
+          = render 'sessions/new'
+        .tab-pane.fade#sign-up
+          = render 'users/new'
+        .tab-pane.fade#password-reset
+          = render 'password_resets/new'
