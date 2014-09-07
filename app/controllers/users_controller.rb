@@ -10,16 +10,30 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.where(email: params[:user][:email]).first_or_initialize
-    @user.name = params[:user][:name]
-    @user.password = params[:user][:password]
+    @user = User.build params[:user]
 
     respond_to do |format|
-      if @user.save
-        format.html { redirect_to :back, success: "#{@user.name}'s account added to RideSnap" }
-        format.js { render json: nil, status: :created, layout: false }
+      case @user[:status]
+      when 'fresh user'
+        flash[:success] = "#{@user[:object].name} added to RideSnap"
+        format.html { redirect_to :back }
+        format.js { render js: "location.reload();" }
+      when 'returning user'
+        flash[:success] = "Welcome back #{@user[:object].first_name}! Your account has been updated"
+        format.html { redirect_to :back }
+        format.js { render js: "location.reload();" }
+      when 'current user'
+        if @user[:object].authenticate params[:user][:password]
+          sign_in @user[:object]
+          flash[:success] = "Welcome back #{@user[:object].first_name}! You already have an account, so you've been signed in"
+          format.html { redirect_to :back }
+          format.js { render js: "location.reload();" }
+        else
+          errors = {email: ['account exists... invalid email/password combination'], password: ['']}
+          format.js { render json: errors, status: :expectation_failed } # 417
+        end
       else
-        format.js { render json: @user.errors, status: :unprocessable_entity }
+        format.js { render json: @user[:object].errors, status: :unprocessable_entity } # 422
       end
     end
   end

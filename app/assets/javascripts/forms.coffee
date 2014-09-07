@@ -1,13 +1,25 @@
 ready = ->
 
   $(document).ajaxError (event, jqxhr, settings, exception) ->
-    $form = switch settings.url
-      when '/users' then $("form[data-model='user']")
-      when '/sessions' then $("form[data-model='session']")
+    switch settings.url
+      when '/users'
+        if jqxhr.status == 422
+          $form = $("form[data-model='user']")
+        else
+          $form = $("form[data-model='session']")
+          $('a[href=#sign-in]').tab('show')
+      when '/sessions'
+        $form = $("form[data-model='session']")
     $form.render_form_errors JSON.parse(jqxhr.responseText)
 
   $(document).ajaxSuccess (event, xhr, settings) ->
     $('.modal').modal_success()
+
+  $('.modal').on 'click', '.clear-form', ->
+    setTimeout ->
+      $('form').clear_previous_errors()
+    , 500
+
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

@@ -2,6 +2,13 @@
   .modal-dialog
     .modal-content
       .tab-content
+        %ul.nav.nav-tabs.hidden{role: 'tablist'}
+          %li.active
+            %a{href: '#sign-in', role: 'tab', data: {toggle: 'tab'}}
+          %li
+            %a{href: '#sign-up', role: 'tab', data: {toggle: 'tab'}}
+          %li
+            %a{href: '#password-reset', role: 'tab', data: {toggle: 'tab'}}
         .tab-pane.fade.in.active#sign-in
           = render 'sessions/new'
         .tab-pane.fade#sign-up

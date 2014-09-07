@@ -4,5 +4,7 @@ ready = ->
 
   $('.best_in_place').best_in_place()
 
+  viewportUnitsBuggyfill.init()
+
 $(document).ready(ready)
 $(document).on('page:load', ready)

@@ -21,13 +21,38 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase.strip }
   before_create :create_remember_token
 
-  validates :name, presence: true, length: { maximum: 50 }
+  # validates :name, presence: true, length: { maximum: 50 }
   # validates :password, length: { minimum: 6 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence:   true,
                     format:     { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   has_secure_password validations: false
+
+  def self.build(params={})
+    u = User.find_by(email: params[:email])
+    if u
+      # user exists, and has already signed up
+      if u.password_digest.present?
+        u.update_attributes name: params[:name]
+        return {object: u, status:'current user'}
+      # user's email exists, but hasn't actually signed up
+      else
+        u.name = params[:name]
+        u.password = params[:password]
+        u.save # no name or password validations, so this should always succeed
+        return {object: u, status:'returning user'}
+      end
+    # user doesn't exist, completely new record
+    else
+      u = User.new params.permit(:email, :name, :password)
+      if u.save
+        return {object: u, status:'fresh user'}
+      else
+        return {object: u}
+      end
+    end
+  end
 
   def first_name
     if %w[mr mr. dr dr. ms ms. mrs mrs.].include? self.name.split(' ').first.downcase
