@@ -5,6 +5,7 @@ class CreateVehicles < ActiveRecord::Migration
       t.string :model
       t.integer :year
       t.string :style
+      t.text :description
       t.integer :mileage
       t.string :condition
       t.hstore :options

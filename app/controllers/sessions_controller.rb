@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
         format.html { redirect_to :back }
         format.js { render js: "location.reload();" }
       else
-        format.js { render json: errors, status: :unprocessable_entity }
+        format.js { render json: errors, status: :unprocessable_entity } # 422
       end
     end
   end

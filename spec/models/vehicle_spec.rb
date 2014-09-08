@@ -7,6 +7,7 @@
 #  model             :string(255)
 #  year              :integer
 #  style             :string(255)
+#  description       :text
 #  mileage           :integer
 #  condition         :string(255)
 #  options           :hstore

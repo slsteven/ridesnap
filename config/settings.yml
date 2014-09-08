@@ -10,6 +10,10 @@ app:
   name: RideSnap
   email:
     info: info@ridesnap.co
+    steven: slstevenlam@gmail.com
+    melbs: mclemieux@gmail.com
+    tommy: quantumventuress@gmail.com
+    brett: brett@dudo.io
 
 google_analytics:
   enabled: false

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/about'        => 'pages#about'
   get '/contact'      => 'pages#contact'
   get '/faq'          => 'pages#faq'
-  get '/agent'        => 'pages#agent'
+  get '/agent'       => 'pages#agent'
 
   namespace :api, defaults: {format: 'json'} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
@@ -38,6 +38,8 @@ Rails.application.routes.draw do
       post 'schedule_confirm'
     end
   end
+
+  resources :rides
 
   resources :cities, only: [:create, :index, :update]
   resources :password_resets, only: [:create, :edit, :update]

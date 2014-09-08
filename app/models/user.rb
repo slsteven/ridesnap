@@ -2,18 +2,22 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  name            :string(255)
-#  email           :string(255)
-#  phone           :integer
-#  password_digest :string(255)
-#  remember_token  :string(255)
-#  admin           :boolean          default(FALSE)
-#  created_at      :datetime
-#  updated_at      :datetime
+#  id                     :integer          not null, primary key
+#  name                   :string(255)
+#  email                  :string(255)
+#  phone                  :integer
+#  password_digest        :string(255)
+#  remember_token         :string(255)
+#  created_at             :datetime
+#  updated_at             :datetime
+#  password_reset_token   :string(255)
+#  password_reset_sent_at :datetime
+#  zip_code               :string(255)
+#  status                 :string(255)
 #
 
 class User < ActiveRecord::Base
+  include AASM
 
   has_many :rides
   has_many :vehicles, through: :rides
@@ -28,6 +32,20 @@ class User < ActiveRecord::Base
                     format:     { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   has_secure_password validations: false
+
+  aasm column: 'status', whiny_transitions: false do
+    state :standard, initial: true
+    state :applicant
+    state :agent
+    state :admin
+    event :apply_for_agent do
+      transitions from: :standard, to: :applicant
+    end
+  end
+
+  def admin?
+    self.status == 'admin'
+  end
 
   def self.build(params={})
     u = User.find_by(email: params[:email])
@@ -81,7 +99,7 @@ class User < ActiveRecord::Base
     self.password_reset_token = User.generate_token
     self.password_reset_sent_at = Time.zone.now
     save!
-    UserMailer.password_reset(self).deliver
+    UserMailer.password_reset(self.id).deliver
   end
 
   private

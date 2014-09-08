@@ -4,7 +4,16 @@ ready = ->
     for k, v of JSON.parse(what.responseText)
       $(where).append( $("<option></option>").attr("value", k).text(v) )
 
-  $('#vehicle-query #make').on 'change', ->
+  display_query_results = ->
+    $('input#schedule-button').attr 'disabled', false
+
+  clear_query_results = ->
+    $('input#schedule-button').attr 'disabled', true
+    $('#trade-in-value, #ridesnap-value, #buy-it-now-value').text '$0'
+    $('.circle.trade-in-value, .circle.ridesnap-value, .circle.buy-it-now-value').width '100%'
+    $('form#vehicle-inspection #vehicle_id').val null
+
+  $('#vehicle-query #vehicle_make').on 'change', ->
     $.ajax
       type: 'get'
       dataType: 'json'
@@ -12,45 +21,49 @@ ready = ->
       data:
         make: $(this).val()
     .complete (opt) ->
-      update_select opt, '#vehicle-query #model'
-      $('#vehicle-query #model').prop 'disabled', false
-      $('#vehicle-query #year').val ''
-      $('#vehicle-query #year').prop 'disabled', true
-      $('#vehicle-query #style').val ''
-      $('#vehicle-query #style').prop 'disabled', true
+      update_select opt, '#vehicle-query #vehicle_model'
+      $('#vehicle-query #vehicle_model').prop 'disabled', false
+      $('#vehicle-query #vehicle_year').val ''
+      $('#vehicle-query #vehicle_year').prop 'disabled', true
+      $('#vehicle-query #vehicle_style').val ''
+      $('#vehicle-query #vehicle_style').prop 'disabled', true
       $('a#get-a-quote').attr 'disabled', true
+      clear_query_results()
 
-  $('#vehicle-query #model').on 'change', ->
+  $('#vehicle-query #vehicle_model').on 'change', ->
     $.ajax
       type: 'get'
       dataType: 'json'
       url: '/vehicles/year_query'
       data:
-        make: $('#vehicle-query #make').val()
+        make: $('#vehicle-query #vehicle_make').val()
         model: $(this).val()
     .complete (opt) ->
-      update_select opt, '#vehicle-query #year'
-      $('#vehicle-query #year').prop 'disabled', false
-      $('#vehicle-query #style').val ''
-      $('#vehicle-query #style').prop 'disabled', true
+      update_select opt, '#vehicle-query #vehicle_year'
+      $('#vehicle-query #vehicle_year').prop 'disabled', false
+      $('#vehicle-query #vehicle_style').val ''
+      $('#vehicle-query #vehicle_style').prop 'disabled', true
       $('a#get-a-quote').attr 'disabled', true
+      clear_query_results()
 
-  $('#vehicle-query #year').on 'change', ->
+  $('#vehicle-query #vehicle_year').on 'change', ->
     $.ajax
       type: 'get'
       dataType: 'json'
       url: '/vehicles/style_query'
       data:
-        make: $('#vehicle-query #make').val()
-        model: $('#vehicle-query #model').val()
+        make: $('#vehicle-query #vehicle_make').val()
+        model: $('#vehicle-query #vehicle_model').val()
         year: $(this).val()
     .complete (opt) ->
-      update_select opt, '#vehicle-query #style'
-      $('#vehicle-query #style').prop 'disabled', false
+      update_select opt, '#vehicle-query #vehicle_style'
+      $('#vehicle-query #vehicle_style').prop 'disabled', false
       $('a#get-a-quote').attr 'disabled', true
+      clear_query_results()
 
-  $('#vehicle-query #style').on 'change', ->
+  $('#vehicle-query #vehicle_style').on 'change', ->
     $('a#get-a-quote').attr 'disabled', false
+    clear_query_results()
 
   $('a#get-a-quote').on 'click', ->
     $.ajax
@@ -58,11 +71,11 @@ ready = ->
       dataType: 'json'
       url: '/vehicles/query'
       data:
-        make: $('#vehicle-query #make').val()
-        model: $('#vehicle-query #model').val()
-        year: $('#vehicle-query #year').val()
-        style: $('#vehicle-query #style').val()
-        zip: $('#vehicle-query #zip').val()
+        make: $('#vehicle-query #vehicle_make').val()
+        model: $('#vehicle-query #vehicle_model').val()
+        year: $('#vehicle-query #vehicle_year').val()
+        style: $('#vehicle-query #vehicle_style').val()
+        zip: $('#vehicle-query #vehicle_zip').val()
     .complete (prices) ->
       prices = JSON.parse(prices.responseText)
       $('#trade-in-value').text '$' + prices.trade_in
@@ -72,11 +85,14 @@ ready = ->
       $('.circle.trade-in-value').width Math.round(prices.trade_in/max*100) + '%'
       $('.circle.ridesnap-value').width Math.round(prices.retail/max*100) + '%'
       $('.circle.buy-it-now-value').width Math.round(prices.private_party/max*100) + '%'
-      $('span#selected-make').text $('#vehicle-query #make option:selected').text()
-      $('span#selected-model').text $('#vehicle-query #model option:selected').text()
-      $('span#selected-year').text $('#vehicle-query #year option:selected').text()
-      $('span#selected-style').text $('#vehicle-query #style option:selected').text()
       $('form#vehicle-inspection #vehicle_id').val prices.vehicle_id
+      $('form#vehicle-query #vehicle_description').val(
+        $('#vehicle-query #vehicle_year option:selected').text() + ' ' +
+        $('#vehicle-query #vehicle_make option:selected').text() + ' ' +
+        $('#vehicle-query #vehicle_model option:selected').text() + ' - ' +
+        $('#vehicle-query #vehicle_style option:selected').text()
+      )
+      display_query_results()
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

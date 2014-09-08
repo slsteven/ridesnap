@@ -53,24 +53,24 @@
     %h2.purple Apply Today.
     %br
     %br
-    = form_tag agent_users_path, class: 'form-inline', id: 'vehicle-inspection', role: 'form', remote: true do
+    = form_for User.new, url: agent_users_path, html: {class: 'form-inline', id: 'vehicle-inspection', role: 'form'} do |f|
       .form-group
-        = label_tag :name, nil, class: 'sr-only'
-        = text_field_tag :name, nil, placeholder: 'Full Name', class: 'form-control'
+        = f.label :name, nil, class: 'sr-only'
+        = f.text_field :name, placeholder: 'Full Name', class: 'form-control'
       .form-group
-        = label_tag :zip_code, nil, class: 'sr-only'
-        = text_field_tag :zip_code, nil, placeholder: 'Zip Code', class: 'form-control'
+        = f.label :zip_code, nil, class: 'sr-only'
+        = f.text_field :zip_code, placeholder: 'Zip Code', class: 'form-control'
       %br
       .form-group
-        = label_tag :phone, nil, class: 'sr-only'
-        = text_field_tag :phone, nil, placeholder: 'Phone', class: 'form-control'
+        = f.label :phone, nil, class: 'sr-only'
+        = f.text_field :phone, placeholder: 'Phone', class: 'form-control phone'
       .form-group
-        = label_tag :email, nil, class: 'sr-only'
-        = text_field_tag :email, nil, placeholder: 'Email', class: 'form-control'
+        = f.label :email, nil, class: 'sr-only'
+        = f.text_field :email, placeholder: 'Email', class: 'form-control'
+      / %br
+      / .form-group
+      /   = f.label :reference, nil, class: 'sr-only'
+      /   = f.text_field :reference, placeholder: 'Referred By (optional)', class: 'form-control'
       %br
       .form-group
-        = label_tag :reference, nil, class: 'sr-only'
-        = text_field_tag :reference, nil, placeholder: 'Referred By (optional)', class: 'form-control'
-      %br
-      .form-group
-        = submit_tag 'Apply', class: 'btn btn-purple btn-wide'
+        = f.submit 'Apply', class: 'btn btn-purple btn-wide'

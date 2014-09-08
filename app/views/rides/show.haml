@@ -1,0 +1,25 @@
+- provide(:title, 'Confirmation')
+
+.jumbotron.black-bg#confirm1
+  .container.text-center#header-threshold
+    %h1= @ride.scheduled_at > Date.current ? 'Scheduled Ride.' : 'Past Ride.'
+
+.jumbotron.white-bg
+  .container.text-center
+    %h2.purple= "Thank you, #{@user.first_name}!"
+    %p We look forward to meeting you!
+    %br
+    %br
+    %b.purple= @user.name
+    %p= number_to_phone(@user.phone, area_code: true)
+    %p= @user.email
+    %br
+    %b.purple INSPECTION APPOINTMENT FOR:
+    %p= @ride.scheduled_at.to_formatted_s :long_ordinal
+    %p
+      %span= @ride.address
+      %br
+      %span= "#{@location[:city]}, #{@location[:state]} #{@location[:zip_code]}"
+    %br
+    %b.purple VEHICLE INFORMATION
+    %p= @vehicle.description

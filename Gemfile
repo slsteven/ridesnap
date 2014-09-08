@@ -78,4 +78,6 @@ gem 'rails_config'
 
 gem 'annotate'
 
-gem "best_in_place", github: 'bernat/best_in_place', ref: 'ee95961e'
+gem 'best_in_place', github: 'bernat/best_in_place', ref: 'ee95961e'
+
+gem 'chronic'

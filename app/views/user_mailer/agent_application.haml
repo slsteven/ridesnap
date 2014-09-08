@@ -1,0 +1,13 @@
+%p Hello!
+%p
+  = @user.name
+  has decided to become an agent for
+  = "#{Settings.app.name}."
+%p
+  They reside in
+  = "#{Location.from_zip @user.zip_code}."
+%p
+  Reach out to them at
+  = @user.email
+  or
+  = "#{@user.phone}."

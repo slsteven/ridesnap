@@ -3,7 +3,7 @@ class CreateRides < ActiveRecord::Migration
     create_table :rides do |t|
       t.belongs_to :user
       t.belongs_to :vehicle
-      t.datetime :datetime
+      t.datetime :scheduled_at
       t.string :relation # used for state machine
       t.boolean :owner
       t.string :address

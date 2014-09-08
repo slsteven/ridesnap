@@ -10,30 +10,36 @@ form#vehicle-inspection {
   }
 }
 
-.circle {
-  margin: 0 auto;
-  .words {
-    position: absolute;
-    top: calc(50% - 46px);
-    left: 0;
-    right: 0;
-  }
-  &:hover {
-    color: $purple;
-  }
-  svg {
-    fill: none;
-    &.grey {
-      stroke: lightgrey;
-      color: lightgrey !important;
+#results-circles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .circle {
+    margin: 0 auto;
+    transition-duration: 2s;
+    .words {
+      position: absolute;
+      top: calc(50% - 46px);
+      left: 0;
+      right: 0;
     }
-    &.purple {
-      stroke: $purple;
-      color: $purple !important;
+    &:hover {
+      color: $purple;
     }
-    &.black {
-      stroke: black;
-      color: black !important;
+    svg {
+      fill: none;
+      &.grey {
+        stroke: lightgrey;
+        color: lightgrey !important;
+      }
+      &.purple {
+        stroke: $purple;
+        color: $purple !important;
+      }
+      &.black {
+        stroke: black;
+        color: black !important;
+      }
     }
   }
 }

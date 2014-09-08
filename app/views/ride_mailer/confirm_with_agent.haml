@@ -1,0 +1,21 @@
+%p Hello!
+%p
+  = @user.name
+  has decided to sell their
+  = @vehicle.description
+  with
+  = "#{Settings.app.name}."
+%p
+  They're thinking
+  = @ride.scheduled_at.to_formatted_s :long_ordinal
+%p
+  They reside in
+  = "#{@location[:city]}, #{@location[:state]}."
+%p
+  Reach out to them at
+  = mail_to @user.email, subject: "#{Settings.app.name} Follow up", target: '_blank'
+  or
+  = "#{@user.phone}."
+%br
+%br
+%p= link_to ride_url(@ride), "Link to #{Settings.app.name}", target: '_blank'

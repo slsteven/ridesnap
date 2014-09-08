@@ -1,13 +1,12 @@
 class VehiclesController < ApplicationController
   def create
-    @vehicle = Vehicle.new(vehicle_params)
-    if @vehicle.save
-      sign_in @vehicle
-      flash.now[:success] = "Vehicle created"
-      redirect_to @vehicle
-    else
-      render 'new'
-    end
+    params[:vehicle][:zip_code] = params[:vehicle][:zip_code].presence
+    value = Edmunds.typical_value params[:vehicle][:style], zip: params[:vehicle][:zip_code]
+    params[:vehicle][:preliminary_value] = value
+    params[:vehicle].slice!(:make, :model, :year, :style, :zip_code, :description, :preliminary_value)
+    @vehicle = Vehicle.new params[:vehicle].permit!
+    @menu = 'start'
+    render new_ride_path if @vehicle.save
   end
 
   def destroy
@@ -36,43 +35,11 @@ class VehiclesController < ApplicationController
 
   def query
     value = Edmunds.typical_value params[:style], zip: params[:zip].presence
-    params[:preliminary_value] = value
-    @vehicle = Vehicle.create params.except(:action, :controller).permit!
-    value[:vehicle_id] = @vehicle.id
     render json: value
   end
 
   def new
     @vehicle = Vehicle.new
-  end
-
-  def schedule_confirm
-    @vehicle = Vehicle.find(params[:vehicle_id])
-
-    @user = User.where(email: params[:email]).first_or_initialize
-    @user.name = params[:name]
-    @user.phone = params[:phone].delete('^0-9')
-
-    if @user.save
-      @ride = @user.rides
-                   .where(vehicle_id: @vehicle.id, relation: 'seller')
-                   .first_or_initialize
-      @ride.datetime = params[:datetime] || Time.now
-      @ride.address = params[:address]
-      @ride.zip_code = params[:zip_code]
-      @ride.owner = true
-
-      if @ride.save
-        @location = Location.from_zip(@ride.zip_code)
-        flash.now[:success] = "Appointment confirmed!"
-      else
-        flash.now[:error] = "Something went wrong... please try again"
-        render 'pages/start'
-      end
-    else
-      flash.now[:error] = "Something went wrong... please try again"
-      render 'pages/start'
-    end
   end
 
   def show

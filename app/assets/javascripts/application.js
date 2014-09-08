@@ -15,4 +15,5 @@
 //= require best_in_place
 //= require bootstrap-sprockets
 //= require turbolinks
+//= require lib/moment.min.js
 //= require_tree .
