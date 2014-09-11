@@ -1,4 +1,7 @@
 class VehiclesController < ApplicationController
+  before_filter :signed_in_user,    only: [:index, :edit, :update, :destroy]
+  before_filter :admin_user,        only: [:index, :destroy]
+
   def create
     params[:vehicle][:zip_code] = params[:vehicle][:zip_code].presence
     value = Edmunds.typical_value params[:vehicle][:style], zip: params[:vehicle][:zip_code]
@@ -19,6 +22,7 @@ class VehiclesController < ApplicationController
   end
 
   def index
+    @vehicles = Vehicle.all
   end
 
   def model_query

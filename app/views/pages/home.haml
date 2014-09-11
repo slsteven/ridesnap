@@ -3,13 +3,13 @@
 .jumbotron.black-bg#home1
   .container.text-center#header-threshold
     %h1 AT YOUR SERVICE.
-    %p= word_wrap 'We are RideSnap, a concierge service that takes care of all the worry and work that comes with selling a car.', line_width: 80
+    %p RideSnap takes care of all the stress and work that comes with selling your car.
     = link_to 'Get Started', start_path, class: 'btn btn-purple btn-wide btn-lg'
 
 .jumbotron.white-bg
   .container.text-center
     %h2.purple Sell your car with RideSnap.
-    %p because you value your:
+    %p So you don’t waste:
     %ul.nav#time-money{role: 'tablist'}
       %li
         = link_to 'Time', '#time', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple btn-circle'
@@ -25,48 +25,48 @@
             %small Click on one of the buttons above to see how we do our part to save you time and money.
       .tab-pane.fade#time
         .col-sm-8.col-sm-offset-2
-          %p.purple We understand that everybody lives a busy lifestyle. That's why we've designed our service to be simple.
+          %p.purple We make it easy so you can spend your time somewhere else.
         .row
           .col-sm-4.col-xs-12
             %h2
-              %span.glyphicon.glyphicon-time
-            %p.purple Time saver.
+              %span= image_tag('clock.svg')
+            %p.purple We Come To You
             %p
-              %small No more posting ads and filtering through low ball offers, organizing test drives, and meetings with inspectors.
+              %small Any time, any place to get started.
           .col-sm-4.col-xs-12
             %h2
-              %span.glyphicon.glyphicon-calendar
-            %p.purple We work with your schedule.
+              %span= image_tag('calendar.svg')
+            %p.purple No Grunt Work
             %p
-              %small Not sure when or where you can pencil us in for a car inspection? You pick the location and we come to you to get started.
+              %small No more posting ads, finding buyers, filtering through emails and handling paperwork.
           .col-sm-4.col-xs-12
             %h2
-              %span.glyphicon.glyphicon-bell
-            %p.purple Stay informed.
+              %span= image_tag('alert.svg')
+            %p.purple Test Drives
             %p
-              %small We find your buyers and handle all the logistics while keeping you updated along the way.
+              %small We take care of scheduling and meeting with buyers for test drives.
       .tab-pane.fade#money
         .col-sm-8.col-sm-offset-2
-          %p.purple We want to help you get the highest value for your car, because we don't buy cars to resell like a dealership &#8212; we are actually on your side.
+          %p.purple We want to help you get the highest value for your car by avoiding the dealership.
         .row
           .col-sm-4.col-xs-12
             %h2
-              %span.glyphicon.glyphicon-eye-open
-            %p.purple Total transparency.
+              %span= image_tag('eye.svg')
+            %p.purple Total Transparency
             %p
-              %small No upfront costs or hidden fees. Don't pay us until your car is sold.
+              %small No upfront costs or hidden fees. We charge a simple 5% commission.
           .col-sm-4.col-xs-12
             %h2
-              %span.glyphicon.glyphicon-usd
-            %p.purple The more, the better.
+              %span= image_tag('money.svg')
+            %p.purple The More, the Better
             %p
-              %small The more the car sells for, the more money there is for both of us. It's as simple as that!
+              %small The more your car sells for, the more money there is for both of us!
           .col-sm-4.col-xs-12
             %h2
-              %span.glyphicon.glyphicon-lock
-            %p.purple Secure transactions.
+              %span= image_tag('lock.svg')
+            %p.purple Secure Transaction
             %p
-              %small We write a check to you, not the buyer. So don't worry about getting counterfeit money or bad cashier checks.
+              %small We pay you, not the buyer. So don’t worry about getting counterfeit money or bad cashier checks.
 
 .jumbotron.whitesmoke-bg#how-link
   .container.text-center
@@ -86,29 +86,31 @@
           = link_to 'STEP 4', '#step_4', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple'
       .tab-content
         .tab-pane.fade.in.active#step_1
-          %h2.purple GIVE US THE BASICS.
-          %p We start by getting basic information about your car, like its make, model, and year so we can give you an idea of a potential listing price compared to a dealership.
+          %h2.purple GIVE US THE BASICS
+          %p
+            With your car's
+            %b make, model, and year,
+            we give you a rough estimate on how much we can sell your car for compared to a Trade-in.
           = link_to 'Get Started', start_path, class: 'btn btn-purple btn-wide btn-lg'
         .tab-pane.fade#step_2
-          %h2.purple MAKE AN APPOINTMENT.
-          %p Schedule an appointment at any location and we will come to you. We want to meet to do a few things in person.
-          %p.purple 1. Inspect your car and discuss a competitive listing price based on your needs.
-          %p.purple 2. Collect the car title and additional paperwork so we can have it prepared for prospective buyers.
-          %p.purple
-            3. Give you a
-            %b BUY IT NOW
-            price.
+          %h2.purple GET IN TOUCH
+          %p
+            Schedule an appointment at any location and we will come to you. Our agent will:
+            %ol
+              %li.purple Inspect your car
+              %li.purple Reassess the listing price
+              %li.purple Take pictures
         .tab-pane.fade#step_3
-          %h2.purple SIT BACK AND RELAX.
+          %h2.purple SIT BACK and WAIT FOR YOUR OFFER!
           %p Continue using your car if you need to. We take care of everything from here. We clean your car, photograph it, inspect it, post ads, and schedule test drives. We want to manage the complete process so you don't lift a finger.
         .tab-pane.fade#step_4
-          %h2.purple COLLECT YOUR MONEY.
+          %h2.purple GET PAID
           %p
-            Once your car is sold, we will write you a check. We
+            We
             %b guarantee that your car will sell in 31 days
             or we give you the option of having us purchase it from you for the
-            %b BUY IT NOW
-            price. You make money no matter what.
+            %b “buy it now”
+            price. We want to make sure you make money, no matter what.
           = link_to 'Get Started', start_path, class: 'btn btn-purple btn-wide btn-lg'
 
 .jumbotron.purple-bg#home2

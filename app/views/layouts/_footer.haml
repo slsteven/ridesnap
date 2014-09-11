@@ -18,6 +18,8 @@
             %li= link_to 'Sign out', signout_path, method: 'delete'
             %li.divider
             %li= link_to 'Available Locations', cities_path if current_user.try(:admin?)
+            %li= link_to 'Vehicles', vehicles_path if current_user.try(:admin?)
+            %li= link_to 'Users', users_path if current_user.try(:admin?)
             %li= link_to 'Market Place', nil, disabled: true
       - else
         %li= link_to 'Sign in', '', data: {target: '#signin-modal', toggle: 'modal'}

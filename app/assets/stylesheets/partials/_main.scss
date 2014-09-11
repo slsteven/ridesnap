@@ -77,3 +77,15 @@ html, body {
   float: left;
   margin-right: 10px;
 }
+
+ol, ul {
+  list-style-position: inside;
+  padding-left: 0px;
+}
+ul {
+  list-style: none;
+}
+
+span img {
+  max-width: 70px;
+}

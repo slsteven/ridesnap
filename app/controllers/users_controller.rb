@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :signed_in_user,
-                only: [:index, :edit, :update, :destroy]
+  before_filter :signed_in_user,    only: [:index, :edit, :update, :destroy]
   before_filter :correct_user,      only: [:edit, :update]
-  before_filter :admin_user,        only: [:destroy]
+  before_filter :admin_user,        only: [:index, :destroy]
   before_filter :already_signed_in, only: [:new, :create]
 
   def agent
@@ -59,6 +58,7 @@ class UsersController < ApplicationController
   end
 
   def index
+    @users = User.all
   end
 
   def new
@@ -80,10 +80,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-    def admin_user
-      redirect_to(root_path) unless current_user.admin?
-    end
 
     def correct_user
       @user = User.find(params[:id])
