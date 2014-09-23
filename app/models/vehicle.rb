@@ -35,6 +35,9 @@ class Vehicle < ActiveRecord::Base
   has_many :rides
   has_many :users, through: :rides
 
+  # these states give us helper methods as follows
+  # Vehicle.listed === Vehicle.where(status: 'listed')
+  # Vehicle#listed? === Vehicle.first.status == 'listed'
   aasm column: 'status' do
     state :preliminary, initial: true
     state :listed

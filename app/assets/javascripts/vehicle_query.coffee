@@ -78,13 +78,16 @@ ready = ->
         zip: $('#vehicle-query #vehicle_zip_code').val()
     .complete (prices) ->
       prices = JSON.parse(prices.responseText)
-      $('#trade-in-value').text '$' + prices.trade_in
-      $('#ridesnap-value').text '$' + prices.retail
-      $('#buy-it-now-value').text '$' + prices.private_party
-      max = Math.max(prices.trade_in, prices.retail, prices.private_party)
-      $('.circle.trade-in-value').width Math.round(prices.trade_in/max*100) + '%'
-      $('.circle.ridesnap-value').width Math.round(prices.retail/max*100) + '%'
-      $('.circle.buy-it-now-value').width Math.round(prices.private_party/max*100) + '%'
+      trade_in = prices.trade_in
+      buy_now = prices.buy_now
+      ride_snap = prices.ride_snap
+      $('#trade-in-value').text '$' + trade_in
+      $('#ridesnap-value').text '$' + ride_snap
+      $('#buy-it-now-value').text '$' + buy_now
+      max = Math.max(trade_in, ride_snap, buy_now)
+      $('.circle.trade-in-value').width Math.round(trade_in/max*100) + '%'
+      $('.circle.ridesnap-value').width Math.round(ride_snap/max*100) + '%'
+      $('.circle.buy-it-now-value').width Math.round(buy_now/max*100) + '%'
       $('form#vehicle-inspection #vehicle_id').val prices.vehicle_id
       $('form#vehicle-query #vehicle_description').val(
         $('#vehicle-query #vehicle_year option:selected').text() + ' ' +

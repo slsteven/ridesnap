@@ -39,6 +39,12 @@ class VehiclesController < ApplicationController
 
   def query
     value = Edmunds.typical_value params[:style], zip: params[:zip].presence
+    sources = [value[:trade_in], value[:private_party]]
+    avg = sources.sum / sources.size.to_f
+    dif = value[:private_party] - avg
+    value[:buy_now] = (avg + (dif * 0)).round(-2) # this will let us adjust the price easily while staying in the bounds
+    value[:trade_in] = value[:trade_in].round(-2)
+    value[:ride_snap] = value[:private_party].round(-2)
     render json: value
   end
 

@@ -33,18 +33,22 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   has_secure_password validations: false
 
+  # these states give us helper methods as follows
+  # User.standard === User.where(status: 'standard')
+  # User#standard? === User.first.status == 'standard'
   aasm column: 'status', whiny_transitions: false do
     state :standard, initial: true
     state :applicant
     state :agent
     state :admin
+
     event :apply_for_agent do
       transitions from: :standard, to: :applicant
     end
-  end
 
-  def admin?
-    self.status == 'admin'
+    event :promote_to_agent do
+      transitions from: :applicant, to: :agent
+    end
   end
 
   def self.build(params={})
