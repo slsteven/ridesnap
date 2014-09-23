@@ -68,6 +68,28 @@
             %p
               %small We pay you, not the buyer. So don’t worry about getting counterfeit money or bad cashier checks.
 
+.jumbotron.purple-bg#home2
+  .container.text-center
+    %p
+      %small
+        %b
+          NOW AVAILABLE IN
+        %br
+        %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    %h2 The San Francisco Bay Area.
+    %p
+      COMING SOON:
+      %b CHICAGO
+    %p
+      %small Don't see your city? Let us know where you'd like to see RideSnap next!
+    .col-lg-4.col-lg-offset-4
+      = form_tag cities_path do
+        .input-group
+          = label_tag :zip_code, nil, class: 'sr-only'
+          = text_field_tag :zip_code, nil, placeholder: 'Zip Code', class: 'form-control'
+          %span.input-group-btn
+            = submit_tag 'Submit', class: 'btn btn-default'
+
 .jumbotron.whitesmoke-bg#how-link
   .container.text-center
     %p
@@ -112,28 +134,6 @@
             %b “buy it now”
             price. We want to make sure you make money, no matter what.
           = link_to 'Get Started', start_path, class: 'btn btn-purple btn-wide btn-lg'
-
-.jumbotron.purple-bg#home2
-  .container.text-center
-    %p
-      %small
-        %b
-          NOW AVAILABLE IN
-        %br
-        %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    %h2 The San Francisco Bay Area.
-    %p
-      COMING SOON:
-      %b CHICAGO
-    %p
-      %small Don't see your city? Let us know where you'd like to see RideSnap next!
-    .col-lg-4.col-lg-offset-4
-      = form_tag cities_path do
-        .input-group
-          = label_tag :zip_code, nil, class: 'sr-only'
-          = text_field_tag :zip_code, nil, placeholder: 'Zip Code', class: 'form-control'
-          %span.input-group-btn
-            = submit_tag 'Submit', class: 'btn btn-default'
 
 - if action_name == 'how'
   :coffee

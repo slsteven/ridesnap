@@ -5,7 +5,48 @@
 
 module Edmunds
 
-  def self.images(styleid)
+  def self.query_color(styleid)
+    endpoint = "api/vehicle/v2/styles/#{styleid}/colors"
+    doc = fetch(endpoint)
+    interior = {}
+    exterior = {}
+    doc[:colors].each do |c|
+      next unless c[:colorChips] && c[:name]
+      if c[:category].downcase == 'exterior'
+        exterior[c[:id]] = { name: c[:name],
+                             primary: c[:colorChips][:primary].try(:fetch, :hex, nil),
+                             secondary: c[:colorChips][:secondary].try(:fetch, :hex, nil) }
+      else
+        interior[c[:id]] = { name: c[:name],
+                             primary: c[:colorChips][:primary].try(:fetch, :hex, nil),
+                             secondary: c[:colorChips][:secondary].try(:fetch, :hex, nil) }
+      end
+    end
+    {interior: interior, exterior: exterior}
+  end
+
+  def self.query_equipment(styleid)
+    endpoint = "api/vehicle/v2/styles/#{styleid}/equipment"
+    doc = fetch(endpoint)
+    doc[:equipment].each_with_object(options={}) do |h,o|
+      o[h[:equipmentType].downcase] ||= {}
+      o[h[:equipmentType].downcase][h[:id]] = { name: h[:name],
+                                                availability: h[:availability].downcase }
+    end
+  end
+
+  def self.images(styleid, options={})
+    raise 'styleid necessary to talk with API' if styleid.blank?
+
+    endpoint = 'v1/api/vehiclephoto/service/findphotosbystyleid'
+    options[:styleId] = styleid
+    options[:comparator] = 'simple'
+    doc = fetch(endpoint, options)
+    imgs = doc[0]['photoSrcs']
+    img = imgs.select{ |i| i[/500.jpg$/i] }[0] || imgs[0]
+    img = Settings.edmunds.image_url + img
+    caption = doc[0]['captionTranscript']
+    {image: img, caption: caption}
   end
 
   def self.query_makes(options={})
@@ -89,6 +130,13 @@ module Edmunds
     return_values(doc[:tmv][:totalWithOptions])
   end
 
+  def self.vin_to_style(vin)
+    raise 'vin necessary to talk with API' if vin.blank?
+    endpoint = "api/vehicle/v2/vins/#{vin}"
+    doc = fetch(endpoint)
+    doc[:years][0][:styles][0][:id] rescue nil
+  end
+
   private
 
     def self.fetch(endpoint, params={})
@@ -99,7 +147,8 @@ module Edmunds
       params.slice!(:optionid, :colorid).each_with_object(parameters = []){ |(k,v),o| o << "#{k}=#{v}" }
       params.each{ |k,v| v.delete(' ').split(',').each{ |i| parameters << "#{k}=#{i}" } }
       parameters = parameters.join('&')
-      HTTParty.get("#{base}/#{endpoint}?#{parameters}").with_indifferent_access
+      result = HTTParty.get("#{base}/#{endpoint}?#{parameters}")
+      result.kind_of?(Hash) ? result.with_indifferent_access : result
     end
 
     def self.return_values(prices={})

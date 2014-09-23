@@ -7,6 +7,7 @@ gem 'rails', '~> 4.1.4'
 
 # Use pg as the database
 gem 'pg'
+gem 'hstore_accessor' # not sure we need this
 
 # Use SCSS and bootstrap for styles
 gem 'bootstrap-sass', '~> 3.2.0'

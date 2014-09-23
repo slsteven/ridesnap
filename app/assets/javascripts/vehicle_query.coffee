@@ -75,7 +75,7 @@ ready = ->
         model: $('#vehicle-query #vehicle_model').val()
         year: $('#vehicle-query #vehicle_year').val()
         style: $('#vehicle-query #vehicle_style').val()
-        zip: $('#vehicle-query #vehicle_zip').val()
+        zip: $('#vehicle-query #vehicle_zip_code').val()
     .complete (prices) ->
       prices = JSON.parse(prices.responseText)
       $('#trade-in-value').text '$' + prices.trade_in

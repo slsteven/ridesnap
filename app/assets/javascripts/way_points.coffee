@@ -16,4 +16,4 @@ $(window).load ->
       if ($('body').hasClass('home') or $('body').hasClass('how'))
         $('ul li#home').addClass 'active'
         $('ul li#how').removeClass 'active'
-  , { offset: 80 }
+  , { offset: 90 }

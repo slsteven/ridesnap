@@ -24,6 +24,14 @@
 class Vehicle < ActiveRecord::Base
   include AASM
 
+  hstore_accessor :preliminary_value,
+    private_party: :integer,
+    trade_in: :integer
+  hstore_accessor :agreed_value,
+    private_party: :integer,
+    buy_it_now: :integer
+  # hstore_accessor :options
+
   has_many :rides
   has_many :users, through: :rides
 
