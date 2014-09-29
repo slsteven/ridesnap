@@ -6,25 +6,20 @@
     %p RideSnap takes care of all the stress and work that comes with selling your car.
     = link_to 'Get Started', start_path, class: 'btn btn-purple btn-wide btn-lg'
 
-.jumbotron.white-bg
+.jumbotron.white-bg.time-money-tabs
   .container.text-center
     %h2.purple Sell your car with RideSnap.
     %p So you don’t waste:
     %ul.nav#time-money{role: 'tablist'}
-      %li
+      %li.active
         = link_to 'Time', '#time', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple btn-circle'
       %li
         = link_to 'Money', '#money', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple btn-circle'
     %br
     %br
     .tab-content
-      .tab-pane.fade.in.active#or
-        .col-sm-8.col-sm-offset-2
-          %p.purple Whether it's your time or your money, you can count on us to make sure neither is wasted.
-          %p
-            %small Click on one of the buttons above to see how we do our part to save you time and money.
-      .tab-pane.fade#time
-        .col-sm-8.col-sm-offset-2
+      .tab-pane.fade.in.active#time
+        .col-sm-10.col-sm-offset-1
           %p.purple We make it easy so you can spend your time somewhere else.
         .row
           .col-sm-4.col-xs-12
@@ -46,7 +41,7 @@
             %p
               %small We take care of scheduling and meeting with buyers for test drives.
       .tab-pane.fade#money
-        .col-sm-8.col-sm-offset-2
+        .col-sm-10.col-sm-offset-1
           %p.purple We want to help you get the highest value for your car by avoiding the dealership.
         .row
           .col-sm-4.col-xs-12

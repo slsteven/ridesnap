@@ -1,0 +1,14 @@
+ready = ->
+  tabCarousel = setInterval(->
+    tabs = $("ul#time-money > li")
+    active = tabs.filter(".active")
+    next = active.next("li")
+    goTo = (if next.length then next.find("a") else tabs.eq(0).find("a"))
+    goTo.tab 'show'
+  , 5000)
+
+  $('.time-money-tabs').hover ->
+    clearInterval tabCarousel
+
+$(document).ready(ready)
+$(document).on('page:load', ready)
