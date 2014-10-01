@@ -26,7 +26,7 @@
     %ul.nav.navbar-nav.navbar-right
       %li{class: ('active' if @menu == 'faq')}= link_to 'FAQ', faq_url, title: 'frequently asked questions'
       %li{class: ('active' if @menu == 'contact')}= mail_to 'info@ridesnap.co', 'Contact Us', subject: 'Info request', title: 'Talk to us!', target: '_blank'
-      %li.social= link_to embedded_svg('facebook.svg', class: 'social-icon facebook', size: 45), 'http://facebook.com', title: 'Facebook'
-      %li.social= link_to embedded_svg('twitter.svg', class: 'social-icon twitter', size: 45), 'http://twitter.com', title: 'Twitter'
-      %li.social= link_to embedded_svg('linkedin.svg', class: 'social-icon linkedin', size: 45), 'http://linkedin.com', title: 'LinkedIn'
-      %li.social= link_to embedded_svg('google.svg', class: 'social-icon google', size: 45), 'http://plus.google.com', title: 'Google+'
+      %li.social= link_to embedded_svg('facebook.svg', class: 'social-icon facebook', size: 45), Settings.social.facebook, title: 'Facebook'
+      %li.social= link_to embedded_svg('twitter.svg', class: 'social-icon twitter', size: 45), Settings.social.twitter, title: 'Twitter'
+      %li.social= link_to embedded_svg('linkedin.svg', class: 'social-icon linkedin', size: 45), Settings.social.linkedin, title: 'LinkedIn'
+      %li.social= link_to embedded_svg('google.svg', class: 'social-icon google', size: 45), Settings.social.google, title: 'Google+'

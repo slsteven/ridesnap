@@ -1,5 +1,131 @@
 - provide(:title, @vehicle.description)
 
-.jumbotron
+.jumbotron.black-bg#start1
+  .container.text-center#header-threshold
+    %h1= @vehicle.description.split('-')[0].strip
+
+.jumbotron.small.white-bg
   .container.text-center
-    %h1= @vehicle.description
+    %h2.purple
+      Let
+      = Settings.app.name
+      do the work for you.
+    %p.col-md-6.col-md-offset-3 We inspect, find your buyers, schedule test drives, and negotiate so you can worry about other things.
+
+.jumbotron.whitesmoke-bg#how-link
+  .container.text-center
+    %p
+      %small
+        %b GET STARTED
+        %br
+        %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    %h2.purple Estimated Value.
+    %p= @vehicle.description
+    %p= @vehicle.known_attr.join('&nbsp;&nbsp;|&nbsp;&nbsp;')
+    .well
+      %h3 Edit vehicle options:
+      .row
+        .col-sm-6.col-xs-12
+          .form-group
+            %select.form-control
+              %option 1
+              %option 2
+              %option 3
+          .form-group
+            %select.form-control
+              %option 1
+              %option 2
+              %option 3
+          .form-group
+            %select.form-control
+              %option 1
+              %option 2
+              %option 3
+        .col-sm-6.col-xs-12
+          .form-group
+            %select.form-control
+              %option 1
+              %option 2
+              %option 3
+          .form-group
+            %select.form-control
+              %option 1
+              %option 2
+              %option 3
+          .form-group
+            %select.form-control
+              %option 1
+              %option 2
+              %option 3
+    %br
+    %br
+    = render 'vehicles/price_circles'
+
+    %hr
+
+    %p Your Listing Detail
+
+    #vehicle-images.carousel.slide
+      / Indicators
+      %ol.carousel-indicators
+        - 1.upto(@vehicle_images.size) do |i|
+          %li{class: ('active' if i == 1),data: {'slide-to' => 0, target: '#vehicle-images'}}
+      / Wrapper for slides
+      .carousel-inner
+        - @vehicle_images.each_with_index do |img, i|
+          .item{class: ('active' if i == 0)}
+            = image_tag img
+            .carousel-caption= nil
+      / Controls
+      %a.left.carousel-control{href: '#vehicle-images', role: 'button', data: {slide: 'prev'}}
+        %span.glyphicon.glyphicon-chevron-left
+      %a.right.carousel-control{href: '#vehicle-images', role: 'button', data: {slide: 'next'}}
+        %span.glyphicon.glyphicon-chevron-right
+
+    %br
+    .text-left
+      blah blah blah
+
+.jumbotron.white-bg
+  .container.text-center
+    = render 'pages/how_it_works'
+
+.jumbotron.whitesmoke-bg#how-link
+  .container.text-center
+    %p
+      %small
+        %b NEXT STEP
+        %br
+        %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    %h2.purple Schedule an Inspection.
+    %p
+      Your car condition matters. Schedule an appointment so
+      = Settings.app.name
+      can inspect your car and photograph it. The report helps us narrow the listing price and it gives buyers peace of mind.
+    .well
+      %h3 The inspection report includes:
+      %p= @inspection_report.join('&nbsp;&nbsp;&bull;&nbsp;&nbsp;').html_safe
+    =link_to 'Schedule with RideSnap', new_ride_path(vehicle_id: @vehicle.id), class: 'btn btn-purple btn-wide btn-lg'
+
+:coffee
+  $.ajax
+    type: 'get'
+    dataType: 'json'
+    url: '/vehicles/query'
+    data:
+      make: '#{@vehicle.make}'
+      model: '#{@vehicle.model}'
+      year: '#{@vehicle.year}'
+      style: '#{@vehicle.style}'
+      zip: '#{@vehicle.zip_code}'
+  .complete (prices) ->
+    prices = JSON.parse(prices.responseText)
+    trade_in = prices.trade_in
+    buy_now = prices.buy_now
+    ride_snap = prices.ride_snap
+    $('#trade-in-value').text '$' + trade_in
+    $('#ridesnap-value').text '$' + ride_snap
+    max = Math.max(trade_in, ride_snap, buy_now)
+    $('.circle.trade-in-value').width Math.round(trade_in/max*100) + '%'
+    $('.circle.ridesnap-value').width Math.round(ride_snap/max*100) + '%'
+    $('.circle.buy-it-now-value').width Math.round(buy_now/max*100) + '%'

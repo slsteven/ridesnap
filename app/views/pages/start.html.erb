@@ -42,35 +42,7 @@
     <h2 class="purple">Results.</h2>
     <br/>
     <br/>
-    <div class="row" id="results-circles">
-      <div class="col-sm-4 col-xs-12">
-        <div class="circle trade-in-value">
-          <%= embedded_svg('circle.svg', class: 'grey') %>
-          <div class="words">
-            <h4>Trade in</h4>
-            <h2 id="trade-in-value">$0</h2>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-4 col-xs-12">
-        <div class="circle ridesnap-value">
-          <%= embedded_svg('circle.svg', class: 'purple') %>
-          <div class="words">
-            <h4>RideSnap</h4>
-            <h2 id="ridesnap-value">$0</h2>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-4 col-xs-12">
-        <div class="circle buy-it-now-value">
-          <%= embedded_svg('circle.svg', class: 'black') %>
-          <div class="words">
-            <h4>Buy it Now</h4>
-            <h2 id="buy-it-now-value">$0</h2>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%= render 'vehicles/price_circles' %>
     <br/>
     <br/>
     <div class="form-group">

@@ -13,6 +13,18 @@ ready = ->
     $('.circle.trade-in-value, .circle.ridesnap-value, .circle.buy-it-now-value').width '100%'
     $('form#vehicle-inspection #vehicle_id').val null
 
+  get_value = (make, model, year, style, zip) ->
+    $.ajax
+      type: 'get'
+      dataType: 'json'
+      url: '/vehicles/query'
+      data:
+        make: make
+        model: model
+        year: year
+        style: style
+        zip: zip
+
   $('#vehicle-query #vehicle_make').on 'change', ->
     $.ajax
       type: 'get'
@@ -66,16 +78,13 @@ ready = ->
     clear_query_results()
 
   $('a#get-a-quote').on 'click', ->
-    $.ajax
-      type: 'get'
-      dataType: 'json'
-      url: '/vehicles/query'
-      data:
-        make: $('#vehicle-query #vehicle_make').val()
-        model: $('#vehicle-query #vehicle_model').val()
-        year: $('#vehicle-query #vehicle_year').val()
-        style: $('#vehicle-query #vehicle_style').val()
-        zip: $('#vehicle-query #vehicle_zip_code').val()
+    get_value(
+      $('#vehicle-query #vehicle_make').val()
+      $('#vehicle-query #vehicle_model').val()
+      $('#vehicle-query #vehicle_year').val()
+      $('#vehicle-query #vehicle_style').val()
+      $('#vehicle-query #vehicle_zip_code').val()
+    )
     .complete (prices) ->
       prices = JSON.parse(prices.responseText)
       trade_in = prices.trade_in
@@ -83,7 +92,7 @@ ready = ->
       ride_snap = prices.ride_snap
       $('#trade-in-value').text '$' + trade_in
       $('#ridesnap-value').text '$' + ride_snap
-      $('#buy-it-now-value').text '$' + buy_now
+      # $('#buy-it-now-value').text '$' + buy_now
       max = Math.max(trade_in, ride_snap, buy_now)
       $('.circle.trade-in-value').width Math.round(trade_in/max*100) + '%'
       $('.circle.ridesnap-value').width Math.round(ride_snap/max*100) + '%'

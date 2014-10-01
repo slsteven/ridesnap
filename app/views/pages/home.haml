@@ -87,48 +87,7 @@
 
 .jumbotron.whitesmoke-bg#how-link
   .container.text-center
-    %p
-      %small
-        %b HOW IT WORKS
-        %br
-        %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      %ul.nav#how-it-works{role: 'tablist'}
-        %li.active
-          = link_to 'STEP 1', '#step_1', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple'
-        %li
-          = link_to 'STEP 2', '#step_2', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple'
-        %li
-          = link_to 'STEP 3', '#step_3', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple'
-        %li
-          = link_to 'STEP 4', '#step_4', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple'
-      .tab-content
-        .tab-pane.fade.in.active#step_1
-          %h2.purple GIVE US THE BASICS
-          %p
-            With your car's
-            %b make, model, and year,
-            we give you a rough estimate on how much we can sell your car for compared to a Trade-in.
-          = link_to 'Get Started', start_path, class: 'btn btn-purple btn-wide btn-lg'
-        .tab-pane.fade#step_2
-          %h2.purple GET IN TOUCH
-          %p
-            Schedule an appointment at any location and we will come to you. Our agent will:
-            %ol
-              %li.purple Inspect your car
-              %li.purple Reassess the listing price
-              %li.purple Take pictures
-        .tab-pane.fade#step_3
-          %h2.purple SIT BACK and WAIT FOR YOUR OFFER!
-          %p Continue using your car if you need to. We take care of everything from here. We clean your car, photograph it, inspect it, post ads, and schedule test drives. We want to manage the complete process so you don't lift a finger.
-        .tab-pane.fade#step_4
-          %h2.purple GET PAID
-          %p
-            We
-            %b guarantee that your car will sell in 31 days
-            or we give you the option of having us purchase it from you for the
-            %b “buy it now”
-            price. We want to make sure you make money, no matter what.
-          = link_to 'Get Started', start_path, class: 'btn btn-purple btn-wide btn-lg'
+    = render 'pages/how_it_works'
 
 - if action_name == 'how'
   :coffee

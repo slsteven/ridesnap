@@ -10,7 +10,7 @@ module ApplicationHelper
 
   # Returns the full title on a per-page basis.
   def full_title(page_title)
-    base_title = 'RideSnap'
+    base_title = Settings.app.name
     if page_title.empty?
       base_title
     else

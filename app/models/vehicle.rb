@@ -23,6 +23,7 @@
 
 class Vehicle < ActiveRecord::Base
   include AASM
+  include ActionView::Helpers::NumberHelper
 
   hstore_accessor :preliminary_value,
     private_party: :integer,
@@ -57,6 +58,20 @@ class Vehicle < ActiveRecord::Base
       puts "sold to #{user.name}!!"
       transitions to: :sold
     end
+  end
+
+  def options
+    OpenStruct.new read_attribute(:options)
+  end
+
+  def known_attr
+    known = []
+    known << "#{self.condition} condition" if self.condition
+    known << "#{number_with_delimiter self.mileage} miles" if self.mileage
+    known << self.options.color if self.options.color
+    known << self.options.transmission if self.options.transmission
+    known << self.options.engine if self.options.engine
+    known
   end
 
 end

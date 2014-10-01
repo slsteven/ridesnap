@@ -1,0 +1,22 @@
+#results-circles.row
+  .col-sm-4.col-xs-12
+    .circle.trade-in-value
+      = embedded_svg('circle.svg', class: 'grey')
+      .words
+        %h4 Trade in
+        %h2#trade-in-value $0
+  .col-sm-4.col-xs-12
+    .circle.ridesnap-value
+      = embedded_svg('circle.svg', class: 'purple')
+      .words
+        %h4= Settings.app.name
+        %h2#ridesnap-value $0
+  .col-sm-4.col-xs-12
+    .circle.buy-it-now-value
+      = embedded_svg('circle.svg', class: 'black')
+      .words
+        %h4
+          SnapUp
+          = content_tag :a, class: 'snapup-popup', tabindex: 0, data: {toggle: 'popover', trigger: 'hover', content: "With SnapUp, we guarantee to buy your car if we cannot sell it in less than 31 days!", placement: 'top'} do
+            %span.glyphicon.glyphicon-question-sign.purple
+        %h2#buy-it-now-value COMING SOON

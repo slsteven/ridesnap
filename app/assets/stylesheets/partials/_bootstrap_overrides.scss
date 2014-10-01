@@ -150,10 +150,13 @@ fieldset[disabled] .btn-purple.active {
   &.whitesmoke-bg {
     background-color: whitesmoke;
   }
-}
-.jumbotron li {
-  font-size: 21px;
-  font-weight: 200;
+  li {
+    font-size: 21px;
+    font-weight: 200;
+  }
+  &.small {
+    min-height: 50vh !important;
+  }
 }
 
 .btn:focus, .btn:active {
@@ -198,3 +201,23 @@ ul.dropdown-menu {
     background-color: $purple;
   }
 }
+
+.well {
+  background-color: #dcdcdc;
+  border: none;
+  border-radius: 0px;
+}
+
+.carousel {
+  margin: 0 auto;
+  max-height: 333px;
+  max-width: 500px;
+  .carousel-inner {
+    max-height: 333px;
+    max-width: 500px;
+    img {
+      object-fit: cover;
+    }
+  }
+}
+

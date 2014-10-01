@@ -1,9 +1,7 @@
 source 'https://rubygems.org'
 
-ruby '2.1.2'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.1.4'
+gem 'rails', '~> 4.1.6'
 
 # Use pg as the database
 gem 'pg'
@@ -11,7 +9,7 @@ gem 'hstore_accessor' # not sure we need this
 
 # Use SCSS and bootstrap for styles
 gem 'bootstrap-sass', '~> 3.2.0'
-gem 'sass-rails', '>= 3.2'
+gem 'sass-rails'
 # Pagination
 gem 'kaminari'
 gem 'kaminari-bootstrap', '~> 3.0.1'
@@ -74,11 +72,7 @@ end
 gem 'httparty' # used for making zipcode requests to google to find city/state
 gem 'nokogiri' # scraper... but only using internally to build inline SVGs
 gem 'meta-tags'
-
 gem 'rails_config'
-
 gem 'annotate'
-
 gem 'best_in_place', github: 'bernat/best_in_place', ref: 'ee95961e'
-
 gem 'chronic'

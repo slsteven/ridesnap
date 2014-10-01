@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       case @user[:status]
       when 'fresh user'
-        flash[:success] = "#{@user[:object].name} added to RideSnap"
+        flash[:success] = "#{@user[:object].name} added to #{Settings.app.name}"
         format.html { redirect_to :back }
         format.js { render js: "location.reload();" }
       when 'returning user'

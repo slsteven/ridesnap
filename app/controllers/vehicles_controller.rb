@@ -54,6 +54,10 @@ class VehiclesController < ApplicationController
 
   def show
     @vehicle = Vehicle.find(params[:id])
+    @vehicle_images = ['about.jpg', 'home.jpg']
+    @inspection_report = ['Body Exterior', 'Body Interior', 'Engine',
+      'Transmission', 'Steering', 'Suspension', 'Brake System', 'Electrical System',
+      'Convenience Group', 'Air Conditioning', 'Drive Axles', 'Wheels', 'Tires']
   end
 
   def update

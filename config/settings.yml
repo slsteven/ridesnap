@@ -96,3 +96,9 @@ vehicle_makes:
   volkswagen: 'Volkswagen'
   volvo: 'Volvo'
   smart: 'smart'
+
+social:
+  facebook: http://facebook.com
+  twitter: http://twitter.com
+  linkedin: http://linkedin.com
+  google: http://plus.google.com
