@@ -9,6 +9,7 @@ class VehiclesController < ApplicationController
     params[:vehicle].slice!(:make, :model, :year, :style, :zip_code, :description, :preliminary_value)
     @vehicle = Vehicle.new params[:vehicle].permit!
     @menu = 'start'
+
     render new_ride_path if @vehicle.save
   end
 

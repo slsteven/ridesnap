@@ -1,9 +1,28 @@
 .navbar {
   padding: 15px 25px !important;
+  min-height: 75px;
 }
 
 .navbar-brand {
   color: white !important;
+}
+
+.navbar-header button {
+  position: absolute;
+  right: 0px;
+}
+
+.navbar-collapse.collapse.in, .navbar-collapse.collapsing {
+  text-align: center;
+  ul.narrow {
+    margin: 7.5px 20px;
+  }
+}
+
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+  background-color: rgba(0,0,0,0);
 }
 
 .btn {

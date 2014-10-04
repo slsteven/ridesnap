@@ -23,6 +23,7 @@ html, body {
       position: absolute;
       left: 15px;
       top: 75%;
+      background-color: rgba(0,0,0,0);
     }
     .navbar-brand img{
       max-width: 200px;
@@ -31,7 +32,7 @@ html, body {
   }
   header {
     transition-duration: 1s;
-    background-color: $header !important;
+    background-color: $header-override !important;
     &.override {
       background-color: $header-override !important;
     }
@@ -92,4 +93,12 @@ span img {
 
 .snapup-popup {
   cursor: pointer;
+}
+
+li.social {
+  display: inline-block;
+}
+
+ul#how-it-works {
+  margin: 0px -40px;
 }

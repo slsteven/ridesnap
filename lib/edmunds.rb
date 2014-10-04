@@ -5,37 +5,59 @@
 
 module Edmunds
 
-  def self.query_color(styleid)
+  def self.query_colors(styleid)
     endpoint = "api/vehicle/v2/styles/#{styleid}/colors"
     doc = fetch(endpoint)
-    interior = {}
-    exterior = {}
-    doc[:colors].each do |c|
-      next unless c[:colorChips] && c[:name]
-      if c[:category].downcase == 'exterior'
-        exterior[c[:id]] = { name: c[:name],
-                             primary: c[:colorChips][:primary].try(:fetch, :hex, nil),
-                             secondary: c[:colorChips][:secondary].try(:fetch, :hex, nil) }
-      else
-        interior[c[:id]] = { name: c[:name],
-                             primary: c[:colorChips][:primary].try(:fetch, :hex, nil),
-                             secondary: c[:colorChips][:secondary].try(:fetch, :hex, nil) }
-      end
+    doc[:colors].each_with_object(colors={}) do |h,o|
+      next unless h[:name]
+      o[h[:category].downcase] ||= {}
+      o[h[:category].downcase][h[:id]] = { name: h[:name],
+                                           primary: h[:colorChips].try(:fetch, :primary, nil).try(:fetch, :hex, nil),
+                                           secondary: h[:colorChips].try(:fetch, :secondary, nil).try(:fetch, :hex, nil),
+                                           equipped: nil }
     end
-    {interior: interior, exterior: exterior}
+    colors
   end
 
-  def self.query_equipment(styleid)
-    endpoint = "api/vehicle/v2/styles/#{styleid}/equipment"
+  def self.query_options(styleid)
+    endpoint = "api/vehicle/v2/styles/#{styleid}/options"
     doc = fetch(endpoint)
-    doc[:equipment].each_with_object(options={}) do |h,o|
-      o[h[:equipmentType].downcase] ||= {}
-      o[h[:equipmentType].downcase][h[:id]] = { name: h[:name],
-                                                availability: h[:availability].downcase }
+    doc[:options].each_with_object(options={}) do |h,o|
+      next if ['package', 'additional fees', 'other'].include? h[:category].downcase
+      o[h[:category].downcase] ||= {}
+      o[h[:category].downcase][h[:id]] = { name: h[:name],
+                                           description: h[:description],
+                                           availability: h[:availability].downcase,
+                                           equipped: nil }
     end
+    options
   end
 
-  def self.images(styleid, options={})
+  def self.query_engines(styleid)
+    endpoint = "api/vehicle/v2/styles/#{styleid}/engines"
+    doc = fetch(endpoint)
+    doc[:engines].each_with_object(engines={}) do |h,o|
+      o[h[:id]] = { name: h[:manufacturerEngineCode],
+                    description: h[:name],
+                    availability: h[:availability].downcase,
+                    equipped: h[:availability].downcase == 'standard' ? true : nil }
+    end
+    engines
+  end
+
+  def self.query_transmissions(styleid)
+    endpoint = "api/vehicle/v2/styles/#{styleid}/transmissions"
+    doc = fetch(endpoint)
+    doc[:transmissions].each_with_object(transmissions={}) do |h,o|
+      o[h[:id]] = { name: h[:name],
+                    description: "#{h[:numberOfSpeeds]}-speed #{h[:transmissionType].downcase}",
+                    availability: h[:availability].downcase,
+                    equipped: h[:availability].downcase == 'standard' ? true : nil }
+    end
+    transmissions
+  end
+
+  def self.query_images(styleid, options={})
     raise 'styleid necessary to talk with API' if styleid.blank?
 
     endpoint = 'v1/api/vehiclephoto/service/findphotosbystyleid'

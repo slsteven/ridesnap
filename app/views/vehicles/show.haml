@@ -21,42 +21,19 @@
         %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     %h2.purple Estimated Value.
     %p= @vehicle.description
-    %p= @vehicle.known_attr.join('&nbsp;&nbsp;|&nbsp;&nbsp;')
-    .well
-      %h3 Edit vehicle options:
-      .row
-        .col-sm-6.col-xs-12
-          .form-group
-            %select.form-control
-              %option 1
-              %option 2
-              %option 3
-          .form-group
-            %select.form-control
-              %option 1
-              %option 2
-              %option 3
-          .form-group
-            %select.form-control
-              %option 1
-              %option 2
-              %option 3
-        .col-sm-6.col-xs-12
-          .form-group
-            %select.form-control
-              %option 1
-              %option 2
-              %option 3
-          .form-group
-            %select.form-control
-              %option 1
-              %option 2
-              %option 3
-          .form-group
-            %select.form-control
-              %option 1
-              %option 2
-              %option 3
+    %p= @vehicle.known_attr.join(' &nbsp;|&nbsp; ').html_safe
+    %p= link_to 'Edit vehicle options to refine your estimate', '#', class: 'purple'
+    = form_for @vehicle, html: {class: 'form-inline', role: 'form'} do |f|
+      .well
+        %h3 Edit vehicle options:
+        = f.label :style, nil, class: 'sr-only'
+        = f.select :style, options_for_select([]), {include_blank: 'Style'}, class: 'form-control'
+        .row
+          .col-sm-6.col-xs-12
+            .form-group
+          .col-sm-6.col-xs-12
+            .form-group
+
     %br
     %br
     = render 'vehicles/price_circles'
@@ -104,8 +81,8 @@
       can inspect your car and photograph it. The report helps us narrow the listing price and it gives buyers peace of mind.
     .well
       %h3 The inspection report includes:
-      %p= @inspection_report.join('&nbsp;&nbsp;&bull;&nbsp;&nbsp;').html_safe
-    =link_to 'Schedule with RideSnap', new_ride_path(vehicle_id: @vehicle.id), class: 'btn btn-purple btn-wide btn-lg'
+      %p= @inspection_report.join(' &nbsp;&bull;&nbsp; ').html_safe
+    =link_to 'Schedule with RideSnap', new_ride_path(vehicle_id: @vehicle.id), class: 'btn btn-purple btn-lg'
 
 :coffee
   $.ajax

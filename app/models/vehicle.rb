@@ -31,10 +31,16 @@ class Vehicle < ActiveRecord::Base
   hstore_accessor :agreed_value,
     private_party: :integer,
     buy_it_now: :integer
-  # hstore_accessor :options
+  # hstore_accessor :options,
+  #   colors: :hash,
+  #   options: :hash,
+  #   engines: :hash,
+  #   transmissions: :hash
 
   has_many :rides
   has_many :users, through: :rides
+
+  before_create :build_options
 
   # these states give us helper methods as follows
   # Vehicle.listed === Vehicle.where(status: 'listed')
@@ -50,28 +56,60 @@ class Vehicle < ActiveRecord::Base
     end
 
     event :sell? do
-      puts 'pending sale'
       transitions from: :listed, to: :pending
     end
 
     event :sell do |user|
-      puts "sold to #{user.name}!!"
       transitions to: :sold
     end
   end
 
-  def options
-    OpenStruct.new read_attribute(:options)
+  def color
+    self.options[:colors][:exterior].select{ |h| h[:equipped] }[0] rescue nil
+  end
+
+  def engine
+    self.options[:transmissions].select{ |h| h[:equipped] }[0] rescue nil
+  end
+
+  def transmission
+    self.options[:engines].select{ |h| h[:equipped] }[0] rescue nil
   end
 
   def known_attr
     known = []
     known << "#{self.condition} condition" if self.condition
     known << "#{number_with_delimiter self.mileage} miles" if self.mileage
-    known << self.options.color if self.options.color
-    known << self.options.transmission if self.options.transmission
-    known << self.options.engine if self.options.engine
+    known << self.color if self.color
+    known << self.transmission if self.transmission
+    known << self.engine if self.engine
     known
   end
+
+  # def options
+  #   if !read_attribute(:options).nil?
+  #     OpenStruct.new read_attribute(:options)
+  #   else
+  #     nil
+  #   end
+  # end
+
+  private
+
+    def build_options
+      return unless self.options.nil?
+      tries = 0
+      begin
+        # 4 external calls to Edmunds API, hence the rescue block, just in case
+        self.options = { colors: Edmunds.query_colors(self.style),
+                         options: Edmunds.query_options(self.style),
+                         engines: Edmunds.query_engines(self.style),
+                         transmissions: Edmunds.query_transmissions(self.style) }
+        tries += 1
+      rescue
+        retry if tries <= 3
+        return nil
+      end
+    end
 
 end

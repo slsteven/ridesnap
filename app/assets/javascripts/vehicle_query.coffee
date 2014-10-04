@@ -9,7 +9,7 @@ ready = ->
 
   clear_query_results = ->
     $('input#schedule-button').attr 'disabled', true
-    $('#trade-in-value, #ridesnap-value, #buy-it-now-value').text '$0'
+    $('#trade-in-value, #ridesnap-value').text '$0'
     $('.circle.trade-in-value, .circle.ridesnap-value, .circle.buy-it-now-value').width '100%'
     $('form#vehicle-inspection #vehicle_id').val null
 
