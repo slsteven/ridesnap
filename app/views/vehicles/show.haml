@@ -23,16 +23,7 @@
     %p= @vehicle.description
     %p= @vehicle.known_attr.join(' &nbsp;|&nbsp; ').html_safe
     %p= link_to 'Edit vehicle options to refine your estimate', '#', class: 'purple'
-    = form_for @vehicle, html: {class: 'form-inline', role: 'form'} do |f|
-      .well
-        %h3 Edit vehicle options:
-        = f.label :style, nil, class: 'sr-only'
-        = f.select :style, options_for_select([]), {include_blank: 'Style'}, class: 'form-control'
-        .row
-          .col-sm-6.col-xs-12
-            .form-group
-          .col-sm-6.col-xs-12
-            .form-group
+    = render 'vehicles/update'
 
     %br
     %br
@@ -58,10 +49,6 @@
         %span.glyphicon.glyphicon-chevron-left
       %a.right.carousel-control{href: '#vehicle-images', role: 'button', data: {slide: 'next'}}
         %span.glyphicon.glyphicon-chevron-right
-
-    %br
-    .text-left
-      blah blah blah
 
 .jumbotron.white-bg
   .container.text-center
