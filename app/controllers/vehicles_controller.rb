@@ -4,8 +4,11 @@ class VehiclesController < ApplicationController
 
   def create
     params[:vehicle][:zip_code] = params[:vehicle][:zip_code].presence
-    value = Edmunds.typical_value params[:vehicle][:style], zip: params[:vehicle][:zip_code]
-    params[:vehicle][:preliminary_value] = value
+    params[:vehicle][:preliminary_value] = {
+      trade_in: params[:trade_in_value],
+      ridesnap: params[:ridesnap_value],
+      snapup: params[:snapup_value]
+    }
     params[:vehicle].slice!(:make, :model, :year, :style, :zip_code, :description, :preliminary_value)
     @vehicle = Vehicle.new params[:vehicle].permit!
     @menu = 'start'
@@ -55,8 +58,8 @@ class VehiclesController < ApplicationController
 
   def show
     @vehicle = Vehicle.find(params[:id])
-    @vehicle.send(:build_options) and @vehicle.save and sleep 0.5 if @vehicle.options.nil?
-    @styles = Edmunds.query_styles(@vehicle.make, @vehicle.model, @vehicle.year).invert.to_a
+    @vehicle.send(:build_options) and @vehicle.save if @vehicle.options.nil?
+    @styles = Edmunds.query_styles(@vehicle.make, @vehicle.model, @vehicle.year).invert.to_a rescue []
     @vehicle_images = ['about.jpg', 'home.jpg']
     @inspection_report = ['Body Exterior', 'Body Interior', 'Engine',
       'Transmission', 'Steering', 'Suspension', 'Brake System', 'Electrical System',

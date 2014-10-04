@@ -33,6 +33,7 @@ ready = ->
       data:
         make: $(this).val()
     .complete (opt) ->
+      return alert('Vehicle querying is down for maintenance, we apologize for the inconvenience.') if typeof opt.responseJSON is 'number'
       update_select opt, '#vehicle-query #vehicle_model'
       $('#vehicle-query #vehicle_model').prop 'disabled', false
       $('#vehicle-query #vehicle_year').val ''
@@ -93,6 +94,9 @@ ready = ->
       $('#trade-in-value').text '$' + trade_in
       $('#ridesnap-value').text '$' + ride_snap
       # $('#buy-it-now-value').text '$' + buy_now
+      $('#trade_in_value').val trade_in
+      $('#ridesnap_value').val ride_snap
+      $('#snapup_value').val buy_now
       max = Math.max(trade_in, ride_snap, buy_now)
       $('.circle.trade-in-value').width Math.round(trade_in/max*100) + '%'
       $('.circle.ridesnap-value').width Math.round(ride_snap/max*100) + '%'

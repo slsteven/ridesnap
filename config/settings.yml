@@ -88,6 +88,7 @@ vehicle_makes:
   saab: 'Saab'
   saturn: 'Saturn'
   scion: 'Scion'
+  smart: 'Smart'
   spyker: 'Spyker'
   subaru: 'Subaru'
   suzuki: 'Suzuki'
@@ -95,7 +96,6 @@ vehicle_makes:
   toyota: 'Toyota'
   volkswagen: 'Volkswagen'
   volvo: 'Volvo'
-  smart: 'smart'
 
 social:
   facebook: http://facebook.com

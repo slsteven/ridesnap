@@ -2,7 +2,7 @@
 
 .jumbotron.black-bg#start1
   .container.text-center#header-threshold
-    %h1= @vehicle.description.split('-')[0].strip
+    %h1= @vehicle.description.split('-')[0..-2].join('-').strip
 
 .jumbotron.small.white-bg
   .container.text-center
@@ -72,24 +72,12 @@
     =link_to 'Schedule with RideSnap', new_ride_path(vehicle_id: @vehicle.id), class: 'btn btn-purple btn-lg'
 
 :coffee
-  $.ajax
-    type: 'get'
-    dataType: 'json'
-    url: '/vehicles/query'
-    data:
-      make: '#{@vehicle.make}'
-      model: '#{@vehicle.model}'
-      year: '#{@vehicle.year}'
-      style: '#{@vehicle.style}'
-      zip: '#{@vehicle.zip_code}'
-  .complete (prices) ->
-    prices = JSON.parse(prices.responseText)
-    trade_in = prices.trade_in
-    buy_now = prices.buy_now
-    ride_snap = prices.ride_snap
-    $('#trade-in-value').text '$' + trade_in
-    $('#ridesnap-value').text '$' + ride_snap
-    max = Math.max(trade_in, ride_snap, buy_now)
-    $('.circle.trade-in-value').width Math.round(trade_in/max*100) + '%'
-    $('.circle.ridesnap-value').width Math.round(ride_snap/max*100) + '%'
-    $('.circle.buy-it-now-value').width Math.round(buy_now/max*100) + '%'
+  trade_in = #{@vehicle.preliminary_value['trade_in'].to_i}
+  buy_now = #{@vehicle.preliminary_value['snapup'].to_i}
+  ride_snap = #{@vehicle.preliminary_value['ridesnap'].to_i}
+  $('#trade-in-value').text '$' + trade_in
+  $('#ridesnap-value').text '$' + ride_snap
+  max = Math.max(trade_in, ride_snap, buy_now)
+  $('.circle.trade-in-value').width Math.round(trade_in/max*100) + '%'
+  $('.circle.ridesnap-value').width Math.round(ride_snap/max*100) + '%'
+  $('.circle.buy-it-now-value').width Math.round(buy_now/max*100) + '%'

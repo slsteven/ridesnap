@@ -8,6 +8,7 @@ module Edmunds
   def self.query_colors(styleid)
     endpoint = "api/vehicle/v2/styles/#{styleid}/colors"
     doc = fetch(endpoint)
+    return doc if doc.kind_of? Integer
     doc[:colors].each_with_object(colors={}) do |h,o|
       next unless h[:name]
       o[h[:category].downcase] ||= {}
@@ -22,6 +23,7 @@ module Edmunds
   def self.query_options(styleid)
     endpoint = "api/vehicle/v2/styles/#{styleid}/options"
     doc = fetch(endpoint)
+    return doc if doc.kind_of? Integer
     doc[:options].each_with_object(options={}) do |h,o|
       next if ['package', 'additional fees', 'other'].include? h[:category].downcase
       o[h[:category].downcase] ||= {}
@@ -36,6 +38,7 @@ module Edmunds
   def self.query_engines(styleid)
     endpoint = "api/vehicle/v2/styles/#{styleid}/engines"
     doc = fetch(endpoint)
+    return doc if doc.kind_of? Integer
     doc[:engines].each_with_object(engines={}) do |h,o|
       o[h[:id]] = { name: h[:manufacturerEngineCode],
                     description: h[:name],
@@ -48,6 +51,7 @@ module Edmunds
   def self.query_transmissions(styleid)
     endpoint = "api/vehicle/v2/styles/#{styleid}/transmissions"
     doc = fetch(endpoint)
+    return doc if doc.kind_of? Integer
     doc[:transmissions].each_with_object(transmissions={}) do |h,o|
       o[h[:id]] = { name: h[:name],
                     description: "#{h[:numberOfSpeeds]}-speed #{h[:transmissionType].downcase}",
@@ -64,6 +68,7 @@ module Edmunds
     options[:styleId] = styleid
     options[:comparator] = 'simple'
     doc = fetch(endpoint, options)
+    return doc if doc.kind_of? Integer
     imgs = doc[0]['photoSrcs']
     img = imgs.select{ |i| i[/500.jpg$/i] }[0] || imgs[0]
     img = Settings.edmunds.image_url + img
@@ -79,6 +84,7 @@ module Edmunds
     options[:view] ||= 'basic'
 
     doc = fetch(endpoint, options)
+    return doc if doc.kind_of? Integer
     doc[:makes].each_with_object(makes={}){ |h,o| o[h[:niceName]] = h[:name] }
     makes.with_indifferent_access
   end
@@ -92,6 +98,7 @@ module Edmunds
     options[:view] ||= 'basic'
 
     doc = fetch(endpoint, options)
+    return doc if doc.kind_of? Integer
     doc[:models].each_with_object(models={}){ |h,o| o[h[:niceName]] = h[:name] }
     models.with_indifferent_access
   end
@@ -105,6 +112,7 @@ module Edmunds
     options[:view] ||= 'basic'
 
     doc = fetch(endpoint, options)
+    return doc if doc.kind_of? Integer
     doc[:years].each_with_object(years={}){ |h,o| o[h[:year]] = h[:year] }
     years.with_indifferent_access
   end
@@ -118,6 +126,7 @@ module Edmunds
     options[:view] ||= 'basic'
 
     doc = fetch(endpoint, options)
+    return doc if doc.kind_of? Integer
     doc[:styles].each_with_object(styles={}){ |h,o| o[h[:id]] = h[:name] }
     styles.with_indifferent_access
   end
@@ -131,6 +140,7 @@ module Edmunds
     options[:zip] ||= Settings.locals.zip_code
 
     doc = fetch(endpoint, options)
+    return doc if doc.kind_of? Integer
 
     return_values(doc[:tmv][:totalWithOptions])
   end
@@ -148,6 +158,7 @@ module Edmunds
     # colors: 'xxx' # csv
 
     doc = fetch(endpoint, options)
+    return doc if doc.kind_of? Integer
 
     return_values(doc[:tmv][:totalWithOptions])
   end
@@ -156,6 +167,7 @@ module Edmunds
     raise 'vin necessary to talk with API' if vin.blank?
     endpoint = "api/vehicle/v2/vins/#{vin}"
     doc = fetch(endpoint)
+    return doc if doc.kind_of? Integer
     doc[:years][0][:styles][0][:id] rescue nil
   end
 
@@ -170,6 +182,7 @@ module Edmunds
       params.each{ |k,v| v.delete(' ').split(',').each{ |i| parameters << "#{k}=#{i}" } }
       parameters = parameters.join('&')
       result = HTTParty.get("#{base}/#{endpoint}?#{parameters}")
+      return result.code unless result.code.to_s[/^2/]
       result.kind_of?(Hash) ? result.with_indifferent_access : result
     end
 

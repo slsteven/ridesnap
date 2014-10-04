@@ -29,6 +29,9 @@
         <%= f.select :style, options_for_select([]), {include_blank: 'Style'}, class: 'form-control', disabled: true %>
       </div>
       <%= f.hidden_field :description %>
+      <%= hidden_field_tag :trade_in_value %>
+      <%= hidden_field_tag :ridesnap_value %>
+      <%= hidden_field_tag :snapup_value %>
       <br/>
       <div class="form-group">
         <%= f.label :zip_code, nil, class: 'sr-only' %>
