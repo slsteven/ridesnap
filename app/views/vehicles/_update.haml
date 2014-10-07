@@ -24,14 +24,15 @@
                 = f.radio_button :transmission, tran, checked: details[:equipped], title: details[:description]
                 = details[:name]
 
-        .form-group#options
-          %h3 Options
-          - @vehicle.options.each do |opt, details|
-            - details.each do |k,v|
-              .checkbox
-                = label_tag do
-                  = check_box_tag 'options[]', k, v[:equipped]
-                  = v[:name]
+        - if @vehicle.options.any?
+          .form-group#options
+            %h3 Options
+            - @vehicle.options.each do |opt, details|
+              - details.each do |k,v|
+                .checkbox
+                  = label_tag do
+                    = check_box_tag 'options[]', k, v[:equipped]
+                    = v[:name]
 
       .col-sm-6.col-xs-12
         .form-group#colors
