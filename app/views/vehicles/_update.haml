@@ -1,10 +1,44 @@
-= form_for @vehicle, html: {class: 'form-inline', role: 'form'} do |f|
-  .well
-    %h3 Edit vehicle options:
-    = f.label :style, nil, class: 'sr-only'
-    = f.select :style, options_for_select(@styles, @vehicle.style), {include_blank: 'Style'}, class: 'form-control'
+= form_for @vehicle, html: {role: 'form'} do |f|
+  .well#vehicle_options.collapse
+    .row
+      %h3 Edit vehicle options:
+      .col-lg-6.col-lg-offset-3.col-sm-12
+        .form-group
+          = f.label :style, nil, class: 'sr-only'
+          = f.select :style, options_for_select(@styles, @vehicle.style), {}, class: 'form-control'
     .row
       .col-sm-6.col-xs-12
-        .form-group
+        .form-group#engine
+          %h3 Engine
+          - @vehicle.engines.each do |eng, details|
+            .radio
+              = label_tag do
+                = f.radio_button :engine, eng, checked: details[:equipped], title: details[:description]
+                = details[:name]
+
+        .form-group#transmission
+          %h3 Transmission
+          - @vehicle.transmissions.each do |tran, details|
+            .radio
+              = label_tag do
+                = f.radio_button :transmission, tran, checked: details[:equipped], title: details[:description]
+                = details[:name]
+
+        .form-group#options
+          %h3 Options
+          - @vehicle.options.each do |opt, details|
+            - details.each do |k,v|
+              .checkbox
+                = label_tag do
+                  = check_box_tag 'options[]', k, v[:equipped]
+                  = v[:name]
+
       .col-sm-6.col-xs-12
-        .form-group
+        .form-group#colors
+          - @vehicle.colors.each do |type, details|
+            %h3= "#{type.titleize} Color"
+            - details.each do |k,v|
+              .radio
+                = label_tag do
+                  = f.radio_button type.to_sym, k, checked: v[:equipped]
+                  = v[:name]

@@ -64,35 +64,47 @@ class Vehicle < ActiveRecord::Base
     end
   end
 
+  def options
+    return nil if read_attribute(:options).nil?
+    eval(read_attribute(:options)['options'])
+  end
+
   def color
-    self.options[:colors][:exterior].select{ |h| h[:equipped] }[0] rescue nil
+    self.colors[:exterior].select{ |k,v| v[:equipped] == true } rescue nil
+  end
+
+  def colors
+    return nil if read_attribute(:options).nil?
+    eval(read_attribute(:options)['colors'])
   end
 
   def engine
-    self.options[:transmissions].select{ |h| h[:equipped] }[0] rescue nil
+    self.engines.select{ |k,v| v[:equipped] == true } rescue nil
+  end
+
+  def engines
+    return nil if read_attribute(:options).nil?
+    eval(read_attribute(:options)['engines'])
   end
 
   def transmission
-    self.options[:engines].select{ |h| h[:equipped] }[0] rescue nil
+    self.transmissions.select{ |k,v| v[:equipped] == true } rescue nil
+  end
+
+  def transmissions
+    return nil if read_attribute(:options).nil?
+    eval(read_attribute(:options)['transmissions'])
   end
 
   def known_attr
     known = []
     known << "#{self.condition} condition" if self.condition
     known << "#{number_with_delimiter self.mileage} miles" if self.mileage
-    known << self.color if self.color
-    known << self.transmission if self.transmission
-    known << self.engine if self.engine
+    known << self.color.first[1][:name] if self.color
+    known << self.engine.first[1][:name] if self.engine
+    known << self.transmission.first[1][:description] if self.transmission
     known
   end
-
-  # def options
-  #   if !read_attribute(:options).nil?
-  #     OpenStruct.new read_attribute(:options)
-  #   else
-  #     nil
-  #   end
-  # end
 
   private
 

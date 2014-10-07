@@ -40,7 +40,7 @@ module Edmunds
     doc = fetch(endpoint)
     return doc if doc.kind_of? Integer
     doc[:engines].each_with_object(engines={}) do |h,o|
-      o[h[:id]] = { name: h[:manufacturerEngineCode],
+      o[h[:id]] = { name: "#{h[:size]}L #{h[:configuration]}#{h[:cylinder]}",
                     description: h[:name],
                     availability: h[:availability].downcase,
                     equipped: h[:availability].downcase == 'standard' ? true : nil }
