@@ -127,7 +127,7 @@ class Vehicle < ActiveRecord::Base
     known = []
     known << "#{self.condition} condition" if self.condition
     known << "#{number_with_delimiter self.mileage} miles" if self.mileage
-    known << self.color.first[1][:name] if self.color
+    known << self.color.first[1][:name] if self.color.any?
     known << self.engine.first[1][:name] if self.engine
     known << self.transmission.first[1][:description] if self.transmission
     known
