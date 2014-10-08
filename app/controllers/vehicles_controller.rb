@@ -61,13 +61,20 @@ class VehiclesController < ApplicationController
     @vehicle.send(:build_options) and @vehicle.save if @vehicle.options.nil?
     @styles = Edmunds.query_styles(@vehicle.make, @vehicle.model, @vehicle.year).invert.to_a rescue []
     @vehicle_images = ['about.jpg', 'home.jpg']
+    @conditions = Vehicle.conditions.to_a
+    @vehicle_condition = Vehicle.conditions[@vehicle.condition]
     @inspection_report = ['Body Exterior', 'Body Interior', 'Engine',
       'Transmission', 'Steering', 'Suspension', 'Brake System', 'Electrical System',
       'Convenience Group', 'Air Conditioning', 'Drive Axles', 'Wheels', 'Tires']
   end
 
   def update
-
+    @vehicle = Vehicle.find(params[:id])
+    @vehicle.options = {e: params[:vehicle][:engine], t: params[:vehicle][:transmission], o: (params[:vehicle][:options].presence || []), c: (params[:vehicle][:colors].presence || {})}
+    @vehicle.style = params[:vehicle][:style]
+    @vehicle.condition = params[:vehicle][:condition].to_i if !params[:vehicle][:condition].blank?
+    @vehicle.mileage = params[:vehicle][:mileage]
+    @vehicle.save
   end
 
   private

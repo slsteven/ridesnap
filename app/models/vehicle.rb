@@ -9,7 +9,7 @@
 #  style             :string(255)
 #  description       :text
 #  mileage           :integer
-#  condition         :string(255)
+#  condition         :integer
 #  options           :hstore
 #  preliminary_value :hstore
 #  agreed_value      :hstore
@@ -24,6 +24,7 @@
 class Vehicle < ActiveRecord::Base
   include AASM
   include ActionView::Helpers::NumberHelper
+  enum condition: { outstanding: 5, clean: 4, avg: 3, rough: 2, damaged: 1 }
 
   hstore_accessor :preliminary_value,
     private_party: :integer,
@@ -31,11 +32,6 @@ class Vehicle < ActiveRecord::Base
   hstore_accessor :agreed_value,
     private_party: :integer,
     buy_it_now: :integer
-  # hstore_accessor :options,
-  #   colors: :hash,
-  #   options: :hash,
-  #   engines: :hash,
-  #   transmissions: :hash
 
   has_many :rides
   has_many :users, through: :rides
@@ -52,25 +48,56 @@ class Vehicle < ActiveRecord::Base
     state :sold
 
     event :list do
-      transitions from: :preliminary, to: :listed
+      transitions from: [:preliminary, :pending], to: :listed
     end
 
     event :sell? do
       transitions from: :listed, to: :pending
     end
 
-    event :sell do |user|
-      transitions to: :sold
+    event :sell do
+      transitions to: :sold, on_transition: :sold_to
     end
   end
+
+  def sold_to(user)
+    rides.create(user_id: user, relation: 'buyer')
+  end
+
+  # # # # #
+  # /AASM
+  # # # # #
 
   def options
     return nil if read_attribute(:options).nil?
     eval(read_attribute(:options)['options'])
   end
 
+  def options=(e: nil, t: nil, o: [], c: {})
+    engine = engines.each{|k,v| v[:equipped] = nil}
+    engine[e][:equipped] = true
+
+    transmission = transmissions.each{|k,v| v[:equipped] = nil}
+    transmission[t][:equipped] = true
+
+    option = options.each{|k,v| v.each{|ke,va| va[:equipped] = nil}}
+    o.each do |opt| # array
+      option.deep_find(opt)[:equipped] = true
+    end
+
+    color = colors.each{|k,v| v.each{|ke,va| va[:equipped] = nil}}
+    c.each do |type,col| # hash
+      color[type][col][:equipped] = true
+    end
+
+    write_attribute :options, { colors: color,
+                                options: option,
+                                engines: engine,
+                                transmissions: transmission }
+  end
+
   def color
-    self.colors[:exterior].select{ |k,v| v[:equipped] == true } rescue nil
+    self.colors['exterior'].select{ |k,v| v[:equipped] == true } rescue nil
   end
 
   def colors
@@ -106,22 +133,22 @@ class Vehicle < ActiveRecord::Base
     known
   end
 
-  private
+private
 
-    def build_options
-      return unless self.options.nil?
-      tries = 0
-      begin
-        # 4 external calls to Edmunds API, hence the rescue block, just in case
-        self.options = { colors: Edmunds.query_colors(self.style),
-                         options: Edmunds.query_options(self.style),
-                         engines: Edmunds.query_engines(self.style),
-                         transmissions: Edmunds.query_transmissions(self.style) }
-        tries += 1
-      rescue
-        retry if tries <= 3
-        return nil
-      end
+  def build_options
+    return unless read_attribute(:options).nil?
+    tries = 0
+    begin
+      # 4 external calls to Edmunds API, hence the rescue block, just in case
+      write_attribute :options, { colors: Edmunds.query_colors(self.style),
+                                  options: Edmunds.query_options(self.style),
+                                  engines: Edmunds.query_engines(self.style),
+                                  transmissions: Edmunds.query_transmissions(self.style) }
+      tries += 1
+    rescue
+      retry if tries <= 3
+      return nil
     end
+  end
 
 end

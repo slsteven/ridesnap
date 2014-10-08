@@ -51,6 +51,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  # # # # #
+  # /AASM
+  # # # # #
+
   def self.build(params={})
     u = User.find_by(email: params[:email])
     if u

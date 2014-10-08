@@ -13,7 +13,6 @@ class RidesController < ApplicationController
       @ride.scheduled_at = Chronic.parse(params[:scheduled_at]) || Time.now
       @ride.address = params[:address]
       @ride.zip_code = params[:zip_code]
-      @ride.owner = true
 
       if @ride.save
         @location = Location.from_zip(@ride.zip_code)
