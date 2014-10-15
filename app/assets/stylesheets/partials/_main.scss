@@ -106,3 +106,11 @@ ul#how-it-works {
 .pointer {
   cursor: pointer;
 }
+
+#vehicle-alert {
+  display: none;
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}

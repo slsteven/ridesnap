@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui/widget
 //= require best_in_place
 //= require bootstrap-sprockets
 //= require turbolinks

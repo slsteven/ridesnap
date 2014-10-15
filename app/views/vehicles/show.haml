@@ -23,6 +23,10 @@
     %p= @vehicle.description
     %p= @vehicle.known_attr.join(' &nbsp;|&nbsp; ').html_safe
     %p= content_tag :a, 'Edit vehicle options to refine your estimate', class: 'purple pointer', data: {toggle: 'collapse', target: '#vehicle_options'}
+    .row
+      .col-sm-4.col-sm-offset-4
+        .alert.alert-success#vehicle-alert{role: 'alert'} Vehicle saved!
+
     = render 'vehicles/update'
 
     %br
@@ -37,7 +41,7 @@
       / Indicators
       %ol.carousel-indicators
         - 1.upto(@vehicle_images.size) do |i|
-          %li{class: ('active' if i == 1),data: {'slide-to' => 0, target: '#vehicle-images'}}
+          %li{class: ('active' if i == 1),data: {'slide-to' => i-1, target: '#vehicle-images'}}
       / Wrapper for slides
       .carousel-inner
         - @vehicle_images.each_with_index do |img, i|

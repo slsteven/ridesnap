@@ -12,6 +12,12 @@
 #  created_at   :datetime
 #  updated_at   :datetime
 #
+# Indexes
+#
+#  index_rides_on_relation    (relation)
+#  index_rides_on_user_id     (user_id)
+#  index_rides_on_vehicle_id  (vehicle_id)
+#
 
 class Ride < ActiveRecord::Base
   include AASM

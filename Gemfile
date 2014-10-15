@@ -31,6 +31,7 @@ gem 'haml'
 gem 'aasm'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -76,5 +77,6 @@ gem 'nokogiri' # scraper... but only using internally to build inline SVGs
 gem 'meta-tags'
 gem 'rails_config'
 gem 'annotate'
-gem 'best_in_place', github: 'bernat/best_in_place', ref: 'ee95961e'
+gem 'best_in_place', '~> 3.0.0.rc1', github: 'bernat/best_in_place'
 gem 'chronic'
+gem 'color'

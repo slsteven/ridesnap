@@ -20,6 +20,12 @@
 #  created_at        :datetime
 #  updated_at        :datetime
 #
+# Indexes
+#
+#  index_vehicles_on_condition  (condition)
+#  index_vehicles_on_status     (status)
+#  index_vehicles_on_zip_code   (zip_code)
+#
 
 class Vehicle < ActiveRecord::Base
   include AASM
@@ -98,6 +104,28 @@ class Vehicle < ActiveRecord::Base
 
   def color
     self.colors['exterior'].select{ |k,v| v[:equipped] == true } rescue nil
+  end
+
+  def base_color
+    return '' unless self.color.presence && self.color.first[1][:primary]
+    hue = Color.new(self.color.first[1][:primary]).hue
+    sat = Color.new(self.color.first[1][:primary]).saturation
+    lgt = Color.new(self.color.first[1][:primary]).luminosity
+
+    case
+    when lgt < 0.2  then 'black'
+    when lgt > 0.8  then 'white'
+
+    when sat < 0.25 then 'grey'
+
+    when hue < 30   then 'red'
+    when hue < 90   then 'yellow'
+    when hue < 150  then 'green'
+    when hue < 210  then 'cyan'
+    when hue < 270  then 'blue'
+    when hue < 330  then 'magenta'
+    else 'red'
+    end
   end
 
   def colors

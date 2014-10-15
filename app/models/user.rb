@@ -15,12 +15,18 @@
 #  zip_code               :string(255)
 #  status                 :string(255)
 #
+# Indexes
+#
+#  index_users_on_email   (email)
+#  index_users_on_status  (status)
+#
 
 class User < ActiveRecord::Base
   include AASM
 
   has_many :rides
   has_many :vehicles, through: :rides
+  has_many :favorites, through: :garage
 
   before_save { self.email = email.downcase.strip }
   before_create :create_remember_token
@@ -80,6 +86,14 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.digest(token)
+    Digest::SHA1.hexdigest(token.to_s)
+  end
+
+  def self.generate_token
+    SecureRandom.urlsafe_base64
+  end
+
   def first_name
     if %w[mr mr. dr dr. ms ms. mrs mrs.].include? self.name.split(' ').first.downcase
       self.name.split(' ')[1]
@@ -87,20 +101,17 @@ class User < ActiveRecord::Base
       self.name.split(' ').first
     end
   end
+
+  def inspector?
+    self.admin? || self.agent?
+  end
+
   def last_name
     if %w[jr jr. sr sr. ii iii iv v].include? self.name.split(' ').last.downcase
       self.name.split(' ')[-2]
     else
       self.name.split(' ').last
     end
-  end
-
-  def self.digest(token)
-    Digest::SHA1.hexdigest(token.to_s)
-  end
-
-  def self.generate_token
-    SecureRandom.urlsafe_base64
   end
 
   def send_password_reset
@@ -110,10 +121,10 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self.id).deliver
   end
 
-  private
+private
 
-    def create_remember_token
-      self.remember_token = User.digest(User.generate_token)
-    end
+  def create_remember_token
+    self.remember_token = User.digest(User.generate_token)
+  end
 
 end
