@@ -4,6 +4,10 @@ module SessionsHelper
     redirect_to(root_path) unless current_user.admin?
   end
 
+  def admin?
+    current_user.try :admin?
+  end
+
   # in and out
   def sign_in(user)
     remember_token = User.generate_token

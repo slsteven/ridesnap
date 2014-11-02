@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141015034447) do
+ActiveRecord::Schema.define(version: 20141028032206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 20141015034447) do
     t.integer  "user_id"
     t.integer  "vehicle_id"
     t.datetime "scheduled_at"
-    t.string   "relation"
+    t.integer  "relation"
     t.string   "address"
     t.string   "zip_code"
     t.datetime "created_at"
@@ -96,8 +96,10 @@ ActiveRecord::Schema.define(version: 20141015034447) do
     t.string   "zip_code"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "closest_color"
   end
 
+  add_index "vehicles", ["closest_color"], name: "index_vehicles_on_closest_color", using: :btree
   add_index "vehicles", ["condition"], name: "index_vehicles_on_condition", using: :btree
   add_index "vehicles", ["status"], name: "index_vehicles_on_status", using: :btree
   add_index "vehicles", ["zip_code"], name: "index_vehicles_on_zip_code", using: :btree

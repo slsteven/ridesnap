@@ -6,6 +6,8 @@ module Location
         state: loc['results'][0]['address_components'][3]['long_name'],
      zip_code: code,
       country: loc['results'][0]['address_components'][4]['long_name']
-    } rescue {}
+    }
+  rescue
+    {}
   end
 end

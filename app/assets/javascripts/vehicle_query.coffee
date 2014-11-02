@@ -95,19 +95,15 @@ ready = ->
       $('#ridesnap-value').text '$' + ride_snap
       # $('#buy-it-now-value').text '$' + buy_now
       $('#trade_in_value').val trade_in
-      $('#ridesnap_value').val ride_snap
-      $('#snapup_value').val buy_now
+      $('#ride_snap_value').val ride_snap
+      $('#snap_up_value').val buy_now
       max = Math.max(trade_in, ride_snap, buy_now)
       $('.circle.trade-in-value').width Math.round(trade_in/max*100) + '%'
       $('.circle.ridesnap-value').width Math.round(ride_snap/max*100) + '%'
       $('.circle.buy-it-now-value').width Math.round(buy_now/max*100) + '%'
       $('form#vehicle-inspection #vehicle_id').val prices.vehicle_id
-      $('form#vehicle-query #vehicle_description').val(
-        $('#vehicle-query #vehicle_year option:selected').text() + ' ' +
-        $('#vehicle-query #vehicle_make option:selected').text() + ' ' +
-        $('#vehicle-query #vehicle_model option:selected').text() + ' - ' +
-        $('#vehicle-query #vehicle_style option:selected').text()
-      )
+      $('form#vehicle-query #pretty_model').val($('#vehicle-query #vehicle_model option:selected').text())
+      $('form#vehicle-query #vehicle_description').val($('#vehicle-query #vehicle_style option:selected').text())
       display_query_results()
 
 $(document).ready(ready)

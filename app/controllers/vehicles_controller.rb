@@ -6,9 +6,10 @@ class VehiclesController < ApplicationController
     params[:vehicle][:zip_code] = params[:vehicle][:zip_code].presence
     params[:vehicle][:preliminary_value] = {
       trade_in: params[:trade_in_value],
-      ridesnap: params[:ridesnap_value],
-      snapup: params[:snapup_value]
+      ridesnap: params[:ride_snap_value],
+      snapup: params[:snap_up_value]
     }
+    params[:vehicle][:model] = "#{params[:vehicle][:model]} ~~ #{params[:pretty_model]}"
     params[:vehicle].slice!(:make, :model, :year, :style, :zip_code, :description, :preliminary_value)
     @vehicle = Vehicle.new params[:vehicle].permit!
     @menu = 'start'
@@ -46,7 +47,8 @@ class VehiclesController < ApplicationController
     sources = [value[:trade_in], value[:private_party]]
     avg = sources.sum / sources.size.to_f
     dif = value[:private_party] - avg
-    value[:buy_now] = (avg + (dif * 0)).round(-2) # this will let us adjust the price easily while staying in the bounds
+    adj = dif * 0 # this will let us adjust the price easily while staying in the bounds 0.0 .. 1.0
+    value[:buy_now] = (avg + adj).round(-2)
     value[:trade_in] = value[:trade_in].round(-2)
     value[:ride_snap] = value[:private_party].round(-2)
     render json: value
@@ -66,6 +68,7 @@ class VehiclesController < ApplicationController
     @inspection_report = ['Body Exterior', 'Body Interior', 'Engine',
       'Transmission', 'Steering', 'Suspension', 'Brake System', 'Electrical System',
       'Convenience Group', 'Air Conditioning', 'Drive Axles', 'Wheels', 'Tires']
+    @rides = admin? ? @vehicle.rides : @vehicle.rides.with(current_user)
   end
 
   def update
@@ -77,9 +80,9 @@ class VehiclesController < ApplicationController
     render js: nil, status: :ok, layout: false if @vehicle.save
   end
 
-  private
+private
 
-    def vehicle_params
-      params.require(:vehicle).permit!
-    end
+  def vehicle_params
+    params.require(:vehicle).permit!
+  end
 end

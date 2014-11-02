@@ -9,7 +9,6 @@
 app:
   name: RideSnap
   email:
-    info: info@ridesnap.co
     steven: slstevenlam@gmail.com
     melbs: mclemieux@gmail.com
     tommy: quantumventuress@gmail.com
@@ -56,7 +55,7 @@ vehicle_makes:
   ford: 'Ford'
   gmc: 'GMC'
   geo: 'Geo'
-  hummer: 'HUMMER'
+  hummer: 'Hummer'
   honda: 'Honda'
   hyundai: 'Hyundai'
   infiniti: 'Infiniti'
@@ -69,7 +68,7 @@ vehicle_makes:
   lexus: 'Lexus'
   lincoln: 'Lincoln'
   lotus: 'Lotus'
-  mini: 'MINI'
+  mini: 'Mini'
   maserati: 'Maserati'
   maybach: 'Maybach'
   mazda: 'Mazda'

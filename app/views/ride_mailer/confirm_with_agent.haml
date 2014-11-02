@@ -2,7 +2,9 @@
 %p
   = @user.name
   has decided to sell their
-  = @vehicle.description
+  = @vehicle.year
+  = @vehicle.make(pretty: true)
+  = @vehicle.model(pretty: true)
   with
   = "#{Settings.app.name}."
 %p

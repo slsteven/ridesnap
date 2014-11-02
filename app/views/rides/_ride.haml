@@ -1,0 +1,8 @@
+= link_to ride, class: 'list-group-item' do
+  = ride.scheduled_at.strftime('%b %-d, %Y @ %l:%M%P')
+  %br
+  = ride.address
+  %br
+  #{ride.city}, #{ride.state} #{ride.zip_code}
+  %h3.user_name.ride
+    = controller_name == 'vehicles' ? ride.user.name : "#{ride.vehicle.make(pretty: true)} #{ride.vehicle.model(pretty: false)}"

@@ -1,8 +1,11 @@
-- provide(:title, @vehicle.description)
+- provide(:title, "#{@vehicle.make(pretty: true)} #{@vehicle.model(pretty: true)}")
 
 .jumbotron.black-bg#start1
   .container.text-center#header-threshold
-    %h1= @vehicle.description.split('-')[0..-2].join('-').strip
+    %h1
+      = @vehicle.year
+      = @vehicle.make(pretty: true)
+      = @vehicle.model(pretty: true)
 
 .jumbotron.small.white-bg
   .container.text-center
@@ -20,7 +23,11 @@
         %br
         %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     %h2.purple Estimated Value.
-    %p= @vehicle.description
+    %p
+      = @vehicle.year
+      = @vehicle.make(pretty: true)
+      = @vehicle.model(pretty: true)
+      = @vehicle.description
     %p= @vehicle.known_attr.join(' &nbsp;|&nbsp; ').html_safe
     %p= content_tag :a, 'Edit vehicle options to refine your estimate', class: 'purple pointer', data: {toggle: 'collapse', target: '#vehicle_options'}
     .row
@@ -73,12 +80,24 @@
     .well
       %h3 The inspection report includes:
       %p= @inspection_report.join(' &nbsp;&bull;&nbsp; ').html_safe
-    =link_to 'Schedule with RideSnap', new_ride_path(vehicle_id: @vehicle.id), class: 'btn btn-purple btn-lg'
+    =link_to "Schedule with #{Settings.app.name}", new_ride_path(vehicle_id: @vehicle.id), class: 'btn btn-purple btn-lg'
+
+- if @rides.any?
+  .jumbotron.white-bg
+    .container
+      %p.text-center
+        %small
+          %b SCHEDULED RIDES
+          %br
+          %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      .col-md-6.col-md-offset-3.col-sm-12
+        %ul.list-group
+          = render @rides
 
 :coffee
   trade_in = #{@vehicle.preliminary_value['trade_in'].to_i}
-  buy_now = #{@vehicle.preliminary_value['snapup'].to_i}
-  ride_snap = #{@vehicle.preliminary_value['ridesnap'].to_i}
+  buy_now = #{@vehicle.preliminary_value['snap_up'].to_i}
+  ride_snap = #{@vehicle.preliminary_value['ride_snap'].to_i}
   $('#trade-in-value').text '$' + trade_in
   $('#ridesnap-value').text '$' + ride_snap
   max = Math.max(trade_in, ride_snap, buy_now)

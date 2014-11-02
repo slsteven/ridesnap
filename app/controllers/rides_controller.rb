@@ -1,4 +1,6 @@
 class RidesController < ApplicationController
+  before_filter :correct_user,        only: [:update, :destroy]
+
   def create
     @vehicle = Vehicle.find(params[:vehicle_id].to_i)
 
@@ -15,7 +17,6 @@ class RidesController < ApplicationController
       @ride.zip_code = params[:zip_code]
 
       if @ride.save
-        @location = Location.from_zip(@ride.zip_code)
         flash[:success] = "Appointment confirmed for #{@ride.scheduled_at.strftime('%A, %B')} #{@ride.scheduled_at.day.ordinalize}! We've sent you a confirmation email"
         redirect_to @ride
         @ride.confirm_ride
@@ -35,9 +36,16 @@ class RidesController < ApplicationController
 
   def show
     @ride = Ride.find(params[:id])
-    @location = Location.from_zip(@ride.zip_code)
     @user = @ride.user
     @vehicle = @ride.vehicle
     @menu = 'start'
   end
+
+private
+
+  def correct_user
+    @ride = Ride.find(params[:id])
+    redirect_to(@ride) unless @ride.with?(current_user) || current_user.admin?
+  end
+
 end

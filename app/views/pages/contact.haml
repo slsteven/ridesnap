@@ -6,4 +6,4 @@
 
 .jumbotron.white-bg
   .container.text-center
-    %p= mail_to 'info@ridesnap.com'
+    %p= mail_to "info@#{request.host}"

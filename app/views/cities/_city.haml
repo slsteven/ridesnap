@@ -3,4 +3,4 @@
   = "#{city.city},"
   = city.state
   = "- #{city.country}" unless city.country == 'United States'
-  %span.pull-right{style: "padding-right: 15px"}= best_in_place city, :available, type: :checkbox, collection: ['Not yet...', 'Available!']
+  %span.pull-right{style: "padding-right: 15px"}= best_in_place city, :available, as: :checkbox, collection: ['Not yet...', 'Available!']

@@ -22,6 +22,7 @@
 #
 
 class User < ActiveRecord::Base
+  include LocationConcern
   include AASM
 
   has_many :rides
@@ -100,10 +101,6 @@ class User < ActiveRecord::Base
     else
       self.name.split(' ').first
     end
-  end
-
-  def inspector?
-    self.admin? || self.agent?
   end
 
   def last_name

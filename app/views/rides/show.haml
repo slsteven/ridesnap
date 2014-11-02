@@ -10,16 +10,23 @@
     %p We look forward to meeting you!
     %br
     %br
-    %b.purple= @user.name
+    %b.purple= @user.name.upcase
     %p= number_to_phone(@user.phone, area_code: true)
     %p= @user.email
     %br
     %b.purple INSPECTION APPOINTMENT FOR:
-    %p= @ride.scheduled_at.to_formatted_s :long_ordinal
+    %p= @ride.scheduled_at.strftime("%B #{@ride.scheduled_at.day.ordinalize}, %Y @ %l:%M%P")
     %p
       %span= @ride.address
       %br
-      %span= "#{@location[:city]}, #{@location[:state]} #{@location[:zip_code]}"
+      %span= "#{@ride.city}, #{@ride.state} #{@ride.zip_code}"
+    = button_tag 'Reschedule', class: 'btn btn-sm btn-purple'
+    %br
     %br
     %b.purple VEHICLE INFORMATION
-    %p= @vehicle.description
+    %p
+      = @vehicle.year
+      = @vehicle.make(pretty: true)
+      = @vehicle.model(pretty: true)
+      \-
+      = @vehicle.description

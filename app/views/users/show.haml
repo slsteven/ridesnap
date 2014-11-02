@@ -3,3 +3,15 @@
 .jumbotron
   .container.text-center
     %h1= @user.name
+
+- if @rides.any?
+  .jumbotron.white-bg
+    .container
+      %p.text-center
+        %small
+          %b SCHEDULED RIDES
+          %br
+          %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      .col-md-6.col-md-offset-3.col-sm-12
+        %ul.list-group
+          = render @rides

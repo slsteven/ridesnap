@@ -3,12 +3,12 @@
 .jumbotron.black-bg#home1
   .container.text-center#header-threshold
     %h1 AT YOUR SERVICE.
-    %p RideSnap takes care of all the stress and work that comes with selling your car.
+    %p #{Settings.app.name} takes care of all the stress and work that comes with selling your car.
     = link_to 'Get Started', start_path, class: 'btn btn-purple btn-wide btn-lg'
 
 .jumbotron.white-bg.time-money-tabs
   .container.text-center
-    %h2.purple Sell your car with RideSnap.
+    %h2.purple Sell your car with #{Settings.app.name}.
     %p So you don’t waste:
     %ul.nav#time-money{role: 'tablist'}
       %li.active
@@ -76,7 +76,7 @@
       COMING SOON:
       %b CHICAGO
     %p
-      %small Don't see your city? Let us know where you'd like to see RideSnap next!
+      %small Don't see your city? Let us know where you'd like to see #{Settings.app.name} next!
     .col-sm-4.col-sm-offset-4
       = form_tag cities_path do
         .input-group

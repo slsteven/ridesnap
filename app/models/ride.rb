@@ -6,7 +6,7 @@
 #  user_id      :integer
 #  vehicle_id   :integer
 #  scheduled_at :datetime
-#  relation     :string(255)
+#  relation     :integer
 #  address      :string(255)
 #  zip_code     :string(255)
 #  created_at   :datetime
@@ -20,26 +20,23 @@
 #
 
 class Ride < ActiveRecord::Base
-  include AASM
+  include LocationConcern
+
+  enum relation: { seller: 1, tester: 2, buyer: 3, inspector: 4 }
 
   belongs_to :user
   belongs_to :vehicle
 
-  default_scope { order(created_at: :asc) }
-
-  aasm column: 'relation' do
-    state :seller
-    state :tester
-    state :buyer
-  end
-
-  # # # # #
-  # /AASM
-  # # # # #
+  default_scope { where.not(scheduled_at: nil).order(created_at: :asc) }
+  scope :with, ->(user) { where(user_id: user) }
 
   def confirm_ride
     RideMailer.confirm_with_user(self.id).deliver
     RideMailer.confirm_with_agent(self.id).deliver
+  end
+
+  def with?(user)
+    user_id == user.id
   end
 
 end
