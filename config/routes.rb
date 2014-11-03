@@ -37,6 +37,7 @@ Rails.application.routes.draw do
       get 'query'
       post 'schedule_confirm'
     end
+    resources :images
   end
 
   resources :rides

@@ -60,6 +60,16 @@
         %span.glyphicon.glyphicon-chevron-left
       %a.right.carousel-control{href: '#vehicle-images', role: 'button', data: {slide: 'next'}}
         %span.glyphicon.glyphicon-chevron-right
+    %br
+    = box_uploader_form post: vehicle_images_url(@vehicle), as: "image[image_url]" do
+      %span.btn.btn-purple.btn-file
+        Add Images
+        = file_field_tag :file, multiple: true
+    %script{id: 'template-upload', type: 'text/x-tmpl'}
+      .upload
+        {%=o.name%}
+        .progress
+          .bar{style: 'width: 0%'}
 
 .jumbotron.white-bg
   .container.text-center

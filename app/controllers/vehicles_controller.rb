@@ -1,4 +1,6 @@
 class VehiclesController < ApplicationController
+  include UploadHelper
+
   before_filter :signed_in_user,    only: [:index, :edit, :update, :destroy]
   before_filter :admin_user,        only: [:index, :destroy]
 
