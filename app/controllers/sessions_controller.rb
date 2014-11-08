@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
-  def new
+  force_ssl only: :box_auth
+
+  def box_auth
+
   end
 
   def create
@@ -22,4 +25,6 @@ class SessionsController < ApplicationController
     redirect_to root_url
   end
 
+  def new
+  end
 end

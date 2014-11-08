@@ -12,7 +12,6 @@ class RideMailer < ActionMailer::Base
     @ride = Ride.find(ride_id)
     @user = @ride.user
     @vehicle = @ride.vehicle
-    @location = Location.from_zip @vehicle.zip_code
     mail to: Settings.app.email.steven, subject: "#{@user.name}'s Vehicle Inspection"
   end
 end

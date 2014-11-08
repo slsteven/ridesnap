@@ -4,7 +4,10 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
-  resources :sessions, only: [:create, :destroy]
+  resources :sessions, only: [:create, :destroy] do
+    collection { get 'box_auth' }
+  end
+
   delete '/signout'   => 'sessions#destroy'
   get '/how'          => 'pages#how'
   get '/start'        => 'pages#start'

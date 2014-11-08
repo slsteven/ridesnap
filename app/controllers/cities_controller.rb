@@ -2,7 +2,7 @@ class CitiesController < ApplicationController
   before_filter :admin_user,        only: [:index, :update]
 
   def create
-    loc = Location.from_zip params[:zip_code]
+    loc = Location.from_zip code: params[:zip_code]
     if loc.any?
       @city = City.where(city: loc[:city], state: loc[:state]).first_or_initialize
       @city.country = loc[:country]

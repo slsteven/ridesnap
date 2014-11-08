@@ -4,14 +4,10 @@
     %title= full_title(yield(:title))
     = favicon_link_tag 'favicon.ico'
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
     - set_meta_tags viewport: 'width=device-width, initial-scale=1.0'
     - set_meta_tags keywords: Settings.meta_tags
     = display_meta_tags
-    = render 'layouts/shim.html.erb'
-    - if Settings.google_analytics.enabled
-      = render 'shared/ga'
   = content_tag :body, body_attributes do
     .wrapper
       = render 'layouts/header'

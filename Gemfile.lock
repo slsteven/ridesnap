@@ -1,4 +1,14 @@
 GIT
+  remote: git://github.com/attachmentsme/ruby-box.git
+  revision: 34f52ae3a0de73e54808f514aba9b4ad820d75f4
+  specs:
+    ruby-box (1.15.0)
+      addressable
+      json
+      multipart-post
+      oauth2
+
+GIT
   remote: git://github.com/bernat/best_in_place.git
   revision: d14da00f49256adbe023c245449d8937eb1bee42
   specs:
@@ -36,6 +46,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
+    addressable (2.3.6)
     annotate (2.6.5)
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
@@ -71,6 +82,8 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.2.1)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
     haml (4.0.5)
       tilt
     hike (1.2.3)
@@ -89,6 +102,7 @@ GEM
     jquery-ui-rails (5.0.1)
       railties (>= 3.2.16)
     json (1.8.1)
+    jwt (1.0.0)
     kaminari (0.16.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -105,8 +119,15 @@ GEM
     minitest (5.4.2)
     multi_json (1.10.1)
     multi_xml (0.5.5)
+    multipart-post (2.0.0)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
+    oauth2 (1.0.0)
+      faraday (>= 0.8, < 0.10)
+      jwt (~> 1.0)
+      multi_json (~> 1.3)
+      multi_xml (~> 0.5)
+      rack (~> 1.2)
     pg (0.17.1)
     pry (0.10.1)
       coderay (~> 1.1.0)
@@ -229,6 +250,7 @@ DEPENDENCIES
   rails_serve_static_assets
   responders
   rspec-rails (~> 3.0.0)
+  ruby-box!
   sass-rails
   sdoc (~> 0.4.0)
   spring

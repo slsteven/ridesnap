@@ -12,7 +12,7 @@
   = @ride.scheduled_at.to_formatted_s :long_ordinal
 %p
   They reside in
-  = "#{@location[:city]}, #{@location[:state]}."
+  = "#{@ride.city}, #{@ride.state}."
 %p
   Reach out to them at
   = mail_to @user.email, subject: "#{Settings.app.name} Follow up", target: '_blank'

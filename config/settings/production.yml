@@ -1,5 +1,6 @@
-google_analytics:
-  enabled: true
+google:
+  analytics:
+    enabled: true
 
 social:
   facebook: '#'

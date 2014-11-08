@@ -29,3 +29,9 @@
       %li.social= link_to embedded_svg('twitter.svg', class: 'social-icon twitter', size: 45), Settings.social.twitter, title: 'Twitter'
       %li.social= link_to embedded_svg('linkedin.svg', class: 'social-icon linkedin', size: 45), Settings.social.linkedin, title: 'LinkedIn'
       %li.social= link_to embedded_svg('google.svg', class: 'social-icon google', size: 45), Settings.social.google, title: 'Google+'
+
+  = javascript_include_tag 'application', 'data-turbolinks-track' => true
+  = javascript_include_tag 'https://maps.googleapis.com/maps/api/js?libraries=places'
+  = render 'layouts/shim.html.erb'
+  - if Settings.google.analytics.enabled
+    = render 'shared/ga'

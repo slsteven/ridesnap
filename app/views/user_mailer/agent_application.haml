@@ -5,7 +5,7 @@
   = "#{Settings.app.name}."
 %p
   They reside in
-  = "#{Location.from_zip @user.zip_code}."
+  #{@user.zip_code}.
 %p
   Reach out to them at
   = @user.email
