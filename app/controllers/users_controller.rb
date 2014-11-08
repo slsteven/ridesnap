@@ -58,7 +58,8 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
+    @actual_users = User.where.not(password_digest: nil)
+    @new_users = User.where(password_digest: nil)
   end
 
   def new

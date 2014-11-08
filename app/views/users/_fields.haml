@@ -4,7 +4,11 @@
   %span.help-block
 .form-group
   = f.label :email, nil, class: 'sr-only'
-  = f.text_field :email, class: 'form-control', placeholder: 'email address'
+  = f.text_field :email, class: 'form-control', placeholder: 'Email'
+  %span.help-block
+.form-group
+  = f.label :phone, nil, class: 'sr-only'
+  = f.text_field :phone, class: 'form-control', placeholder: 'Phone'
   %span.help-block
 .form-group
   = f.label :password, nil, class: 'sr-only'

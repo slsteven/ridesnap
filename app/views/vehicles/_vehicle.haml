@@ -1,1 +1,6 @@
-= link_to "#{vehicle.year} #{vehicle.make(pretty: true)} #{vehicle.model(pretty: true)} - #{vehicle.description}", vehicle, class: 'list-group-item'
+= link_to vehicle, class: 'list-group-item vehicle' do
+  = vehicle.year
+  = vehicle.make(pretty: true)
+  = vehicle.model(pretty: true)
+  \-
+  = vehicle.description
