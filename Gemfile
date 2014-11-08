@@ -1,16 +1,16 @@
 source 'https://rubygems.org'
 
-ruby '2.1.3'
+ruby '2.1.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.1.6'
+gem 'rails', '~> 4.1.7'
 
 # Use pg as the database
 gem 'pg'
 gem 'hstore_accessor' # not sure we need this
 
 # Use SCSS and bootstrap for styles
-gem 'bootstrap-sass', '~> 3.2.0'
+gem 'bootstrap-sass', '~> 3.3.0'
 gem 'sass-rails'
 # Pagination
 gem 'kaminari'
@@ -18,9 +18,9 @@ gem 'kaminari-bootstrap', '~> 3.0.1'
 # Autoprefixer adds the appropriate CSS browser prefixes to everything!
 gem 'autoprefixer-rails'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails'
 # Javascript templating engine...
 # gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
 # Use HAML for the views
@@ -59,7 +59,7 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.0.0'
+  gem 'rspec-rails', '~> 3.1.0'
   gem 'binding_of_caller'
   gem 'better_errors'
   gem 'pry-rails'
@@ -77,7 +77,7 @@ gem 'nokogiri' # scraper... but only using internally to build inline SVGs
 gem 'meta-tags'
 gem 'rails_config'
 gem 'annotate'
-gem 'best_in_place', '~> 3.0.0.rc1', github: 'bernat/best_in_place'
+gem 'best_in_place', '~> 3.0.0', github: 'bernat/best_in_place'
 gem 'chronic'
 gem 'color'
 gem 'browser-timezone-rails'
