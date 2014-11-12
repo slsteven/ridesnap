@@ -1,4 +1,4 @@
-= link_to vehicle, class: 'list-group-item vehicle' do
+= link_to vehicle, class: 'list-group-item vehicle', data: {object: vehicle.id} do
   = vehicle.year
   = vehicle.make(pretty: true)
   = vehicle.model(pretty: true)

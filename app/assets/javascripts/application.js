@@ -17,6 +17,5 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require lib/moment.min.js
-//= require lib/hammer.js
 //= require browser_timezone_rails/application.js
 //= require_tree .
