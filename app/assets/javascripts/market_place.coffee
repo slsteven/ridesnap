@@ -2,18 +2,19 @@ ready = ->
   transform = {}
   start_x = 0
 
-  handleSwipeLeft = (ev) ->
-    console.log(ev)
+  handlePan = (ev) ->
+    el = $(".actions[data-object='" + ev.target.dataset.object + "']")
+    el.removeClass('accept').addClass('reject') if ev.deltaX < 0
+    el.removeClass('reject').addClass('accept') if ev.deltaX > 0
+    transform.translate = { x: start_x + ev.deltaX }
+    updateElementTransform(ev.target.dataset.object)
 
-  handleSwipeRight = (ev) ->
-    console.log(ev)
-
-  updateElementTransform = (el) ->
+  updateElementTransform = (obj) ->
     value = [
       'translate3d(' + transform.translate.x + 'px, 0px, 0)'
     ]
     value = value.join(" ")
-    el = document.querySelector(".vehicle[data-object='" + el + "']")
+    el = document.querySelector(".vehicle[data-object='" + obj + "']")
     el.style.webkitTransform = value
     el.style.mozTransform = value
     el.style.transform = value
@@ -24,22 +25,14 @@ ready = ->
     }
     updateElementTransform()
 
-  onPan = (ev) ->
-    console.log(ev)
-    # ev.target.dataset.object
-    transform.translate = {
-      x: start_x + ev.deltaX
-    }
-    updateElementTransform(ev.target.dataset.object)
-
   createHammer = (v) ->
     mc = new Hammer.Manager(v, {})
     mc.add new Hammer.Pan(
       direction: Hammer.DIRECTION_HORIZONTAL
       threshold: 20
     )
-    mc.on 'panleft', onPan
-    mc.on 'panright', onPan
+    mc.on 'panleft', handlePan
+    mc.on 'panright', handlePan
 
   selector = '.market-place .vehicle'
   createHammer(v) for v in document.querySelectorAll(selector)

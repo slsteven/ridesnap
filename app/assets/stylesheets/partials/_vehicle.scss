@@ -42,3 +42,23 @@ form#vehicle-inspection {
     }
   }
 }
+
+.vehicle {
+  position: relative;
+  z-index: 5;
+  border-radius: 0px !important;
+}
+.actions {
+  position: relative;
+  z-index: 4;
+  top: -41px;
+  @extend .list-group-item;
+  height: 42px;
+  border-radius: 0px !important;
+  &.accept{
+    @extend .list-group-item-success;
+  }
+  &.reject{
+    @extend .list-group-item-danger;
+  }
+}
