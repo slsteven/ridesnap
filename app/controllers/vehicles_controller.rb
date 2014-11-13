@@ -8,8 +8,8 @@ class VehiclesController < ApplicationController
     params[:vehicle][:zip_code] = params[:vehicle][:zip_code].presence
     params[:vehicle][:preliminary_value] = {
       trade_in: params[:trade_in_value],
-      ridesnap: params[:ride_snap_value],
-      snapup: params[:snap_up_value]
+      ride_snap: params[:ride_snap_value],
+      snap_up: params[:snap_up_value]
     }
     params[:vehicle][:model] = "#{params[:vehicle][:model]} ~~ #{params[:pretty_model]}"
     params[:vehicle].slice!(:make, :model, :year, :style, :zip_code, :description, :preliminary_value)
