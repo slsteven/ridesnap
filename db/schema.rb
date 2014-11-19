@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141028032206) do
+ActiveRecord::Schema.define(version: 20141119054440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20141028032206) do
     t.string   "zip_code"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "cancel",       default: false
   end
 
   add_index "rides", ["relation"], name: "index_rides_on_relation", using: :btree

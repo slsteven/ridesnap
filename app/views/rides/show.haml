@@ -14,14 +14,19 @@
     %p= number_to_phone(@user.phone, area_code: true)
     %p= @user.email
     %br
+
     %b.purple INSPECTION APPOINTMENT FOR:
-    %p= @ride.scheduled_at.strftime("%B #{@ride.scheduled_at.day.ordinalize}, %Y @ %l:%M%P")
-    %p
-      %span= @ride.address
-      %br
-      %span= "#{@ride.city}, #{@ride.state} #{@ride.zip_code}"
-    = button_tag 'Reschedule', class: 'btn btn-sm btn-purple'
-    %br
+    .tab-content
+      .tab-pane.fade.in.active#scheduled-ride
+        = render 'scheduled_ride'
+      .tab-pane.fade#edit
+        = render 'edit'
+    %ul{role: 'tablist'}
+      %li#scheduled-ride-tab
+        = link_to 'Reschedule', '#edit', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-sm btn-purple'
+      %li.active.hidden#edit-tab
+        = link_to 'Scheduled', '#scheduled-ride', role: 'tab', data: {toggle: 'tab'}
+
     %br
     %b.purple VEHICLE INFORMATION
     %p

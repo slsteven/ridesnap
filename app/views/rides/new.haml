@@ -7,15 +7,20 @@
     %br
     %br
     = form_tag Ride.new, class: 'form-inline', id: 'vehicle-inspection', role: 'form' do
-      .form-group
-        = label_tag :name, nil, class: 'sr-only'
-        = text_field_tag :name, nil, placeholder: 'Full Name', class: 'form-control'
-      .form-group
-        = label_tag :phone, nil, class: 'sr-only'
-        = text_field_tag :phone, nil, placeholder: 'Phone', class: 'form-control phone'
-      .form-group
-        = label_tag :email, nil, class: 'sr-only'
-        = text_field_tag :email, nil, placeholder: 'Email', class: 'form-control'
+      - if current_user
+        .form-group
+          %h2= current_user.name
+          = hidden_field_tag :user_id, current_user.id
+      - else
+        .form-group
+          = label_tag :name, nil, class: 'sr-only'
+          = text_field_tag :name, nil, placeholder: 'Full Name', class: 'form-control'
+        .form-group
+          = label_tag :phone, nil, class: 'sr-only'
+          = text_field_tag :phone, nil, placeholder: 'Phone', class: 'form-control phone'
+        .form-group
+          = label_tag :email, nil, class: 'sr-only'
+          = text_field_tag :email, nil, placeholder: 'Email', class: 'form-control'
       %br
       .form-group
         = label_tag :scheduled_at, nil, class: 'sr-only'

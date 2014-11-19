@@ -11,6 +11,7 @@
 #  zip_code     :string(255)
 #  created_at   :datetime
 #  updated_at   :datetime
+#  cancel       :boolean          default(FALSE)
 #
 # Indexes
 #

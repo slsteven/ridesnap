@@ -10,5 +10,8 @@ ready = ->
   $('.time-money-tabs .tab-content').hover (ev) ->
     clearInterval tabCarousel
 
+  $(document).on 'click', '#scheduled-ride-tab a', ->
+    $(this).parent().fadeOut('fast')
+
 $(document).ready(ready)
 $(document).on('page:load', ready)

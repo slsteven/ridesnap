@@ -5,12 +5,14 @@ ready = ->
       when '/users'
         if jqxhr.status == 422
           $form = $("form[data-model='user']")
+          $form.render_form_errors JSON.parse(jqxhr.responseText)
         else
           $form = $("form[data-model='session']")
+          $form.render_form_errors JSON.parse(jqxhr.responseText)
           $('a[href=#sign-in]').tab('show')
       when '/sessions'
         $form = $("form[data-model='session']")
-    $form.render_form_errors JSON.parse(jqxhr.responseText)
+        $form.render_form_errors JSON.parse(jqxhr.responseText)
 
   $(document).ajaxSuccess (event, xhr, settings) ->
     $('.modal').modal_success()

@@ -1,12 +1,16 @@
 class RidesController < ApplicationController
   before_filter :correct_user,        only: [:update, :destroy]
+  respond_to :html, :js
 
   def create
     @vehicle = Vehicle.find(params[:vehicle_id].to_i)
-
-    @user = User.where(email: params[:email]).first_or_initialize
-    @user.name = params[:name]
-    @user.phone = params[:phone].delete('^0-9')
+    if params[:user_id]
+      @user = User.find_by_id(params[:user_id])
+    else
+      @user = User.where(email: params[:email]).first_or_initialize
+      @user.name = params[:name]
+      @user.phone = params[:phone].delete('^0-9')
+    end
 
     if @user.save
       @ride = @user.rides
@@ -39,6 +43,16 @@ class RidesController < ApplicationController
     @user = @ride.user
     @vehicle = @ride.vehicle
     @menu = 'start'
+  end
+
+  def update
+    @ride = Ride.find(params[:id])
+    @ride.scheduled_at = Chronic.parse(params[:ride][:scheduled_at]) || Time.now
+    @ride.address = params[:ride][:address]
+    @ride.zip_code = params[:ride][:zip_code]
+    @ride.save
+    @ride.confirm_ride if @ride.errors.blank?
+    respond_with @ride, layout: false
   end
 
 private

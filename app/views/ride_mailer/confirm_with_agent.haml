@@ -15,7 +15,7 @@
   = "#{@ride.city}, #{@ride.state}."
 %p
   Reach out to them at
-  = mail_to @user.email, subject: "#{Settings.app.name} Follow up", target: '_blank'
+  = mail_to @user.email, @user.email, subject: "#{Settings.app.name} Follow up", target: '_blank'
   or
   = "#{@user.phone}."
 %br
