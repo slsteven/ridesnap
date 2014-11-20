@@ -1,7 +1,7 @@
 =form_for @ride, html: {class: 'form-inline', role: 'form', remote: true} do |f|
   .form-group
     = f.label :scheduled_at, class: 'sr-only'
-    = f.text_field :scheduled_at, placeholder: 'Date/Time', class: 'form-control', id: 'datetimepicker-schedule'
+    = f.text_field :scheduled_at, value: @ride.scheduled_at.strftime("%m/%d/%Y %I:%M %p"), placeholder: 'Date/Time', class: 'form-control', id: 'datetimepicker-schedule'
   .form-group
     = f.label :address, class: 'sr-only'
     = f.text_field :address, placeholder: 'Street', class: 'form-control'

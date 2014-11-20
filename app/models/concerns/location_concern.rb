@@ -2,7 +2,7 @@ module LocationConcern
   extend ActiveSupport::Concern
 
   def location
-    Location.from_zip code: self.zip_code
+    @loc ||= Location.from_zip code: self.zip_code
   end
 
   def city
