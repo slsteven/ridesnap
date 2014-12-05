@@ -20,6 +20,7 @@
 #  created_at        :datetime
 #  updated_at        :datetime
 #  closest_color     :string(255)
+#  vin               :string(255)
 #
 # Indexes
 #
@@ -47,9 +48,11 @@ class Vehicle < ActiveRecord::Base
 
   has_many :rides
   has_many :users, through: :rides
+  has_many :images
 
   before_create :build_options
   before_save { self.closest_color = base_color }
+  before_save { self.vin ||= Vehicle.generate_vin }
 
   # these states give us helper methods as follows
   # Vehicle.listed === Vehicle.where(status: 'listed')
@@ -177,6 +180,11 @@ class Vehicle < ActiveRecord::Base
                                 options: option,
                                 engines: engine,
                                 transmissions: transmission }
+  end
+
+  def self.generate_vin
+    # 17 characters
+    SecureRandom.urlsafe_base64[0..16]
   end
 
 private

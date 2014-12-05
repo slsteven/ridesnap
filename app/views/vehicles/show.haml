@@ -44,27 +44,23 @@
 
     %p Your Listing Detail
 
-    #vehicle-images.carousel.slide
+    #vehicle-images.carousel.slide{data: {interval: false}}
       / Indicators
       %ol.carousel-indicators
-        - 1.upto(@vehicle_images.size) do |i|
-          %li{class: ('active' if i == 1),data: {'slide-to' => i-1, target: '#vehicle-images'}}
+        = render collection: @vehicle_images, partial: 'images/vehicle_preview', as: :image
       / Wrapper for slides
       .carousel-inner
-        - @vehicle_images.each_with_index do |img, i|
-          .item{class: ('active' if i == 0)}
-            = image_tag img
-            .carousel-caption= nil
+        = render collection: @vehicle_images, partial: 'images/vehicle_carousel', as: :image
       / Controls
       %a.left.carousel-control{href: '#vehicle-images', role: 'button', data: {slide: 'prev'}}
         %span.glyphicon.glyphicon-chevron-left
       %a.right.carousel-control{href: '#vehicle-images', role: 'button', data: {slide: 'next'}}
         %span.glyphicon.glyphicon-chevron-right
     %br
-    / = box_uploader_form post: vehicle_images_url(@vehicle), as: "image[image_url]" do
-    /   %span.btn.btn-purple.btn-file
-    /     Add Images
-    /     = file_field_tag :file, multiple: true
+    = s3_uploader_form post: vehicle_images_url(@vehicle), as: "image[url]", vin: @vehicle.vin do
+      %span.btn.btn-purple.btn-file
+        Add Images
+        = file_field_tag :file, multiple: true
     %script{id: 'template-upload', type: 'text/x-tmpl'}
       .upload
         {%=o.name%}

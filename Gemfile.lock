@@ -1,14 +1,4 @@
 GIT
-  remote: git://github.com/attachmentsme/ruby-box.git
-  revision: 34f52ae3a0de73e54808f514aba9b4ad820d75f4
-  specs:
-    ruby-box (1.15.0)
-      addressable
-      json
-      multipart-post
-      oauth2
-
-GIT
   remote: git://github.com/bernat/best_in_place.git
   revision: 85ea66c06a960f45d48fe36add81e1d01310b1d1
   specs:
@@ -53,6 +43,7 @@ GEM
     arel (5.0.1.20140414130214)
     autoprefixer-rails (3.1.2.20141016)
       execjs
+    awesome_print (1.2.0)
     bcrypt (3.1.9)
     better_errors (2.0.0)
       coderay (>= 1.0.0)
@@ -82,8 +73,6 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.2.2)
-    faraday (0.9.0)
-      multipart-post (>= 1.2, < 3)
     haml (4.0.5)
       tilt
     hike (1.2.3)
@@ -102,7 +91,6 @@ GEM
     jquery-ui-rails (5.0.2)
       railties (>= 3.2.16)
     json (1.8.1)
-    jwt (1.0.0)
     kaminari (0.16.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -123,16 +111,11 @@ GEM
     minitest (5.4.2)
     multi_json (1.10.1)
     multi_xml (0.5.5)
-    multipart-post (2.0.0)
     nokogiri (1.6.4.1)
       mini_portile (~> 0.6.0)
-    oauth2 (1.0.0)
-      faraday (>= 0.8, < 0.10)
-      jwt (~> 1.0)
-      multi_json (~> 1.3)
-      multi_xml (~> 0.5)
-      rack (~> 1.2)
     pg (0.17.1)
+    powder (0.3.0)
+      thor (>= 0.11.5)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -227,6 +210,7 @@ DEPENDENCIES
   aasm
   annotate
   autoprefixer-rails
+  awesome_print
   bcrypt (~> 3.1.7)
   best_in_place (~> 3.0.0)!
   better_errors
@@ -248,6 +232,7 @@ DEPENDENCIES
   meta-tags
   nokogiri
   pg
+  powder
   pry-rails
   rails (~> 4.1.7)
   rails_12factor
@@ -255,7 +240,6 @@ DEPENDENCIES
   rails_serve_static_assets
   responders
   rspec-rails (~> 3.1.0)
-  ruby-box!
   sass-rails
   sdoc (~> 0.4.0)
   spring

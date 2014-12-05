@@ -62,3 +62,29 @@ form#vehicle-inspection {
     @extend .list-group-item-danger;
   }
 }
+
+/* Indicators list style */
+#vehicle-images.carousel.slide .carousel-indicators {
+  li {
+    border: medium none;
+    border-radius: 0;
+    float: left;
+    height: 54px;
+    margin-bottom: 5px;
+    margin-left: 0;
+    margin-right: 5px !important;
+    margin-top: 0;
+    width: 100px;
+  }
+  img {
+    border: 2px solid #FFFFFF;
+    float: left;
+    height: 54px;
+    left: 0;
+    width: 100px;
+  }
+  .active img {
+    border: 2px solid $purple;
+    opacity: 0.7;
+  }
+}

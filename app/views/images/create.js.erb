@@ -1,0 +1,9 @@
+<% if @image.new_record? %>
+  alert("Failed to upload image: <%= j @image.errors.full_messages.join(', ').html_safe %>");
+<% else %>
+  var i = '#vehicle-images.carousel.slide ';
+  // var count = $(i + '.carousel-indicators li').length+1
+  <% count = @image.vehicle.images.size+1 %>
+  $(i + '.carousel-indicators').append("<%= j render partial: 'images/vehicle_preview', locals: { image: @image, image_counter: count } %>");
+  $(i + '.carousel-inner').append("<%= j render partial: 'images/vehicle_carousel', locals: { image: @image, image_counter: count } %>");
+<% end %>

@@ -64,11 +64,10 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'better_errors'
   gem 'pry-rails'
-  # gem 'debugger'
 end
 
+# this production group necessary for heroku
 group :production do
-  # necessary for heroku
   gem 'rails_12factor'
   gem 'rails_serve_static_assets'
 end
@@ -82,4 +81,5 @@ gem 'best_in_place', '~> 3.0.0', github: 'bernat/best_in_place'
 gem 'chronic'
 gem 'color'
 gem 'browser-timezone-rails'
-gem 'ruby-box', github: 'attachmentsme/ruby-box'
+gem 'powder' # a wrapper around pow, get to server @ http://ridesnap.dev
+gem 'awesome_print' # ap Vehicle.first in the console for an example

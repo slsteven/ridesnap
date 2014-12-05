@@ -171,26 +171,26 @@ module Edmunds
     doc[:years][0][:styles][0][:id] rescue nil
   end
 
-  private
+private
 
-    def self.fetch(endpoint, params={})
-      raise 'endpoint necessary to talk with API' if endpoint.blank?
-      base = Settings.edmunds.base_url
-      params[:fmt] = 'json'
-      params[:api_key] = Settings.edmunds.key
-      params.slice!(:optionid, :colorid).each_with_object(parameters = []){ |(k,v),o| o << "#{k}=#{v}" }
-      params.each{ |k,v| v.delete(' ').split(',').each{ |i| parameters << "#{k}=#{i}" } }
-      parameters = parameters.join('&')
-      result = HTTParty.get("#{base}/#{endpoint}?#{parameters}")
-      return result.code unless result.code.to_s[/^2/]
-      result.kind_of?(Hash) ? result.with_indifferent_access : result
-    end
+  def self.fetch(endpoint, params={})
+    raise 'endpoint necessary to talk with API' if endpoint.blank?
+    base = Settings.edmunds.base_url
+    params[:fmt] = 'json'
+    params[:api_key] = Settings.edmunds.key
+    params.slice!(:optionid, :colorid).each_with_object(parameters = []){ |(k,v),o| o << "#{k}=#{v}" }
+    params.each{ |k,v| v.delete(' ').split(',').each{ |i| parameters << "#{k}=#{i}" } }
+    parameters = parameters.join('&')
+    result = HTTParty.get("#{base}/#{endpoint}?#{parameters}")
+    return result.code unless result.code.to_s[/^2/]
+    result.kind_of?(Hash) ? result.with_indifferent_access : result
+  end
 
-    def self.return_values(prices={})
-      {
-        retail: prices[:usedTmvRetail],
-        private_party: prices[:usedPrivateParty],
-        trade_in: prices[:usedTradeIn]
-      }
-    end
+  def self.return_values(prices={})
+    {
+      retail: prices[:usedTmvRetail],
+      private_party: prices[:usedPrivateParty],
+      trade_in: prices[:usedTradeIn]
+    }
+  end
 end

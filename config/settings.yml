@@ -14,6 +14,11 @@ app:
     tommy: quantumventuress@gmail.com
     brett: brett@dudo.io
 
+aws:
+  access_key_id: AKIAI2I4KMECXPV4HVMQ
+  secret_access_key: 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
+  bucket: ridesnap
+
 box:
   client_id: 4w4pnp6pt4le6iap940vf9kktyfdyeih
   client_secret: ZdGn0GmeE1HlKkbYS03NLOx95v1ayjgv

@@ -64,7 +64,7 @@ class VehiclesController < ApplicationController
     @vehicle = Vehicle.find(params[:id])
     @vehicle.send(:build_options) and @vehicle.save if @vehicle.options.nil?
     @styles = Edmunds.query_styles(@vehicle.make, @vehicle.model, @vehicle.year).invert.to_a rescue []
-    @vehicle_images = ['blank.jpg', 'blank.jpg']
+    @vehicle_images = @vehicle.images
     @conditions = Vehicle.conditions.to_a
     @vehicle_condition = Vehicle.conditions[@vehicle.condition]
     @inspection_report = ['Body Exterior', 'Body Interior', 'Engine',
