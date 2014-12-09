@@ -47,6 +47,16 @@ form#vehicle-inspection {
   position: relative;
   z-index: 5;
   border-radius: 0px !important;
+  padding: 0px;
+  .market-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    img {
+      max-height: 190px;
+    }
+  }
 }
 .actions {
   position: relative;

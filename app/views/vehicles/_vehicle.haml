@@ -1,9 +1,23 @@
 = link_to vehicle, class: 'list-group-item vehicle', data: {object: vehicle.id} do
-  = vehicle.year
-  = vehicle.make(pretty: true)
-  = vehicle.model(pretty: true)
-  \-
-  = vehicle.description
+  .row.market-list
+    .col-sm-3
+      = image_tag vehicle.images[0].try(:url), class: 'img-responsive'
+    .col-sm-3
+      = image_tag vehicle.images[1].try(:url), class: 'img-responsive'
+    .col-sm-3
+      = image_tag vehicle.images[2].try(:url), class: 'img-responsive'
+    .col-sm-3
+      %p.purple
+        %b
+          = vehicle.year
+          = vehicle.make(pretty: true)
+          = vehicle.model(pretty: true)
+      %p
+        %small price: #{number_to_currency vehicle.agreed_value || vehicle.preliminary_value['ride_snap'], precision: 0}
+      %p
+        %small mileage: #{vehicle.mileage || 'n/a'}
+      %p
+        %small location: #{vehicle.city || 'n/a'}
 .actions{data: {object: vehicle.id}}
-  .pull-right nope
-  .pull-left yup
+  .pull-right.nope nope
+  .pull-left.yup yup
