@@ -78,7 +78,7 @@
     %p
       %small Don't see your city? Let us know where you'd like to see #{Settings.app.name} next!
     .col-sm-4.col-sm-offset-4
-      = form_tag cities_path do
+      = form_tag cities_path, role: 'form' do
         .input-group
           = label_tag :zip_code, nil, class: 'sr-only'
           = text_field_tag :zip_code, nil, placeholder: 'Zip Code', class: 'form-control'

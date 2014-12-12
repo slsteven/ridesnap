@@ -49,6 +49,12 @@ form#vehicle-inspection {
   border-radius: 0px !important;
   padding: 0px;
   .market-list {
+    .mini-words {
+      position: absolute;
+      width: 95%;
+      bottom: -15px;
+    }
+    padding: 5px;
     display: flex;
     align-items: center;
     justify-content: center;

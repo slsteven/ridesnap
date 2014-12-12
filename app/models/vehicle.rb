@@ -106,7 +106,7 @@ class Vehicle < ActiveRecord::Base
     eval(read_attribute(:options)['colors'])
   end
   def base_color
-    return '' unless self.color.presence && self.color.first[1][:primary]
+    return nil unless self.color.presence && self.color.first[1][:primary]
     color = Color.new(self.color.first[1][:primary])
     hue = color.hue
     sat = color.saturation
@@ -180,6 +180,10 @@ class Vehicle < ActiveRecord::Base
                                 options: option,
                                 engines: engine,
                                 transmissions: transmission }
+  end
+
+  def list_price
+    agreed_value || preliminary_value['ride_snap']
   end
 
   def self.generate_vin

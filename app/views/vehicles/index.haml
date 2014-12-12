@@ -5,6 +5,23 @@
     %h1 Vehicles.
 
 .jumbotron.white-bg.row
-  .container
+  .container.text-center
+    = form_tag '#', class: 'form-inline', role: 'form' do
+      .form-group
+        = select_tag :makes, options_for_select(@makes), prompt: 'Makes', class: 'form-control'
+      .form-group
+        = select_tag :years, options_for_select(@years), prompt: 'Years', class: 'form-control'
+      .form-group
+        = text_field_tag :min_price, nil, placeholder: 'Min Price', class: 'form-control w100 br5'
+        = text_field_tag :max_price, nil, placeholder: 'Max Price', class: 'form-control w100 br5'
+      .form-group
+        = select_tag :colors, options_for_select(@colors), prompt: 'Colors', class: 'form-control'
+      .form-group
+        = select_tag :type, options_for_select(@types), prompt: 'Types', class: 'form-control'
+      .form-group
+        = select_tag :mileage, options_for_select(@miles), prompt: 'Mileage', class: 'form-control'
+
+    %br
+
     .list-group.market-place
       = render @vehicles

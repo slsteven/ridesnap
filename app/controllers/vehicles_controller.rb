@@ -30,6 +30,14 @@ class VehiclesController < ApplicationController
 
   def index
     @vehicles = Vehicle.all
+    @vehicles.map(&:make).uniq.each_with_object(@makes=[]){ |m,o| o << [Settings.vehicle_makes[m], m] }
+    @years = [*Date.today.year-10 .. Date.today.year].reverse # that splat is supposed to be there
+    @colors = @vehicles.map(&:closest_color).uniq.reject(&:blank?)
+    @miles = [['< 25,000', 25000],
+              ['< 50,000', 50000],
+              ['< 75,000', 75000],
+              ['> 100,000', 100000]]
+    @types = ['Coupe', 'Sedan']
   end
 
   def model_query
