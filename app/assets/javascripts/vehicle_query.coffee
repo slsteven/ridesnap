@@ -89,18 +89,18 @@ ready = ->
     .complete (prices) ->
       prices = JSON.parse(prices.responseText)
       trade_in = prices.trade_in
-      buy_now = prices.buy_now
+      snap_up = prices.snap_up
       ride_snap = prices.ride_snap
       $('#trade-in-value').text '$' + trade_in
       $('#ridesnap-value').text '$' + ride_snap
-      # $('#buy-it-now-value').text '$' + buy_now
+      # $('#buy-it-now-value').text '$' + snap_up
       $('#trade_in_value').val trade_in
       $('#ride_snap_value').val ride_snap
-      $('#snap_up_value').val buy_now
-      max = Math.max(trade_in, ride_snap, buy_now)
+      $('#snap_up_value').val snap_up
+      max = Math.max(trade_in, ride_snap, snap_up)
       $('.circle.trade-in-value').width Math.round(trade_in/max*100) + '%'
       $('.circle.ridesnap-value').width Math.round(ride_snap/max*100) + '%'
-      $('.circle.buy-it-now-value').width Math.round(buy_now/max*100) + '%'
+      $('.circle.buy-it-now-value').width Math.round(snap_up/max*100) + '%'
       $('form#vehicle-inspection #vehicle_id').val prices.vehicle_id
       $('form#vehicle-query #pretty_model').val($('#vehicle-query #vehicle_model option:selected').text())
       $('form#vehicle-query #vehicle_description').val($('#vehicle-query #vehicle_style option:selected').text())

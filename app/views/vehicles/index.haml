@@ -6,22 +6,25 @@
 
 .jumbotron.white-bg.row
   .container.text-center
-    = form_tag '#', class: 'form-inline', role: 'form' do
+    = form_tag vehicles_path, class: 'form-inline', role: 'form', method: 'get' do
       .form-group
-        = select_tag :makes, options_for_select(@makes), prompt: 'Makes', class: 'form-control'
+        = select_tag :make, options_for_select(@makes, params[:make]), prompt: 'Makes', class: 'form-control'
       .form-group
-        = select_tag :years, options_for_select(@years), prompt: 'Years', class: 'form-control'
+        = select_tag :year, options_for_select(@years, params[:year]), prompt: 'Years', class: 'form-control'
       .form-group
-        = text_field_tag :min_price, nil, placeholder: 'Min Price', class: 'form-control w100 br5'
-        = text_field_tag :max_price, nil, placeholder: 'Max Price', class: 'form-control w100 br5'
+        = text_field_tag :min_price, params[:min_price], placeholder: 'Min Price', class: 'form-control w100 br5'
+        = text_field_tag :max_price, params[:max_price], placeholder: 'Max Price', class: 'form-control w100 br5'
       .form-group
-        = select_tag :colors, options_for_select(@colors), prompt: 'Colors', class: 'form-control'
+        = select_tag :closest_color, options_for_select(@colors, params[:closest_color]), prompt: 'Colors', class: 'form-control'
+      / .form-group
+      /   = select_tag :types, options_for_select(@types), prompt: 'Types', class: 'form-control'
       .form-group
-        = select_tag :type, options_for_select(@types), prompt: 'Types', class: 'form-control'
-      .form-group
-        = select_tag :mileage, options_for_select(@miles), prompt: 'Mileage', class: 'form-control'
-
+        = select_tag :mileage, options_for_select(@miles, params[:mileage]), prompt: 'Mileage', class: 'form-control'
+      %br
+      %br
+      = submit_tag 'filter', class: 'btn btn-purple btn-wide'
     %br
-
     .list-group.market-place
+      = paginate @vehicles
       = render @vehicles
+      = paginate @vehicles

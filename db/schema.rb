@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141205040713) do
+ActiveRecord::Schema.define(version: 20141214024114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,7 +90,6 @@ ActiveRecord::Schema.define(version: 20141205040713) do
     t.integer  "condition"
     t.hstore   "options"
     t.hstore   "preliminary_value"
-    t.hstore   "agreed_value"
     t.decimal  "sold_price"
     t.string   "status"
     t.boolean  "inspection"
@@ -99,6 +98,7 @@ ActiveRecord::Schema.define(version: 20141205040713) do
     t.datetime "updated_at"
     t.string   "closest_color"
     t.string   "vin"
+    t.decimal  "agreed_value"
   end
 
   add_index "vehicles", ["closest_color"], name: "index_vehicles_on_closest_color", using: :btree

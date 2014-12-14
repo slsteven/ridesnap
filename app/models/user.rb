@@ -29,7 +29,11 @@ class User < ActiveRecord::Base
   has_many :vehicles, through: :rides
   has_many :favorites, through: :garage
 
-  before_save { self.email = email.downcase.strip }
+  before_save do
+    self.email = email.downcase.strip
+    cln_ph = phone.to_s.delete('^0-9')
+    self.phone = cln_ph[0] == 1 && cln_ph.length == 11 ? cln_ph[1..10] : cln_ph[0..9]
+  end
   before_create :create_remember_token
 
   # validates :name, presence: true, length: { maximum: 50 }

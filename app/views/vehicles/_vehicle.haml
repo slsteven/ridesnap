@@ -24,7 +24,7 @@
       %p
         %small price: #{number_to_currency(vehicle.list_price, precision: 0)}
       %p
-        %small mileage: #{vehicle.mileage || 'n/a'}
+        %small mileage: #{number_with_delimiter(vehicle.mileage) || 'n/a'}
       %p
         %small location: #{vehicle.city || 'n/a'}
 .actions{data: {object: vehicle.id}}

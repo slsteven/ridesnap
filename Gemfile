@@ -14,7 +14,7 @@ gem 'bootstrap-sass', '~> 3.3.0'
 gem 'sass-rails'
 # Pagination
 gem 'kaminari'
-gem 'kaminari-bootstrap', '~> 3.0.1'
+gem 'kaminari-bootstrap'
 # Autoprefixer adds the appropriate CSS browser prefixes to everything!
 gem 'autoprefixer-rails'
 # Use Uglifier as compressor for JavaScript assets
@@ -60,10 +60,11 @@ group :development do
 end
 
 group :development, :test do
-  gem 'rspec-rails', '~> 3.1.0'
+  gem 'rspec-rails'
   gem 'binding_of_caller'
   gem 'better_errors'
   gem 'pry-rails'
+  gem 'faker'
 end
 
 # this production group necessary for heroku

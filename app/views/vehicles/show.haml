@@ -23,11 +23,7 @@
         %br
         %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     %h2.purple Estimated Value.
-    %p
-      = @vehicle.year
-      = @vehicle.make(pretty: true)
-      = @vehicle.model(pretty: true)
-      = @vehicle.description
+    %p= @vehicle.info
     %p= @vehicle.known_attr.join(' &nbsp;|&nbsp; ').html_safe
     %p= content_tag :a, 'Edit vehicle options to refine your estimate', class: 'purple pointer', data: {toggle: 'collapse', target: '#vehicle_options'}
     .row

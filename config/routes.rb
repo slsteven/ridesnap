@@ -2,6 +2,10 @@ require 'api_constraints'
 
 Rails.application.routes.draw do
 
+  concern :paginatable do
+    get '(page/:page)', action: :index, on: :collection, as: ''
+  end
+
   root 'pages#home'
 
   resources :sessions, only: [:create, :destroy] do
@@ -31,7 +35,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :vehicles do
+  resources :vehicles, concerns: :paginatable do
     collection do
       get 'make_query'
       get 'model_query'
@@ -39,6 +43,7 @@ Rails.application.routes.draw do
       get 'style_query'
       get 'query'
       post 'schedule_confirm'
+      get 'find'
     end
     resources :images
   end

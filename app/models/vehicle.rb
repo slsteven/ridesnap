@@ -12,7 +12,6 @@
 #  condition         :integer
 #  options           :hstore
 #  preliminary_value :hstore
-#  agreed_value      :hstore
 #  sold_price        :decimal(, )
 #  status            :string(255)
 #  inspection        :boolean
@@ -21,6 +20,7 @@
 #  updated_at        :datetime
 #  closest_color     :string(255)
 #  vin               :string(255)
+#  agreed_value      :decimal(, )
 #
 # Indexes
 #
@@ -41,18 +41,19 @@ class Vehicle < ActiveRecord::Base
     ride_snap: :integer,
     trade_in: :integer,
     snap_up: :integer
-  hstore_accessor :agreed_value,
-    ride_snap: :integer,
-    trade_in: :integer,
-    snap_up: :integer
+
+  alias_attribute :list_price, :agreed_value
 
   has_many :rides
   has_many :users, through: :rides
   has_many :images
 
   before_create :build_options
-  before_save { self.closest_color = base_color }
-  before_save { self.vin ||= Vehicle.generate_vin }
+  before_save { self.closest_color ||= base_color }
+  before_save do
+    self.vin ||= Vehicle.generate_vin
+    self.agreed_value ||= self.ride_snap
+  end
 
   # these states give us helper methods as follows
   # Vehicle.listed === Vehicle.where(status: 'listed')
@@ -83,6 +84,35 @@ class Vehicle < ActiveRecord::Base
   # # # # #
   # /AASM
   # # # # #
+
+  def info
+    "#{year} #{make(pretty: true)} #{model(pretty: true)} - #{description}"
+  end
+
+  def self.filter(attributes)
+    return self.all unless attributes.except('action', 'controller', 'utf8', 'commit').any?
+    attributes.inject(self) do |scope, (key, value)|
+      return scope if value.blank?
+      case key
+      when 'make', 'closest_color'
+        scope.where(key => value.downcase)
+      when 'year'
+        scope.where(key => value.to_i)
+      when 'mileage'
+        scope.where("#{key} <= ?", value.to_i)
+        binding.pry
+      else # unknown key
+        scope
+      end
+    end
+    if attributes['min_price'].present? && attributes['max_price'].present?
+      self.scope.where('agreed_value >= ? AND agreed_value <= ?', attributes['min_price'].to_d, attributes['max_price'].to_d)
+    elsif attributes['min_price'].present?
+      self.scope.where('agreed_value >= ?', attributes['min_price'].to_d)
+    elsif attributes['max_price'].present?
+      self.scope.where('agreed_value <= ?', attributes['max_price'].to_d)
+    end
+  end
 
   # getters for prettified text
   def make(pretty: false)
@@ -180,10 +210,6 @@ class Vehicle < ActiveRecord::Base
                                 options: option,
                                 engines: engine,
                                 transmissions: transmission }
-  end
-
-  def list_price
-    agreed_value || preliminary_value['ride_snap']
   end
 
   def self.generate_vin

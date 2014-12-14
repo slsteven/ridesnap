@@ -50,10 +50,12 @@ html, body {
 }
 
 .debug_dump {
-  position: absolute;
-  bottom: 82px;
-  float: left;
-  display: none;
+  z-index: 100;
+  position: fixed;
+  bottom: 70px;
+  left: 30px;
+  width: 400px;
+  height: 300px;
 }
 
 .purple {

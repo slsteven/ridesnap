@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @user = User.where(email: params[:user][:email]).first_or_initialize
     @user.name = params[:user][:name]
     @user.zip_code = params[:user][:zip_code]
-    @user.phone = params[:user][:phone].delete('^0-9')
+    @user.phone = params[:user][:phone]
     if @user.save
       @user.apply_for_agent
       flash[:success] = "Thank you, #{@user.first_name}! We'll be in touch"
