@@ -43,7 +43,6 @@ Rails.application.routes.draw do
       get 'style_query'
       get 'query'
       post 'schedule_confirm'
-      get 'find'
     end
     resources :images
   end

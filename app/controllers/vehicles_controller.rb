@@ -28,26 +28,12 @@ class VehiclesController < ApplicationController
   def edit
   end
 
-  # def find
-  #   all = Vehicle.all
-  #   @vehicles = Vehicle.filter(params).page(params[:page]).per(20)
-  #   all.map(&:make).uniq.sort.each_with_object(@makes=[]){ |m,o| o << [Settings.vehicle_makes[m], m] }
-  #   @years = [*Date.today.year-10 .. Date.today.year].reverse # that splat is supposed to be there
-  #   all.map(&:closest_color).uniq.reject(&:blank?).sort.each_with_object(@colors=[]){ |c,o| o << [c.titleize, c] }
-  #   @miles = [['< 25,000', 25000],
-  #             ['< 50,000', 50000],
-  #             ['< 75,000', 75000],
-  #             ['> 100,000', 500000]] # no way there is a 10 year old car with half a million miles
-  #   @types = ['Coupe', 'Sedan'].sort # not using this yet...
-  #   render 'vehicles/index'
-  # end
-
   def index
     all = Vehicle.all
     @vehicles = Vehicle.filter(params).page(params[:page]).per(20)
     all.map(&:make).uniq.sort.each_with_object(@makes=[]){ |m,o| o << [Settings.vehicle_makes[m], m] }
     @years = [*Date.today.year-10 .. Date.today.year].reverse # that splat is supposed to be there
-    all.map(&:closest_color).uniq.reject(&:blank?).sort.each_with_object(@colors=[]){ |c,o| o << [c.titleize, c] }
+    all.map(&:closest_color).uniq.reject(&:blank?).sort.each_with_object(@colors=[]){ |c,o| o << [c.capitalize, c] }
     @miles = [['< 25,000', 25000],
               ['< 50,000', 50000],
               ['< 75,000', 75000],

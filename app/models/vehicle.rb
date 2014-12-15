@@ -48,6 +48,13 @@ class Vehicle < ActiveRecord::Base
   has_many :users, through: :rides
   has_many :images
 
+  scope :min_price, ->(min) { where('agreed_value >= ?', min.to_i) }
+  scope :max_price, ->(max) { where('agreed_value <= ?', max.to_i) }
+  scope :make, ->(make) { where(make: make.downcase) }
+  scope :closest_color, ->(color) { where(closest_color: color.downcase) }
+  scope :year, ->(year) { where(year: year.to_i) }
+  scope :mileage, ->(mileage) { where('mileage <= ?', mileage.to_i) }
+
   before_create :build_options
   before_save { self.closest_color ||= base_color }
   before_save do
@@ -90,27 +97,9 @@ class Vehicle < ActiveRecord::Base
   end
 
   def self.filter(attributes)
-    return self.all unless attributes.except('action', 'controller', 'utf8', 'commit').any?
-    attributes.inject(self) do |scope, (key, value)|
-      return scope if value.blank?
-      case key
-      when 'make', 'closest_color'
-        scope.where(key => value.downcase)
-      when 'year'
-        scope.where(key => value.to_i)
-      when 'mileage'
-        scope.where("#{key} <= ?", value.to_i)
-        binding.pry
-      else # unknown key
-        scope
-      end
-    end
-    if attributes['min_price'].present? && attributes['max_price'].present?
-      self.scope.where('agreed_value >= ? AND agreed_value <= ?', attributes['min_price'].to_d, attributes['max_price'].to_d)
-    elsif attributes['min_price'].present?
-      self.scope.where('agreed_value >= ?', attributes['min_price'].to_d)
-    elsif attributes['max_price'].present?
-      self.scope.where('agreed_value <= ?', attributes['max_price'].to_d)
+    supported_filters = [:make, :closest_color, :year, :mileage, :min_price, :max_price]
+    attributes.slice(*supported_filters).inject(self) do |scope, (key, value)|
+      value.present? ? scope.send(key, value) : scope
     end
   end
 
