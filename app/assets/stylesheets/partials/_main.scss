@@ -50,6 +50,7 @@ html, body {
 }
 
 .debug_dump {
+  display: none;
   z-index: 100;
   position: fixed;
   bottom: 70px;
@@ -129,4 +130,24 @@ ul#how-it-works {
 
 .br5 {
   border-radius: 5px !important;
+}
+
+.one {
+  max-height: 100vh;
+  margin: auto;
+}
+
+.three-four {
+  max-height: 75vh;
+  margin: auto;
+}
+
+.one-two {
+  max-height: 50vh;
+  margin: auto;
+}
+
+.one-four {
+  max-height: 25vh;
+  margin: auto;
 }

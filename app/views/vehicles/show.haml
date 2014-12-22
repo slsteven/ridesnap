@@ -1,108 +1,185 @@
 - provide(:title, "#{@vehicle.make(pretty: true)} #{@vehicle.model(pretty: true)}")
 
-.jumbotron.black-bg#start1
-  .container.text-center#header-threshold
-    %h1
-      = @vehicle.year
-      = @vehicle.make(pretty: true)
-      = @vehicle.model(pretty: true)
+.container{style: 'padding-top:90px'}
+  .owl-carousel
+    - @vehicle.images.each do |img|
+      = image_tag img.try(:url), class: 'img-responsive three-four'
 
-.jumbotron.small.white-bg
-  .container.text-center
-    %h2.purple
-      Let
-      = Settings.app.name
-      do the work for you.
-    %p.col-md-6.col-md-offset-3 We inspect, find your buyers, schedule test drives, and negotiate so you can worry about other things.
+  - if admin?
+    %br
+    .text-center
+      = s3_uploader_form post: vehicle_images_url(@vehicle), as: "image[url]", vin: @vehicle.vin do
+        %span.btn.btn-purple.btn-file
+          Add Images
+          = file_field_tag :file, multiple: true
+      %script{id: 'template-upload', type: 'text/x-tmpl'}
+        .upload
+          {%=o.name%}
+          .progress
+            .bar{style: 'width: 0%'}
+    %br
 
-.jumbotron.whitesmoke-bg#how-link
-  .container.text-center
-    %p
-      %small
-        %b GET STARTED
-        %br
-        %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    %h2.purple Estimated Value.
-    %p= @vehicle.info
-    %p= @vehicle.known_attr.join(' &nbsp;|&nbsp; ').html_safe
-    %p= content_tag :a, 'Edit vehicle options to refine your estimate', class: 'purple pointer', data: {toggle: 'collapse', target: '#vehicle_options'}
+.jumbotron
+  .container
+    %h1.text-center RVR BM3485
     .row
-      .col-sm-4.col-sm-offset-4
-        .alert.alert-success#vehicle-alert{role: 'alert'} Vehicle saved!
-
-    = render 'vehicles/update'
+      .col-xs-12.col-sm-6.hoverable
+        .overlay.text-center
+          %p Mechanics Report
+          %p
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            %br
+            = link_to 'click to view', '#'
+        = image_tag 'blank.jpg', class: 'img-responsive'
+      .col-xs-12.col-sm-6.hoverable
+        .overlay.text-center
+          %p Exteiror Report
+          %p
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            %br
+            = link_to 'click to view', '#'
+        = image_tag 'blank.jpg', class: 'img-responsive'
+    .row
+      .col-xs-12.col-sm-6.hoverable
+        .overlay.text-center
+          %p CarFax Report
+          %p
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            %br
+            = link_to 'click to view', '#'
+        = image_tag 'blank.jpg', class: 'img-responsive'
+      .col-xs-12.col-sm-6.hoverable
+        .overlay.text-center
+          %p Value Summary
+          %p
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            %br
+            = link_to 'click to view', '#'
+        = image_tag 'blank.jpg', class: 'img-responsive'
 
     %br
     %br
-    = render 'vehicles/price_circles'
+    .row
+      .col-md-6.col-md-offset-3
+        .pull-left
+          %p Model: #{@vehicle.year} #{@vehicle.make(pretty: true)} #{@vehicle.model(pretty: true)}
+          %p MPG: Up to 21 city, 29 highway
+          %p Body style: Sedan
+          %p Horsepower: 215 HP
+          %p Torque: 185 lb-ft
+          %p Engine size: 3.0L
+          %p Trim: #{@vehicle.description}
+        .pull-right
+          %span.center-block.clearfix
+            %span.glyphicon.glyphicon-star{'aria-hidden' => true}
+            %br
+            %small
+              No Accidents
+          %span.center-block.clearfix
+            %span.glyphicon.glyphicon-star{'aria-hidden' => true}
+            %br
+            %small
+              Title in Hand
+          %br
+          %span.center-block.clearfix
+            %span.glyphicon.glyphicon-star{'aria-hidden' => true}
+            %br
+            %small
+              Single Owner
+          %span.center-block.clearfix
+            %span.glyphicon.glyphicon-star{'aria-hidden' => true}
+            %br
+            %small
+              Bluetooth
+          %br
+          %span.center-block.clearfix
+            %span.glyphicon.glyphicon-star{'aria-hidden' => true}
+            %br
+            %small
+              Radio
+          %span.center-block.clearfix
+            %span.glyphicon.glyphicon-star{'aria-hidden' => true}
+            %br
+            %small
+              Sunroof
+          %br
+          %span.center-block.clearfix
+            %span.glyphicon.glyphicon-star{'aria-hidden' => true}
+            %br
+            %small
+              Navigation
 
     %hr
-
-    %p Your Listing Detail
-
-    #vehicle-images.carousel.slide{data: {interval: false}}
-      / Indicators
-      %ol.carousel-indicators
-        = render collection: @vehicle_images, partial: 'images/vehicle_preview', as: :image
-      / Wrapper for slides
-      .carousel-inner
-        = render collection: @vehicle_images, partial: 'images/vehicle_carousel', as: :image
-      / Controls
-      %a.left.carousel-control{href: '#vehicle-images', role: 'button', data: {slide: 'prev'}}
-        %span.glyphicon.glyphicon-chevron-left
-      %a.right.carousel-control{href: '#vehicle-images', role: 'button', data: {slide: 'next'}}
-        %span.glyphicon.glyphicon-chevron-right
     %br
-    = s3_uploader_form post: vehicle_images_url(@vehicle), as: "image[url]", vin: @vehicle.vin do
-      %span.btn.btn-purple.btn-file
-        Add Images
-        = file_field_tag :file, multiple: true
-    %script{id: 'template-upload', type: 'text/x-tmpl'}
-      .upload
-        {%=o.name%}
-        .progress
-          .bar{style: 'width: 0%'}
+    %br
+    %br
+    .text-center
+      %p
+        Mechanical Inspection -
+        %b.text-success EXCELLENT
+      %br
+      = button_tag 'DOWNLOAD REPORT', class: 'btn btn-success'
+      = button_tag 'CHECK OUT THIS CAR', class: 'btn btn-grey'
+      = button_tag 'BUY THIS CAR!', class: 'btn btn-purple'
+    %br
+    %br
+    %br
+    %hr
 
-.jumbotron.white-bg
-  .container.text-center
-    = render 'pages/how_it_works'
+    .row.text-center
+      .col-sm-4.col-xs-12
+        %h2
+          %span= image_tag('money.svg')
+        %p 5-day money back guarantee
+        %p
+          %small Return the car if you don’t like it.
+      .col-sm-4.col-xs-12
+        %h2
+          %span= image_tag('location.svg')
+        %p Reduced risk
+        %p
+          %small #{Settings.app.name} inspects all cars listed to make sure there are no surprises.
+      .col-sm-4.col-xs-12
+        %h2
+          %span= image_tag('eye.svg')
+        %p Total Transparency
+        %p
+          %small No upfront costs or hidden fees. We charge a simple 5% commission.
 
-.jumbotron.whitesmoke-bg#how-link
-  .container.text-center
-    %p
-      %small
-        %b NEXT STEP
-        %br
-        %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    %h2.purple Schedule an Inspection.
-    %p
-      Your car condition matters. Schedule an appointment so
-      = Settings.app.name
-      can inspect your car and photograph it. The report helps us narrow the listing price and it gives buyers peace of mind.
-    .well
-      %h3 The inspection report includes:
-      %p= @inspection_report.join(' &nbsp;&bull;&nbsp; ').html_safe
-    =link_to "Schedule with #{Settings.app.name}", new_ride_path(vehicle_id: @vehicle.id), class: 'btn btn-purple btn-lg'
+    .row.text-center
+      .col-sm-4.col-xs-12
+        %h2
+          %span= image_tag('steer.svg')
+        %p Check out the car in person!
+        %p
+          %small Just give us the 4-digit code of the car you are interested in and we can tell you the location of the car to see in person.
+      .col-sm-4.col-xs-12
+        %h2
+          %span= image_tag('checklist.svg')
+        %p The easiest buying process
+        %p
+          %small Don’t haggle with salesman or go through complicated paperwork. Let #{Settings.app.name} handle both from the convenience of your own home.
+      .col-sm-4.col-xs-12
+        %h2
+          %span= image_tag('lock.svg')
+        %p Secure Transaction
+        %p
+          %small
+            #{Settings.app.name} will send you a copy of the title to show title is in hand from the private party buyer.
+            %br
+            We act as a secure escrow service.
 
-- if @rides.any?
-  .jumbotron.white-bg
-    .container
-      %p.text-center
-        %small
-          %b SCHEDULED RIDES
-          %br
-          %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      .col-md-6.col-md-offset-3.col-sm-12
-        %ul.list-group
-          = render @rides
 
-:coffee
-  trade_in = #{@vehicle.preliminary_value['trade_in'].to_i}
-  buy_now = #{@vehicle.preliminary_value['snap_up'].to_i}
-  ride_snap = #{@vehicle.preliminary_value['ride_snap'].to_i}
-  $('#trade-in-value').text '$' + trade_in
-  $('#ridesnap-value').text '$' + ride_snap
-  max = Math.max(trade_in, ride_snap, buy_now)
-  $('.circle.trade-in-value').width Math.round(trade_in/max*100) + '%'
-  $('.circle.ridesnap-value').width Math.round(ride_snap/max*100) + '%'
-  $('.circle.buy-it-now-value').width Math.round(buy_now/max*100) + '%'
+
+
+
+
+
+
+
+
+
+
+
+
+

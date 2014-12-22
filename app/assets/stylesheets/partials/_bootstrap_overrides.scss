@@ -137,6 +137,49 @@ fieldset[disabled] .btn-purple.active {
   background-color: #fff !important;
 }
 
+.btn-grey {
+  color: #fff !important;
+  background-color: #555555 !important;
+  border-color: #484848 !important;
+}
+.btn-grey:hover,
+.btn-grey:focus,
+.btn-grey:active,
+.btn-grey.active,
+li.active .btn-grey,
+.open .dropdown-toggle.btn-grey {
+  color: #fff !important;
+  background-color: #484848 !important;
+  border-color: #383838 !important;
+}
+.btn:active,
+.btn.active,
+.open .dropdown-toggle.btn {
+  background-image: none !important;
+}
+.btn-grey.disabled,
+.btn-grey[disabled],
+fieldset[disabled] .btn-grey,
+.btn-grey.disabled:hover,
+.btn-grey[disabled]:hover,
+fieldset[disabled] .btn-grey:hover,
+.btn-grey.disabled:focus,
+.btn-grey[disabled]:focus,
+fieldset[disabled] .btn-grey:focus,
+.btn-grey.disabled:active,
+.btn-grey[disabled]:active,
+fieldset[disabled] .btn-grey:active,
+.btn-grey.disabled.active,
+.btn-grey[disabled].active,
+fieldset[disabled] .btn-grey.active {
+  background-color: #555555 !important;
+  border-color: #484848 !important;
+}
+.btn-grey .badge {
+  color: #555555 !important;
+  background-color: #fff !important;
+}
+
 .btn-circle {
   height: 80px;
   width: 80px;
@@ -263,4 +306,8 @@ ul.dropdown-menu {
 .badge {
   position: relative;
   top: 6px;
+}
+
+hr {
+  border-top: 2px solid #999999;
 }

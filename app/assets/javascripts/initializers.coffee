@@ -6,6 +6,10 @@ ready = ->
 
   $('.snapup-popup').popover()
 
+  $('.owl-carousel').owlCarousel
+    items: 1
+    itemsScaleUp: true
+
   # fills
 
   viewportUnitsBuggyfill.init()
