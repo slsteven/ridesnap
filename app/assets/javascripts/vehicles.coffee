@@ -37,5 +37,8 @@ ready = ->
   selector = '.market-place .vehicle'
   createHammer(v) for v in document.querySelectorAll(selector)
 
+  $('.hoverable .overlay').click ->
+    $(this).toggleClass 'hover'
+
 $(document).ready(ready)
 $(document).on('page:load', ready)

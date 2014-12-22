@@ -60,54 +60,21 @@
     %br
     %br
     .row
-      .col-md-6.col-md-offset-3
-        .pull-left
-          %p Model: #{@vehicle.year} #{@vehicle.make(pretty: true)} #{@vehicle.model(pretty: true)}
-          %p MPG: Up to 21 city, 29 highway
-          %p Body style: Sedan
-          %p Horsepower: 215 HP
-          %p Torque: 185 lb-ft
-          %p Engine size: 3.0L
-          %p Trim: #{@vehicle.description}
-        .pull-right
-          %span.center-block.clearfix
-            %span.glyphicon.glyphicon-star{'aria-hidden' => true}
-            %br
-            %small
-              No Accidents
-          %span.center-block.clearfix
-            %span.glyphicon.glyphicon-star{'aria-hidden' => true}
-            %br
-            %small
-              Title in Hand
-          %br
-          %span.center-block.clearfix
-            %span.glyphicon.glyphicon-star{'aria-hidden' => true}
-            %br
-            %small
-              Single Owner
-          %span.center-block.clearfix
-            %span.glyphicon.glyphicon-star{'aria-hidden' => true}
-            %br
-            %small
-              Bluetooth
-          %br
-          %span.center-block.clearfix
-            %span.glyphicon.glyphicon-star{'aria-hidden' => true}
-            %br
-            %small
-              Radio
-          %span.center-block.clearfix
-            %span.glyphicon.glyphicon-star{'aria-hidden' => true}
-            %br
-            %small
-              Sunroof
-          %br
-          %span.center-block.clearfix
-            %span.glyphicon.glyphicon-star{'aria-hidden' => true}
-            %br
-            %small
-              Navigation
+      .col-md-7.col-md-offset-1
+        %p Model: #{@vehicle.year} #{@vehicle.make(pretty: true)} #{@vehicle.model(pretty: true)}
+        %p MPG: Up to 21 city, 29 highway
+        %p Body style: Sedan
+        %p Horsepower: 215 HP
+        %p Torque: 185 lb-ft
+        %p Engine size: 3.0L
+        %p Trim: #{@vehicle.description}
+      .col-md-3
+        = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'No Accidents'}
+        = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'Title in Hand'}
+        = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'Single Owner'}
+        = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'Bluetooth'}
+        = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'Sunroof'}
+        = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'Navigation'}
 
     %hr
     %br

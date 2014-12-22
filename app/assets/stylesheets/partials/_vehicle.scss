@@ -115,7 +115,7 @@ form#vehicle-inspection {
   left: 0;
   right: 0;
   padding: 30px;
-  &:hover {
+  &:hover, &.hover {
     opacity: 1;
     background-color: rgba(238,238,238,.8);
   }
