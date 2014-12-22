@@ -113,14 +113,17 @@
     %br
     %br
     %br
-    .text-center
+    .text-center.form-inline
       %p
         Mechanical Inspection -
         %b.text-success EXCELLENT
       %br
-      = button_tag 'DOWNLOAD REPORT', class: 'btn btn-success'
-      = button_tag 'CHECK OUT THIS CAR', class: 'btn btn-grey'
-      = button_tag 'BUY THIS CAR!', class: 'btn btn-purple'
+      .form-group
+        = button_tag 'DOWNLOAD REPORT', class: 'btn btn-success'
+      .form-group
+        = button_tag 'CHECK OUT THIS CAR', class: 'btn btn-grey'
+      .form-group
+        = button_tag 'BUY THIS CAR!', class: 'btn btn-purple'
     %br
     %br
     %br
