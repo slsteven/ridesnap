@@ -1,1 +1,100 @@
 - provide(:title, "#{@vehicle.make(pretty: true)} #{@vehicle.model(pretty: true)}")
+
+.container{style: 'padding-top:90px'}
+  .text-center
+    %h1
+      %b
+        RVR:
+        %span.text-muted EX1234
+        = button_tag 'CHECK', class: 'btn btn-purple'
+  %p The process of buying used cars on Craigslist and other sites are flawed.
+  %p You should know much more about a car before meeting random people and going out for a test drive!
+  %br
+  %p
+    Now with RideSnap’s marketplace or by entering your
+    %span.purple RideSnap Vehicle Reference
+    (RVR), you can find all the details
+    %span.purple before
+    making any commitments.
+
+  .row
+    .col-sm-6
+      = image_tag 'blank.jpg', class: 'img-responsive'
+      We believe in complete transparency and overloading our buyers with information. We want you to feel confident in your future purchase so we don’t hide anything. Use RideSnap’s 4 component Vehicle report conducted by mechanics to find out the details.
+    .col-sm-6
+      = image_tag 'blank.jpg', class: 'img-responsive'
+      Report includes: mechanical, cosmetic damages, car history, and value summary
+      %ul
+        %li Mechanical – 150 point inspection report
+        %li Cosmetic damages – points out all of the dents, scratches, and defects
+        %li Car History – Carfax report
+        %li Value Summary – KBB report
+
+  %hr.arrow
+
+  .text-center
+    %span= image_tag('eye.svg')
+    %br
+    %br
+    = button_tag 'CHECK OUT THIS CAR', class: 'btn btn-grey'
+    %br
+    %br
+    %p Are you satisfied with the car so far?
+    %p Schedule a time and place to see the car in person prior to purchase.
+
+  %hr.arrow
+
+  .text-center
+    %span= image_tag('checklist.svg')
+    %br
+    %br
+    = button_tag 'DOWNLOAD REPORT', class: 'btn btn-success'
+    %br
+    %br
+    = button_tag 'MESSAGE US', class: 'btn btn-success'
+    %br
+    %br
+    %p Interested? More questions? Just talk to us.
+
+  %hr.arrow
+
+  .text-center
+    %span= image_tag('money.svg')
+    %br
+    %br
+    = button_tag 'BUY THIS CAR!', class: 'btn btn-purple'
+    %br
+    %br
+    %p You can buy anything online, why not a car?
+    %p
+      Pay now with
+      %span.text-success cash,
+      %span.text-primary bank transfer,
+      or
+      %span.purple financing options.
+    %br
+    %p Payment and title transfer can be a huge mess.
+    %p You have the money, but the seller has the title; who hands over what first? No one wants to get ripped off!
+    %p RideSnap safely facilitates the transfer between both parties like an escrow service.
+
+  %hr.arrow
+
+  .text-center
+    %span= image_tag('steer.svg')
+    %br
+    %br
+    %h3 Delivery
+    %p Get your car delivered right to your door step.
+
+  %hr.arrow
+
+  .text-center
+    %h1
+      %b
+        RVR:
+        %span.text-muted EX1234
+        = button_tag 'CHECK', class: 'btn btn-purple'
+
+  %hr
+
+  = render 'pages/story_icons'
