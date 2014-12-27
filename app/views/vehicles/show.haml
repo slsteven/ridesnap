@@ -83,7 +83,7 @@
       %b.text-success EXCELLENT
     %br
     .form-group
-      = button_tag 'DOWNLOAD REPORT', class: 'btn btn-success'
+      = button_tag 'DOWNLOAD REPORT', class: 'btn btn-success', data: {toggle: 'modal', target: '#report-modal'}
     .form-group
       = button_tag 'CHECK OUT THIS CAR', class: 'btn btn-grey'
     .form-group
@@ -92,3 +92,13 @@
   %hr
 
   = render 'pages/story_icons'
+
+.modal.fade#report-modal{role: "dialog", 'aria-labelledby' => "Vehicle Report", 'aria-hidden' => "true"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        = button_tag '&times'.html_safe, class: 'close', 'data-dismiss' => "modal", 'aria-label' => "Close"
+        .modal-title Vehicle Report
+      .modal-body
+        %p Sweet report...
+        %p All of the options!!
