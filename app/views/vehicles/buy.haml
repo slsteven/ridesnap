@@ -48,10 +48,10 @@
     %span= image_tag('checklist.svg')
     %br
     %br
-    = button_tag 'DOWNLOAD REPORT', class: 'btn btn-success'
+    = button_tag 'DOWNLOAD REPORT', class: 'btn btn-success', data: {toggle: 'modal', target: '#report-modal'}
     %br
     %br
-    = button_tag 'MESSAGE US', class: 'btn btn-success'
+    = mail_to "info@#{request.host}", 'MESSAGE US', class: 'btn btn-success'
     %br
     %br
     %p Interested? More questions? Just talk to us.
@@ -68,10 +68,11 @@
     %p You can buy anything online, why not a car?
     %p
       Pay now with
-      %span.text-success cash,
-      %span.text-primary bank transfer,
+      %b.text-success cash,
+      %b.text-primary bank transfer,
       or
-      %span.purple financing options.
+      %b.purple financing
+      options.
     %br
     %p Payment and title transfer can be a huge mess.
     %p You have the money, but the seller has the title; who hands over what first? No one wants to get ripped off!
@@ -98,3 +99,5 @@
   %hr
 
   = render 'pages/story_icons'
+
+= render 'vehicles/report'

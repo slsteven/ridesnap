@@ -8,6 +8,14 @@ module ApplicationHelper
     }
   end
 
+  def calc_progress(percent=0)
+    case percent
+    when 66..100 then 'success'
+    when 33..65 then 'warning'
+    else 'danger'
+    end
+  end
+
   # Returns the full title on a per-page basis.
   def full_title(page_title)
     base_title = Settings.app.name

@@ -1,0 +1,4 @@
+.pull-right.report-conditions
+  = button_tag 'poor', class: "btn btn-xs btn-#{cond == 'poor' ? 'danger' : 'default'}"
+  = button_tag 'fair', class: "btn btn-xs btn-#{cond == 'fair' ? 'warning' : 'default'}"
+  = button_tag 'good', class: "btn btn-xs btn-#{cond == 'good' ? 'success' : 'default'}"
