@@ -44,6 +44,7 @@ Rails.application.routes.draw do
       get 'query'
       post 'schedule_confirm'
     end
+    get 'buy', on: :member, as: :buy # putting 'as' just in case it changes
     resources :images
   end
 

@@ -17,139 +17,78 @@
           {%=o.name%}
           .progress
             .bar{style: 'width: 0%'}
-    %br
 
-.jumbotron
-  .container
-    %h1.text-center RVR BM3485
-    .row
-      .col-xs-12.col-sm-6.hoverable
-        .overlay.text-center
-          %p Mechanics Report
-          %p
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            %br
-            = link_to 'click to view', '#'
-        = image_tag 'blank.jpg', class: 'img-responsive'
-      .col-xs-12.col-sm-6.hoverable
-        .overlay.text-center
-          %p Exteiror Report
-          %p
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            %br
-            = link_to 'click to view', '#'
-        = image_tag 'blank.jpg', class: 'img-responsive'
-    .row
-      .col-xs-12.col-sm-6.hoverable
-        .overlay.text-center
-          %p CarFax Report
-          %p
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            %br
-            = link_to 'click to view', '#'
-        = image_tag 'blank.jpg', class: 'img-responsive'
-      .col-xs-12.col-sm-6.hoverable
-        .overlay.text-center
-          %p Value Summary
-          %p
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            %br
-            = link_to 'click to view', '#'
-        = image_tag 'blank.jpg', class: 'img-responsive'
+  %hr.arrow
 
-    %br
-    %br
-    .row
-      .col-md-7.col-md-offset-1
-        %p Model: #{@vehicle.year} #{@vehicle.make(pretty: true)} #{@vehicle.model(pretty: true)}
-        %p MPG: Up to 21 city, 29 highway
-        %p Body style: Sedan
-        %p Horsepower: 215 HP
-        %p Torque: 185 lb-ft
-        %p Engine size: 3.0L
-        %p Trim: #{@vehicle.description}
-      .col-md-3
-        = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'No Accidents'}
-        = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'Title in Hand'}
-        = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'Single Owner'}
-        = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'Bluetooth'}
-        = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'Sunroof'}
-        = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'Navigation'}
-
-    %hr
-    %br
-    %br
-    %br
-    .text-center.form-inline
-      %p
-        Mechanical Inspection -
-        %b.text-success EXCELLENT
-      %br
-      .form-group
-        = button_tag 'DOWNLOAD REPORT', class: 'btn btn-success'
-      .form-group
-        = button_tag 'CHECK OUT THIS CAR', class: 'btn btn-grey'
-      .form-group
-        = button_tag 'BUY THIS CAR!', class: 'btn btn-purple'
-    %br
-    %br
-    %br
-    %hr
-
-    .row.text-center
-      .col-sm-4.col-xs-12
-        %h2
-          %span= image_tag('money.svg')
-        %p 5-day money back guarantee
+  %h1.text-center RVR BM3485
+  .row
+    .col-xs-12.col-sm-6.hoverable
+      .overlay.text-center
+        %p Mechanics Report
         %p
-          %small Return the car if you don’t like it.
-      .col-sm-4.col-xs-12
-        %h2
-          %span= image_tag('location.svg')
-        %p Reduced risk
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          %br
+          = link_to 'click to view', '#'
+      = image_tag 'blank.jpg', class: 'img-responsive'
+    .col-xs-12.col-sm-6.hoverable
+      .overlay.text-center
+        %p Exteiror Report
         %p
-          %small #{Settings.app.name} inspects all cars listed to make sure there are no surprises.
-      .col-sm-4.col-xs-12
-        %h2
-          %span= image_tag('eye.svg')
-        %p Total Transparency
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          %br
+          = link_to 'click to view', '#'
+      = image_tag 'blank.jpg', class: 'img-responsive'
+  .row
+    .col-xs-12.col-sm-6.hoverable
+      .overlay.text-center
+        %p CarFax Report
         %p
-          %small No upfront costs or hidden fees. We charge a simple 5% commission.
-
-    .row.text-center
-      .col-sm-4.col-xs-12
-        %h2
-          %span= image_tag('steer.svg')
-        %p Check out the car in person!
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          %br
+          = link_to 'click to view', '#'
+      = image_tag 'blank.jpg', class: 'img-responsive'
+    .col-xs-12.col-sm-6.hoverable
+      .overlay.text-center
+        %p Value Summary
         %p
-          %small Just give us the 4-digit code of the car you are interested in and we can tell you the location of the car to see in person.
-      .col-sm-4.col-xs-12
-        %h2
-          %span= image_tag('checklist.svg')
-        %p The easiest buying process
-        %p
-          %small Don’t haggle with salesman or go through complicated paperwork. Let #{Settings.app.name} handle both from the convenience of your own home.
-      .col-sm-4.col-xs-12
-        %h2
-          %span= image_tag('lock.svg')
-        %p Secure Transaction
-        %p
-          %small
-            #{Settings.app.name} will send you a copy of the title to show title is in hand from the private party buyer.
-            %br
-            We act as a secure escrow service.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          %br
+          = link_to 'click to view', '#'
+      = image_tag 'blank.jpg', class: 'img-responsive'
 
+  %br
+  %br
+  .row
+    .col-md-7.col-md-offset-1
+      %p Model: #{@vehicle.year} #{@vehicle.make(pretty: true)} #{@vehicle.model(pretty: true)}
+      %p MPG: Up to 21 city, 29 highway
+      %p Body style: Sedan
+      %p Horsepower: 215 HP
+      %p Torque: 185 lb-ft
+      %p Engine size: 3.0L
+      %p Trim: #{@vehicle.description}
+    .col-md-3
+      = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'No Accidents'}
+      = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'Title in Hand'}
+      = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'Single Owner'}
+      = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'Bluetooth'}
+      = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'Sunroof'}
+      = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'Navigation'}
 
+  %hr.arrow
 
+  .text-center.form-inline
+    %p
+      Mechanical Inspection -
+      %b.text-success EXCELLENT
+    %br
+    .form-group
+      = button_tag 'DOWNLOAD REPORT', class: 'btn btn-success'
+    .form-group
+      = button_tag 'CHECK OUT THIS CAR', class: 'btn btn-grey'
+    .form-group
+      = link_to 'BUY THIS CAR!', buy_vehicle_path(@vehicle), class: 'btn btn-purple'
 
+  %hr
 
-
-
-
-
-
-
-
-
-
-
+  = render 'pages/story_icons'

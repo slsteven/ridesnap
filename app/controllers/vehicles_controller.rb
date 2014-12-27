@@ -4,6 +4,10 @@ class VehiclesController < ApplicationController
   before_filter :signed_in_user,    only: [:index, :edit, :update, :destroy]
   before_filter :admin_user,        only: [:index, :destroy]
 
+  def buy
+    @vehicle = Vehicle.find(params[:id])
+  end
+
   def create
     params[:vehicle][:zip_code] = params[:vehicle][:zip_code].presence
     params[:vehicle][:preliminary_value] = {

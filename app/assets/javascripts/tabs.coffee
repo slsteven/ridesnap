@@ -7,7 +7,7 @@ ready = ->
     goTo.tab 'show'
   , 5000)
 
-  $('.time-money-tabs .tab-content').hover (ev) ->
+  $('.time-money-tabs .tab-content').mouseenter (ev) ->
     clearInterval tabCarousel
 
   $(document).on 'click', '#scheduled-ride-tab a', ->

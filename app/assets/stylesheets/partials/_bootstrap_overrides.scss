@@ -309,5 +309,19 @@ ul.dropdown-menu {
 }
 
 hr {
+  margin: 6em auto;
   border-top: 2px solid #999999;
+  &.arrow:after {
+    content: '';
+    display: block;
+    position: relative;
+    left: 50%;
+    bottom: 8px;
+    transform:rotate(-135deg);
+    width: 15px;
+    height: 15px;
+    background: white;
+    border-left: 2px solid #999999;
+    border-top: 2px solid #999999;
+  }
 }
