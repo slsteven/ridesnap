@@ -4,67 +4,61 @@
   .container.text-center#header-threshold
     %h1 AT YOUR SERVICE.
     %p #{Settings.app.name} takes care of all the stress and work that comes with selling your car.
-    = link_to 'Get Started', start_path, class: 'btn btn-purple btn-wide btn-lg'
+    .col-sm-4.col-sm-offset-4
+      = form_tag search_vehicles_path, role: 'form', method: :get do
+        .input-group
+          = label_tag :search, nil, class: 'sr-only'
+          = text_field_tag :search, nil, placeholder: 'RVR: _ _ _ _ _ _', class: 'form-control'
+          %span.input-group-btn
+            = submit_tag 'Check', class: 'btn btn-purple btn-wide'
 
-.jumbotron.white-bg.time-money-tabs
-  .container.text-center
-    %h2.purple Sell your car with #{Settings.app.name}.
-    %p So you don’t waste:
-    %ul.nav#time-money{role: 'tablist'}
-      %li.active
-        = link_to 'Time', '#time', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple btn-circle'
-      %li
-        = link_to 'Money', '#money', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-purple btn-circle'
-    %br
-    %br
-    .tab-content
-      .tab-pane.fade.in.active#time
-        .col-sm-10.col-sm-offset-1
-          %p.purple We make it easy so you can spend your time somewhere else.
-        .row
-          .col-sm-4.col-xs-12
-            %h2
-              %span= image_tag('location.svg')
-            %p.purple We Come To You
-            %p
-              %small Any time, any place to get started.
-          .col-sm-4.col-xs-12
-            %h2
-              %span= image_tag('checklist.svg')
-            %p.purple No Grunt Work
-            %p
-              %small No more posting ads, finding buyers, filtering through emails and handling paperwork.
-          .col-sm-4.col-xs-12
-            %h2
-              %span= image_tag('steer.svg')
-            %p.purple Test Drives
-            %p
-              %small We take care of scheduling and meeting with buyers for test drives.
-      .tab-pane.fade#money
-        .col-sm-10.col-sm-offset-1
-          %p.purple We want to help you get the highest value for your car by avoiding the dealership.
-        .row
-          .col-sm-4.col-xs-12
-            %h2
-              %span= image_tag('eye.svg')
-            %p.purple Total Transparency
-            %p
-              %small No upfront costs or hidden fees. We charge a simple 5% commission.
-          .col-sm-4.col-xs-12
-            %h2
-              %span= image_tag('money.svg')
-            %p.purple The More, the Better
-            %p
-              %small The more your car sells for, the more money there is for both of us!
-          .col-sm-4.col-xs-12
-            %h2
-              %span= image_tag('lock.svg')
-            %p.purple Secure Transaction
-            %p
-              %small We pay you, not the buyer. So don’t worry about getting counterfeit money or bad cashier checks.
+.container
+  .text-center
+    %h2
+      RideSnap
+      %span.purple Values
+    %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    = render 'shared/story_icons'
 
-.jumbotron.purple-bg#home2
-  .container.text-center
+  %hr.arrow
+
+  %div
+    %h2.text-center
+      RideSnap
+      %span.purple Services
+    %p.text-center Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    .row
+      .col-sm-6
+        %h3.text-center BUY
+        %ol
+          %li Discover the details of a car you are looking at by entering the RVR number. Or go straight to the marketplace.
+          %li Scan reports
+          %li Message us for more details or check out the car in person
+          %li Go through the payment and title transfer process
+          %li Give us the location to deliver your new ride!
+        %br
+        %br
+        %br
+        .text-center
+          = button_tag 'START BROWSING', class: 'btn btn-purple'
+      .col-sm-6
+        %h3.text-center SELL
+        %ol
+          %li Tell RideSnap about the car you want to sell!
+          %li Schedule a time and place for us to see in
+          %li son and conduct your free RVR inspection.
+          %li Put your RVR sticker on your window and keep
+          %li ving your car while we find your buyers.
+          %li Stay updated along the way.
+          %li Get paid.
+        %br
+        %br
+        .text-center
+          = button_tag 'START SELLING', class: 'btn btn-success'
+
+  %hr.arrow
+
+  .text-center
     %p
       %small
         %b
@@ -85,15 +79,6 @@
           %span.input-group-btn
             = submit_tag 'Submit', class: 'btn btn-default'
 
-.jumbotron.whitesmoke-bg#how-link
-  .container.text-center
-    = render 'pages/how_it_works'
-
-- if action_name == 'how'
-  :coffee
-    $('body').animate(
-      scrollTop: $('#how-link').offset().top - 80
-    , 'slow')
 
 - if controller_name == 'password_resets' && action_name == 'edit'
   = render 'password_resets/edit'

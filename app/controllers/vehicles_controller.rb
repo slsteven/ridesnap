@@ -73,6 +73,10 @@ class VehiclesController < ApplicationController
     @vehicle = Vehicle.new
   end
 
+  def search
+    redirect_to root_path
+  end
+
   def show
     @vehicle = Vehicle.find(params[:id])
     @vehicle.send(:build_options) and @vehicle.save if @vehicle.options.nil?

@@ -42,6 +42,7 @@ Rails.application.routes.draw do
       get 'year_query'
       get 'style_query'
       get 'query'
+      get 'search'
       post 'schedule_confirm'
     end
     get 'buy', on: :member, as: :buy # putting 'as' just in case it changes
