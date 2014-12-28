@@ -10,6 +10,11 @@ ready = ->
     items: 1
     itemsScaleUp: true
 
+  $('.owl-carousel-index-page').owlCarousel
+    itemsCustom: [[0, 1], [768, 2], [992, 3], [1200, 4]]
+    itemsScaleUp: true
+    pagination: false
+
   # fills
 
   viewportUnitsBuggyfill.init()

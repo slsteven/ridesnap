@@ -1,7 +1,9 @@
-= link_to vehicle, class: 'list-group-item vehicle', data: {object: vehicle.id} do
+.list-group-item.vehicle{data: {object: vehicle.id}}
   .row.market-list
-    .col-xs-12.col-sm-3.col-md-4
-      = image_tag vehicle.images[0].try(:url), class: 'img-responsive'
+    .col-sm-9.col-md-8{style: 'width:100%; height:100%'}
+      .owl-carousel-index-page
+        - vehicle.images.each do |img|
+          = image_tag img.try(:url), class: 'img-responsive'
       .visible-xs-block.mini-words
         .pull-left.text-left
           %p
@@ -12,15 +14,12 @@
             mileage: #{vehicle.mileage || 'n/a'}
         .pull-right
           %h2= number_to_currency(vehicle.list_price, precision: 0)
-    .hidden-xs.col-md-4
-      = image_tag vehicle.images[1].try(:url), class: 'img-responsive'
-    .hidden-xs.hidden-sm.col-md-4
-      = image_tag vehicle.images[2].try(:url), class: 'img-responsive'
     .hidden-xs.col-sm-3.col-md-4.text-left
       %p
-        = vehicle.year
-        = vehicle.make(pretty: true)
-        = vehicle.model(pretty: true)
+        = link_to vehicle do
+          = vehicle.year
+          = vehicle.make(pretty: true)
+          = vehicle.model(pretty: true)
       %p
         %small price: #{number_to_currency(vehicle.list_price, precision: 0)}
       %p
