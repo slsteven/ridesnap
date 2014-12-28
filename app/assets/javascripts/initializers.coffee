@@ -11,7 +11,7 @@ ready = ->
     itemsScaleUp: true
 
   $('.owl-carousel-index-page').owlCarousel
-    itemsCustom: [[0, 1], [768, 2], [992, 3], [1200, 4]]
+    itemsCustom: [[0, 1], [768, 2], [992, 3]]
     itemsScaleUp: true
     pagination: false
 
