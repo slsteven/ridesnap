@@ -3,22 +3,23 @@ class RidesController < ApplicationController
   respond_to :html, :js
 
   def create
-    @vehicle = Vehicle.find(params[:vehicle_id].to_i)
-    if params[:user_id]
-      @user = User.find_by_id(params[:user_id])
-    else
-      @user = User.where(email: params[:email]).first_or_initialize
-      @user.name = params[:name]
-      @user.phone = params[:phone].delete('^0-9')
-    end
+    value = Edmunds.typical_value params[:vehicle][:style], zip: params[:ride][:zip_code].presence
+    sources = [value[:trade_in], value[:private_party]]
+    avg = sources.sum / sources.size.to_f
+    dif = value[:private_party] - avg
+    adj = dif * 0 # this will let us adjust the price easily while staying in the bounds 0.0 .. 1.0
+    params[:vehicle][:preliminary_value] = {
+      snap_up: (avg + adj).round(-2),
+      trade_in: value[:trade_in].round(-2),
+      ride_snap: value[:private_party].round(-2)
+    }
+    @vehicle = Vehicle.where(id: params[:vehicle_id]).first_or_initialize(vehicle_params)
+    @user = User.where(id: params[:user_id]).first_or_initialize(user_params)
 
-    if @user.save
-      @ride = @user.rides
-                   .where(vehicle_id: @vehicle.id, relation: 'seller')
-                   .first_or_initialize
-      @ride.scheduled_at = Chronic.parse(params[:scheduled_at]) || Time.now
-      @ride.address = params[:address]
-      @ride.zip_code = params[:zip_code]
+    if @user.save && @vehicle.save
+      relation = params[:intent] == 'buy' ? 'tester' : 'seller'
+      params[:ride][:scheduled_at] = Chronic.parse(params[:ride][:scheduled_at]) || Time.now
+      @ride = @user.rides.send(relation).where(vehicle_id: @vehicle.id).first_or_initialize(ride_params)
 
       if @ride.save
         flash[:success] = "Appointment confirmed for #{@ride.scheduled_at.strftime('%A, %B')} #{@ride.scheduled_at.day.ordinalize}! We've sent you a confirmation email"
@@ -35,7 +36,9 @@ class RidesController < ApplicationController
   end
 
   def new
-    # @vehicle = Vehicle.find(params[:vehicle_id])
+    @vehicle = Vehicle.find_by_id(params[:vehicle_id])
+    @menu = params[:intent]
+    Settings.vehicle_makes.to_hash.each_with_object(@makes=[]){ |(k,v),o| o << [v,k] }
   end
 
   def show
@@ -60,6 +63,10 @@ private
   def correct_user
     @ride = Ride.find(params[:id])
     redirect_to(@ride) unless @ride.with?(current_user) || current_user.admin?
+  end
+
+  def ride_params
+    params.require(:ride).permit!
   end
 
 end

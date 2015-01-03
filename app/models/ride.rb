@@ -23,13 +23,12 @@
 class Ride < ActiveRecord::Base
   include LocationConcern
 
-  enum relation: { seller: 1, tester: 2, buyer: 3, inspector: 4 }
+  enum relation: { inspector: 1, seller: 2, tester: 3, buyer: 4 }
 
   belongs_to :user
   belongs_to :vehicle
 
   default_scope { where.not(scheduled_at: nil).order(created_at: :asc) }
-  scope :with, ->(user) { where(user_id: user) }
 
   def confirm_ride
     RideMailer.confirm_with_user(self.id).deliver

@@ -21,6 +21,8 @@
 #  closest_color     :string(255)
 #  vin               :string(255)
 #  agreed_value      :decimal(, )
+#  financed          :boolean
+#  model_pretty      :string(255)
 #
 # Indexes
 #
@@ -111,8 +113,7 @@ class Vehicle < ActiveRecord::Base
     read_attribute(:make)
   end
   def model(pretty: false)
-    md = read_attribute(:model).split(' ~~ ')
-    pretty ? md[1] : md[0]
+    pretty ? read_attribute(:model_pretty) : read_attribute(:model)
   rescue
     read_attribute(:model)
   end

@@ -7,9 +7,10 @@
       .visible-xs-block.mini-words
         .pull-left.text-left
           %p
-            = vehicle.year
-            = vehicle.make(pretty: true)
-            = vehicle.model(pretty: true)
+            = link_to vehicle do
+              = vehicle.year
+              = vehicle.make(pretty: true)
+              = vehicle.model(pretty: true)
             %br
             mileage: #{vehicle.mileage || 'n/a'}
         .pull-right

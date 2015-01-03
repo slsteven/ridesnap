@@ -4,23 +4,7 @@ class VehiclesController < ApplicationController
   before_filter :signed_in_user,    only: [:edit, :update, :destroy]
   before_filter :admin_user,        only: [:destroy]
 
-  def buy
-    @vehicle = Vehicle.find(params[:id])
-  end
-
   def create
-    params[:vehicle][:zip_code] = params[:vehicle][:zip_code].presence
-    params[:vehicle][:preliminary_value] = {
-      trade_in: params[:trade_in_value],
-      ride_snap: params[:ride_snap_value],
-      snap_up: params[:snap_up_value]
-    }
-    params[:vehicle][:model] = "#{params[:vehicle][:model]} ~~ #{params[:pretty_model]}"
-    params[:vehicle].slice!(:make, :model, :year, :style, :zip_code, :description, :preliminary_value)
-    @vehicle = Vehicle.new params[:vehicle].permit!
-    @menu = 'start'
-
-    render new_ride_path if @vehicle.save
   end
 
   def destroy
@@ -57,18 +41,6 @@ class VehiclesController < ApplicationController
     render json: Edmunds.query_styles(params[:make], params[:model], params[:year])
   end
 
-  def query
-    value = Edmunds.typical_value params[:style], zip: params[:zip].presence
-    sources = [value[:trade_in], value[:private_party]]
-    avg = sources.sum / sources.size.to_f
-    dif = value[:private_party] - avg
-    adj = dif * 0 # this will let us adjust the price easily while staying in the bounds 0.0 .. 1.0
-    value[:snap_up] = (avg + adj).round(-2)
-    value[:trade_in] = value[:trade_in].round(-2)
-    value[:ride_snap] = value[:private_party].round(-2)
-    render json: value
-  end
-
   def new
     @vehicle = Vehicle.new
   end
@@ -87,7 +59,7 @@ class VehiclesController < ApplicationController
     @inspection_report = ['Body Exterior', 'Body Interior', 'Engine',
       'Transmission', 'Steering', 'Suspension', 'Brake System', 'Electrical System',
       'Convenience Group', 'Air Conditioning', 'Drive Axles', 'Wheels', 'Tires']
-    @rides = admin? ? @vehicle.rides : @vehicle.rides.with(current_user)
+    @rides = admin? ? @vehicle.rides : current_user.try(:rides)
   end
 
   def update
@@ -100,12 +72,6 @@ class VehiclesController < ApplicationController
     @vehicle.condition = params[:vehicle][:condition].to_i if !params[:vehicle][:condition].blank?
     @vehicle.mileage = params[:vehicle][:mileage]
     render js: nil, status: :ok, layout: false if @vehicle.save
-  end
-
-private
-
-  def vehicle_params
-    params.require(:vehicle).permit!
   end
 
 end

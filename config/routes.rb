@@ -8,9 +8,7 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
-  resources :sessions, only: [:create, :destroy] do
-    collection { get 'box_auth' }
-  end
+  resources :sessions, only: [:create, :destroy]
 
   delete '/signout'   => 'sessions#destroy'
   get '/how'          => 'pages#how'
@@ -45,7 +43,6 @@ Rails.application.routes.draw do
       get 'search'
       post 'schedule_confirm'
     end
-    get 'buy', on: :member, as: :buy # putting 'as' just in case it changes
     resources :images
   end
 

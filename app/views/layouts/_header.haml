@@ -1,6 +1,5 @@
 %header.navbar.navbar-inverse.navbar-fixed-top{role: 'navigation'}
   .container-fluid
-    / Brand and toggle get grouped for better mobile display
     .navbar-header
       = button_tag data: {target: '#top-collapse', toggle: 'collapse'}, class: 'navbar-toggle' do
         %span.sr-only Toggle navigation
@@ -12,8 +11,6 @@
     #top-collapse.collapse.navbar-collapse
       %ul.nav.navbar-nav.navbar-right
         %li#how{class: "#{'active' if @menu == 'buy'}"}= link_to 'BUY', vehicles_url, title: 'MarketPlace', class: 'blue'
-        %li{class: "#{'active' if @menu == 'sell'}"}= link_to 'SELL', '#', title: 'Sell with RideSnap', class: 'green'
+        %li{class: "#{'active' if @menu == 'sell'}"}= link_to 'SELL', new_ride_path(intent: 'sell'), title: 'Sell with RideSnap', class: 'green'
         %li{class: ('active' if @menu == 'faq')}= link_to 'FAQs', faq_url, title: 'frequently asked questions'
         %li{class: ('active' if @menu == 'about')}= link_to 'ABOUT', about_url, title: 'About RideSnap'
-      / .nav.navbar-nav.navbar-right
-      /   = link_to 'BECOME AN AGENT', agent_url, class: 'btn btn-purple navbar-btn btn-wide'

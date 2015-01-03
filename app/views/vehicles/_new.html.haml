@@ -1,0 +1,15 @@
+.form-group
+  = label_tag 'vehicle[make]', nil, class: 'sr-only'
+  = select_tag 'vehicle[make]', options_for_select(@makes), prompt: 'Make', class: 'form-control'
+.form-group
+  = label_tag 'vehicle[model]', nil, class: 'sr-only'
+  = select_tag 'vehicle[model]', options_for_select([]), prompt: 'Model', class: 'form-control', disabled: true
+.form-group
+  = label_tag 'vehicle[year]', nil, class: 'sr-only'
+  = select_tag 'vehicle[year]', options_for_select([]), prompt: 'Year', class: 'form-control', disabled: true
+.form-group
+  = label_tag 'vehicle[style]', nil, class: 'sr-only'
+  = select_tag 'vehicle[style]', options_for_select([]), prompt: 'Style', class: 'form-control', disabled: true
+
+= hidden_field_tag 'vehicle[description]'
+= hidden_field_tag 'vehicle[model_pretty]'

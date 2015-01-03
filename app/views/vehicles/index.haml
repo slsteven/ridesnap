@@ -2,7 +2,8 @@
 
 .jumbotron.black-bg#about1
   .container.text-center#header-threshold
-    %h1 Vehicles.
+    %h1 Browse the Marketplace and find out more details from our RVR.
+    %p= button_tag 'learn More', class: 'btn btn-purple btn-wide', data: {target: '#buyer-details-modal', toggle: 'modal'}
 
 .jumbotron.white-bg.row
   .container.text-center
@@ -28,3 +29,5 @@
       = paginate @vehicles
       = render @vehicles
       = paginate @vehicles
+
+= render 'vehicles/buy'

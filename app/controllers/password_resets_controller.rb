@@ -23,4 +23,5 @@ class PasswordResetsController < ApplicationController
       render :edit
     end
   end
+
 end

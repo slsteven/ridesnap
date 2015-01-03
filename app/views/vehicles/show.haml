@@ -63,16 +63,12 @@
   %hr.arrow
 
   .text-center.form-inline
-    %p
-      Mechanical Inspection -
-      %b.text-success EXCELLENT
-    %br
     .form-group
       = button_tag 'DOWNLOAD REPORT', class: 'btn btn-success', data: {toggle: 'modal', target: '#report-modal'}
     .form-group
-      = button_tag 'CHECK OUT THIS CAR', class: 'btn btn-grey'
+      = link_to 'CHECK OUT THIS CAR', new_ride_path(intent: 'buy', vehicle_id: @vehicle.id), class: 'btn btn-grey'
     .form-group
-      = link_to 'BUY THIS CAR!', buy_vehicle_path(@vehicle), class: 'btn btn-purple'
+      = button_tag 'BUY THIS CAR!', class: 'btn btn-purple'
 
   %hr
 

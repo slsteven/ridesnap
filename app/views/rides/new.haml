@@ -1,82 +1,87 @@
 - provide(:title, 'Schedule')
 
 .container{style: 'padding-top:90px'}
-  .text-center
-    %h1
-      RideSnap
-      %span.purple Reservation Service
-    %br
-    %p We will need some of your information to provide our top level serivce and ensure you will enjoy your time with us.
+  = form_tag Ride.new, class: 'form-inline', id: 'vehicle-inspection', role: 'form' do
+    .text-center
+      %h1
+        RideSnap
+        %span.purple Reservation Service
+      %br
+      %p We will need some of your information to provide our top level serivce and ensure you will enjoy your time with us.
 
-    = form_tag Ride.new, class: 'form-inline', id: 'vehicle-inspection', role: 'form' do
       .form-group
-        = label_tag :name, nil, class: 'sr-only'
-        = text_field_tag :name, current_user.try(:name), placeholder: 'Full Name', class: 'form-control'
+        = label_tag 'user[name]', nil, class: 'sr-only'
+        = text_field_tag 'user[name]', current_user.try(:name), placeholder: 'Full Name', class: 'form-control'
       .form-group
-        = label_tag :phone, nil, class: 'sr-only'
-        = text_field_tag :phone, current_user.try(:phone), placeholder: 'Phone', class: 'form-control phone'
+        = label_tag 'user[phone]', nil, class: 'sr-only'
+        = text_field_tag 'user[phone]', current_user.try(:phone), placeholder: 'Phone', class: 'form-control phone'
       .form-group
-        = label_tag :email, nil, class: 'sr-only'
-        = text_field_tag :email, current_user.try(:email), placeholder: 'Email', class: 'form-control'
+        = label_tag 'user[email]', nil, class: 'sr-only'
+        = text_field_tag 'user[email]', current_user.try(:email), placeholder: 'Email', class: 'form-control'
       %br
       .form-group
-        = label_tag :scheduled_at, nil, class: 'sr-only'
-        = text_field_tag :scheduled_at, nil, placeholder: 'Date/Time', class: 'form-control', id: 'datetimepicker-schedule'
+        = label_tag 'ride[scheduled_at]', nil, class: 'sr-only'
+        = text_field_tag 'ride[scheduled_at]', nil, placeholder: 'Date/Time', class: 'form-control', id: 'datetimepicker-schedule'
       .form-group
-        = label_tag :address, nil, class: 'sr-only'
-        = text_field_tag :address, current_user.try(:address), placeholder: 'Street', class: 'form-control'
+        = label_tag 'ride[address]', nil, class: 'sr-only'
+        = text_field_tag 'ride[address]', current_user.try(:address), placeholder: 'Street', class: 'form-control'
       .form-group
-        = label_tag :zip_code, nil, class: 'sr-only'
-        = text_field_tag :zip_code, current_user.try(:zip_code), placeholder: 'Zip', class: 'form-control'
+        = label_tag 'ride[zip_code]', nil, class: 'sr-only'
+        = text_field_tag 'ride[zip_code]', current_user.try(:zip_code), placeholder: 'Zip', class: 'form-control'
       .form-group
-        / = hidden_field_tag :vehicle_id, @vehicle.id
-        = hidden_field_tag :user_id, current_user.id if current_user
+        = hidden_field_tag :vehicle_id, @vehicle.try(:id)
+        = hidden_field_tag :user_id, current_user.try(:id)
+        = hidden_field_tag :intent, params[:intent]
       %br
-      .form-group
-        = button_tag 'Reserve an Inspection', class: 'btn btn-success btn-wide'
+      - if params[:intent] == 'sell'
+        #vehicle-query
+          = render 'vehicles/new'
+      - if params[:intent] == 'buy'
+        .form-group
+          = submit_tag 'Reserve a Test Drive', class: 'btn btn-success btn-wide'
 
-  %hr.arrow
+    - if params[:intent] == 'sell'
 
-  .text-center
-    %h3 Pick an inspection time slot
-    %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-    %br
-    BLOCKS...
+      %hr.arrow
 
-  %hr.arrow
+      .text-center
+        %h3 It would be much faster if you can provide your car VIN number:
+        .row
+          .col-sm-4.col-sm-offset-4
+            = label_tag 'vehicle[vin]', nil, class: 'sr-only'
+            = text_field_tag 'vehicle[vin]', nil, placeholder: '1A2BC34D5EF678901', class: 'form-control'
+            %span.help-block Don’t know where to find your VIN? Click here.
 
-  .text-center
-    %h3 It would be much faster if you can provide your car VIN number:
-    .row
-      .col-sm-4.col-sm-offset-4
-        = text_field_tag :vin, nil, placeholder: '1A2BC34D5EF678901', class: 'form-control'
-        %span.help-block Don’t know where to find your VIN? Click here.
+      %hr.arrow
 
-  %hr.arrow
+      .text-center
+        %h3 Is the car currenlty financed?
+        .radio
+          %label
+            = label_tag :financed_true, nil, class: 'sr-only'
+            = radio_button_tag 'vehicle[financed]', true
+            Yes, I am still paying off a loan
+        %br
+        .radio
+          %label
+            = label_tag :financed_false, nil, class: 'sr-only'
+            = radio_button_tag 'vehicle[financed]', false
+            No, I have a clean title
 
-  .text-center
-    %h3 Is the car currenlty financed?
-    .radio
-      %label
-        = radio_button_tag :financed, true
-        Yes, I am still paying off a loan
-    .radio
-      %label
-        = radio_button_tag :financed, false
-        No, I have a clean title
+      %hr.arrow
 
-  %hr.arrow
+      .text-center
+        = label_tag :submit, nil, class: 'sr-only'
+        = submit_tag 'Ready to sell my car!', class: 'btn btn-success', disabled: true, id: 'ready'
+        %br
+        %br
+        %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
 
-  .text-center
-    = button_tag 'Ready to sell my car!', class: 'btn btn-success'
-    %br
-    %br
-    %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+    %hr
 
-  %hr
-
-  = render 'shared/story_icons'
+    = render 'shared/story_icons'
 
 :coffee
   $ ->
-    $('#datetimepicker-schedule').datetimepicker()
+    $('#datetimepicker-schedule').datetimepicker
+      useCurrent: true

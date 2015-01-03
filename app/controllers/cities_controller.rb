@@ -28,9 +28,10 @@ class CitiesController < ApplicationController
     render json: @city
   end
 
-  private
+private
 
-    def admin_user
-      redirect_to(root_path) unless current_user.try(:admin?)
-    end
+  def admin_user
+    redirect_to(root_path) unless current_user.try(:admin?)
+  end
+
 end
