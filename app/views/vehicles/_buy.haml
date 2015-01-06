@@ -4,7 +4,7 @@
       .modal-header
         = button_tag '&times'.html_safe, class: 'close', 'data-dismiss' => "modal", 'aria-label' => "Close"
         .modal-title
-          %h3 Buying with RideSnap
+          %h3 Buying with #{Settings.app.name}
       .modal-body
         .text-center
           %h1
@@ -12,12 +12,12 @@
               RVR:
               %span.text-muted EX1234
               = button_tag 'CHECK', class: 'btn btn-purple btn-lg'
-        %p The process of buying used cars on Craigslist and other sites are flawed.
-        %p You should know much more about a car before meeting random people and going out for a test drive!
+        %p The process of buying a used car from Craigslist and other third party websites is flawed! Don't spend hours browsing for cars, scheduling test drives and then getting an inspection only to find a ton of mechanical issues you and the seller didn't expect.
+        %p All cars posted by #{Settings.app.name} come with a #{Settings.app.name} Vehicle Reference (RVR). The new and trustworthy way to shop for cars.
         %br
         %p
-          Now with RideSnap’s marketplace or by entering your
-          %span.purple RideSnap Vehicle Reference
+          Now with #{Settings.app.name}’s marketplace or by entering your
+          %span.purple #{Settings.app.name} Vehicle Reference
           (RVR), you can find all the details
           %span.purple before
           making any commitments.
@@ -25,15 +25,29 @@
         .row
           .col-sm-6
             = image_tag 'blank.jpg', class: 'img-responsive'
-            We believe in complete transparency and overloading our buyers with information. We want you to feel confident in your future purchase so we don’t hide anything. Use RideSnap’s 4 component Vehicle report conducted by mechanics to find out the details.
+            We believe in complete transparency, so the #{Settings.app.name} Vehicle Reference is our way to save you time and tell you everything about the vehicle. RVR is conducted by trained mechanics.
           .col-sm-6
             = image_tag 'blank.jpg', class: 'img-responsive'
-            Report includes: mechanical, cosmetic damages, car history, and value summary
+            RVR has four components:
             %ul
-              %li Mechanical – 150 point inspection report
-              %li Cosmetic damages – points out all of the dents, scratches, and defects
-              %li Car History – Carfax report
-              %li Value Summary – KBB report
+              %li Mechanical – 150 point inspection (engine, leaks, structure, etc.)
+              %li Exterior – scratches, dents, and door dings
+              %li History – title status, ownership, and maintenance history
+              %li Value – summary of vehicle's worth based on condition
+
+        %hr.arrow
+
+        .text-center
+          %span= image_tag('checklist.svg')
+          %br
+          %br
+          = button_tag 'DOWNLOAD REPORT', class: 'btn btn-success'
+          %br
+          %br
+          = mail_to "info@#{request.host}", 'MESSAGE US', class: 'btn btn-success', target: '_blank'
+          %br
+          %br
+          %p Interested? More questions? Just talk to us.
 
         %hr.arrow
 
@@ -44,22 +58,7 @@
           = button_tag 'CHECK OUT THIS CAR', class: 'btn btn-grey'
           %br
           %br
-          %p Are you satisfied with the car so far?
-          %p Schedule a time and place to see the car in person prior to purchase.
-
-        %hr.arrow
-
-        .text-center
-          %span= image_tag('checklist.svg')
-          %br
-          %br
-          = button_tag 'DOWNLOAD REPORT', class: 'btn btn-success', data: {toggle: 'modal', target: '#report-modal'}
-          %br
-          %br
-          = mail_to "info@#{request.host}", 'MESSAGE US', class: 'btn btn-success'
-          %br
-          %br
-          %p Interested? More questions? Just talk to us.
+          %p Do you see a car you're interested in? Schedule a time to come see it in person!
 
         %hr.arrow
 
@@ -81,7 +80,7 @@
           %br
           %p Payment and title transfer can be a huge mess.
           %p You have the money, but the seller has the title; who hands over what first? No one wants to get ripped off!
-          %p RideSnap safely facilitates the transfer between both parties like an escrow service.
+          %p #{Settings.app.name} safely facilitates the transfer between both parties like an escrow service.
 
         %hr.arrow
 
@@ -103,4 +102,4 @@
 
         %hr
 
-        = render 'shared/story_icons'
+        = render 'shared/story_icons_1'

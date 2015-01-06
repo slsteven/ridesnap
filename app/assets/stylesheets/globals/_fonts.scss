@@ -9,6 +9,11 @@
 }
 @font-face {
   font-family: 'Roboto';
+  src: font-url('Roboto-Light.ttf');
+  font-weight: lighter;
+}
+@font-face {
+  font-family: 'Roboto';
   src: font-url('Roboto-Italic.ttf');
   font-style: italic;
 }
@@ -20,6 +25,7 @@
 }
 @font-face {
   font-family: 'Roboto';
-  src: font-url('Roboto-Thin.ttf');
+  src: font-url('Roboto-LightItalic');
   font-weight: lighter;
+  font-style: italic;
 }

@@ -4,7 +4,7 @@
       .modal-header
         = button_tag '&times'.html_safe, class: 'close', 'data-dismiss' => "modal", 'aria-label' => "Close"
         .modal-title
-          %h2 RideSnap Report
+          %h2 #{Settings.app.name} Report
       .modal-body
         = render 'vehicles/highlights'
         %br

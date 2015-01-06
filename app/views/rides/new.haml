@@ -4,7 +4,7 @@
   = form_tag Ride.new, class: 'form-inline', id: 'vehicle-inspection', role: 'form' do
     .text-center
       %h1
-        RideSnap
+        #{Settings.app.name}
         %span.purple Reservation Service
       %br
       %p We will need some of your information to provide our top level serivce and ensure you will enjoy your time with us.
@@ -79,7 +79,7 @@
 
     %hr
 
-    = render 'shared/story_icons'
+    = render 'shared/story_icons_1'
 
 :coffee
   $ ->

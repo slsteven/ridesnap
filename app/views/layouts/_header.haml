@@ -11,6 +11,6 @@
     #top-collapse.collapse.navbar-collapse
       %ul.nav.navbar-nav.navbar-right
         %li#how{class: "#{'active' if @menu == 'buy'}"}= link_to 'BUY', vehicles_url, title: 'MarketPlace', class: 'blue'
-        %li{class: "#{'active' if @menu == 'sell'}"}= link_to 'SELL', new_ride_path(intent: 'sell'), title: 'Sell with RideSnap', class: 'green'
+        %li{class: "#{'active' if @menu == 'sell'}"}= link_to 'SELL', new_ride_path(intent: 'sell'), title: "Sell with #{Settings.app.name}", class: 'green'
         %li{class: ('active' if @menu == 'faq')}= link_to 'FAQs', faq_url, title: 'frequently asked questions'
-        %li{class: ('active' if @menu == 'about')}= link_to 'ABOUT', about_url, title: 'About RideSnap'
+        %li{class: ('active' if @menu == 'about')}= link_to 'ABOUT', about_url, title: "About #{Settings.app.name}"
