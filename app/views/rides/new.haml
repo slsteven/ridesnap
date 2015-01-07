@@ -10,26 +10,26 @@
       %p We will need some of your information to provide our top level serivce and ensure you will enjoy your time with us.
 
       .form-group
-        = label_tag 'user[name]', nil, class: 'sr-only'
+        = label_tag :user_name, nil, class: 'sr-only'
         = text_field_tag 'user[name]', current_user.try(:name), placeholder: 'Full Name', class: 'form-control'
       .form-group
-        = label_tag 'user[phone]', nil, class: 'sr-only'
+        = label_tag :user_phone, nil, class: 'sr-only'
         = text_field_tag 'user[phone]', current_user.try(:phone), placeholder: 'Phone', class: 'form-control phone'
       .form-group
-        = label_tag 'user[email]', nil, class: 'sr-only'
+        = label_tag :user_email, nil, class: 'sr-only'
         = text_field_tag 'user[email]', current_user.try(:email), placeholder: 'Email', class: 'form-control'
       %br
       .form-group
-        = label_tag 'ride[scheduled_at]', nil, class: 'sr-only'
+        = label_tag :ride_scheduled_at, nil, class: 'sr-only'
         = text_field_tag 'ride[scheduled_at]', nil, placeholder: 'Date/Time', class: 'form-control', id: 'datetimepicker-schedule'
       .form-group
-        = label_tag 'ride[address]', nil, class: 'sr-only'
+        = label_tag :ride_address, nil, class: 'sr-only'
         = text_field_tag 'ride[address]', current_user.try(:address), placeholder: 'Street', class: 'form-control'
       .form-group
-        = label_tag 'ride[zip_code]', nil, class: 'sr-only'
+        = label_tag :ride_zip_code, nil, class: 'sr-only'
         = text_field_tag 'ride[zip_code]', current_user.try(:zip_code), placeholder: 'Zip', class: 'form-control'
       .form-group
-        = hidden_field_tag :vehicle_id, @vehicle.try(:id)
+        = hidden_field_tag 'vehicle[id]', @vehicle.try(:id)
         = hidden_field_tag :user_id, current_user.try(:id)
         = hidden_field_tag :intent, params[:intent]
       %br
@@ -48,7 +48,7 @@
         %h3 It would be much faster if you can provide your car VIN number:
         .row
           .col-sm-4.col-sm-offset-4
-            = label_tag 'vehicle[vin]', nil, class: 'sr-only'
+            = label_tag :vehicle_vin, nil, class: 'sr-only'
             = text_field_tag 'vehicle[vin]', nil, placeholder: '1A2BC34D5EF678901', class: 'form-control'
             %span.help-block Don’t know where to find your VIN? Click here.
 

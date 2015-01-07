@@ -66,7 +66,7 @@
     .form-group
       = button_tag 'DOWNLOAD REPORT', class: 'btn btn-success', data: {toggle: 'modal', target: '#report-modal'}
     .form-group
-      = link_to 'CHECK OUT THIS CAR', new_ride_path(intent: 'buy', vehicle_id: @vehicle.id), class: 'btn btn-grey'
+      = link_to 'CHECK OUT THIS CAR', new_ride_path(intent: 'buy', vin: @vehicle.vin), class: 'btn btn-grey'
     .form-group
       = button_tag 'BUY THIS CAR!', class: 'btn btn-purple'
 

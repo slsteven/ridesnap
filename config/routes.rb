@@ -20,14 +20,14 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: 'json'} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
-      resources :tests
+      resources :vehicles
     end
     # scope module: :v2, constraints: ApiConstraints.new(version: 2) do
-    #   resources :tests
+    #   resources :vehicles
     # end
   end
 
-  resources :users do
+  resources :users, concerns: :paginatable do
     collection do
       post 'agent'
     end
@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     resources :images
   end
 
-  resources :rides
+  resources :rides, concerns: :paginatable
 
   resources :cities, only: [:create, :index, :update]
   resources :password_resets, only: [:create, :edit, :update]

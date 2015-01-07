@@ -46,7 +46,12 @@ class VehiclesController < ApplicationController
   end
 
   def search
-    redirect_to root_path
+    if @veh = Vehicle.select{ |v| v.rvr == params[:rvr] }.first
+      redirect_to @veh
+    else
+      flash[:error] = "Vehicle with RVR of #{params[:rvr].presence || 'nil'} not found."
+      redirect_to root_path
+    end
   end
 
   def show

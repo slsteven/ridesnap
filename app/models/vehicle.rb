@@ -58,11 +58,12 @@ class Vehicle < ActiveRecord::Base
   scope :mileage, ->(mileage) { where('mileage <= ?', mileage.to_i) }
 
   before_create :build_options
-  before_save { self.closest_color ||= base_color }
   before_save do
+    self.closest_color = base_color
     self.vin ||= Vehicle.generate_vin
     self.agreed_value ||= self.ride_snap
   end
+  before_update :update_s3_folder, if: :vin_changed?
 
   # these states give us helper methods as follows
   # Vehicle.listed === Vehicle.where(status: 'listed')
@@ -126,8 +127,8 @@ class Vehicle < ActiveRecord::Base
     eval(read_attribute(:options)['colors'])
   end
   def base_color
-    return nil unless self.color.presence && self.color.first[1][:primary]
-    color = Color.new(self.color.first[1][:primary])
+    return nil unless self.color.present? && self.color.first[1][:primary]
+    color = Color::RGB.from_html(self.color.first[1][:primary]).to_hsl
     hue = color.hue
     sat = color.saturation
     lgt = color.luminosity
@@ -154,6 +155,10 @@ class Vehicle < ActiveRecord::Base
   def engines
     return nil if read_attribute(:options).nil?
     eval(read_attribute(:options)['engines'])
+  end
+
+  def rvr
+    vin[-6..-1]
   end
 
   def transmission
@@ -224,6 +229,10 @@ private
       return nil
     end
     true
+  end
+
+  def update_s3_folder
+
   end
 
 end

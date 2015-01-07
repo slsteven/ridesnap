@@ -26,13 +26,12 @@ class User < ActiveRecord::Base
   include AASM
 
   has_many :rides
-  has_many :vehicles, through: :rides
+  has_many :vehicles, -> { where(rides: {relation: %w(2 4)}) }, through: :rides
   has_many :favorites, through: :garage
 
   before_save do
     self.email = email.downcase.strip
-    cln_ph = phone.to_s.delete('^0-9')
-    self.phone = cln_ph[0] == 1 && cln_ph.length == 11 ? cln_ph[1..10] : cln_ph[0..9]
+    self.phone = phone.to_s.delete('^0-9').strip
   end
   before_create :create_remember_token
 
@@ -113,6 +112,10 @@ class User < ActiveRecord::Base
     else
       self.name.split(' ').last
     end
+  end
+
+  def owner?(vehicle)
+    self.vehicles.include?(vehicle)
   end
 
   def send_password_reset

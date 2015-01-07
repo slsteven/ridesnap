@@ -3,17 +3,18 @@ class RidesController < ApplicationController
   respond_to :html, :js
 
   def create
-    value = Edmunds.typical_value params[:vehicle][:style], zip: params[:ride][:zip_code].presence
+    @vehicle = Vehicle.where(id: params[:vehicle][:id]).first_or_initialize(vehicle_params)
+    @vehicle.style ||= params[:vehicle][:style].presence
+    value = Edmunds.typical_value @vehicle.style, zip: params[:ride][:zip_code].presence
     sources = [value[:trade_in], value[:private_party]]
     avg = sources.sum / sources.size.to_f
     dif = value[:private_party] - avg
     adj = dif * 0 # this will let us adjust the price easily while staying in the bounds 0.0 .. 1.0
-    params[:vehicle][:preliminary_value] = {
+    @vehicle.preliminary_value ||= {
       snap_up: (avg + adj).round(-2),
       trade_in: value[:trade_in].round(-2),
       ride_snap: value[:private_party].round(-2)
     }
-    @vehicle = Vehicle.where(id: params[:vehicle_id]).first_or_initialize(vehicle_params)
     @user = User.where(id: params[:user_id]).first_or_initialize(user_params)
 
     if @user.save && @vehicle.save
@@ -36,7 +37,7 @@ class RidesController < ApplicationController
   end
 
   def new
-    @vehicle = Vehicle.find_by_id(params[:vehicle_id])
+    @vehicle = Vehicle.find_by_vin(params[:vin])
     @menu = params[:intent]
     Settings.vehicle_makes.to_hash.each_with_object(@makes=[]){ |(k,v),o| o << [v,k] }
   end
