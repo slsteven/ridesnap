@@ -11,6 +11,7 @@ class RidesController < ApplicationController
     Settings.vehicle_makes.to_hash.each_with_object(@makes=[]){ |(k,v),o| o << [v,k] }
     params[:vehicle][:vin] = params[:vehicle_vin].presence
     @intent = params[:vehicle][:vin] ? 'buy' : 'sell'
+    @menu = @intent
 
     @vehicle = Vehicle.where(vin: params[:vehicle][:vin]).first_or_initialize(vehicle_params)
     value = Edmunds.typical_value @vehicle.style, zip: params[:ride][:zip_code].presence

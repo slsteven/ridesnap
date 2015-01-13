@@ -11,6 +11,13 @@ class ImagesController < ApplicationController
     end
   end
 
+  def destroy
+    @image = Image.find(params[:id])
+    @vehicle = @image.vehicle
+    @image.destroy
+    redirect_to @vehicle
+  end
+
   def index
   end
 

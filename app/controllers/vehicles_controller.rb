@@ -27,6 +27,7 @@ class VehiclesController < ApplicationController
               ['< 75,000', 75000],
               ['> 100,000', 500000]] # no way there is a 10 year old car with half a million miles
     @types = ['Coupe', 'Sedan'].sort # not using this yet...
+    @menu = 'buy'
   end
 
   def model_query

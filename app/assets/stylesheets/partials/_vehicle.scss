@@ -120,3 +120,23 @@ form#vehicle-inspection {
     background-color: rgba(255,255,255,.8);
   }
 }
+
+.remove-image {
+  position: absolute;
+  left: 50%;
+  margin-top: 10px;
+  font-size: 21px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  opacity: 0.6;
+  &:hover,
+  &:focus {
+    color: #d2322d;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    opacity: 0.9;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  z-index: 99;
+}

@@ -3,7 +3,10 @@
 .container{style: 'padding-top:90px'}
   .owl-carousel
     - @vehicle.images.each do |img|
-      = image_tag img.try(:image_url), class: 'img-responsive three-four'
+      .vehicle-image
+        = image_tag img.try(:image_url), class: 'img-responsive three-four'
+        - if admin?
+          = link_to '', [@vehicle, img], method: :delete, data: { confirm: "You're sure you want to REMOVE this image from the vehicle?" }, class: 'glyphicon glyphicon-remove remove-image', title: 'Remove image', 'aria-label' => "Remove image"
 
   - if admin?
     %br
