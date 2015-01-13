@@ -1,2 +1,3 @@
 aws:
   bucket: ridesnap-dev
+  address: https://ridesnap-dev.s3.amazonaws.com

@@ -40,7 +40,7 @@ ready = ->
       $('#vehicle-query #vehicle_year').prop 'disabled', true
       $('#vehicle-query #vehicle_style').val ''
       $('#vehicle-query #vehicle_style').prop 'disabled', true
-      $('#ready').attr 'disabled', true
+      $('#ready, #admin-create-vehicle').attr 'disabled', true
 
   $('#vehicle-query #vehicle_model').on 'change', ->
     $.ajax
@@ -55,7 +55,7 @@ ready = ->
       $('#vehicle-query #vehicle_year').prop 'disabled', false
       $('#vehicle-query #vehicle_style').val ''
       $('#vehicle-query #vehicle_style').prop 'disabled', true
-      $('#ready').attr 'disabled', true
+      $('#ready, #admin-create-vehicle').attr 'disabled', true
       $('#vehicle-query #vehicle_model_pretty').val($('#vehicle-query #vehicle_model option:selected').text())
 
   $('#vehicle-query #vehicle_year').on 'change', ->
@@ -70,10 +70,10 @@ ready = ->
     .complete (opt) ->
       update_select opt, '#vehicle-query #vehicle_style'
       $('#vehicle-query #vehicle_style').prop 'disabled', false
-      $('#ready').attr 'disabled', true
+      $('#ready, #admin-create-vehicle').attr 'disabled', true
 
   $('#vehicle-query #vehicle_style').on 'change', ->
-    $('#ready').attr 'disabled', false
+    $('#ready, #admin-create-vehicle').attr 'disabled', false
     $('#vehicle-query #vehicle_description').val($('#vehicle-query #vehicle_style option:selected').text())
 
   # $('#ready').on 'click', ->

@@ -23,7 +23,8 @@
         = render 'edit'
     %ul{role: 'tablist'}
       %li#scheduled-ride-tab
-        = link_to 'Reschedule', '#edit', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-sm btn-purple'
+        - if @ride.with?(current_user) || admin?
+          = link_to 'Reschedule', '#edit', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-sm btn-purple'
       %li.active.hidden#edit-tab
         = link_to 'Scheduled', '#scheduled-ride', role: 'tab', data: {toggle: 'tab'}
 

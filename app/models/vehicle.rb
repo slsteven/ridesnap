@@ -46,9 +46,10 @@ class Vehicle < ActiveRecord::Base
 
   alias_attribute :list_price, :agreed_value
 
-  has_many :rides
+  has_many :rides, dependent: :delete_all
   has_many :users, through: :rides
-  has_many :images
+  has_many :images, dependent: :delete_all
+  has_many :followers, through: :garages
 
   scope :min_price, ->(min) { where('agreed_value >= ?', min.to_i) }
   scope :max_price, ->(max) { where('agreed_value <= ?', max.to_i) }
@@ -63,7 +64,7 @@ class Vehicle < ActiveRecord::Base
     self.vin ||= Vehicle.generate_vin
     self.agreed_value ||= self.ride_snap
   end
-  before_update :update_s3_folder, if: :vin_changed?
+  # before_update :update_s3_folder, if: :vin_changed?
 
   # these states give us helper methods as follows
   # Vehicle.listed === Vehicle.where(status: 'listed')
@@ -232,7 +233,11 @@ private
   end
 
   def update_s3_folder
-
+    creds = ::Aws::Credentials.new(Settings.aws.access_key_id, Settings.aws.secret_access_key)
+    s3 = ::Aws::S3::Resource.new(region: 'us-west-1', credentials: creds)
+    bucket = Settings.aws.bucket
+    s3.copy_object(bucket: bucket, copy_source: self.vin_was, key: self.vin)
+    s3.delete_object(bucket: bucket, key: self.vin_was)
   end
 
 end

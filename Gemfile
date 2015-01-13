@@ -83,4 +83,5 @@ gem 'chronic'
 gem 'color'
 gem 'browser-timezone-rails'
 gem 'powder' # a wrapper around pow, get to server @ http://ridesnap.dev
-gem 'awesome_print' # ap Vehicle.first in the console for an example
+gem 'awesome_print' # ap User.first in the console for an example
+gem 'aws-sdk', github: 'aws/aws-sdk-core-ruby'

@@ -36,7 +36,7 @@ class Ride < ActiveRecord::Base
   end
 
   def with?(user)
-    user_id == user.id
+    user_id == user.try(:id)
   end
 
 end

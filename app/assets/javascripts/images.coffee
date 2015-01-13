@@ -17,11 +17,10 @@ ready = ->
 
     done: (e, data) ->
       file = data.files[0]
-      domain = $('#fileupload').attr('action')
       path = $('#fileupload input[name=key]').val().replace('${filename}', file.name)
       to = $('#fileupload').data('post')
       content = {}
-      content[$('#fileupload').data('as')] = domain + path
+      content[$('#fileupload').data('as')] = file.name
       $.post to, content
       data.context.remove() if data.context
 
