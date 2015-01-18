@@ -8,8 +8,9 @@ class VehiclesController < ApplicationController
   end
 
   def destroy
-    Vehicle.find(params[:id]).destroy
-    flash.now[:success] = 'Vehicle destroyed'
+    @vehicle = Vehicle.find_by_vin(params[:id]) || Vehicle.find(params[:id])
+    @vehicle.destroy
+    flash[:success] = 'Vehicle destroyed'
     redirect_to vehicles_url
   end
 
@@ -56,7 +57,7 @@ class VehiclesController < ApplicationController
   end
 
   def show
-    @vehicle = Vehicle.find_by_vin(params[:id])
+    @vehicle = Vehicle.find_by_vin(params[:id]) || Vehicle.find(params[:id])
     @vehicle.send(:build_options) and @vehicle.save if @vehicle.options.nil?
     @styles = Edmunds.query_styles(@vehicle.make, @vehicle.model, @vehicle.year).invert.to_a rescue []
     @vehicle_images = @vehicle.images
@@ -69,7 +70,7 @@ class VehiclesController < ApplicationController
   end
 
   def update
-    @vehicle = Vehicle.find(params[:id])
+    @vehicle = Vehicle.find_by_vin(params[:id]) || Vehicle.find(params[:id])
     @vehicle.options = { e: params[:vehicle][:engine],
                          t: params[:vehicle][:transmission],
                          o: (params[:vehicle][:options].presence || []),

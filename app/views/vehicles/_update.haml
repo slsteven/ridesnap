@@ -55,5 +55,7 @@
                   = v[:name]
 
     .row.center-text
+      - if admin?
+        = link_to 'delete', @vehicle, method: :delete, data: { confirm: "You're sure you want to DELETE this #{@vehicle.make(pretty:true)} #{@vehicle.model(pretty:true)}?" }, class: 'btn btn-danger btn-xs', title: 'Delete Vehicle', 'aria-label' => "Delete Vehicle"
       = content_tag :a, 'CANCEL', class: 'btn btn-default btn-sm btn-wide', data: {toggle: 'collapse', target: '#vehicle_options'}
       = submit_tag 'SAVE', class: 'btn btn-purple btn-wide', data: {toggle: 'collapse', target: '#vehicle_options'}
