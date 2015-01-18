@@ -2,6 +2,9 @@
 
 .container{style: 'padding-top:90px'}
   .owl-carousel
+    - if @vehicle.images.blank?
+      .vehicle-image
+        = image_tag 'blank.jpg', class: 'img-responsive three-four'
     - @vehicle.images.each do |img|
       .vehicle-image
         = image_tag img.try(:image_url), class: 'img-responsive three-four'
@@ -62,6 +65,12 @@
   %hr.arrow
 
   = render 'vehicles/highlights'
+
+  - if @rides.any?
+    %hr.arrow
+
+    %h2.text-center Rides
+    = render @rides
 
   %hr.arrow
 

@@ -2,7 +2,7 @@
 
 .jumbotron.black-bg#confirm1
   .container.text-center#header-threshold
-    %h1= @ride.scheduled_at > Date.current ? 'Scheduled Ride.' : 'Past Ride.'
+    %h1= @ride.scheduled_at > Time.now ? 'Scheduled Ride.' : 'Past Ride.'
 
 .jumbotron.white-bg
   .container.text-center
@@ -31,11 +31,7 @@
     %br
     %b.purple VEHICLE INFORMATION
     %p
-      = @vehicle.year
-      = @vehicle.make(pretty: true)
-      = @vehicle.model(pretty: true)
-      \-
-      = @vehicle.description
+      = @vehicle.info
 
 :coffee
   $ ->

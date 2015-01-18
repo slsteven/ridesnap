@@ -56,7 +56,7 @@ class VehiclesController < ApplicationController
   end
 
   def show
-    @vehicle = Vehicle.find(params[:id])
+    @vehicle = Vehicle.find_by_vin(params[:id])
     @vehicle.send(:build_options) and @vehicle.save if @vehicle.options.nil?
     @styles = Edmunds.query_styles(@vehicle.make, @vehicle.model, @vehicle.year).invert.to_a rescue []
     @vehicle_images = @vehicle.images

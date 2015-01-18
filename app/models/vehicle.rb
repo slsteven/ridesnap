@@ -37,6 +37,9 @@ class Vehicle < ActiveRecord::Base
   include AASM
   include ActionView::Helpers::NumberHelper
 
+  extend FriendlyId
+  friendly_id :vin
+
   enum condition: { Outstanding: 5, Clean: 4, Average: 3, Rough: 2, Damaged: 1 }
 
   hstore_accessor :preliminary_value,

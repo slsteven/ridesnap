@@ -7,9 +7,10 @@ class RidesController < ApplicationController
     params[:vehicle] ||= {}
     params[:user] ||= {}
     params[:ride] ||= {}
-    params[:user][:zip_code] = params[:ride][:zip_code]
+    params[:vehicle][:zip_code] = params[:user][:zip_code] = params[:ride][:zip_code]
     Settings.vehicle_makes.to_hash.each_with_object(@makes=[]){ |(k,v),o| o << [v,k] }
     params[:vehicle][:vin] = params[:vehicle_vin].presence
+    params[:vehicle][:condition] = params[:vehicle][:condition].to_i
     @intent = params[:vehicle][:vin] ? 'buy' : 'sell'
     @menu = @intent
 
@@ -32,7 +33,7 @@ class RidesController < ApplicationController
 
     if @user.save && @vehicle.save
       params[:ride][:relation] = @intent == 'buy' ? 'tester' : 'seller'
-      params[:ride][:scheduled_at] = Chronic.parse(params[:ride][:scheduled_at]) || Time.now
+      params[:ride][:scheduled_at] = Chronic.parse(params[:ride][:scheduled_at]) || (Time.now+1.day)
       params[:ride][:vehicle_id] = @vehicle.id
       params[:ride][:user_id] = @user.id
       @ride = Ride.new(ride_params)
@@ -58,6 +59,7 @@ class RidesController < ApplicationController
     @vehicle = Vehicle.find_by_vin(params[:vehicle_vin])
     @intent = @vehicle.present? ? 'buy' : 'sell'
     @menu = @intent
+    @conditions = Vehicle.conditions.to_a
     Settings.vehicle_makes.to_hash.each_with_object(@makes=[]){ |(k,v),o| o << [v,k] }
   end
 
