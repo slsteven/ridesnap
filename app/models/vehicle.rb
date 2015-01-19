@@ -166,7 +166,7 @@ class Vehicle < ActiveRecord::Base
   end
 
   def rvr
-    vin[-6..-1]
+    vin.presence[-6..-1]
   rescue
     ''
   end
