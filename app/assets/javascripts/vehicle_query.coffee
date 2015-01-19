@@ -5,10 +5,10 @@ ready = ->
       $(where).append( $("<option></option>").attr("value", k).text(v) )
 
   # display_query_results = ->
-  #   $('input#schedule-button').attr 'disabled', false
+  #   $('input#schedule-button').prop 'disabled', false
 
   # clear_query_results = ->
-  #   $('input#schedule-button').attr 'disabled', true
+  #   $('input#schedule-button').prop 'disabled', true
   #   $('#trade-in-value, #ridesnap-value').text '$0'
   #   $('.circle.trade-in-value, .circle.ridesnap-value, .circle.buy-it-now-value').width '100%'
   #   $('form#vehicle-inspection #vehicle_id').val null
@@ -40,7 +40,7 @@ ready = ->
       $('#vehicle-query #vehicle_year').prop 'disabled', true
       $('#vehicle-query #vehicle_style').val ''
       $('#vehicle-query #vehicle_style').prop 'disabled', true
-      $('#ready, #admin-create-vehicle').attr 'disabled', true
+      $('.new-ride-sell').prop 'disabled', true
 
   $('#vehicle-query #vehicle_model').on 'change', ->
     $.ajax
@@ -55,7 +55,7 @@ ready = ->
       $('#vehicle-query #vehicle_year').prop 'disabled', false
       $('#vehicle-query #vehicle_style').val ''
       $('#vehicle-query #vehicle_style').prop 'disabled', true
-      $('#ready, #admin-create-vehicle').attr 'disabled', true
+      $('.new-ride-sell').prop 'disabled', true
       $('#vehicle-query #vehicle_model_pretty').val($('#vehicle-query #vehicle_model option:selected').text())
 
   $('#vehicle-query #vehicle_year').on 'change', ->
@@ -70,11 +70,24 @@ ready = ->
     .complete (opt) ->
       update_select opt, '#vehicle-query #vehicle_style'
       $('#vehicle-query #vehicle_style').prop 'disabled', false
-      $('#ready, #admin-create-vehicle').attr 'disabled', true
+      $('.new-ride-sell').prop 'disabled', true
 
   $('#vehicle-query #vehicle_style').on 'change', ->
-    $('#ready, #admin-create-vehicle').attr 'disabled', false
+    $('.new-ride-sell').prop 'disabled', false
     $('#vehicle-query #vehicle_description').val($('#vehicle-query #vehicle_style option:selected').text())
+
+
+  $('.check-presence').on 'focusout keyup', ->
+    if (($(obj).val() for obj in $('.check-presence')).some (p) -> !p?.length)
+      $('.new-ride-buy').prop 'disabled', true
+    else
+      $('.new-ride-buy').prop 'disabled', false
+
+  $('#vehicle_vin').on 'focusout keyup', ->
+    if ($('#vehicle_vin').val().trim() == '')
+      $('.new-ride-sell').prop 'disabled', true
+    else
+      $('.new-ride-sell').prop 'disabled', false
 
   # $('#ready').on 'click', ->
   #   get_value(

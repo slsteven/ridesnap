@@ -167,8 +167,18 @@ module Edmunds
     raise 'vin necessary to talk with API' if vin.blank?
     endpoint = "api/vehicle/v2/vins/#{vin}"
     doc = fetch(endpoint)
-    return doc if doc.kind_of? Integer
-    doc[:years][0][:styles][0][:id] rescue nil
+    return {} if doc.kind_of? Integer
+    {
+      make: doc[:make][:niceName],
+      model: doc[:model][:niceName],
+      model_pretty: doc[:model][:name],
+      year: doc[:years][0][:year],
+      style: doc[:years][0][:styles][0][:id],
+      description: doc[:years][0][:styles][0][:name]
+      # body: doc[:categories][:vehicleStyle].downcase
+    }
+  rescue
+    {}
   end
 
 private

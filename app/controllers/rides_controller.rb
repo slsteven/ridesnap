@@ -10,11 +10,19 @@ class RidesController < ApplicationController
     params[:vehicle][:zip_code] = params[:user][:zip_code] = params[:ride][:zip_code]
     Settings.vehicle_makes.to_hash.each_with_object(@makes=[]){ |(k,v),o| o << [v,k] }
     params[:vehicle][:vin] = params[:vehicle_vin].presence
-    params[:vehicle][:condition] = params[:vehicle][:condition].to_i
+    params[:vehicle][:condition] = params[:vehicle][:condition].present? ? params[:vehicle][:condition].to_i : nil
     @intent = params[:vehicle][:vin] ? 'buy' : 'sell'
     @menu = @intent
 
     @vehicle = Vehicle.where(vin: params[:vehicle][:vin]).first_or_initialize(vehicle_params)
+    @user = User.where(email: params[:user][:email]).first_or_initialize(user_params)
+
+    Edmunds.vin_to_style(params[:vehicle][:vin]).each{ |k,v| @vehicle.send("#{k}=", v) } if admin?
+    if @vehicle.style.blank?
+      flash[:error] = "VIN #{params[:vehicle][:vin]} not found... please try again."
+      redirect_to(new_ride_path) and return
+    end
+
     value = Edmunds.typical_value @vehicle.style, zip: params[:ride][:zip_code].presence
     sources = [value[:trade_in], value[:private_party]]
     avg = sources.sum / sources.size.to_f
@@ -25,9 +33,8 @@ class RidesController < ApplicationController
       trade_in: value[:trade_in].round(-2),
       ride_snap: value[:private_party].round(-2)
     }
-    @user = User.where(email: params[:user][:email]).first_or_initialize(user_params)
 
-    if params[:admin] && @vehicle.save
+    if admin? && @vehicle.save
       redirect_to @vehicle and return
     end
 
@@ -43,11 +50,11 @@ class RidesController < ApplicationController
         redirect_to @ride
         @ride.confirm_ride
       else
-        flash.now[:error] = "Something went wrong saving your ride... please try again"
+        flash.now[:error] = "Something went wrong saving your ride... please try again."
         render 'rides/new'
       end
     else
-      flash.now[:error] = "Something went wrong saving user/vehicle... please try again"
+      flash.now[:error] = "Something went wrong saving user/vehicle... please try again."
       render 'rides/new'
     end
   end

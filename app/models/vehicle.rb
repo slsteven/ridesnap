@@ -61,6 +61,10 @@ class Vehicle < ActiveRecord::Base
   scope :year, ->(year) { where(year: year.to_i) }
   scope :mileage, ->(mileage) { where('mileage <= ?', mileage.to_i) }
 
+  validates :make, presence: true
+  validates :model, presence: true
+  validates :year, presence: true
+
   before_create :build_options
   before_save do
     self.closest_color = base_color
@@ -162,7 +166,7 @@ class Vehicle < ActiveRecord::Base
   end
 
   def rvr
-    vin[-6..-1]
+    vin[-6..-1] rescue ''
   end
 
   def transmission
