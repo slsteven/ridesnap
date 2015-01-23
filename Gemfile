@@ -65,6 +65,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'pry-rails'
   gem 'faker'
+  gem 'powder' # a wrapper around pow, get to server @ http://ridesnap.dev
 end
 
 # this production group necessary for heroku
@@ -82,7 +83,6 @@ gem 'best_in_place', '~> 3.0.0', github: 'bernat/best_in_place'
 gem 'chronic'
 gem 'color'
 gem 'browser-timezone-rails'
-gem 'powder' # a wrapper around pow, get to server @ http://ridesnap.dev
 gem 'awesome_print' # ap User.first in the console for an example
 gem 'aws-sdk', github: 'aws/aws-sdk-core-ruby'
 gem 'friendly_id', '~> 5.1.0'
