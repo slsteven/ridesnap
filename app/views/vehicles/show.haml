@@ -29,6 +29,8 @@
   %h1.text-center
     RVR
     = @vehicle.rvr.upcase
+  - if admin? && @vehicle.external_ad
+    %h3= link_to @vehicle.external_ad
   .row
     .col-xs-12.col-sm-6.hoverable
       .overlay.text-center

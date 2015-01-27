@@ -40,6 +40,9 @@
             .form-group
               = label_tag :vehicle_mileage, nil, class: 'sr-only'
               = text_field_tag 'vehicle[mileage]', params[:vehicle][:mileage], placeholder: 'Mileage', class: 'form-control'
+            .form-group
+              = label_tag :vehicle_external_ad, nil, class: 'sr-only'
+              = text_field_tag 'vehicle[external_ad]', params[:vehicle][:external_ad], placeholder: 'External Ad', class: 'form-control'
             %br
             .form-group
               = submit_tag 'Create Vehicle', class: 'btn btn-purple btn-wide new-ride-sell', disabled: true, data: { disable_with: 'Creating Vehicle...' }
