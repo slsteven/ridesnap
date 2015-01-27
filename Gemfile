@@ -3,14 +3,14 @@ source 'https://rubygems.org'
 ruby '2.1.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.1.7'
+gem 'rails', '~> 4.1.9'
 
 # Use pg as the database
 gem 'pg'
 gem 'hstore_accessor' # not sure we need this
 
 # Use SCSS and bootstrap for styles
-gem 'bootstrap-sass', '~> 3.3.0'
+gem 'bootstrap-sass'
 gem 'sass-rails'
 # Pagination
 gem 'kaminari'
@@ -44,9 +44,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
-# Use thin as the app server
-gem 'thin' # this can go into the dev group if using passenger / nginx in production
-
 # This was taken out of Rails 4.2
 gem 'responders'
 
@@ -70,6 +67,8 @@ end
 
 # this production group necessary for heroku
 group :production do
+  # Use thin as the app server
+  gem 'thin' # this can go into the dev group if using passenger / nginx in production
   gem 'rails_12factor'
   gem 'rails_serve_static_assets'
 end
@@ -85,4 +84,5 @@ gem 'color'
 gem 'browser-timezone-rails'
 gem 'awesome_print' # ap User.first in the console for an example
 gem 'aws-sdk', github: 'aws/aws-sdk-core-ruby'
+gem 'aws-sdk-v1'
 gem 'friendly_id', '~> 5.1.0'

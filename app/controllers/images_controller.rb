@@ -2,7 +2,7 @@ class ImagesController < ApplicationController
   respond_to :js
 
   def create
-    @vehicle = Vehicle.find(params[:vehicle_id])
+    @vehicle = Vehicle.find_by_vin(params[:vehicle_id]) || Vehicle.find(params[:vehicle_id])
     @image = @vehicle.images.build(image_params)
     if @image.save
       respond_with @image
