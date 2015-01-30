@@ -3,11 +3,11 @@
 # Table name: cities
 #
 #  id         :integer          not null, primary key
-#  city       :string(255)
-#  state      :string(255)
-#  country    :string(255)
-#  requests   :integer          default(0)
-#  available  :boolean          default(FALSE)
+#  city       :string
+#  state      :string
+#  country    :string
+#  requests   :integer          default("0")
+#  available  :boolean          default("false")
 #  created_at :datetime
 #  updated_at :datetime
 #

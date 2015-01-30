@@ -3,17 +3,17 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
-#  name                   :string(255)
-#  email                  :string(255)
+#  name                   :string
+#  email                  :string
 #  phone                  :integer
-#  password_digest        :string(255)
-#  remember_token         :string(255)
+#  password_digest        :string
+#  remember_token         :string
 #  created_at             :datetime
 #  updated_at             :datetime
-#  password_reset_token   :string(255)
+#  password_reset_token   :string
 #  password_reset_sent_at :datetime
-#  zip_code               :string(255)
-#  status                 :string(255)
+#  zip_code               :string
+#  status                 :string
 #
 # Indexes
 #

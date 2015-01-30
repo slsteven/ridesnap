@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
 
-ruby '2.1.4'
+ruby '2.2.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.1.9'
+gem 'rails', '~> 4.2.0'
 
 # Use pg as the database
 gem 'pg'
-gem 'hstore_accessor' # not sure we need this
+gem 'hstore_accessor'
 
 # Use SCSS and bootstrap for styles
 gem 'bootstrap-sass'
@@ -45,7 +45,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt', '~> 3.1.7'
 
 # This was taken out of Rails 4.2
-gem 'responders'
+gem 'responders', '~> 2.0'
 
 group :development do
   # Use Capistrano for deployment

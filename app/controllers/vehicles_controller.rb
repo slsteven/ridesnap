@@ -20,7 +20,7 @@ class VehiclesController < ApplicationController
   def index
     all = Vehicle.all
     @vehicles = Vehicle.filter(params).page(params[:page]).per(20)
-    all.map(&:make).uniq.sort.each_with_object(@makes=[]){ |m,o| o << [Settings.vehicle_makes[m], m] }
+    all.map(&:make).uniq.compact.sort.each_with_object(@makes=[]){ |m,o| o << [Settings.vehicle_makes[m], m] }
     @years = [*Date.today.year-10 .. Date.today.year].reverse # that splat is supposed to be there
     all.map(&:closest_color).uniq.reject(&:blank?).sort.each_with_object(@colors=[]){ |c,o| o << [c.capitalize, c] }
     @miles = [['< 25,000', 25000],
@@ -57,8 +57,12 @@ class VehiclesController < ApplicationController
   end
 
   def show
-    @vehicle = Vehicle.find_by_vin(params[:id]) || Vehicle.find(params[:id])
-    @vehicle.send(:build_options) and @vehicle.save if @vehicle.options.nil?
+    @vehicle = Vehicle.find_by_vin(params[:id]) || Vehicle.find_by_id(params[:id])
+    unless @vehicle
+      flash[:error] = "Vehicle with VIN of #{params[:id].presence || 'nil'} not found."
+      redirect_to root_path and return
+    end
+    @vehicle.send(:build_options) and @vehicle.save if @vehicle.option_list.blank?
     @styles = Edmunds.query_styles(@vehicle.make, @vehicle.model, @vehicle.year).invert.to_a rescue []
     @vehicle_images = @vehicle.images
     @conditions = Vehicle.conditions.to_a
@@ -71,13 +75,16 @@ class VehiclesController < ApplicationController
 
   def update
     @vehicle = Vehicle.find_by_vin(params[:id]) || Vehicle.find(params[:id])
-    @vehicle.options = { e: params[:vehicle][:engine],
-                         t: params[:vehicle][:transmission],
-                         o: (params[:vehicle][:options].presence || []),
-                         c: (params[:vehicle][:colors].presence || {}) }
+
+    @vehicle.color = params[:vehicle][:colors].presence
+    @vehicle.options = params[:vehicle][:options].presence
+    @vehicle.engine = params[:vehicle][:engine]
+    @vehicle.transmission = params[:vehicle][:transmission]
+
     @vehicle.style = params[:vehicle][:style]
     @vehicle.condition = params[:vehicle][:condition].to_i if !params[:vehicle][:condition].blank?
     @vehicle.mileage = params[:vehicle][:mileage]
+
     render js: nil, status: :ok, layout: false if @vehicle.save
   end
 

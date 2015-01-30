@@ -7,11 +7,11 @@
 #  vehicle_id   :integer
 #  scheduled_at :datetime
 #  relation     :integer
-#  address      :string(255)
-#  zip_code     :string(255)
+#  address      :string
+#  zip_code     :string
 #  created_at   :datetime
 #  updated_at   :datetime
-#  cancel       :boolean          default(FALSE)
+#  cancel       :boolean          default("false")
 #
 # Indexes
 #

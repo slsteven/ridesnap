@@ -3,26 +3,29 @@
 # Table name: vehicles
 #
 #  id                :integer          not null, primary key
-#  make              :string(255)
-#  model             :string(255)
+#  make              :string
+#  model             :string
 #  year              :integer
-#  style             :string(255)
+#  style             :string
 #  description       :text
 #  mileage           :integer
 #  condition         :integer
 #  options           :hstore
 #  preliminary_value :hstore
 #  sold_price        :decimal(, )
-#  status            :string(255)
+#  status            :string
 #  inspection        :boolean
-#  zip_code          :string(255)
+#  zip_code          :string
 #  created_at        :datetime
 #  updated_at        :datetime
-#  closest_color     :string(255)
-#  vin               :string(255)
+#  closest_color     :string
+#  vin               :string
 #  agreed_value      :decimal(, )
 #  financed          :boolean
-#  model_pretty      :string(255)
+#  model_pretty      :string
+#  external_ad       :string
+#  report            :jsonb            default("{}")
+#  option_list       :jsonb            default("{}")
 #
 # Indexes
 #
@@ -91,7 +94,7 @@ class Vehicle < ActiveRecord::Base
     end
 
     event :sell do
-      transitions to: :sold, on_transition: :sold_to
+      transitions to: :sold, after: :sold_to
     end
   end
 
@@ -127,14 +130,15 @@ class Vehicle < ActiveRecord::Base
     read_attribute(:model)
   end
 
-  def color
-    self.colors['exterior'].select{ |k,v| v[:equipped] == true } rescue nil
-  end
-  def colors
-    return nil if read_attribute(:options).nil?
-    eval(read_attribute(:options)['colors'])
-  end
+  # def color
+  #   self.colors['exterior'].select{ |k,v| v[:equipped] == true } rescue nil
+  # end
+  # def colors
+  #   return nil if read_attribute(:options).nil?
+  #   eval(read_attribute(:options)['colors'])
+  # end
   def base_color
+    return %w(black white grey red yellow green cyan blue magenta).sample if closest_color.nil?
     return nil unless self.color.present? && self.color.first[1][:primary]
     color = Color::RGB.from_html(self.color.first[1][:primary]).to_hsl
     hue = color.hue
@@ -157,13 +161,13 @@ class Vehicle < ActiveRecord::Base
     end
   end
 
-  def engine
-    self.engines.select{ |k,v| v[:equipped] == true } rescue nil
-  end
-  def engines
-    return nil if read_attribute(:options).nil?
-    eval(read_attribute(:options)['engines'])
-  end
+  # def engine
+  #   self.engines.select{ |k,v| v[:equipped] == true } rescue nil
+  # end
+  # def engines
+  #   return nil if read_attribute(:options).nil?
+  #   eval(read_attribute(:options)['engines'])
+  # end
 
   def rvr
     vin.presence[-6..-1]
@@ -171,50 +175,96 @@ class Vehicle < ActiveRecord::Base
     ''
   end
 
-  def transmission
-    self.transmissions.select{ |k,v| v[:equipped] == true } rescue nil
-  end
-  def transmissions
-    return nil if read_attribute(:options).nil?
-    eval(read_attribute(:options)['transmissions'])
-  end
+  # def transmission
+  #   self.transmissions.select{ |k,v| v[:equipped] == true } rescue nil
+  # end
+  # def transmissions
+  #   return nil if read_attribute(:options).nil?
+  #   eval(read_attribute(:options)['transmissions'])
+  # end
 
-  def known_attr
-    known = []
-    known << "#{self.condition} condition" if self.condition
-    known << "#{number_with_delimiter self.mileage} miles" if self.mileage
-    known << self.color.first[1][:name] if self.color.any?
-    known << self.engine.first[1][:name] if self.engine
-    known << self.transmission.first[1][:description] if self.transmission
-    known
-  end
+  # def known_attr
+  #   known = []
+  #   known << "#{self.condition} condition" if self.condition
+  #   known << "#{number_with_delimiter self.mileage} miles" if self.mileage
+  #   known << self.color.first[1][:name] if self.color.any?
+  #   known << self.engine.first[1][:name] if self.engine
+  #   known << self.transmission.first[1][:description] if self.transmission
+  #   known
+  # end
 
-  def options
-    return nil if read_attribute(:options).nil?
-    eval(read_attribute(:options)['options'])
-  end
+  # def options
+  #   return nil if read_attribute(:options).nil?
+  #   eval(read_attribute(:options)['options'])
+  # end
 
-  def options=(e: nil, t: nil, o: [], c: {})
-    engine = engines.each{|k,v| v[:equipped] = nil}
-    engine[e][:equipped] = true
+  # def options=(e: nil, t: nil, o: [], c: {})
+  #   engine = engines.each{|k,v| v[:equipped] = nil}
+  #   engine[e][:equipped] = true
 
-    transmission = transmissions.each{|k,v| v[:equipped] = nil}
-    transmission[t][:equipped] = true
+  #   transmission = transmissions.each{|k,v| v[:equipped] = nil}
+  #   transmission[t][:equipped] = true
 
-    option = options.each{|k,v| v.each{|ke,va| va[:equipped] = nil}}
-    o.each do |opt| # array
-      option.deep_find(opt)[:equipped] = true
+  #   option = options.each{|k,v| v.each{|ke,va| va[:equipped] = nil}}
+  #   o.each do |opt| # array
+  #     option.deep_find(opt)[:equipped] = true
+  #   end
+
+  #   color = colors.each{|k,v| v.each{|ke,va| va[:equipped] = nil}}
+  #   c.each do |type,col| # hash
+  #     color[type][col][:equipped] = true
+  #   end
+
+  #   write_attribute :options, { colors: color,
+  #                               options: option,
+  #                               engines: engine,
+  #                               transmissions: transmission }
+  # end
+
+  # # # # #
+  # this builds all of the getter and setter methods for the option_list attribute
+  # # # # #
+  %w(colors options transmissions engines).each do |opt|
+    define_method("available_#{opt}") do
+      option_list[opt].with_indifferent_access
     end
 
-    color = colors.each{|k,v| v.each{|ke,va| va[:equipped] = nil}}
+    define_method("available_#{opt}=") do |val|
+      option_list[opt] = val
+    end
+
+    define_method(opt == 'options' ? opt : opt.singularize) do
+      self.send("available_#{opt}#{['exterior'] if opt == 'color'}").select{ |k,v| v['equipped'] == true } rescue nil
+    end
+  end
+
+  def color=(c={})
+    return unless c.present?
+    clr = available_colors.each{ |k,v| v.each{ |ke,va| va['equipped'] = nil } }
     c.each do |type,col| # hash
-      color[type][col][:equipped] = true
+      clr[type][col]['equipped'] = true
     end
-
-    write_attribute :options, { colors: color,
-                                options: option,
-                                engines: engine,
-                                transmissions: transmission }
+    self.available_colors = clr
+  end
+  def engine=(e=nil)
+    return unless e.present?
+    eng = available_engines.each{ |k,v| v['equipped'] = nil }
+    eng[e]['equipped'] = true
+    self.available_engines = eng
+  end
+  def transmission=(t=nil)
+    return unless t.present?
+    trn = available_transmissions.each{ |k,v| v['equipped'] = nil }
+    trn[t]['equipped'] = true
+    self.available_transmissions = trn
+  end
+  def options=(o=[])
+    return unless o.present?
+    opt = available_options.each{ |k,v| v.each{ |ke,va| va['equipped'] = nil } }
+    o.each do |op| # array
+      opt.deep_find(op)[:equipped] = true
+    end
+    self.available_options = opt
   end
 
   def self.generate_vin
@@ -225,16 +275,18 @@ class Vehicle < ActiveRecord::Base
 private
 
   def build_options
-    return unless read_attribute(:options).nil?
+    return unless option_list.empty?
     tries = 0
     begin
       # 4 external calls to Edmunds API, hence the rescue block, just in case
-      write_attribute :options, { colors: Edmunds.query_colors(self.style),
-                                  options: Edmunds.query_options(self.style),
-                                  engines: Edmunds.query_engines(self.style),
-                                  transmissions: Edmunds.query_transmissions(self.style) }
+      self.available_colors = Edmunds.query_colors(style)
+      self.available_options = Edmunds.query_options(style)
+      self.available_engines = Edmunds.query_engines(style)
+      self.available_transmissions = Edmunds.query_transmissions(style)
+      self.save
       tries += 1
     rescue
+      sleep 1
       retry if tries <= 3
       return nil
     end

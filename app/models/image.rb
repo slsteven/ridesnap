@@ -4,7 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  vehicle_id :integer
-#  url        :string(255)
+#  url        :string
 #  default    :boolean
 #  created_at :datetime
 #  updated_at :datetime

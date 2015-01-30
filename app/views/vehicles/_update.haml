@@ -18,7 +18,7 @@
       .col-sm-6.col-xs-12
         .form-group#engine
           %h3 Engine
-          - @vehicle.engines.each do |eng, details|
+          - @vehicle.available_engines.each do |eng, details|
             .radio{title: details[:description]}
               = label_tag do
                 = f.radio_button :engine, eng, checked: details[:equipped]
@@ -26,13 +26,13 @@
 
         .form-group#transmission
           %h3 Transmission
-          - @vehicle.transmissions.each do |tran, details|
+          - @vehicle.available_transmissions.each do |tran, details|
             .radio{title: details[:description]}
               = label_tag do
                 = f.radio_button :transmission, tran, checked: details[:equipped]
                 = details[:name]
 
-        - if @vehicle.options.any?
+        - if @vehicle.available_options.any?
           .form-group#options
             %h3 Options
             - @vehicle.options.each do |opt, details|
@@ -46,7 +46,7 @@
       .col-sm-6.col-xs-12
         .form-group#colors
           %h3 Color
-          - @vehicle.colors.each do |type, details|
+          - @vehicle.available_colors.each do |type, details|
             %h4.purple= type.titleize
             - details.each do |k,v|
               .radio{title: v[:description]}
