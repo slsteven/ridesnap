@@ -8,6 +8,10 @@ module SessionsHelper
     current_user.try :admin?
   end
 
+  def agent?
+    current_user.try(:agent?) || admin?
+  end
+
   # in and out
   def sign_in(user)
     remember_token = User.generate_token

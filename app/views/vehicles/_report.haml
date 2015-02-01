@@ -8,99 +8,19 @@
       .modal-body
         = render 'vehicles/highlights'
         %br
-
-        %h3 FEDERAL SAFETY INSPECTION
-        .clearfix
-          %p.pull-left Front brake driver-side
-          = render partial: 'shared/progress', locals: {percent: 50}
-        .clearfix
-          %p.pull-left Front brake passenger-side
-          = render partial: 'shared/progress', locals: {percent: 80}
-        .clearfix
-          %p.pull-left Rear brake driver-side
-          = render partial: 'shared/progress', locals: {percent: 20}
-        .clearfix
-          %p.pull-left Rear brake passenger-side
-          = render partial: 'shared/progress', locals: {percent: 100}
-        .clearfix
-          %p.pull-left Seat belts
-          = render partial: 'shared/condition', locals: {cond: 'good'}
-        .clearfix
-          %p.pull-left Suspension
-          = render partial: 'shared/condition', locals: {cond: 'fair'}
-        .clearfix
-          %p.pull-left Lights
-          = render partial: 'shared/condition', locals: {cond: 'poor'}
-        %br
-
-        %h3 POWERTRAIN GUARANTEE INSPECTION
-        .clearfix
-          %p.pull-left Power steering pump
-          = render partial: 'shared/condition', locals: {cond: 'good'}
-        .clearfix
-          %p.pull-left Cooling system
-          = render partial: 'shared/condition', locals: {cond: 'good'}
-        .clearfix
-          %p.pull-left Belts
-          = render partial: 'shared/condition', locals: {cond: 'good'}
-        .clearfix
-          %p.pull-left Exhaust system
-          = render partial: 'shared/condition', locals: {cond: 'good'}
-        .clearfix
-          %p.pull-left Engine air filter
-          = render partial: 'shared/condition', locals: {cond: 'good'}
-        .clearfix
-          %p.pull-left Engine performance
-          = render partial: 'shared/condition', locals: {cond: 'good'}
-        .clearfix
-          %p.pull-left Transmission
-          = render partial: 'shared/condition', locals: {cond: 'good'}
-        .clearfix
-          %p.pull-left Fluid sticker
-          = render partial: 'shared/condition', locals: {cond: 'good'}
-        .clearfix
-          %p.pull-left Door sticker
-          = render partial: 'shared/condition', locals: {cond: 'good'}
-        .clearfix
-          %p.pull-left Vehicle system scan
-          = render partial: 'shared/condition', locals: {cond: 'good'}
-        .clearfix
-          %p.pull-left Fluid level checks
-          = render partial: 'shared/condition', locals: {cond: 'good'}
-        .clearfix
-          %p.pull-left Clutch wear
-          = render partial: 'shared/condition', locals: {cond: 'good'}
-        %br
-
-        %h3 WEAR AND TEAR INSPECTION
-        .clearfix
-          %p.pull-left Front tire driver-side
-          = render partial: 'shared/progress', locals: {percent: 40}
-        .clearfix
-          %p.pull-left Front tire passenger-side
-          = render partial: 'shared/progress', locals: {percent: 70}
-        .clearfix
-          %p.pull-left Rear tire driver-side
-          = render partial: 'shared/progress', locals: {percent: 20}
-        .clearfix
-          %p.pull-left Rear tire passenger-side
-          = render partial: 'shared/progress', locals: {percent: 80}
-        .clearfix
-          %p.pull-left Tire pressure
-          = render partial: 'shared/condition', locals: {cond: 'good'}
-        .clearfix
-          %p.pull-left Interior condition
-          = render partial: 'shared/condition', locals: {cond: 'good'}
-        .clearfix
-          %p.pull-left Air conditioning
-          = render partial: 'shared/condition', locals: {cond: 'good'}
-        .clearfix
-          %p.pull-left Cabin air filter
-          = render partial: 'shared/condition', locals: {cond: 'good'}
-        .clearfix
-          %p.pull-left Doors and windows
-          = render partial: 'shared/condition', locals: {cond: 'good'}
-        .clearfix
-          %p.pull-left Keys
-          = render partial: 'shared/condition', locals: {cond: 'good'}
-
+        - @vehicle.report.each do |k,v|
+          %h3.text-center= k.upcase
+          - v.each do |ke,va|
+            .clearfix.report-option
+              %p.pull-left= ke.titleize
+              - if agent?
+                = form_tag '#', role: 'form', class: 'report-conditions pull-right btn-group', data: {toggle: 'buttons'} do
+                  - { 'poor' => 'danger', 'fair' => 'warning', 'good' => 'success' }.each do |key, val|
+                    %label.btn{class: "btn-#{val} #{'active' if va == key}"}
+                      = radio_button_tag "report[#{k}][#{ke}]", key
+                      = key
+              - else
+                .pull-right.report-conditions.none
+                  = content_tag :a, 'poor', class: "btn btn-danger #{'active' if va == 'poor'}"
+                  = content_tag :a, 'fair', class: "btn btn-warning #{'active' if va == 'fair'}"
+                  = content_tag :a, 'good', class: "btn btn-success #{'active' if va == 'good'}"

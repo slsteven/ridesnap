@@ -70,13 +70,11 @@
         %h3 Is the car currenlty financed?
         .radio
           %label
-            = label_tag :financed_true, nil, class: 'sr-only'
             = radio_button_tag 'vehicle[financed]', true
             Yes, I am still paying off a loan
         %br
         .radio
           %label
-            = label_tag :financed_false, nil, class: 'sr-only'
             = radio_button_tag 'vehicle[financed]', false
             No, I have a clean title
 

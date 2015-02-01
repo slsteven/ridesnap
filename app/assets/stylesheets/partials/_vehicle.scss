@@ -140,3 +140,26 @@ form#vehicle-inspection {
   }
   z-index: 99;
 }
+
+.report-option {
+  margin: 5px 0;
+  p {
+    margin: 8px 10px;
+  }
+  .report-conditions {
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    .btn {
+      width: 88px;
+      &:not(.active) {
+        @extend .btn-default;
+      }
+    }
+    &.none {
+      a:hover {
+        cursor: default;
+      }
+    }
+  }
+}
