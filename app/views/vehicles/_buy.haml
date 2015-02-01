@@ -3,8 +3,8 @@
     .modal-content
       .modal-header
         = button_tag '&times'.html_safe, class: 'close', 'data-dismiss' => "modal", 'aria-label' => "Close"
-        .modal-title
-          %h3 Buying with #{Settings.app.name}
+        = image_tag 'black_logo.png', class: 'modal-logo'
+        %h4.modal-title Buying with #{Settings.app.name}
       .modal-body
         .text-center
           %h1

@@ -3,8 +3,8 @@
     .modal-content
       .modal-header
         = button_tag '&times'.html_safe, class: 'close', 'data-dismiss' => "modal", 'aria-label' => "Close"
-        .modal-title
-          %h2 #{Settings.app.name} Report
+        = image_tag 'black_logo.png', class: 'modal-logo'
+        %h4.modal-title #{Settings.app.name} Vehicle Report
       .modal-body
         = render 'vehicles/highlights'
         %br
