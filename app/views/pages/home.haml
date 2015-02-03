@@ -6,12 +6,7 @@
     %p #{Settings.app.name} takes care of all the stress and work that comes with buying and selling your car.
     %p We connect people to vehicles through our marketplace, and after that connection is made we connect the vehicle to the person.
     .col-sm-4.col-sm-offset-4
-      = form_tag search_vehicles_path, role: 'form', method: :get do
-        .input-group
-          = label_tag :rvr, nil, class: 'sr-only'
-          = text_field_tag :rvr, nil, placeholder: 'RVR: _ _ _ _ _ _', class: 'form-control'
-          %span.input-group-btn
-            = submit_tag 'Check', class: 'btn btn-purple btn-wide'
+      = render 'shared/rvr'
 
 .container{style: 'margin-top: 6em;'}
   .text-center
@@ -57,7 +52,7 @@
         %br
         %br
         .text-center
-          = link_to 'START SELLING', new_ride_path, class: 'btn btn-success'
+          = link_to 'START SELLING', sell_path, class: 'btn btn-success'
 
   %hr.arrow
 

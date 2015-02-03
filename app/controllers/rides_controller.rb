@@ -64,10 +64,18 @@ class RidesController < ApplicationController
     params[:user] ||= {}
     params[:ride] ||= {}
     @vehicle = Vehicle.find_by_vin(params[:vehicle_vin])
-    @intent = @vehicle.present? ? 'buy' : 'sell'
+    @intent = @vehicle && @vehicle.make ? 'buy' : 'sell'
     @menu = @intent
     @conditions = Vehicle.conditions.to_a
     Settings.vehicle_makes.to_hash.each_with_object(@makes=[]){ |(k,v),o| o << [v,k] }
+    @models = nil
+    @years = nil
+    @styles = nil
+    if params[:vehicle][:make] && params[:vehicle][:model]
+      @models = Edmunds.query_models(params[:vehicle][:make]).invert.to_a
+      @years = Edmunds.query_years(params[:vehicle][:make], params[:vehicle][:model]).invert.to_a
+      @styles = Edmunds.query_styles(params[:vehicle][:make], params[:vehicle][:model], params[:vehicle][:year]).invert.to_a
+    end
   end
 
   def show

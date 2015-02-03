@@ -17,7 +17,7 @@ html, body {
     ul.navbar-nav > li.active > a:after,
     ul.navbar-nav > li:not(.social) > a:hover:after {
       content: '';
-      border-bottom: $purple solid 2px;
+      border-bottom: solid 2px;
       padding: 0 50%;
       margin: 0 auto;
       position: absolute;
@@ -50,11 +50,10 @@ html, body {
 }
 
 .debug_dump {
-  display: none;
   z-index: 100;
   position: fixed;
-  bottom: 70px;
-  left: 30px;
+  bottom: 0px;
+  left: 0px;
   width: 400px;
   height: 300px;
 }
@@ -166,4 +165,19 @@ ul#how-it-works {
   width: 100px;
 }
 
-
+.price-range {
+  p {
+    position: absolute;
+    float: left;
+    padding: 8px;
+    margin-right: 10px;
+  }
+  .progress {
+    margin-left: 120px;
+    height: 40px;
+    .progress-bar {
+      padding: 8px;
+      // font-size: 24px;
+    }
+  }
+}

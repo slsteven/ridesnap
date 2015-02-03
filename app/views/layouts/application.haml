@@ -19,7 +19,7 @@
       = render 'shared/page_alerts'
       .content
         = yield
-        = debug(params) if Rails.env.development?
+        = debug(params) if Rails.env.development? && Settings.debug
         = render 'shared/modal', type: 'signin'
     = render 'layouts/footer'
 

@@ -16,7 +16,8 @@ Rails.application.routes.draw do
   get '/about'        => 'pages#about'
   get '/contact'      => 'pages#contact'
   get '/faq'          => 'pages#faq'
-  get '/agent'       => 'pages#agent'
+  get '/agent'        => 'pages#agent'
+  get '/sell'         => 'vehicles#sell'
 
   namespace :api, defaults: {format: 'json'} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do

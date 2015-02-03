@@ -35,6 +35,7 @@ ready = ->
     .complete (opt) ->
       return alert('Vehicle querying is down for maintenance, we apologize for the inconvenience.') if typeof opt.responseJSON is 'number'
       update_select opt, '#vehicle-query #vehicle_model'
+      # $('#vehicle-query #vehicle_make').val($(this).val())
       $('#vehicle-query #vehicle_model').prop 'disabled', false
       $('#vehicle-query #vehicle_year').val ''
       $('#vehicle-query #vehicle_year').prop 'disabled', true
@@ -52,6 +53,7 @@ ready = ->
         model: $(this).val()
     .complete (opt) ->
       update_select opt, '#vehicle-query #vehicle_year'
+      # $('#vehicle-query #vehicle_model').val($(this).val())
       $('#vehicle-query #vehicle_year').prop 'disabled', false
       $('#vehicle-query #vehicle_style').val ''
       $('#vehicle-query #vehicle_style').prop 'disabled', true
@@ -69,10 +71,12 @@ ready = ->
         year: $(this).val()
     .complete (opt) ->
       update_select opt, '#vehicle-query #vehicle_style'
+      # $('#vehicle-query #vehicle_year').val($(this).val())
       $('#vehicle-query #vehicle_style').prop 'disabled', false
       $('.new-ride-sell').prop 'disabled', true
 
   $('#vehicle-query #vehicle_style').on 'change', ->
+    # $('#vehicle-query #vehicle_style').val($(this).val())
     $('.new-ride-sell').prop 'disabled', false
     $('#vehicle-query #vehicle_description').val($('#vehicle-query #vehicle_style option:selected').text())
 

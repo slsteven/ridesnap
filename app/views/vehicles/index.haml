@@ -7,7 +7,7 @@
 
 .jumbotron.white-bg.row
   .container.text-center
-    = form_tag vehicles_path, class: 'form-inline', role: 'form', method: 'get' do
+    = form_tag vehicles_path, class: 'form-inline', role: 'form', method: :get do
       .form-group
         = select_tag :make, options_for_select(@makes, params[:make]), prompt: 'Makes', class: 'form-control'
       .form-group
@@ -23,7 +23,7 @@
         = select_tag :mileage, options_for_select(@miles, params[:mileage]), prompt: 'Mileage', class: 'form-control'
       %br
       %br
-      = submit_tag 'filter', class: 'btn btn-purple btn-wide'
+      = submit_tag 'filter', class: 'btn btn-purple btn-wide', name: nil
     %br
     .list-group.market-place
       = paginate @vehicles

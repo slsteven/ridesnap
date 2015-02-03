@@ -130,13 +130,6 @@ class Vehicle < ActiveRecord::Base
     read_attribute(:model)
   end
 
-  # def color
-  #   self.colors['exterior'].select{ |k,v| v[:equipped] == true } rescue nil
-  # end
-  # def colors
-  #   return nil if read_attribute(:options).nil?
-  #   eval(read_attribute(:options)['colors'])
-  # end
   def base_color
     return %w(black white grey red yellow green cyan blue magenta).sample if closest_color.nil?
     return nil unless self.color.present? && self.color.first[1][:primary]
@@ -161,65 +154,92 @@ class Vehicle < ActiveRecord::Base
     end
   end
 
-  # def engine
-  #   self.engines.select{ |k,v| v[:equipped] == true } rescue nil
-  # end
-  # def engines
-  #   return nil if read_attribute(:options).nil?
-  #   eval(read_attribute(:options)['engines'])
-  # end
+  def build_report
+    self.report = {
+      'fluid levels' => {
+        "Engine Oil" => 'good',
+        "Transmission Oil" => 'fair',
+        "Brake Fluid" => 'fair',
+        "Power Steering" => 'good',
+        "Coolant" => 'good',
+        "Engine Leaks" => 'good',
+        "Transmission Leaks" => 'good',
+        "Radiator Leaks" => 'good'
+      }, 'engine' => {
+        "Drive/timing belt" => 'good',
+        "Electric Cooling Fan" => 'good',
+        "ignition" => 'good',
+        "battery" => 'fair',
+        "corrosion" => 'good',
+        "case leaking" => 'good',
+        "load test" => 'good',
+        "voltage" => 'fair'
+      }, 'tires' => {
+        "front left" => 'good',
+        "front right" => 'good',
+        "rear left" => 'good',
+        "rear right" => 'good'
+      }, 'brakes' => {
+        "rotors" => 'good',
+        "pads" => 'poor',
+        "calipers" => 'good'
+      }, 'suspension' => {
+        "Alignment" => 'good',
+        "weird noises" => 'fair',
+        "Shocks/Struts" => 'good',
+        "Movement" => 'good',
+        "Tie-rod Ends" => 'good',
+        "Ball Joints" => 'good',
+        "Control Arms" => 'good'
+      }, 'dash and electronics' => {
+        "Check Engine Lights" => 'good',
+        "Power Mirrors" => 'good',
+        "Heat/AC" => 'good',
+        "Alarm" => 'good',
+        "Windows" => 'good'
+      }, 'exterior' => {
+        "Rust and Corrosion" => 'good',
+        "dents" => 'good',
+        'dings' => 'good',
+        'scuffs' => 'fair'
+      }, 'interior' => {
+        "Carpets" => 'good',
+        "Dash and Door Panels" => 'good',
+        "Console" => 'good',
+        "Seats and head rest" => 'fair'
+      }, 'title' => {
+        "paperwork" => 'good',
+        "overall mechanic's report" => 'good',
+        "Overall Exterior and Interior Report" => 'good'
+      }, 'test drive summary' => {
+        "Speedometer" => 'good',
+        "How does the engine sound?" => 'good',
+        "Does transmission shift gears smoothly?" => 'fair',
+        "Alignment?" => 'good',
+        "Does the car vibrate when the brakes are applied?" => 'good',
+        "Suspension absorbs bumps normally?" => 'good'
+      }
+    }
+  end
+  def report(type=nil)
+    rpt = if self.read_attribute(:report).blank?
+      build_report
+    else
+      self.read_attribute(:report)
+    end
+    case type.to_s.downcase
+    when 'mechanical' then rpt.slice('fluid levels','engine','tires','brakes','suspension','dash and electronics')
+    when 'cosmetic' then rpt.slice('exterior', 'interior')
+    when 'summary' then rpt.slice('title', 'test drive summary')
+    else rpt
+    end
+  end
 
   def rvr
     vin.presence[-6..-1]
   rescue
     ''
   end
-
-  # def transmission
-  #   self.transmissions.select{ |k,v| v[:equipped] == true } rescue nil
-  # end
-  # def transmissions
-  #   return nil if read_attribute(:options).nil?
-  #   eval(read_attribute(:options)['transmissions'])
-  # end
-
-  # def known_attr
-  #   known = []
-  #   known << "#{self.condition} condition" if self.condition
-  #   known << "#{number_with_delimiter self.mileage} miles" if self.mileage
-  #   known << self.color.first[1][:name] if self.color.any?
-  #   known << self.engine.first[1][:name] if self.engine
-  #   known << self.transmission.first[1][:description] if self.transmission
-  #   known
-  # end
-
-  # def options
-  #   return nil if read_attribute(:options).nil?
-  #   eval(read_attribute(:options)['options'])
-  # end
-
-  # def options=(e: nil, t: nil, o: [], c: {})
-  #   engine = engines.each{|k,v| v[:equipped] = nil}
-  #   engine[e][:equipped] = true
-
-  #   transmission = transmissions.each{|k,v| v[:equipped] = nil}
-  #   transmission[t][:equipped] = true
-
-  #   option = options.each{|k,v| v.each{|ke,va| va[:equipped] = nil}}
-  #   o.each do |opt| # array
-  #     option.deep_find(opt)[:equipped] = true
-  #   end
-
-  #   color = colors.each{|k,v| v.each{|ke,va| va[:equipped] = nil}}
-  #   c.each do |type,col| # hash
-  #     color[type][col][:equipped] = true
-  #   end
-
-  #   write_attribute :options, { colors: color,
-  #                               options: option,
-  #                               engines: engine,
-  #                               transmissions: transmission }
-  # end
 
   # # # # #
   # this builds all of the getter and setter methods for the option_list attribute

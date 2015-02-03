@@ -56,6 +56,14 @@ class VehiclesController < ApplicationController
     end
   end
 
+  def sell
+    params[:vehicle] ||= {}
+    params[:user] ||= {}
+    params[:ride] ||= {}
+    @menu = 'sell'
+    Settings.vehicle_makes.to_hash.each_with_object(@makes=[]){ |(k,v),o| o << [v,k] }
+  end
+
   def show
     @vehicle = Vehicle.find_by_vin(params[:id]) || Vehicle.find_by_id(params[:id])
     unless @vehicle

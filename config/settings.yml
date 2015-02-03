@@ -25,6 +25,8 @@ box:
   client_secret: ZdGn0GmeE1HlKkbYS03NLOx95v1ayjgv
   redirect_uri: https://ridesnap.co/sessions/box_auth
 
+debug: false
+
 google:
   analytics:
     enabled: false

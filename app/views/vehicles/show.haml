@@ -39,15 +39,15 @@
         %p
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           %br
-          = link_to 'click to view', '#'
-      = image_tag 'blank.jpg', class: 'img-responsive'
+          = link_to 'click to view', '#report-modal-mech', data: {toggle: 'modal'}
+      = image_tag 'engine.jpg', class: 'img-responsive'
     .col-xs-12.col-sm-6.hoverable
       .overlay.text-center
-        %b Exterior Report
+        %b Cosmetic Report
         %p
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           %br
-          = link_to 'click to view', '#'
+          = link_to 'click to view', '#report-modal-cosm', data: {toggle: 'modal'}
       = image_tag 'blank.jpg', class: 'img-responsive'
   .row
     .col-xs-12.col-sm-6.hoverable
@@ -56,16 +56,16 @@
         %p
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           %br
-          = link_to 'click to view', '#'
-      = image_tag 'blank.jpg', class: 'img-responsive'
+          = link_to 'click to view', '#coming-soon', data: {toggle: 'modal'}
+      = image_tag 'report.jpg', class: 'img-responsive'
     .col-xs-12.col-sm-6.hoverable
       .overlay.text-center
         %b Value Summary
         %p
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
           %br
-          = link_to 'click to view', '#'
-      = image_tag 'blank.jpg', class: 'img-responsive'
+          = link_to 'click to view', '#report-modal-sum', data: {toggle: 'modal'}
+      = image_tag 'money.jpg', class: 'img-responsive'
 
   %hr.arrow
 
@@ -81,7 +81,7 @@
 
   .text-center.form-inline
     .form-group
-      = button_tag 'DOWNLOAD REPORT', class: 'btn btn-success', data: {toggle: 'modal', target: '#report-modal'}
+      = button_tag 'DOWNLOAD REPORT', class: 'btn btn-success', data: {toggle: 'modal', target: '#report-modal-all'}
     .form-group
       = link_to 'CHECK OUT THIS CAR', new_ride_path(vehicle_vin: @vehicle.vin), class: 'btn btn-grey'
     .form-group
@@ -91,4 +91,8 @@
 
   = render 'shared/story_icons_1'
 
+= render 'vehicles/report_mech'
+= render 'vehicles/report_cosm'
 = render 'vehicles/report'
+= render 'vehicles/report_summary'
+= render 'shared/coming_soon'

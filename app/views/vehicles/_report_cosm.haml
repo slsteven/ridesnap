@@ -1,4 +1,4 @@
-.modal.fade#report-modal-all{role: "dialog", 'aria-labelledby' => "Vehicle Report", 'aria-hidden' => "true"}
+.modal.fade#report-modal-cosm{role: "dialog", 'aria-labelledby' => "Vehicle Report", 'aria-hidden' => "true"}
   .modal-dialog
     .modal-content
       .modal-header
@@ -8,7 +8,7 @@
       .modal-body
         = render 'vehicles/highlights'
         %br
-        - @vehicle.report.each do |k,v|
+        - @vehicle.report('cosmetic').each do |k,v|
           %h3.text-center= k.upcase
           - v.each do |ke,va|
             .clearfix.report-option

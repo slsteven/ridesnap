@@ -1,15 +1,15 @@
 .form-group
   = label_tag :vehicle_make, nil, class: 'sr-only'
-  = select_tag 'vehicle[make]', options_for_select(@makes), prompt: 'Make', class: 'form-control'
+  = select_tag 'vehicle[make]', options_for_select(@makes, params[:vehicle][:make]), prompt: 'Make', class: 'form-control'
 .form-group
   = label_tag :vehicle_model, nil, class: 'sr-only'
-  = select_tag 'vehicle[model]', options_for_select([]), prompt: 'Model', class: 'form-control', disabled: true
+  = select_tag 'vehicle[model]', options_for_select((@models || []), params[:vehicle][:model]), prompt: 'Model', class: 'form-control', disabled: true
 .form-group
   = label_tag :vehicle_year, nil, class: 'sr-only'
-  = select_tag 'vehicle[year]', options_for_select([]), prompt: 'Year', class: 'form-control', disabled: true
+  = select_tag 'vehicle[year]', options_for_select((@years || []), params[:vehicle][:year]), prompt: 'Year', class: 'form-control', disabled: true
 .form-group
   = label_tag :vehicle_style, nil, class: 'sr-only'
-  = select_tag 'vehicle[style]', options_for_select([]), prompt: 'Style', class: 'form-control', disabled: true
+  = select_tag 'vehicle[style]', options_for_select((@styles || []), params[:vehicle][:style]), prompt: 'Style', class: 'form-control', disabled: true
 
 = hidden_field_tag 'vehicle[description]'
 = hidden_field_tag 'vehicle[model_pretty]'

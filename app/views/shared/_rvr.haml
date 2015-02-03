@@ -1,0 +1,6 @@
+= form_tag search_vehicles_path, role: 'form', method: :get do
+  .input-group
+    = label_tag :rvr, nil, class: 'sr-only'
+    = text_field_tag :rvr, nil, placeholder: 'RVR: _ _ _ _ _ _', class: 'form-control'
+    %span.input-group-btn
+      = submit_tag 'Check', class: 'btn btn-purple btn-wide'
