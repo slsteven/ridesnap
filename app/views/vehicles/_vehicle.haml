@@ -26,7 +26,8 @@
       %p
         %small mileage: #{number_with_delimiter(vehicle.mileage) || 'n/a'}
       %p
-        %small location: #{vehicle.city || 'n/a'}
+        //%small RVR: #{vehicle.city || 'n/a'}
+        %small RVR: #{vehicle.rvr.upcase}
 .actions{data: {object: vehicle.id}}
   .pull-right.nope nope
   .pull-left.yup yup
