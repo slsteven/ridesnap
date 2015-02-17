@@ -26,7 +26,12 @@
 }
 
 .btn {
-  border-radius: 0 !important;
+  // border-radius: 0 !important;
+}
+
+.btn-link {
+  font-weight: bold;
+  color: $dark;
 }
 
 .btn-wide {
@@ -310,7 +315,7 @@ ul.dropdown-menu {
 
 hr {
   margin: 6em auto;
-  border-top: 2px solid #999999;
+  border-top: 1px solid #999999;
   &.arrow:after {
     content: '';
     display: block;
@@ -321,8 +326,8 @@ hr {
     width: 15px;
     height: 15px;
     background: white;
-    border-left: 2px solid #999999;
-    border-top: 2px solid #999999;
+    border-left: 1px solid #999999;
+    border-top: 1px solid #999999;
   }
 }
 .progress-bar-blank {

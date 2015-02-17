@@ -6,12 +6,11 @@
 #  user_id      :integer
 #  vehicle_id   :integer
 #  scheduled_at :datetime
-#  relation     :integer
+#  relation     :string
 #  address      :string
 #  zip_code     :string
 #  created_at   :datetime
 #  updated_at   :datetime
-#  cancel       :boolean          default("false")
 #
 # Indexes
 #

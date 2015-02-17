@@ -6,9 +6,9 @@ default: &default
   adapter:    postgresql
   encoding:   utf8
   host:       localhost
-  port:       5432
+  port:       5433
   username:   postgres
-  password:   Asdf!234
+  password:   
   reconnect:  true
   pool:       25
 

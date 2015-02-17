@@ -18,6 +18,12 @@
   #results-circles {
     display: flex;
   }
+  h1 {
+    &.big-title {
+      font-size: 90px;
+      line-height: 80px;
+    }
+  }
 }
 
 // Medium devices (desktops, 992px and up)

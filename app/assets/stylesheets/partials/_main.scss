@@ -181,3 +181,39 @@ ul#how-it-works {
     }
   }
 }
+
+.bullet {
+  display: inline-block;
+  text-align: left;
+  &.align-middle {
+    margin-left: 100px;
+  }
+  li {
+    list-style-position: inside;
+    list-style-type: circle;
+    white-space: nowrap;
+  }
+}
+
+h1 {
+  &.big-title {
+    font-size: 60px;
+    line-height: 68px;
+    color: #808080;
+    margin: 20px 0 35px;
+    .btn {
+      border-radius: 10px;
+      font-size: 36px;
+      font-weight: bold;
+      margin-top: 10px;
+      padding: 7px 70px;
+      vertical-align: top;
+    }
+  }
+  .text-muted {
+    color: #e6e6e6;
+  }
+  span {
+    margin-right: 15px;
+  }
+}
