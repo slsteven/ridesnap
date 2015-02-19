@@ -126,6 +126,9 @@ form#vehicle-inspection {
     margin: auto;
     opacity: 0.3;
   }
+  a {
+    color: #333;
+  }
 }
 
 .remove-image {
@@ -149,18 +152,26 @@ form#vehicle-inspection {
 }
 
 .report-option {
-  margin: 5px 0;
-  p {
-    margin: 8px 10px;
-  }
+  margin: 7px 0;
   .report-conditions {
-    width: 50%;
+    // width: 50%;
     display: flex;
     justify-content: space-around;
     .btn {
-      width: 88px;
+      border: medium none;
+      font-weight: normal;
+      line-height: 18px;
+      padding: 0;
+      text-transform: uppercase;
+      width: 55px;
       &:not(.active) {
-        @extend .btn-default;
+        // @extend .btn-default;
+        background-color: #ccc;
+        color: #fff;
+        &:hover {
+          background-color: #ccc !important;
+          color: #fff !important;
+        }
       }
     }
     &.none {
@@ -169,4 +180,42 @@ form#vehicle-inspection {
       }
     }
   }
+  p {
+    margin: 0;
+    color: #666;
+  }
+}
+
+
+/* Additional */
+
+.high_light {
+  p {
+    color: #666;
+  }
+  span {
+    color: #998675;
+  }
+}
+
+.title-grey {
+  background-color: #999999;
+  color: #fff;
+  h1 {
+    font-weight: bold;
+    margin: 0;
+    padding: 16px 0;
+  }
+}
+
+.inspection {
+  font-size: 20px;
+  margin: 20px 0 30px;
+  span {
+    color: #009245;
+  }
+}
+
+.icons_high_light {
+  text-align: center;
 }

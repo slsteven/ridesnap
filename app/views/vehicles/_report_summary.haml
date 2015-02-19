@@ -21,6 +21,6 @@
                       = key
               - else
                 .pull-right.report-conditions.none
-                  = content_tag :a, 'poor', class: "btn btn-danger #{'active' if va == 'poor'}"
-                  = content_tag :a, 'fair', class: "btn btn-warning #{'active' if va == 'fair'}"
                   = content_tag :a, 'good', class: "btn btn-success #{'active' if va == 'good'}"
+                  = content_tag :a, 'fair', class: "btn btn-warning #{'active' if va == 'fair'}"
+                  = content_tag :a, 'poor', class: "btn btn-danger #{'active' if va == 'poor'}"

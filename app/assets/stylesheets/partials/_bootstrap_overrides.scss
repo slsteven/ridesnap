@@ -27,6 +27,8 @@
 
 .btn {
   // border-radius: 0 !important;
+  padding: 2px 30px 0;
+  font-weight: bold;
 }
 
 .btn-link {
@@ -65,7 +67,7 @@ li.active .btn-primary,
 li.active .btn-success,
 .open .dropdown-toggle.btn-success {
   color: #fff !important;
-  background-color: #47a447 !important;
+  background-color: #009245 !important;
   border-color: #398439 !important;
 }
 .btn-info:hover,
@@ -333,4 +335,13 @@ hr {
 .progress-bar-blank {
   background-color: initial;
   box-shadow: none;
+}
+
+// Additional //
+
+.modal-body {
+  padding: 30px;
+  h3 {
+    color: #000;
+  }
 }

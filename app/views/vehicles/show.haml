@@ -26,18 +26,20 @@
 
   %hr.arrow
 
-  %h1.text-center
-    RVR
-    = @vehicle.rvr.upcase
-    - if admin? && @vehicle.external_ad.present?
-      %br
-      %h3= link_to @vehicle.external_ad
+  .title-grey
+    %h1.text-center
+      RVR
+      = @vehicle.rvr.upcase
+      - if admin? && @vehicle.external_ad.present?
+        %br
+        %h3= link_to @vehicle.external_ad
   .row
     .col-xs-12.col-sm-6.hoverable
       .overlay.text-center
         %h3 Mechanical Report
         %p
           150-point inspection (engine, tires, leaks, etc.)
+          %br
           %br
           = link_to 'click to view', '#report-modal-mech', data: {toggle: 'modal'}
       = image_tag 'engine.jpg', class: 'img-responsive'
@@ -46,6 +48,7 @@
         %h3 Cosmetic Report
         %p
           Dents, dings, scratches, rust
+          %br
           %br
           = link_to 'click to view', '#report-modal-cosm', data: {toggle: 'modal'}
       = image_tag 'blank.jpg', class: 'img-responsive'
@@ -56,6 +59,7 @@
         %p
           Title status, ownership, maintenance records
           %br
+          %br
           = link_to 'click to view', '#coming-soon', data: {toggle: 'modal'}
       = image_tag 'report.jpg', class: 'img-responsive'
     .col-xs-12.col-sm-6.hoverable
@@ -64,12 +68,15 @@
         %p
           Test driven by a Mechanic
           %br
+          %br
           = link_to 'click to view', '#report-modal-sum', data: {toggle: 'modal'}
       = image_tag 'money.jpg', class: 'img-responsive'
 
   %hr.arrow
-
-  = render 'vehicles/highlights'
+    .row
+      .col-xs-6.col-xs-offset-3
+        .row
+          = render 'vehicles/highlights'
 
   - if @rides.any?
     %hr.arrow
@@ -80,6 +87,9 @@
   %hr.arrow
 
   .text-center.form-inline
+    .inspection
+      Mechanical Inspection -
+      %span EXCELLENT
     .form-group
       = button_tag 'DOWNLOAD REPORT', class: 'btn btn-success', data: {toggle: 'modal', target: '#report-modal-all'}
     .form-group
