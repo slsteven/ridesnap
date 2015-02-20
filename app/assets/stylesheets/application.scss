@@ -24,11 +24,25 @@
       line-height: 80px;
     }
   }
+  .big-modal {
+    width: 750px;
+    .modal-body {
+      padding: 65px;
+    }
+  }
 }
 
 // Medium devices (desktops, 992px and up)
 @media (min-width: 992px) {
-
+  // .big-modal {
+  //   width: 800px;
+  //   .modal-body {
+  //     padding: 65px;
+  //   }
+  // }
+  .report-img {
+    margin: 0;
+  }
 }
 
 // Large devices (large desktops, 1200px and up)

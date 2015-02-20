@@ -339,9 +339,11 @@ hr {
 
 // Additional //
 
-.modal-body {
-  padding: 30px;
-  h3 {
-    color: #000;
+.big-modal {
+  width: auto;
+  .modal-body {
+    h3 {
+      color: #000;
+    }
   }
 }

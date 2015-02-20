@@ -10,20 +10,25 @@
         %br
         - @vehicle.report('cosmetic').each do |k,v|
           %h3= k.upcase
-          - v.each do |ke,va|
-            .clearfix.report-option
-              .col-md-4
-                .row= ke.titleize
-                - if agent?
-                  = form_tag '#', role: 'form', class: 'report-conditions pull-right btn-group', data: {toggle: 'buttons'} do
-                    - { 'poor' => 'danger', 'fair' => 'warning', 'good' => 'success' }.each do |key, val|
-                      %label.btn{class: "btn-#{val} #{'active' if va == key}"}
-                        = radio_button_tag "report[#{k}][#{ke}]", key
-                        = key
-                - else
-                  .col-md-4.report-conditions.none
-                    = content_tag :a, 'good', class: "btn btn-success #{'active' if va == 'good'}"
-                    = content_tag :a, 'fair', class: "btn btn-warning #{'active' if va == 'fair'}"
-                    = content_tag :a, 'poor', class: "btn btn-danger #{'active' if va == 'poor'}"
-                  .col-md-4
-                    = image_tag 'test-report.jpg', class: 'img-responsive'
+          .clearfix
+            .col-md-9.col-xs-12
+              .row
+                - v.each do |ke,va|
+                  .clearfix.report-option
+                    .col-xs-4
+                      .row
+                        %p= ke.titleize
+                    - if agent?
+                      = form_tag '#', role: 'form', class: 'report-conditions btn-group', data: {toggle: 'buttons'} do
+                        - { 'poor' => 'danger', 'fair' => 'warning', 'good' => 'success' }.each do |key, val|
+                          %label.btn{class: "btn-#{val} #{'active' if va == key}"}
+                            = radio_button_tag "report[#{k}][#{ke}]", key
+                            = key
+                    - else
+                      .col-xs-8.report-conditions.none
+                        = content_tag :a, 'good', class: "btn btn-success #{'active' if va == 'good'}"
+                        = content_tag :a, 'fair', class: "btn btn-warning #{'active' if va == 'fair'}"
+                        = content_tag :a, 'poor', class: "btn btn-danger #{'active' if va == 'poor'}"
+            .col-md-3.col-xs-12
+              .row
+                = image_tag 'test-report.jpg', class: 'img-responsive align-center'

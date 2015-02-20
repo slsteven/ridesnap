@@ -1,20 +1,20 @@
 .modal.fade#report-modal-mech{role: "dialog", 'aria-labelledby' => "Vehicle Report", 'aria-hidden' => "true"}
-  .modal-dialog
+  .modal-dialog.big-modal
     .modal-content
       .modal-header
         = button_tag '&times'.html_safe, class: 'close', 'data-dismiss' => "modal", 'aria-label' => "Close"
         = image_tag 'black_logo.png', class: 'modal-logo'
         %h4.modal-title #{Settings.app.name} Vehicle Report
-      .modal-body.report-section
+      .modal-body
         = render 'vehicles/highlights'
         %br
         - @vehicle.report('mechanical').each do |k,v|
           %h3= k.upcase
-          .clearfix
+          .clearfix.report-option
             .col-md-9.col-xs-12
               .row
-                - v.each do |ke,va|
-                  .clearfix.report-option
+                - v.each_with_index do |(ke,va),index|
+                  .clearfix.report-option.js-report-row{class: 'js-report-report-' + index.to_s}
                     .col-xs-4
                       .row
                         %p= ke.titleize
@@ -29,6 +29,14 @@
                         = content_tag :a, 'good', class: "btn btn-success #{'active' if va == 'good'}"
                         = content_tag :a, 'fair', class: "btn btn-warning #{'active' if va == 'fair'}"
                         = content_tag :a, 'poor', class: "btn btn-danger #{'active' if va == 'poor'}"
-            .col-md-3.col-xs-12
+            .col-md-3.col-xs-12.js-content-images.text-center
               .row
-                = image_tag 'test-report.jpg', class: 'img-responsive align-center'
+                - v.each_with_index do |(ke,va),index|
+                  = image_tag 'test-report-' + index.to_s + '.jpg', class: 'img-responsive report-img js-report-img-' + index.to_s
+            .col-md-9.col-xs-12.js-content-comments
+              .row
+                %p
+                  Comments:
+                  - v.each_with_index do |(ke,va),index|
+                    %span{class: 'report-comment js-report-comment-' + index.to_s}
+                      #{index} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.
