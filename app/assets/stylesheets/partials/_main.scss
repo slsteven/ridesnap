@@ -97,8 +97,14 @@ ul {
   list-style: none;
 }
 
-span img {
-  max-width: 70px;
+span {
+  img {
+    max-width: 70px;
+    &.img-svg {
+      max-width: 100px;
+      width: 100px;
+    }
+  }
 }
 
 .snapup-popup {
@@ -195,26 +201,40 @@ ul#how-it-works {
   }
 }
 
-h1 {
-  &.big-title {
-    font-size: 60px;
-    line-height: 68px;
+.transparent {
+  background-color: transparent;
+  border: medium none;
+  box-shadow: none;
+  &:hover, &:active, &:focus {
+    box-shadow: none;
+    border-color: transparent;
+  }
+}
+
+.form-big {
+  margin: 20px 0 35px;
+  .rvr-only {
     color: #808080;
-    margin: 20px 0 35px;
-    .btn {
-      border-radius: 10px;
-      font-size: 36px;
+    font-size: 50px;
+    line-height: 40px;
+    padding-top: 0;
+  }
+  input {
+    &[type="text"] {
+      font-size: 50px;
       font-weight: bold;
-      margin-top: 10px;
-      padding: 7px 70px;
-      vertical-align: top;
+      height: auto;
+      margin-top: -10px;
+      line-height: normal;
+      padding-bottom: 0;
+      padding-top: 0;
+      @include placeholder(#e6e6e6);
     }
-  }
-  .text-muted {
-    color: #e6e6e6;
-  }
-  span {
-    margin-right: 15px;
+    &[type="submit"] {
+      border-radius: 6px;
+      font-size: 18px;
+      padding: 6px 40px;
+    }
   }
 }
 

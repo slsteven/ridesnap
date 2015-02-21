@@ -30,6 +30,9 @@
       padding: 65px;
     }
   }
+
+  
+
 }
 
 // Medium devices (desktops, 992px and up)
@@ -43,6 +46,26 @@
   .report-img {
     margin: 0;
   }
+
+  .form-big {
+    .rvr-only {
+      font-size: 90px;
+      line-height: 65px;
+      padding-top: 7px;
+    }
+    input {
+      &[type="text"] {
+        font-size: 90px;
+        margin-top: -13px;
+      }
+      &[type="submit"] {
+        border-radius: 10px;
+        font-size: 34px;
+        padding: 12px 78px;
+      }
+    }
+  }
+
 }
 
 // Large devices (large desktops, 1200px and up)

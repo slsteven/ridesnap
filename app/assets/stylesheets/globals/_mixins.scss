@@ -3,3 +3,22 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+@mixin placeholder($color) {
+  &::-webkit-input-placeholder {
+    color: $color;
+    font-weight: bold;
+  }
+  &:-moz-placeholder {
+    color: $color;
+    font-weight: bold;
+  }
+  &::-moz-placeholder {
+    color: $color;
+    font-weight: bold;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+    font-weight: bold;
+  }
+}

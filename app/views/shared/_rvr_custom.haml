@@ -1,0 +1,11 @@
+= form_tag search_vehicles_path, role: 'form', method: :get, class: 'form-horizontal' do
+  .form-group
+    %label.col-xs-3.control-label.rvr-only
+      RVR:
+    .col-xs-5
+      .row
+        = label_tag :rvr, nil, class: 'sr-only'
+        = text_field_tag :rvr, nil, placeholder: 'EX1234', class: 'transparent form-control'
+    .col-xs-4
+      .row
+        = submit_tag 'CHECK', class: 'btn btn-purple btn-lg'

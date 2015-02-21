@@ -6,12 +6,9 @@
         = image_tag 'black_logo.png', class: 'modal-logo'
         %h4.modal-title Buying with #{Settings.app.name}
       .modal-body
-        .text-center
-          %h1.big-title
-            %b
-              RVR:
-              %span.text-muted EX1234
-              = button_tag 'CHECK', class: 'btn btn-purple btn-lg'
+        .form-big
+          =render 'shared/rvr_custom'
+
         %p The process of buying used cars on Craigslist and other sites is flawed.<br /> You should know much more about a car before meeting random people and going out for a test drive!
         %p
           Now with #{Settings.app.name}’s marketplace or by entering your
@@ -39,8 +36,7 @@
         %hr.arrow
 
         .text-center
-          %span= image_tag('eye.svg')
-          %br
+          %span= image_tag 'eye.svg', class: 'img-svg'
           %br
           = button_tag 'CHECK OUT THIS CAR', class: 'btn btn-link'
           %br
@@ -50,7 +46,7 @@
         %hr.arrow
 
         .text-center
-          %span= image_tag('checklist.svg')
+          %span= image_tag 'checklist.svg', class: 'img-svg'
           %br
           %br
           = button_tag 'DOWNLOAD REPORT', class: 'btn btn-link'
@@ -64,7 +60,7 @@
         %hr.arrow
 
         .text-center
-          %span= image_tag('money.svg')
+          %span= image_tag 'money.svg', class: 'img-svg'
           %br
           %br
           = button_tag 'BUY THIS CAR!', class: 'btn btn-link'
@@ -85,20 +81,15 @@
         %hr.arrow
 
         .text-center
-          %span= image_tag('steer.svg')
-          %br
+          %span= image_tag 'steer.svg', class: 'img-svg'
           %br
           %h3 Delivery
           %p Get your car delivered right to your door step.
 
         %hr.arrow
 
-        .text-center
-          %h1.big-title
-            %b
-              RVR:
-              %span.text-muted EX1234
-              = button_tag 'CHECK', class: 'btn btn-purple btn-lg'
+        .form-big
+          =render 'shared/rvr_custom'
 
         %hr
 
