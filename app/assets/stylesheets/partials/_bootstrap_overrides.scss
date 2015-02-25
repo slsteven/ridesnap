@@ -31,6 +31,13 @@
   font-weight: bold;
 }
 
+input.btn {
+  &[type = "submit"] {
+    padding: 6px 12px;
+    font-weight: normal;
+  }
+}
+
 .btn-link {
   font-weight: bold;
   color: $dark;
