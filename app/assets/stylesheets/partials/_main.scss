@@ -241,3 +241,19 @@ ul#how-it-works {
 .align-center {
   margin: 0 auto;
 }
+
+.btn-inspection {
+  .btn {
+    width: 210px;
+  }
+}
+
+.highlights {
+  .model {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  p > span {
+    color: #998675;
+  }
+}

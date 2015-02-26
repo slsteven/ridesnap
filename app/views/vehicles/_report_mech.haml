@@ -19,7 +19,7 @@
                       .row
                         %p= ke.titleize
                     - if agent?
-                      = form_tag '#', role: 'form', class: 'report-conditions btn-group', data: {toggle: 'buttons'} do
+                      = form_tag '#', role: 'form', class: 'report-conditions pull-right btn-group', data: {toggle: 'buttons'} do
                         - { 'poor' => 'danger', 'fair' => 'warning', 'good' => 'success' }.each do |key, val|
                           %label.btn{class: "btn-#{val} #{'active' if va == key}"}
                             = radio_button_tag "report[#{k}][#{ke}]", key

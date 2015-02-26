@@ -10,17 +10,34 @@
         %br
         - @vehicle.report.each do |k,v|
           %h3= k.upcase
-          - v.each do |ke,va|
-            .clearfix.report-option
-              %p.pull-left= ke.titleize
-              - if agent?
-                = form_tag '#', role: 'form', class: 'report-conditions pull-right btn-group', data: {toggle: 'buttons'} do
-                  - { 'poor' => 'danger', 'fair' => 'warning', 'good' => 'success' }.each do |key, val|
-                    %label.btn{class: "btn-#{val} #{'active' if va == key}"}
-                      = radio_button_tag "report[#{k}][#{ke}]", key
-                      = key
-              - else
-                .pull-right.report-conditions.none
-                  = content_tag :a, 'good', class: "btn btn-success #{'active' if va == 'good'}"
-                  = content_tag :a, 'fair', class: "btn btn-warning #{'active' if va == 'fair'}"
-                  = content_tag :a, 'poor', class: "btn btn-danger #{'active' if va == 'poor'}"
+          .clearfix.report-option
+            .col-md-9.col-xs-12
+              .row
+                - v.each_with_index do |(ke,va),index|
+                  .clearfix.report-option.js-report-row{class: 'js-report-report-' + index.to_s}
+                    .col-xs-4
+                      .row
+                        %p= ke.titleize
+                    - if agent?
+                      = form_tag '#', role: 'form', class: 'report-conditions pull-right btn-group', data: {toggle: 'buttons'} do
+                        - { 'poor' => 'danger', 'fair' => 'warning', 'good' => 'success' }.each do |key, val|
+                          %label.btn{class: "btn-#{val} #{'active' if va == key}"}
+                            = radio_button_tag "report[#{k}][#{ke}]", key
+                            = key
+                    - else
+                      .col-xs-8.report-conditions.none
+                        = content_tag :a, 'good', class: "btn btn-success #{'active' if va == 'good'}"
+                        = content_tag :a, 'fair', class: "btn btn-warning #{'active' if va == 'fair'}"
+                        = content_tag :a, 'poor', class: "btn btn-danger #{'active' if va == 'poor'}"
+            .col-md-3.col-xs-12.js-content-images.text-center
+              .row
+                - v.each_with_index do |(ke,va),index|
+                  = image_tag 'test-report-' + index.to_s + '.jpg', class: 'img-responsive report-img js-report-img-' + index.to_s
+            .col-md-9.col-xs-12.js-content-comments
+              .row
+                %p
+                  Comments:
+                  - v.each_with_index do |(ke,va),index|
+                    %span{class: 'report-comment js-report-comment-' + index.to_s}
+                      #{index} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.
+
