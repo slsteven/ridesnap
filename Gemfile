@@ -47,6 +47,8 @@ gem 'bcrypt', '~> 3.1.7'
 # This was taken out of Rails 4.2
 gem 'responders', '~> 2.0'
 
+gem 'pry-rails' # beautiful console
+
 group :development do
   # Use Capistrano for deployment
   # gem 'capistrano',  '~> 3.1'
@@ -60,7 +62,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'binding_of_caller'
   gem 'better_errors'
-  gem 'pry-rails'
   gem 'faker'
   gem 'powder' # a wrapper around pow, get to server @ http://ridesnap.dev
 end

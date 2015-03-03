@@ -48,7 +48,9 @@ edmunds:
   secret: VaVD9hB6e2y3npHd2X5eNuTq
 
 carvoyant:
-  base_url: https://api.carvoyant.com/v1/api
+  base_url: https://api.carvoyant.com
+  api_version: /v1/api
+  callback_url: https://ridesnap.dev/auth/carvoyant/callback
   client_id: weaswm6t4vc6wrvknda9jptb
   secret: XnY9YQt8Fb
 

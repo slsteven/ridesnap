@@ -3,6 +3,8 @@ aws:
   address: https://ridesnap-dev.s3.amazonaws.com
 
 carvoyant:
-  base_url: https://sandbox-api.carvoyant.com/sandbox/api
+  base_url: https://sandbox-api.carvoyant.com
+  api_version: /sandbox/api
+  callback_url: lvh.me:3000
   client_id: 3z4qenxtm4vjzu5fhtpr88x9
   secret: SxJHyVrfZq

@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  force_ssl [:carvoyant]
+  # force_ssl [:carvoyant]
 
   def carvoyant
 
