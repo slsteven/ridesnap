@@ -1,0 +1,61 @@
+= form_for @vehicle, html: {class: 'form-horizontal', role: 'form'}, remote: true do |f|
+  .well#vehicle_options.collapse
+    .row
+      %h3 Edit vehicle options:
+      .form-group
+        = f.label :style, nil, class: 'col-sm-2 col-sm-offset-1 control-label'
+        .col-sm-6
+          = f.select :style, options_for_select(@styles, @vehicle.style), {}, class: 'form-control'
+      .form-group
+        = f.label :condition, nil, class: 'col-sm-2 col-sm-offset-1 control-label'
+        .col-sm-6
+          = f.select :condition, options_for_select(@conditions, @vehicle_condition), {include_blank: true}, class: 'form-control'
+      .form-group
+        = f.label :mileage, nil, class: 'col-sm-2 col-sm-offset-1 control-label'
+        .col-sm-6
+          = f.text_field :mileage, class: 'form-control'
+    .row
+      .col-sm-6.col-xs-12
+        .form-group#engine
+          %h3 Engine
+          - @vehicle.available_engines.each do |eng, details|
+            .radio{title: details[:description]}
+              = label_tag do
+                = f.radio_button :engine, eng, checked: details[:equipped]
+                = details[:name]
+
+        .form-group#transmission
+          %h3 Transmission
+          - @vehicle.available_transmissions.each do |tran, details|
+            .radio{title: details[:description]}
+              = label_tag do
+                = f.radio_button :transmission, tran, checked: details[:equipped]
+                = details[:name]
+
+        - if @vehicle.available_options.any?
+          .form-group#options
+            %h3 Options
+            - @vehicle.options.each do |opt, details|
+              %h4.purple= opt.titleize
+              - details.each do |k,v|
+                .checkbox{title: v[:description]}
+                  = label_tag do
+                    = check_box_tag 'vehicle[options][]', k, v[:equipped]
+                    = v[:name]
+
+      .col-sm-6.col-xs-12
+        .form-group#colors
+          %h3 Color
+          - @vehicle.available_colors.each do |type, details|
+            %h4.purple= type.titleize
+            - details.each do |k,v|
+              .radio{title: v[:description]}
+                = label_tag do
+                  = f.radio_button "colors[#{type}]", k, checked: v[:equipped]
+                  = v[:name]
+
+    .row.center-text
+      - if admin?
+        = link_to 'delete', @vehicle, method: :delete, data: { confirm: "You're sure you want to DELETE this #{@vehicle.make(pretty:true)} #{@vehicle.model(pretty:true)}?" }, class: 'btn btn-danger btn-xs', title: 'Delete Vehicle', 'aria-label' => "Delete Vehicle"
+      = content_tag :a, 'CANCEL', class: 'btn btn-default btn-sm btn-wide', data: {toggle: 'collapse', target: '#vehicle_options'}
+      = submit_tag 'SAVE', class: 'btn btn-purple btn-wide', data: {toggle: 'collapse', target: '#vehicle_options'}

@@ -6,8 +6,32 @@
 
 # Settings.my_section.some_entry == some_value
 
-google_analytics:
-  enabled: false
+app:
+  name: RideSnap
+  email:
+    steven: slstevenlam@gmail.com
+    melbs: mclemieux@gmail.com
+    tommy: quantumventuress@gmail.com
+    brett: brett@dudo.io
+
+aws:
+  access_key_id: AKIAI2I4KMECXPV4HVMQ
+  secret_access_key: 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
+  bucket: ridesnap
+  address: https://ridesnap.s3.amazonaws.com
+
+box:
+  client_id: 4w4pnp6pt4le6iap940vf9kktyfdyeih
+  client_secret: ZdGn0GmeE1HlKkbYS03NLOx95v1ayjgv
+  redirect_uri: https://ridesnap.co/sessions/box_auth
+
+debug: false
+
+google:
+  analytics:
+    enabled: false
+    key: UA-56542383-1
+  api_key: AIzaSyBC4pH2DkIOLKGzTZ3nKxQL9V9HF3FnhVk
 
 meta_tags:
   - sell

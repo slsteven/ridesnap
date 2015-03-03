@@ -1,23 +1,27 @@
 !!!
 %html
   %head
-    %title
-      = full_title(yield(:title))
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    %title= full_title(yield(:title))
+
+    = favicon_link_tag 'favicon.ico'
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+
     = csrf_meta_tags
-    - set_meta_tags viewport: 'width=device-width, initial-scale=1.0'
+    - set_meta_tags viewport: 'width=device-width, initial-scale=1.0, user-scalable=no'
     - set_meta_tags keywords: Settings.meta_tags
     = display_meta_tags
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = render 'layouts/shim'
-    - if Settings.google_analytics.enabled
-      = render 'shared/ga'
+
   = content_tag :body, body_attributes do
     .wrapper
       = render 'layouts/header'
+      = render 'shared/page_alerts'
       .content
-        = render 'shared/page_alerts'
         = yield
-        = debug(params) if Rails.env.development?
+        = debug(params) if Rails.env.development? && Settings.debug
+        = render 'shared/modal', type: 'signin'
     = render 'layouts/footer'
 
+    / = javascript_include_tag 'https://maps.googleapis.com/maps/api/js?libraries=places'
+    = render 'shared/ga'

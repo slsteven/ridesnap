@@ -1,0 +1,13 @@
+=form_for @ride, html: {class: 'form-inline', role: 'form', remote: true} do |f|
+  .form-group
+    = f.label :scheduled_at, class: 'sr-only'
+    = f.text_field :scheduled_at, value: @ride.scheduled_at.strftime("%m/%d/%Y %I:%M %p"), placeholder: 'Date/Time', class: 'form-control', id: 'datetimepicker-schedule'
+  .form-group
+    = f.label :address, class: 'sr-only'
+    = f.text_field :address, placeholder: 'Street', class: 'form-control'
+  .form-group
+    = f.label :zip_code, class: 'sr-only'
+    = f.text_field :zip_code, placeholder: 'Zip', class: 'form-control'
+  %br
+  %br
+  = f.submit 'Save', class: 'btn btn-purple'

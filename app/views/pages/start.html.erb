@@ -1,0 +1,22 @@
+<% provide(:title, 'Start') %>
+<div class="jumbotron black-bg" id="start1">
+  <div class="container text-center" id="header-threshold">
+    <h1>GET STARTED.</h1>
+    <p>Get a quote. Schedule an inspection. Simple.</p>
+  </div>
+</div>
+<div class="jumbotron white-bg">
+  <div class="container text-center">
+    <h2 class="purple">Tell us about your ride.</h2>
+    <p>Get an estimate of what your car listing price could be.</p>
+    <br/>
+    <br/>
+    <%= render 'vehicles/new' %>
+    <div class="form-group">
+      <%= link_to 'New Quote', start_path, class: 'btn btn-default btn-wide' %>
+    </div>
+    <br>
+    <br>
+    <%= image_tag 'edmunds_100.png' %>
+  </div>
+</div>

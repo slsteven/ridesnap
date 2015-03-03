@@ -1,0 +1,26 @@
+.modal.fade#report-modal-sum{role: "dialog", 'aria-labelledby' => "Vehicle Report", 'aria-hidden' => "true"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        = button_tag '&times'.html_safe, class: 'close', 'data-dismiss' => "modal", 'aria-label' => "Close"
+        = image_tag 'black_logo.png', class: 'modal-logo'
+        %h4.modal-title #{Settings.app.name} Vehicle Report
+      .modal-body
+        = render 'vehicles/highlights'
+        %br
+        - @vehicle.report('summary').each do |k,v|
+          %h3.text-center= k.upcase
+          - v.each do |ke,va|
+            .clearfix.report-option
+              %p.pull-left= ke.titleize
+              - if agent?
+                = form_tag '#', role: 'form', class: 'report-conditions pull-right btn-group', data: {toggle: 'buttons'} do
+                  - { 'poor' => 'danger', 'fair' => 'warning', 'good' => 'success' }.each do |key, val|
+                    %label.btn{class: "btn-#{val} #{'active' if va == key}"}
+                      = radio_button_tag "report[#{k}][#{ke}]", key
+                      = key
+              - else
+                .pull-right.report-conditions.none
+                  = content_tag :a, 'poor', class: "btn btn-danger #{'active' if va == 'poor'}"
+                  = content_tag :a, 'fair', class: "btn btn-warning #{'active' if va == 'fair'}"
+                  = content_tag :a, 'good', class: "btn btn-success #{'active' if va == 'good'}"

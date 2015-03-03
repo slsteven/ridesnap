@@ -1,13 +1,16 @@
-= render 'shared/error_messages', object: f.object
 .form-group
-  = f.label :name, class: "col-lg-2 control-label"
-  .col-lg-8
-    = f.text_field :name, class: 'form-control', placeholder: 'John Smith'
+  = f.label :name, nil, class: 'sr-only'
+  = f.text_field :name, class: 'form-control', placeholder: 'Full Name'
+  %span.help-block
 .form-group
-  = f.label :email, class: "col-lg-2 control-label"
-  .col-lg-8
-    = f.text_field :email, class: 'form-control', placeholder: 'john.smith@email.com'
+  = f.label :email, nil, class: 'sr-only'
+  = f.text_field :email, class: 'form-control', placeholder: 'Email'
+  %span.help-block
 .form-group
-  = f.label :password, class: "col-lg-2 control-label"
-  .col-lg-8
-    = f.password_field :password, class: 'form-control'
+  = f.label :phone, nil, class: 'sr-only'
+  = f.text_field :phone, class: 'form-control', placeholder: 'Phone'
+  %span.help-block
+.form-group
+  = f.label :password, nil, class: 'sr-only'
+  = f.password_field :password, class: 'form-control', placeholder: 'Pa55w0rd'
+  %span.help-block

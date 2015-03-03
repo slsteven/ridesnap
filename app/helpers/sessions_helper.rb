@@ -1,15 +1,27 @@
 module SessionsHelper
+
+  def admin_user
+    redirect_to(root_path) unless current_user.admin?
+  end
+
+  def admin?
+    current_user.try :admin?
+  end
+
+  def agent?
+    current_user.try(:agent?) || admin?
+  end
+
   # in and out
   def sign_in(user)
-    remember_token = User.new_remember_token
+    remember_token = User.generate_token
     cookies.permanent[:remember_token] = remember_token
-    user.update_attribute(:remember_token,
-                          User.digest(remember_token))
+    user.update_attribute(:remember_token, User.digest(remember_token))
     self.current_user = user
   end
   def sign_out
     current_user.update_attribute(:remember_token,
-                                  User.digest(User.new_remember_token))
+                                  User.digest(User.generate_token))
     cookies.delete(:remember_token)
     self.current_user = nil
   end
@@ -25,7 +37,7 @@ module SessionsHelper
   end
   def current_user
     remember_token = User.digest(cookies[:remember_token])
-    @current_user ||= User.where(remember_token: remember_token).first
+    @current_user ||= User.find_by(remember_token: remember_token)
   end
 
   # compare a user against the current user
@@ -42,7 +54,7 @@ module SessionsHelper
   def signed_in_user
     unless signed_in?
       store_location
-      redirect_to signin_url, notice: "Please sign in."
+      redirect_to root_path, notice: "Please sign in."
     end
   end
 

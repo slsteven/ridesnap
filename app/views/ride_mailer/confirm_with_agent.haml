@@ -1,0 +1,25 @@
+%p Hello!
+%p
+  = @user.name
+  has decided to
+  - if @ride.seller?
+    sell their
+  - elsif @ride.tester?
+    test drive a
+  = @vehicle.year
+  = @vehicle.make(pretty: true)
+  = @vehicle.model(pretty: true)
+  with
+  #{Settings.app.name}.
+%p
+  They're thinking
+  #{@ride.scheduled_at.strftime("%A, %b %d at %I:%M%P")}.
+%p
+  The ride is in
+  = "#{@ride.city}, #{@ride.state}."
+%p
+  Reach out to them at
+  = mail_to @user.email, @user.email, subject: "#{Settings.app.name} Follow up", target: '_blank'
+  or #{number_to_phone(@user.phone, area_code: true)}.
+%br
+%p= link_to ride_url(@ride), "Link to #{Settings.app.name}", target: '_blank'

@@ -1,26 +1,32 @@
 class PagesController < ApplicationController
 
   def about
+    @menu = 'about'
   end
 
   def agent
+    @menu = 'agent'
   end
 
   def contact
+    @menu = 'contact'
   end
 
   def faq
+    @menu = 'faq'
   end
 
   def home
+    @menu = 'home'
   end
 
-  def start
-    @years      = Date.today.year.downto(1994)
-    @makes      = ['honda', 'ford', 'dodge']
-    @models     = ['blah', 'blah']
-    @trims      = ['swiggity', 'swooty']
-    @miles      = ['0-29k', '30k-59k', '60k-89k', '90k-119k', '120k+']
-    @conditions = ['excellent', 'very good', 'good', 'fair', 'poor']
+  def how
+    @menu = 'how'
+    render :home
   end
+
+  def schedule
+    @menu = 'start'
+  end
+
 end

@@ -1,0 +1,4 @@
+= link_to user, class: 'list-group-item' do
+  = user.password_digest ? user.name : user.email
+  %span.pull-right
+    status: #{user.status}

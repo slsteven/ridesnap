@@ -1,0 +1,11 @@
+- provide(:title, 'Cities')
+
+.jumbotron.black-bg#about1
+  .container.text-center#header-threshold
+    %h1 Available locations.
+
+.jumbotron.white-bg.row
+  .container
+    .col-md-6.col-md-offset-3.col-sm-12
+      %ul.list-group
+        = render @cities

@@ -6,13 +6,17 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:session][:email].downcase.strip)
-    if user && user.authenticate(params[:session][:password])
-      sign_in user
-      redirect_back_or user
-    else
-      flash.now[:error] = 'Invalid email/password combination'
-      render 'new'
+    @user = User.find_by(email: params[:session][:email].downcase.strip)
+    errors = {email: ['invalid email/password combination'], password: ['']}
+    respond_to do |format|
+      if @user.try :authenticate, params[:session][:password]
+        sign_in @user
+        flash[:success] = "Welcome back, #{@user.first_name}"
+        format.html { redirect_to :back }
+        format.js { render js: "location.reload();" }
+      else
+        format.js { render json: errors, status: :unprocessable_entity } # 422
+      end
     end
   end
 
@@ -20,4 +24,8 @@ class SessionsController < ApplicationController
     sign_out
     redirect_to root_url
   end
+
+  def new
+  end
+
 end

@@ -1,0 +1,17 @@
+- provide(:title, 'Users')
+
+.jumbotron.black-bg#about1
+  .container.text-center#header-threshold
+    %h1 Users.
+
+.jumbotron.white-bg
+  .container
+    .row
+      .col-md-6.col-sm-12
+        %h4 Actual Users
+        .list-group
+          = render @actual_users
+      .col-md-6.col-sm-12
+        %h4 Unsigned Users
+        .list-group
+          = render @new_users

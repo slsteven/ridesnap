@@ -1,0 +1,98 @@
+- provide(:title, "#{@vehicle.make(pretty: true)} #{@vehicle.model(pretty: true)}")
+
+.container{style: 'padding-top:90px'}
+  .owl-carousel
+    - if @vehicle.images.blank?
+      .vehicle-image
+        = image_tag 'blank.jpg', class: 'img-responsive three-four'
+    - @vehicle.images.each do |img|
+      .vehicle-image
+        = image_tag img.try(:image_url), class: 'img-responsive three-four'
+        - if admin?
+          = link_to '', [@vehicle, img], method: :delete, data: { confirm: "You're sure you want to REMOVE this image from the vehicle?" }, class: 'glyphicon glyphicon-remove remove-image', title: 'Remove image', 'aria-label' => "Remove image"
+
+  - if admin?
+    %br
+    .text-center
+      = s3_uploader_form post: vehicle_images_url(@vehicle), as: "image[url]", vin: @vehicle.vin do
+        %span.btn.btn-purple.btn-file
+          Add Images
+          = file_field_tag :file, multiple: true
+      %script{id: 'template-upload', type: 'text/x-tmpl'}
+        .upload
+          {%=o.name%}
+          .progress
+            .bar{style: 'width: 0%'}
+
+  %hr.arrow
+
+  %h1.text-center
+    RVR
+    = @vehicle.rvr.upcase
+    - if admin? && @vehicle.external_ad.present?
+      %br
+      %h3= link_to @vehicle.external_ad
+  .row
+    .col-xs-12.col-sm-6.hoverable
+      .overlay.text-center
+        %h3 Mechanical Report
+        %p
+          150-point inspection (engine, tires, leaks, etc.)
+          %br
+          = link_to 'click to view', '#report-modal-mech', data: {toggle: 'modal'}
+      = image_tag 'engine.jpg', class: 'img-responsive'
+    .col-xs-12.col-sm-6.hoverable
+      .overlay.text-center
+        %h3 Cosmetic Report
+        %p
+          Dents, dings, scratches, rust
+          %br
+          = link_to 'click to view', '#report-modal-cosm', data: {toggle: 'modal'}
+      = image_tag 'blank.jpg', class: 'img-responsive'
+  .row
+    .col-xs-12.col-sm-6.hoverable
+      .overlay.text-center
+        %h3 History Report
+        %p
+          Title status, ownership, maintenance records
+          %br
+          = link_to 'click to view', '#coming-soon', data: {toggle: 'modal'}
+      = image_tag 'report.jpg', class: 'img-responsive'
+    .col-xs-12.col-sm-6.hoverable
+      .overlay.text-center
+        %h3 Test Drive/Value Summary
+        %p
+          Test driven by a Mechanic
+          %br
+          = link_to 'click to view', '#report-modal-sum', data: {toggle: 'modal'}
+      = image_tag 'money.jpg', class: 'img-responsive'
+
+  %hr.arrow
+
+  = render 'vehicles/highlights'
+
+  - if @rides.any?
+    %hr.arrow
+
+    %h2.text-center Rides
+    = render @rides
+
+  %hr.arrow
+
+  .text-center.form-inline
+    .form-group
+      = button_tag 'DOWNLOAD REPORT', class: 'btn btn-success', data: {toggle: 'modal', target: '#report-modal-all'}
+    .form-group
+      = link_to 'CHECK OUT THIS CAR', new_ride_path(vehicle_vin: @vehicle.vin), class: 'btn btn-grey'
+    .form-group
+      = button_tag 'BUY THIS CAR!', class: 'btn btn-purple'
+
+  %hr
+
+  = render 'shared/story_icons_1'
+
+= render 'vehicles/report_mech'
+= render 'vehicles/report_cosm'
+= render 'vehicles/report'
+= render 'vehicles/report_summary'
+= render 'shared/coming_soon'

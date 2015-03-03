@@ -1,6 +1,11 @@
 require 'api_constraints'
 
 Rails.application.routes.draw do
+
+  concern :paginatable do
+    get '(page/:page)', action: :index, on: :collection, as: ''
+  end
+
   root 'pages#home'
 
   resources :sessions, only: [:create, :destroy]
@@ -17,23 +22,34 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: 'json'} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
-      resources :tests
+      resources :vehicles
     end
     # scope module: :v2, constraints: ApiConstraints.new(version: 2) do
-    #   resources :tests
+    #   resources :vehicles
     # end
   end
 
-  resources :users do
+  resources :users, concerns: :paginatable do
     collection do
       post 'agent'
     end
   end
 
-  resources :vehicles do
+  resources :vehicles, concerns: :paginatable do
     collection do
+      get 'make_query'
+      get 'model_query'
+      get 'year_query'
+      get 'style_query'
       get 'query'
-      post 'schedule_inspection'
+      get 'search'
+      post 'schedule_confirm'
     end
+    resources :images
   end
+
+  resources :rides, concerns: :paginatable
+
+  resources :cities, only: [:create, :index, :update]
+  resources :password_resets, only: [:create, :edit, :update]
 end

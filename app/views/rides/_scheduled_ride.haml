@@ -1,0 +1,5 @@
+%p= @ride.scheduled_at.strftime("%B #{@ride.scheduled_at.day.ordinalize}, %Y @ %l:%M%P")
+%p
+  %span= @ride.address
+  %br
+  %span= "#{@ride.city}, #{@ride.state} #{@ride.zip_code}"

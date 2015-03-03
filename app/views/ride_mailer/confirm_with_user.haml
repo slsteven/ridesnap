@@ -1,0 +1,8 @@
+%p= @user.name
+%p
+  = @vehicle.year
+  = @vehicle.make(pretty: true)
+  = @vehicle.model(pretty: true)
+  \-
+  = @vehicle.description
+%p= @ride.scheduled_at

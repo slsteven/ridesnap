@@ -1,0 +1,23 @@
+.row
+  .col-md-7.col-md-offset-1
+    %p Model: #{@vehicle.year} #{@vehicle.make(pretty: true)} #{@vehicle.model(pretty: true)}
+    %p MPG: Up to 21 city, 29 highway
+    %p Body style: Sedan
+    %p Horsepower: 215 HP
+    %p Torque: 185 lb-ft
+    %p Engine size: 3.0L
+    %p Trim: #{@vehicle.description}
+    - if current_user.try(:owner?, @vehicle) || admin?
+      %p= content_tag :a, 'Edit vehicle options', class: 'purple pointer', data: {toggle: 'collapse', target: '#vehicle_options'}
+      .alert.alert-success#vehicle-alert{role: 'alert'} Vehicle saved!
+
+  .col-md-3
+    = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'No Accidents'}
+    = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'Title in Hand'}
+    = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'Single Owner'}
+    = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'Bluetooth'}
+    = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'Sunroof'}
+    = render partial: 'vehicles/little_square', locals: {icon: 'star', caption: 'Navigation'}
+
+.text-center
+  = render 'vehicles/update'

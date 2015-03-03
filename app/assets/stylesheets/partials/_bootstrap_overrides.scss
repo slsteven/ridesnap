@@ -1,9 +1,28 @@
 .navbar {
-  padding: 0px 25px !important;
+  padding: 15px 25px !important;
+  min-height: 75px;
 }
 
 .navbar-brand {
   color: white !important;
+}
+
+.navbar-header button {
+  position: absolute;
+  right: 0px;
+}
+
+.navbar-collapse.collapse.in, .navbar-collapse.collapsing {
+  text-align: center;
+  ul.narrow {
+    margin: 7.5px 20px;
+  }
+}
+
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+  background-color: rgba(0,0,0,0);
 }
 
 .btn {
@@ -118,6 +137,49 @@ fieldset[disabled] .btn-purple.active {
   background-color: #fff !important;
 }
 
+.btn-grey {
+  color: #fff !important;
+  background-color: #555555 !important;
+  border-color: #484848 !important;
+}
+.btn-grey:hover,
+.btn-grey:focus,
+.btn-grey:active,
+.btn-grey.active,
+li.active .btn-grey,
+.open .dropdown-toggle.btn-grey {
+  color: #fff !important;
+  background-color: #484848 !important;
+  border-color: #383838 !important;
+}
+.btn:active,
+.btn.active,
+.open .dropdown-toggle.btn {
+  background-image: none !important;
+}
+.btn-grey.disabled,
+.btn-grey[disabled],
+fieldset[disabled] .btn-grey,
+.btn-grey.disabled:hover,
+.btn-grey[disabled]:hover,
+fieldset[disabled] .btn-grey:hover,
+.btn-grey.disabled:focus,
+.btn-grey[disabled]:focus,
+fieldset[disabled] .btn-grey:focus,
+.btn-grey.disabled:active,
+.btn-grey[disabled]:active,
+fieldset[disabled] .btn-grey:active,
+.btn-grey.disabled.active,
+.btn-grey[disabled].active,
+fieldset[disabled] .btn-grey.active {
+  background-color: #555555 !important;
+  border-color: #484848 !important;
+}
+.btn-grey .badge {
+  color: #555555 !important;
+  background-color: #fff !important;
+}
+
 .btn-circle {
   height: 80px;
   width: 80px;
@@ -128,8 +190,34 @@ fieldset[disabled] .btn-purple.active {
   padding-top: 28px !important;
 }
 
+.btn-file {
+  position: relative;
+  overflow: hidden;
+  input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+  }
+}
+
 .jumbotron {
+  min-height: 100vh;
+  padding-top: 120px;
+  padding-bottom: 120px;
   margin: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   &.white-bg {
     background-color: white;
   }
@@ -144,12 +232,100 @@ fieldset[disabled] .btn-purple.active {
   &.whitesmoke-bg {
     background-color: whitesmoke;
   }
+  li {
+    font-size: 21px;
+    font-weight: 200;
+  }
+  &.small {
+    min-height: 50vh !important;
+  }
 }
 
-.btn:focus {
+.btn:focus, .btn:active {
   outline: none !important;
 }
 
 .form-control {
   border-radius: 0px !important;
+}
+
+.jumbotron:first-child {
+  @include background-image-default;
+  &#home1 {
+    background-image: image-url('home.jpg');
+  }
+  &#start1 {
+    background-image: image-url('start.jpg');
+  }
+  &#faq1, &#about1 {
+    background-image: image-url('about.jpg');
+  }
+  &#confirm1 {
+    background-image: image-url('about.jpg');
+  }
+  &#agent1 {
+    background-image: image-url('agent.jpg');
+    background-position: top;
+  }
+}
+.jumbotron#home2 {
+  background-image: image-url('bridge_purple.jpg');
+  background-position: center;
+}
+
+ul.dropdown-menu {
+  border-radius: 0px;
+  background-color: black;
+  li a:hover {
+    background-color: $purple;
+  }
+  .divider {
+    background-color: $purple;
+  }
+}
+
+.well {
+  background-color: #dcdcdc;
+  border: none;
+  border-radius: 0px;
+}
+
+.carousel {
+  margin: 0 auto;
+  max-height: 333px;
+  max-width: 500px;
+  .carousel-inner {
+    max-height: 333px;
+    max-width: 500px;
+    img {
+      object-fit: cover;
+    }
+  }
+}
+
+.badge {
+  position: relative;
+  top: 6px;
+}
+
+hr {
+  margin: 6em auto;
+  border-top: 2px solid #999999;
+  &.arrow:after {
+    content: '';
+    display: block;
+    position: relative;
+    left: 49%;
+    bottom: 8px;
+    transform:rotate(-135deg);
+    width: 15px;
+    height: 15px;
+    background: white;
+    border-left: 2px solid #999999;
+    border-top: 2px solid #999999;
+  }
+}
+.progress-bar-blank {
+  background-color: initial;
+  box-shadow: none;
 }

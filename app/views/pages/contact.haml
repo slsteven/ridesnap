@@ -1,9 +1,9 @@
 - provide(:title, 'Contact')
 
 .jumbotron.black-bg
-  .container.text-center
+  .container.text-center#header-threshold
     %h1 Contact us.
 
 .jumbotron.white-bg
   .container.text-center
-    %p= mail_to 'info@ridesnap.com'
+    %p= mail_to "info@#{request.host}"

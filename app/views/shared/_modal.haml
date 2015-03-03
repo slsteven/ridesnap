@@ -1,0 +1,17 @@
+.modal.fade{id: "#{type}-modal", tabindex: -1, role: 'dialog', 'aria-labelledby' => "#{Settings.app.name} Modal", 'aria-hidden' => 'true'}
+  .modal-dialog
+    .modal-content
+      .tab-content
+        %ul.nav.nav-tabs.hidden{role: 'tablist'}
+          %li.active
+            %a{href: '#sign-in', role: 'tab', data: {toggle: 'tab'}}
+          %li
+            %a{href: '#sign-up', role: 'tab', data: {toggle: 'tab'}}
+          %li
+            %a{href: '#password-reset', role: 'tab', data: {toggle: 'tab'}}
+        .tab-pane.fade.in.active#sign-in
+          = render 'sessions/new'
+        .tab-pane.fade#sign-up
+          = render 'users/new'
+        .tab-pane.fade#password-reset
+          = render 'password_resets/new'

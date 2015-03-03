@@ -12,7 +12,7 @@ ul#how-it-works {
     margin-top: -1px;
     margin-left: -1px;
     &:not(.active) a.btn {
-      background-color: whitesmoke !important;
+      background-color: rgba(0,0,0,0) !important;
       color: #333 !important;
     }
   }

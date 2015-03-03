@@ -1,0 +1,101 @@
+- provide(:title, 'Schedule')
+
+.container{style: 'padding-top:90px'}
+  .text-center
+    %h1
+      #{Settings.app.name}
+      %span.purple Prices
+    %br
+    %p
+      Do you need to sell your car? Let #{Settings.app.name} help by doing the work for you!
+      %br
+      And we mean all of the work.
+    %br
+    = form_tag new_ride_path, class: 'form-inline', id: 'vehicle-query', role: 'form', method: :get do
+      = render 'vehicles/new'
+      .form-group
+        = submit_tag 'Get a Quote', class: 'btn btn-success new-ride-sell', name: nil, disabled: true
+  %br
+  %p.text-justify
+    #{Settings.app.name} does not buy your car to resell like a dealership. Instead, our concierge service finds your buyers, manages the test drives and facilitates the transaction so you can save time and money. We limit your risk and take no upfront costs until your car is sold.
+
+  %hr
+
+  %h1.text-center How It Works
+  %br
+  %p
+    Now with #{Settings.app.name}’s marketplace or by entering your
+    %span.purple #{Settings.app.name} Vehicle number
+    (RVR), you can find all the details
+    %span.purple before
+    making any commitments.
+  .row
+    .col-md-6
+      = image_tag 'example_rvr_blocks.png', class: 'img-responsive', title: 'RVR Summary'
+      %br
+      %p Start by scheduling a time and place for to conduct your free inspection.
+      %p The inspection helps us better determine the car’s value, and the information gathered is used to develop your RVR report and online listing.
+      %p We believe in complete transparency and overloading our buyers with information. We want you to feel confident in your future purchase so we don’t hide anything. Use #{Settings.app.name}’s 4 component Vehicle report conducted by mechanics to find out the details.
+      %p Report includes: Mechanical, cosmetic damages, car history, and value summary
+      %ul
+        %li Mechanical – 150 point inspection report
+        %li Cosmetic damages – points out all of the dents, scratches, and defects
+        %li Car History – Carfax report
+        %li Value Summary – KBB report
+    .col-md-6
+      = image_tag 'report_preview.png', class: 'img-responsive', title: 'Sample RVR'
+
+  %hr.arrow
+
+  %h1.text-center
+    #{Settings.app.name}
+    %span.purple Badge
+  %br
+  .row
+    .col-md-6
+      %p Put your RVR sticker on your window and keep driving your car until we sell it.
+      %p This sticker will provide a fast and secure method for others to find and check your car by using RVR code on our website.
+      %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur
+    .col-md-6
+      = image_tag 'car_sticker_badge.png', class: 'img-responsive'
+
+  %hr.arrow
+
+  %h1.text-center Before we start
+  %br
+  %p We will need to collect some infmormation from you including contact information and phone number to reach you, so we can send our inspector to your car, also establish your car’s profile page.
+
+  %hr.arrow
+
+  .text-center
+    %h1 Start Selling
+    / = form_tag new_ride_path, class: 'form-inline', id: 'vehicle-query', role: 'form', method: :get do
+    / = render 'vehicles/new'
+    / .form-group
+    / = submit_tag 'Get a Quote', class: 'btn btn-success new-ride-sell', name: nil, disabled: true
+  %br
+  %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore.
+  %br
+  .price-range
+    %p #{Settings.app.name} Price:
+    .progress
+      .progress-bar.progress-bar-blank{style: "width: 35%"}
+      .progress-bar.progress-bar-success{style: "width: 50%"}
+        $25,300 ~ $31,000
+  .price-range
+    %p Dealership Price:
+    .progress
+      .progress-bar.progress-bar-blank{style: "width: 10%"}
+      .progress-bar.progress-bar-danger{style: "width: 50%"}
+        $19,500 ~ $28,100
+
+  %br
+  %p #{Settings.app.name} does not buy your car to resell like a dealership. Instead, our concierge service finds your buyers, manages the test drives and facilitates the transaction so you can save time and money. We limit your risk and take no upfront costs until your car is sold.
+
+  %br
+  %h3.purple.text-center Sounds good, I want to reserve a free inspection
+
+
+  %hr
+
+  = render 'shared/story_icons_1'

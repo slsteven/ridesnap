@@ -1,0 +1,21 @@
+<div class='modal-header'>
+  <button class='close' data-dismiss='modal' type='button'>
+    <span aria-hidden='true'>&times;</span>
+    <span class='sr-only'>Close</span>
+  </button>
+  <%= image_tag 'black_logo.png', class: 'modal-logo' %>
+  <h4 class='modal-title'>Reset Password</h4>
+</div>
+<%= form_tag password_resets_path, html: {role: 'form', data: {model: 'user', remote: true}} do |f| %>
+  <div class='modal-body'>
+    <div class='form-group'>
+      <%= label_tag :email, nil, class: 'sr-only' %>
+      <%= text_field_tag :email, nil, class: 'form-control', placeholder: 'email address' %>
+      <span class="help-block"></span>
+    </div>
+  </div>
+  <div class='modal-footer'>
+    <%= link_to 'Cancel', '#sign-in', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-default btn-sm' %>
+    <%= submit_tag 'Reset Password', class: 'btn btn-purple' %>
+  </div>
+<% end %>

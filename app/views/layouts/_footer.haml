@@ -8,11 +8,23 @@
       %span.icon-bar
   / Collect the nav links, forms, and other content for toggling
   .collapse.navbar-collapse#bottom-collapse
+    %ul.nav.navbar-nav.navbar-left.narrow
+      - if signed_in?
+        %li.dropdown.dropup
+          %a.dropdown-toggle{href: '#', 'data-toggle' => 'dropdown'}
+            Account
+            %span.caret
+          %ul.dropdown-menu{role: 'menu'}
+            %li= link_to 'Sign out', signout_path, method: 'delete'
+            %li.divider
+            %li= link_to 'Available Locations', cities_path if admin?
+            %li= link_to 'Users', users_path if admin?
+            %li= link_to 'Market Place', vehicles_path if admin?
+      - else
+        %li= link_to 'Sign in', '', data: {target: '#signin-modal', toggle: 'modal'}
     %ul.nav.navbar-nav.navbar-right
-      %li= link_to 'FAQ', faq_url, title: 'frequently asked questions'
-      %li= link_to 'Contact Us', contact_url, title: 'Talk to us!'
-      %li= link_to embedded_svg('facebook.svg', class: 'social-icon facebook', size: 40), 'http://facebook.com', title: 'Facebook'
-      %li= link_to embedded_svg('twitter.svg', class: 'social-icon twitter', size: 40), 'http://twitter.com', title: 'Twitter'
-      %li= link_to embedded_svg('linkedin.svg', class: 'social-icon linkedin', size: 40), 'http://linkedin.com', title: 'LinkedIn'
-      %li= link_to embedded_svg('google.svg', class: 'social-icon google', size: 40), 'http://plus.google.com', title: 'Google+'
-      / %li= link_to '', nil, class: 'back-to-top glyphicon glyphicon-arrow-up', title: 'Top'
+      %li{class: ('active' if @menu == 'contact')}= mail_to "info@#{request.host}", 'Contact Us', subject: 'Info request', title: 'Talk to us!', target: '_blank'
+      %li.social= link_to embedded_svg('facebook.svg', class: 'social-icon facebook', size: 45), Settings.social.facebook, title: 'Facebook'
+      %li.social= link_to embedded_svg('twitter.svg', class: 'social-icon twitter', size: 45), Settings.social.twitter, title: 'Twitter'
+      %li.social= link_to embedded_svg('linkedin.svg', class: 'social-icon linkedin', size: 45), Settings.social.linkedin, title: 'LinkedIn'
+      %li.social= link_to embedded_svg('google.svg', class: 'social-icon google', size: 45), Settings.social.google, title: 'Google+'

@@ -1,0 +1,39 @@
+- provide(:title, 'Confirmation')
+
+.jumbotron.black-bg#confirm1
+  .container.text-center#header-threshold
+    %h1= @ride.scheduled_at > Time.now ? 'Scheduled Ride.' : 'Past Ride.'
+
+.jumbotron.white-bg
+  .container.text-center
+    %h2.purple= "Thank you, #{@user.first_name}!"
+    %p We look forward to meeting you!
+    %br
+    %br
+    %b.purple= @user.name.upcase
+    %p= number_to_phone(@user.phone, area_code: true)
+    %p= @user.email
+    %br
+
+    %b.purple INSPECTION APPOINTMENT FOR:
+    .tab-content
+      .tab-pane.fade.in.active#scheduled-ride
+        = render 'scheduled_ride'
+      .tab-pane.fade#edit
+        = render 'edit'
+    %ul{role: 'tablist'}
+      %li#scheduled-ride-tab
+        - if @ride.with?(current_user) || admin?
+          = link_to 'Reschedule', '#edit', role: 'tab', data: {toggle: 'tab'}, class: 'btn btn-sm btn-purple'
+      %li.active.hidden#edit-tab
+        = link_to 'Scheduled', '#scheduled-ride', role: 'tab', data: {toggle: 'tab'}
+
+    %br
+    %b.purple VEHICLE INFORMATION
+    %p
+      = @vehicle.info
+
+:coffee
+  $ ->
+    $('#datetimepicker-schedule').datetimepicker
+      minDate: moment()
