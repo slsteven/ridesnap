@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.2'
+ruby '2.1.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.1.4'
@@ -75,4 +75,13 @@ gem 'nokogiri' # scraper... but only using internally to build inline SVGs
 gem 'meta-tags'
 
 gem 'rails_config'
-
+gem 'annotate'
+gem 'best_in_place', '~> 3.0.0', github: 'bernat/best_in_place'
+gem 'chronic'
+gem 'color'
+gem 'browser-timezone-rails'
+gem 'awesome_print' # ap User.first in the console for an example
+gem 'aws-sdk', github: 'aws/aws-sdk-core-ruby'
+gem 'aws-sdk-v1'
+gem 'friendly_id', '~> 5.1.0'
+gem 'oauth2'

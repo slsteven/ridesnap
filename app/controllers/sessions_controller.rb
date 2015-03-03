@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
-  def new
+  force_ssl [:carvoyant]
+
+  def carvoyant
+
   end
 
   def create

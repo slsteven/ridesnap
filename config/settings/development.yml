@@ -1,0 +1,8 @@
+aws:
+  bucket: ridesnap-dev
+  address: https://ridesnap-dev.s3.amazonaws.com
+
+carvoyant:
+  base_url: https://sandbox-api.carvoyant.com/sandbox/api
+  client_id: 3z4qenxtm4vjzu5fhtpr88x9
+  secret: SxJHyVrfZq
