@@ -28,7 +28,7 @@ class VehiclesController < ApplicationController
               ['< 75,000', 75000],
               ['> 100,000', 500000]] # no way there is a 10 year old car with half a million miles
     @types = ['Coupe', 'Sedan'].sort # not using this yet...
-    @menu = 'buy'
+    @menu = 'marketplace'
   end
 
   def model_query
@@ -62,6 +62,10 @@ class VehiclesController < ApplicationController
     params[:ride] ||= {}
     @menu = 'sell'
     Settings.vehicle_makes.to_hash.each_with_object(@makes=[]){ |(k,v),o| o << [v,k] }
+  end
+
+  def buy
+    @menu = 'buy'
   end
 
   def show

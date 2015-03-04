@@ -1,0 +1,85 @@
+- provide(:title, 'Agent')
+
+.jumbotron.black-bg#agent1
+  .container.text-center#header-threshold
+    %h1 BECOME AN AGENT.
+    %p Coordinate with a buyer, give a test drive, and earn money. Simple.
+
+.jumbotron.white-bg
+  .container.text-center
+    %h2.purple
+      JOINING THE
+      %b A
+      TEAM
+    %p Do you have a car you need to sell? #{Settings.app.name} is startup that takes care of this process for you. Individuals can save time and money because we avoid dealerships to get them the most value for their car while managing all of the steps to close the deal.
+    %p We need Agents who can coordinate with sellers and buyers to offer test drives. Don’t worry about listing prices, negotiations and finding your own clients. We take care of that for you.
+    %hr
+    %p Getting started is easy! Just follow these 3 steps:
+    %ol
+      %li.purple Tell us about yourself and provide the necessary documents.
+      %li.purple Wait for us to approve you.
+      %li.purple You're set!
+    %p
+      Get ready to photograph cars and Schedule test drives with potential buyers!
+
+.jumbotron.whitesmoke-bg
+  .container.text-center
+    .row
+      .col-md-6.col-xs-12
+        %p
+          %b REQUIREMENTS
+        %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        %ul
+          %li Your own car
+          %li iPhone or Android smartphone
+          %li Driver's insurance and valid license
+          %li Clean driving record
+          %li Attentive to details and always on time
+          %li Friendly, outgoing, genuinely kind
+          %li Must be 18 or older
+      .col-md-6.col-xs-12
+        %p
+          %b DUTIES
+        %s &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        %ul
+          %li Be the face of the company by interacting with customers
+          %li Make up to 20% of the profit #{Settings.app.name} makes!
+          %li Choose when you want to work
+          %li Manage the cars we assign to you
+          %li Coordinate test drives around the buyer's schedule
+    .row
+      %br
+      %br
+      %h3 How it works for the agent:
+      %ol.purple
+        %li We will notify you when there is a car to be sold.
+        %li Go photograph it and collect the paperwork and spare key.
+        %li We connect you with interested buyers. Coordinate with them and schedule a car showing.
+        %li Get paid once the car sells.
+
+.jumbotron.white-bg
+  .container.text-center
+    %h2.purple Apply Today.
+    %br
+    %br
+    = form_for User.new, url: agent_users_path, html: {class: 'form-inline', id: 'vehicle-inspection', role: 'form'} do |f|
+      .form-group
+        = f.label :name, nil, class: 'sr-only'
+        = f.text_field :name, placeholder: 'Full Name', class: 'form-control'
+      .form-group
+        = f.label :zip_code, nil, class: 'sr-only'
+        = f.text_field :zip_code, placeholder: 'Zip Code', class: 'form-control'
+      %br
+      .form-group
+        = f.label :phone, nil, class: 'sr-only'
+        = f.text_field :phone, placeholder: 'Phone', class: 'form-control phone'
+      .form-group
+        = f.label :email, nil, class: 'sr-only'
+        = f.text_field :email, placeholder: 'Email', class: 'form-control'
+      / %br
+      / .form-group
+      /   = f.label :reference, nil, class: 'sr-only'
+      /   = f.text_field :reference, placeholder: 'Referred By (optional)', class: 'form-control'
+      %br
+      .form-group
+        = f.submit 'Apply', class: 'btn btn-purple btn-wide'

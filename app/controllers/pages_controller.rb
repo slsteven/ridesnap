@@ -29,4 +29,8 @@ class PagesController < ApplicationController
     @menu = 'start'
   end
 
+  def buy
+    @menu = 'buy'
+  end
+
 end

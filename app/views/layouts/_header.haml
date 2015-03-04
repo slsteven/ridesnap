@@ -10,7 +10,8 @@
     / Collect the nav links, forms, and other content for toggling
     #top-collapse.collapse.navbar-collapse
       %ul.nav.navbar-nav.navbar-right
-        %li#how{class: "#{'active' if @menu == 'buy'}"}= link_to 'BUY', vehicles_url, title: 'MarketPlace', class: 'blue'
+        %li#how{class: "#{'active' if @menu == 'marketplace'}"}= link_to 'MarketPlace', vehicles_url, title: 'MarketPlace', class: 'blue'
         %li{class: "#{'active' if @menu == 'sell'}"}= link_to 'SELL', sell_url, title: "Sell with #{Settings.app.name}", class: 'green'
+        %li{class: "#{'active' if @menu == 'buy'}"}= link_to 'Buy', buy_url, title: 'Buy', class: 'blue'
         %li{class: ('active' if @menu == 'faq')}= link_to 'FAQs', faq_url, title: 'frequently asked questions'
         %li{class: ('active' if @menu == 'about')}= link_to 'ABOUT', about_url, title: "About #{Settings.app.name}"

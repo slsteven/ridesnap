@@ -1,0 +1,91 @@
+- provide(:title, 'Buy')
+
+.container{style: 'padding-top:120px'}
+  .form-big
+    =render 'shared/rvr_custom'
+
+  %p The process of buying used cars on Craigslist and other sites is flawed.<br /> You should know much more about a car before meeting random people and going out for a test drive!
+  %p
+    Now with #{Settings.app.name}’s marketplace or by entering your
+    %span.purple #{Settings.app.name} Vehicle Report
+    (RVR), you can find all the details
+    %span.purple before
+    making any commitments.
+
+  .row
+    .col-md-6
+      = image_tag 'example_rvr_blocks.png', class: 'img-responsive', title: 'RVR Summary'
+      %br
+      %p Start by scheduling a time and place for to conduct your free inspection.
+      %p The inspection helps us better determine the car’s value, and the information gathered is used to develop your RVR report and online listing.
+      %p We believe in complete transparency and overloading our buyers with information. We want you to feel confident in your future purchase so we don’t hide anything. Use #{Settings.app.name}’s 4 component Vehicle report conducted by mechanics to find out the details.
+      %p Report includes: Mechanical, cosmetic damages, car history, and value summary
+      %ul.bullet
+        %li Mechanical – 150 point inspection report
+        %li Cosmetic damages – points out all of the dents, scratches, and defects
+        %li Car History – Carfax report
+        %li Value Summary – KBB report
+    .col-md-6
+      = image_tag 'report_preview.png', class: 'img-responsive', title: 'Sample RVR'
+
+  %hr.arrow
+
+  .text-center
+    %span= image_tag 'eye.svg', class: 'img-svg'
+    %br
+    = button_tag 'CHECK OUT THIS CAR', class: 'btn btn-link'
+    %br
+    %br
+    %p Are you satisfied with the car so far? <br />Schedule a time and place to see the car in person prior to purchase.
+
+  %hr.arrow
+
+  .text-center
+    %span= image_tag 'checklist.svg', class: 'img-svg'
+    %br
+    %br
+    = button_tag 'DOWNLOAD REPORT', class: 'btn btn-link'
+    %br
+    %br
+    = mail_to "info@#{request.host}", 'MESSAGE US', class: 'btn btn-link', target: '_blank'
+    %br
+    %br
+    %p Interested? More questions? Just talk to us.
+
+  %hr.arrow
+
+  .text-center
+    %span= image_tag 'money.svg', class: 'img-svg'
+    %br
+    %br
+    = button_tag 'BUY THIS CAR!', class: 'btn btn-link'
+    %br
+    %br
+    %p You can buy anything online, why not a car?
+    %p
+      Pay now with
+      %ul.bullet.align-middle
+        %li Cash
+        %li Bank transfer
+        %li Financing options
+    %br
+    %p Payment and title transfer can be a huge mess.
+    %p You have the money, but the seller has the title; who hands over what first? No one wants to get ripped off!
+    %p #{Settings.app.name} safely facilitates the transfer between both parties like an escrow service.
+
+  %hr.arrow
+
+  .text-center
+    %span= image_tag 'steer.svg', class: 'img-svg'
+    %br
+    %h3 Delivery
+    %p Get your car delivered right to your door step.
+
+  %hr.arrow
+
+  .form-big
+    =render 'shared/rvr_custom'
+
+  %hr
+
+  = render 'shared/story_icons_1'
