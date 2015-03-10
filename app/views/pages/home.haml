@@ -3,8 +3,7 @@
 .jumbotron.black-bg#home1
   .container.text-center#header-threshold
     %h1 AT YOUR SERVICE.
-    %p #{Settings.app.name} takes care of all the stress and work that comes with buying and selling your car.
-    %p We connect people to vehicles through our marketplace, and after that connection is made we connect the vehicle to the person.
+    %p.main-text #{Settings.app.name} takes care of all tress and work that comes with buying and selling used cars.
     .col-sm-4.col-sm-offset-4
       = render 'shared/rvr'
 
@@ -16,47 +15,71 @@
     %p #{Settings.app.name} believes in a data driven concierge service that manages the process, providing risk mitigation, time, and cost savings to all.
     = render 'shared/story_icons_2'
 
-  %hr.arrow
+.section-black{style: 'margin-top: 6em;'}
+  .container
 
-  %div
-    %h2.text-center
-      #{Settings.app.name}
-      %span.purple Services
-    %p.text-center The service is designed to be simple, and anything that needs to be done by the user can be completed online.
-    .row
-      .col-sm-6.col-md-4.col-md-offset-1
-        %h3.text-center
-          %span.glyphicon.glyphicon-road
-        %ol.text-justify
-          %li Discover the details of a car you are looking at by entering the RVR number. Or go straight to the marketplace.
-          %li Scan reports
-          %li Message us for more details or check out the car in person
-          %li Go through the payment and title transfer process
-          %li Give us the location to deliver your new ride!
-        %br
-        %br
-        %br
-        .text-center
-          = link_to 'START BROWSING', vehicles_path, class: 'btn btn-purple'
-      .col-sm-6.col-md-4.col-md-offset-2
-        %h3.text-center
-          %span.glyphicon.glyphicon-usd
-        %ol.text-justify
-          %li Tell #{Settings.app.name} about the car you want to sell!
-          %li Schedule a time and place for us to see in person and conduct your free RVR inspection.
-          %li Put your RVR sticker on your window and keep driving your car while we find your buyers.
-          %li Stay updated along the way.
-          %li Get paid.
-        %br
-        %br
-        %br
-        %br
-        .text-center
-          = link_to 'START SELLING', sell_path, class: 'btn btn-success'
+    %div
+      %h2.text-center
+        #{Settings.app.name} Services
+      %p.text-center The service is designed to be simple, and anything that needs to be done by the user can be<br /> completed online.
+    .row{style: 'margin-top: 6em;'}
+      .col-sm-5.col-xs-12
+        .col-md-5.col-xs-12.col-md-offset-2.col-xs-offset-0
+          = image_tag('cars.png', class: 'img-responsive')
+        .col-md-5.col-xs-12
+          .h2
+            BUY YOUR NEXT CAR
+      .col-sm-2.col-xs-12
+        .h2
+          .text-center
+            OR
+      .col-sm-5.col-xs-12
+        .col-md-5.col-xs-12
+          = image_tag('money.png', class: 'img-responsive')
+        .col-md-7.col-xs-12
+          .h2
+            SELL YOUR EXISTING CAR
 
-  %hr.arrow
+= image_tag('bg-triangle.png',class: 'full-width')
 
+.container{style: 'margin-top: 3em; margin-bottom: 6em'}
   .text-center
+    %h2 How It Works
+  .row
+    .col-sm-6.col-md-4.col-md-offset-1
+      %h3.text-center
+        %span= image_tag('dollar.svg')
+      %ol.text-justify.outside
+        %li Enter an RVR code from a car you saw or go to the marketplace.
+        %li Look through RideSnap Vehicle Reports.
+        %li Check out the car in person.
+        %li Go through the payment and paperwork process.
+      %br
+      %br
+      %br
+      %br
+      %br
+      %br
+      .text-center
+        = link_to 'START BROWSING', vehicles_path, class: 'btn btn-purple'
+    .col-sm-6.col-md-4.col-md-offset-2
+      %h3.text-center
+        %span= image_tag('dollargreen.svg')
+      %ol.text-justify.outside
+        %li Tell us about the car you want to sell!
+        %li Schedule a time and place for us to see in person and conduct your free RVR inspection.
+        %li Prepare your documents.
+        %li Sit back and relax. Let RideSnap find your buyers and manage the whole process.
+        %li Get paid once we find you a buyer.
+      %br
+      %br
+      %br
+      %br
+      .text-center
+        = link_to 'START SELLING', sell_path, class: 'btn btn-success'
+
+.jumbotron.black-bg#home2{style: 'margin-bottom: -75px'}
+  .container.text-center
     %p
       %small
         %b
@@ -76,7 +99,6 @@
           = text_field_tag :zip_code, nil, placeholder: 'Zip Code', class: 'form-control'
           %span.input-group-btn
             = submit_tag 'Submit', class: 'btn btn-default'
-
 
 - if controller_name == 'password_resets' && action_name == 'edit'
   = render 'password_resets/edit'

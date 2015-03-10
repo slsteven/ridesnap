@@ -97,6 +97,12 @@ ul {
   list-style: none;
 }
 
+.outside {
+  li {
+    list-style-position: outside;
+  }
+}
+
 span {
   img {
     max-width: 70px;
@@ -104,6 +110,15 @@ span {
       max-width: 100px;
       width: 100px;
     }
+  }
+}
+
+img {
+  &.full-width {
+    max-width: 100%;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
   }
 }
 

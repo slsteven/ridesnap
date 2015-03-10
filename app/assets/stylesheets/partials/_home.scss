@@ -17,3 +17,22 @@ ul#how-it-works {
     }
   }
 }
+
+p.main-text {
+  margin-bottom: 75px;
+}
+
+.section-black {
+  background-color: #000;
+  padding-bottom: 3em;
+  padding-top: 6em;
+  color: #fff;
+  .h2 {
+    margin: 0;
+    padding: 44px 0;
+    text-align: center;
+  }
+  .img-responsive {
+    margin: 0 auto;
+  }
+}
