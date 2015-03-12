@@ -236,6 +236,11 @@ GEM
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
     slop (3.6.0)
+    smart_listing (1.1.1)
+      coffee-rails
+      jquery-rails
+      kaminari (~> 0.16.1)
+      rails (>= 3.2)
     spring (1.2.0)
     sprockets (2.12.3)
       hike (~> 1.2)
@@ -305,6 +310,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails
   sdoc (~> 0.4.0)
+  smart_listing
   spring
   thin
   turbolinks

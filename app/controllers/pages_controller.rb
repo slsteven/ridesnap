@@ -18,6 +18,8 @@ class PagesController < ApplicationController
 
   def home
     @menu = 'home'
+    @next_city = City.order(requests: :desc).where.not(available: true).first
+    @next_city ||= City.order(requests: :asc).first
   end
 
   def how

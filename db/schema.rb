@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150129065544) do
+ActiveRecord::Schema.define(version: 20150310053421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,15 @@ ActiveRecord::Schema.define(version: 20150129065544) do
     t.datetime "updated_at"
   end
 
+  create_table "codes", force: :cascade do |t|
+    t.string   "code"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "codes", ["code"], name: "index_codes_on_code", using: :btree
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
     t.integer  "sluggable_id",              null: false
@@ -40,16 +49,6 @@ ActiveRecord::Schema.define(version: 20150129065544) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
-  create_table "garages", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "vehicle_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "garages", ["user_id"], name: "index_garages_on_user_id", using: :btree
-  add_index "garages", ["vehicle_id"], name: "index_garages_on_vehicle_id", using: :btree
-
   create_table "images", force: :cascade do |t|
     t.integer  "vehicle_id"
     t.string   "url"
@@ -59,6 +58,19 @@ ActiveRecord::Schema.define(version: 20150129065544) do
   end
 
   add_index "images", ["vehicle_id"], name: "index_images_on_vehicle_id", using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "vehicle_id"
+    t.string   "type"
+    t.jsonb    "details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "ended_at"
+  end
+
+  add_index "notifications", ["ended_at"], name: "index_notifications_on_ended_at", using: :btree
+  add_index "notifications", ["type"], name: "index_notifications_on_type", using: :btree
+  add_index "notifications", ["vehicle_id"], name: "index_notifications_on_vehicle_id", using: :btree
 
   create_table "rides", force: :cascade do |t|
     t.integer  "user_id"

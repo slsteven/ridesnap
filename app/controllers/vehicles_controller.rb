@@ -17,6 +17,15 @@ class VehiclesController < ApplicationController
   def edit
   end
 
+  def notify
+    @vehicle = Vehicle.find_by_vin(params[:id]) || Vehicle.find(params[:id])
+    params[:notifications].each do |n|
+      Notification.klass(n[:_type]).create(vehicle: @vehicle, details: n)
+    end
+    params[:totalRecords] # TODO check pagination
+    return true
+  end
+
   def index
     all = Vehicle.all
     @vehicles = Vehicle.filter(params).page(params[:page]).per(20)

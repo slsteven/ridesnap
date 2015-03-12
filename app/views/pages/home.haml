@@ -66,7 +66,7 @@
     %h2 The San Francisco Bay Area.
     %p
       COMING SOON:
-      %b CHICAGO
+      %b= @next_city.try(:city)
     %p
       %small Don't see your city? Let us know where you'd like to see #{Settings.app.name} next!
     .col-sm-4.col-sm-offset-4
