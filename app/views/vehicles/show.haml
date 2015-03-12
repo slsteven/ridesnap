@@ -93,16 +93,13 @@
   %hr.arrow
 
   .text-center.form-inline
-    .inspection
-      Mechanical Inspection -
-      %span EXCELLENT
     .btn-inspection
       .form-group
         = button_tag 'DOWNLOAD REPORT', class: 'btn btn-success', data: {toggle: 'modal', target: '#report-modal-all'}
       .form-group
-        = link_to 'CHECK OUT THIS CAR', new_ride_path(vehicle_vin: @vehicle.vin), class: 'btn btn-grey'
+        = button_tag 'CHECK OUT THIS CAR', class: 'btn btn-grey'
       .form-group
-        = button_tag 'BUY THIS CAR!', class: 'btn btn-purple'
+        = link_to 'BUY THIS CAR!', new_ride_path(vehicle_vin: @vehicle.vin), class: 'btn btn-purple'
 
   %hr
 

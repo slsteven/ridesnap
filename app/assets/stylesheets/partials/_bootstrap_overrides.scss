@@ -354,3 +354,24 @@ hr {
     }
   }
 }
+
+.img-responsive.align-center {
+  margin: 0 auto;
+}
+
+.progress {
+  background-color: #cccccc;
+  border-radius: 10px;
+}
+
+.progress-bar {
+    border-radius: 10px;
+}
+
+.progress-bar-success {
+    background-color: #39b54a;
+}
+
+.progress-bar-danger {
+    background-color: #d4145a;
+}

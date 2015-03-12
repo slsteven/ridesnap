@@ -100,6 +100,7 @@ ul {
 .outside {
   li {
     list-style-position: outside;
+    margin-left: 15px;
   }
 }
 
@@ -211,7 +212,7 @@ ul#how-it-works {
   }
   li {
     list-style-position: inside;
-    list-style-type: circle;
+    list-style-type: disc;
     white-space: nowrap;
   }
 }
@@ -270,5 +271,48 @@ ul#how-it-works {
   }
   p > span {
     color: #998675;
+  }
+}
+
+.col-space {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.input-center {
+  input[type="text"] {
+    text-align: center;
+    border-width: 2px;
+    border-color: #000;
+  }
+}
+
+.table.table-custom {
+  > thead {
+    > tr {
+      > th {
+        border-width: 0;
+        font-weight: normal;
+        padding: 8px 15px;
+        text-align: center;
+        .th-border {
+          padding: 6px 0;
+          border-top: 1px solid #e6e6e6;
+          border-bottom: 1px solid #e6e6e6;
+        }
+      }
+    }
+  }
+  > tbody {
+    > tr {
+      > td {
+        border-width: 0;
+        padding: 8px 15px;
+        .btn {
+          font-weight: normal;
+          padding: 6px 18px;
+        }
+      }
+    }
   }
 }

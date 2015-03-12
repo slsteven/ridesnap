@@ -1,34 +1,10 @@
 - provide(:title, 'Schedule')
 
-.container{style: 'padding-top:90px'}
+.container{style: 'padding-top:150px'}
   = form_tag Ride.new, class: 'form-inline', id: 'vehicle-inspection', role: 'form' do
     .text-center
-      %h1
-        #{Settings.app.name}
-        %span.purple Reservation Service
       %br
-      %p We will need some of your information to provide our top level serivce and ensure you will enjoy your time with us.
 
-      .form-group
-        = label_tag :user_name, nil, class: 'sr-only'
-        = text_field_tag 'user[name]', params[:user][:name] || current_user.try(:name), placeholder: 'Full Name', class: 'form-control check-presence'
-      .form-group
-        = label_tag :user_phone, nil, class: 'sr-only'
-        = text_field_tag 'user[phone]', params[:user][:phone] || current_user.try(:phone), placeholder: 'Phone', class: 'form-control check-presence phone'
-      .form-group
-        = label_tag :user_email, nil, class: 'sr-only'
-        = text_field_tag 'user[email]', params[:user][:email] || current_user.try(:email), placeholder: 'Email', class: 'form-control check-presence'
-      %br
-      .form-group{style: 'position:relative'}
-        = label_tag :ride_scheduled_at, nil, class: 'sr-only'
-        = text_field_tag 'ride[scheduled_at]', params[:ride][:scheduled_at], placeholder: 'Date/Time', class: 'form-control check-presence', id: 'datetimepicker-schedule'
-      .form-group
-        = label_tag :ride_address, nil, class: 'sr-only'
-        = text_field_tag 'ride[address]', params[:ride][:address], placeholder: 'Street', class: 'form-control check-presence'
-      .form-group
-        = label_tag :ride_zip_code, nil, class: 'sr-only'
-        = text_field_tag 'ride[zip_code]', params[:ride][:zip_code] || current_user.try(:zip_code), placeholder: 'Zip', class: 'form-control check-presence'
-      %br
       #vehicle-query
         - if @intent == 'sell'
           = render 'vehicles/new'
@@ -52,44 +28,229 @@
             = hidden_field_tag :vehicle_vin, @vehicle.try(:vin) || params[:vehicle][:vin]
             = label_tag :submit, nil, class: 'sr-only'
             = submit_tag 'Reserve a Test Drive', class: 'btn btn-success btn-wide new-ride-buy', disabled: true, data: { disable_with: 'Scheduling...' }
-    - if @intent == 'sell'
+        .form-group
+          = submit_tag 'Get a Quote', class: 'btn btn-success new-ride-sell', name: nil, disabled: true
+  %br
+  %br
+  %p We think we can sell your car around this price:
+  %br
+  %br
+  .price-range
+    %p #{Settings.app.name} Price:
+    .progress
+      .progress-bar.progress-bar-blank{style: "width: 35%"}
+      .progress-bar.progress-bar-success{style: "width: 50%"}
+        $25,300 ~ $31,000
+  .price-range
+    %p Dealership Price:
+    .progress
+      .progress-bar.progress-bar-blank{style: "width: 10%"}
+      .progress-bar.progress-bar-danger{style: "width: 50%"}
+        $19,500 ~ $28,100
 
-      %hr.arrow
+  %br
+  %p To sell your car we need to get in touch with you to schedule your free inspection and give you a final price quote.
+  %br
+  %p We come to you. No obligations. 100% free quote and inspection.
+  %br
 
-      .text-center
-        %h3 It would be much faster if you can provide your car VIN number:
+  .row
+    .col-xs-12.col-xs-offset-0.col-md-6.col-md-offset-3
+      .text-center.input-center
+        %h2
+          #{Settings.app.name}
+          %span.purple Reservation Service
+        %br
+        %p How can we get in touch with you?
+        %br
+
         .row
-          .col-sm-4.col-sm-offset-4
-            = label_tag :vehicle_vin, nil, class: 'sr-only'
-            = text_field_tag :vehicle_vin, @vehicle.try(:vin) || params[:vehicle][:vin], placeholder: '1A2BC34D5EF678901', class: 'form-control'
-            %span.help-block Don’t know where to find your VIN? Click here.
+          .col-xs-12.col-md-6
+            .form-group
+              = label_tag :user_name, nil, class: 'sr-only'
+              = text_field_tag 'user[name]', params[:user][:name] || current_user.try(:name), placeholder: 'First Name *', class: 'form-control check-presence'
+          .col-xs-12.col-md-6
+            .form-group
+              = label_tag :user_name, nil, class: 'sr-only'
+              = text_field_tag 'user[name]', params[:user][:name] || current_user.try(:name), placeholder: 'Last Name *', class: 'form-control check-presence'
 
-      %hr.arrow
+          .col-xs-12
+            .form-group
+              = label_tag :user_email, nil, class: 'sr-only'
+              = text_field_tag 'user[email]', params[:user][:email] || current_user.try(:email), placeholder: 'Email Address *', class: 'form-control check-presence'
 
-      .text-center
-        %h3 Is the car currenlty financed?
-        .radio
-          %label
-            = radio_button_tag 'vehicle[financed]', true
-            Yes, I am still paying off a loan
-        %br
-        .radio
-          %label
-            = radio_button_tag 'vehicle[financed]', false
-            No, I have a clean title
+          .col-xs-12
+            .form-group
+              = label_tag :user_phone, nil, class: 'sr-only'
+              = text_field_tag 'user[phone]', params[:user][:phone] || current_user.try(:phone), placeholder: 'Phone Number *', class: 'form-control check-presence phone'
 
-      %hr.arrow
+          .col-xs-12
+            .form-group
+              = label_tag :ride_zip_code, nil, class: 'sr-only'
+              = text_field_tag 'ride[zip_code]', params[:ride][:zip_code] || current_user.try(:zip_code), placeholder: 'Post Code', class: 'form-control check-presence'
 
-      .text-center
-        = label_tag :submit, nil, class: 'sr-only'
-        = submit_tag 'Ready to sell my car!', class: 'btn btn-success new-ride-sell', disabled: true, data: { disable_with: 'Creating Vehicle...' }
-        %br
-        %br
-        %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
 
-    %hr
+  -# .form-group
+  -#   = label_tag :user_name, nil, class: 'sr-only'
+  -#   = text_field_tag 'user[name]', params[:user][:name] || current_user.try(:name), placeholder: 'Full Name', class: 'form-control check-presence'
+  -# .form-group
+  -#   = label_tag :user_phone, nil, class: 'sr-only'
+  -#   = text_field_tag 'user[phone]', params[:user][:phone] || current_user.try(:phone), placeholder: 'Phone', class: 'form-control check-presence phone'
+  -# .form-group
+  -#   = label_tag :user_email, nil, class: 'sr-only'
+  -#   = text_field_tag 'user[email]', params[:user][:email] || current_user.try(:email), placeholder: 'Email', class: 'form-control check-presence'
+  -# %br
+  -# .form-group{style: 'position:relative'}
+  -#   = label_tag :ride_scheduled_at, nil, class: 'sr-only'
+  -#   = text_field_tag 'ride[scheduled_at]', params[:ride][:scheduled_at], placeholder: 'Date/Time', class: 'form-control check-presence', id: 'datetimepicker-schedule'
+  -# .form-group
+  -#   = label_tag :ride_address, nil, class: 'sr-only'
+  -#   = text_field_tag 'ride[address]', params[:ride][:address], placeholder: 'Street', class: 'form-control check-presence'
+  -# .form-group
+  -#   = label_tag :ride_zip_code, nil, class: 'sr-only'
+  -#   = text_field_tag 'ride[zip_code]', params[:ride][:zip_code] || current_user.try(:zip_code), placeholder: 'Zip', class: 'form-control check-presence'
+  -# %br
+  -# - if @intent == 'sell'
 
-    = render 'shared/story_icons_1'
+  -#   %hr.arrow
+
+  -#   .text-center
+  -#     %h3 It would be much faster if you can provide your car VIN number:
+  -#     .row
+  -#       .col-sm-4.col-sm-offset-4
+  -#         = label_tag :vehicle_vin, nil, class: 'sr-only'
+  -#         = text_field_tag :vehicle_vin, @vehicle.try(:vin) || params[:vehicle][:vin], placeholder: '1A2BC34D5EF678901', class: 'form-control'
+  -#         %span.help-block Don’t know where to find your VIN? Click here.
+
+  -#   %hr.arrow
+
+  -#   .text-center
+  -#     %h3 Is the car currenlty financed?
+  -#     .radio
+  -#       %label
+  -#         = radio_button_tag 'vehicle[financed]', true
+  -#         Yes, I am still paying off a loan
+  -#     %br
+  -#     .radio
+  -#       %label
+  -#         = radio_button_tag 'vehicle[financed]', false
+  -#         No, I have a clean title
+
+  -#   %hr.arrow
+
+  -#   .text-center
+  -#     = label_tag :submit, nil, class: 'sr-only'
+  -#     = submit_tag 'Ready to sell my car!', class: 'btn btn-success new-ride-sell', disabled: true, data: { disable_with: 'Creating Vehicle...' }
+  -#     %br
+  -#     %br
+  -#     %p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+
+  %br
+
+  %hr.arrow
+
+  .text-center
+    %h2 Pick some avaliable time slots
+
+    .table-responsive
+      %table.table.table-custom
+        %thead
+          %tr
+            %th
+              .th-border Friday 12/26
+            %th
+              .th-border Saturday 12/27
+            %th 
+              .th-border Monday 12/28
+            %th 
+              .th-border Tuesday 12/29
+            %th 
+              .th-border Friday 12/30
+
+        %tbody
+          %tr
+            %td
+              %button.btn.btn-success 7:30 to 9:30 AM
+            %td
+              %button.btn.btn-grey{:disabled => "disabled"} 7:30 to 9:30 AM
+            %td
+              %button.btn.btn-success 7:30 to 9:30 AM
+            %td
+              %button.btn.btn-success 7:30 to 9:30 AM
+            %td
+              %button.btn.btn-success 7:30 to 9:30 AM
+          %tr
+            %td
+              %button.btn.btn-success 7:30 to 9:30 AM
+            %td
+              %button.btn.btn-grey{:disabled => "disabled"} 7:30 to 9:30 AM
+            %td
+              %button.btn.btn-success 7:30 to 9:30 AM
+            %td
+              %button.btn.btn-success 7:30 to 9:30 AM
+            %td
+              %button.btn.btn-success 7:30 to 9:30 AM
+          %tr
+            %td
+              %button.btn.btn-success 7:30 to 9:30 AM
+            %td
+              %button.btn.btn-grey{:disabled => "disabled"} 7:30 to 9:30 AM
+            %td
+              %button.btn.btn-success 7:30 to 9:30 AM
+            %td
+              %button.btn.btn-success 7:30 to 9:30 AM
+            %td
+              %button.btn.btn-success 7:30 to 9:30 AM
+
+          %tr
+            %td
+              %button.btn.btn-success 7:30 to 9:30 AM
+            %td
+              %button.btn.btn-grey{:disabled => "disabled"} 7:30 to 9:30 AM
+            %td
+              %button.btn.btn-success 7:30 to 9:30 AM
+            %td
+              %button.btn.btn-success 7:30 to 9:30 AM
+            %td
+              %button.btn.btn-success 7:30 to 9:30 AM
+          %tr
+            %td
+              %button.btn.btn-success 7:30 to 9:30 AM
+            %td
+              %button.btn.btn-grey{:disabled => "disabled"} 7:30 to 9:30 AM
+            %td
+              %button.btn.btn-success 7:30 to 9:30 AM
+            %td
+              %button.btn.btn-success 7:30 to 9:30 AM
+            %td
+              %button.btn.btn-success 7:30 to 9:30 AM
+
+  %br
+  %br
+  %br
+  %br
+
+  .text-center
+    %a.btn.btn-success.btn-lg{:href => "#"} Submit
+
+  %hr.arrow
+
+  .text-center
+    %h2 About Pre-purchase Car Inspection Service Description
+    %br
+    %br
+    %p This is a standard 150 point inspection. Mechanic will check all the fluids, hoses, front suspension, brakes, warning lights, interior and exterior lights and body, tires and more. 
+    %br
+    %p We use this report to provide buyers with complete transparency. 
+    %br
+    %p Things you will need during the appointment:
+    %br
+    %ul.bullet.align-middle
+      %li The car’s title/pink slip
+      %li Valid current registration of ownership
+      %li Valid state-issued photo ID for all title holders
+      %li All keys and remote(s)
+      %li Any maintenance records
 
 :coffee
   $ ->

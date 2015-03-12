@@ -4,21 +4,16 @@
   .form-big
     =render 'shared/rvr_custom'
 
-  %p The process of buying used cars on Craigslist and other sites is flawed.<br /> You should know much more about a car before meeting random people and going out for a test drive!
-  %p
-    Now with #{Settings.app.name}’s marketplace or by entering your
-    %span.purple #{Settings.app.name} Vehicle Report
-    (RVR), you can find all the details
-    %span.purple before
-    making any commitments.
+  %p Because all cars are sold “AS-IS” from the owners, we want to try  and make the buying process as transparent as possible.
+
+  %p We have independent and ASE certified mechanics do basic inspections to reveal any obvious or unsafe mechanical issues. You can view these summarized reports by searching through our RVR. We also use the inspection to help us determine the final price to ensure everyone is getting a fair deal.
+
+  %p RideSnap still recommends buyers to bring their own mechanics before purchasing.
 
   .row
     .col-md-6
       = image_tag 'example_rvr_blocks.png', class: 'img-responsive', title: 'RVR Summary'
       %br
-      %p Start by scheduling a time and place for to conduct your free inspection.
-      %p The inspection helps us better determine the car’s value, and the information gathered is used to develop your RVR report and online listing.
-      %p We believe in complete transparency and overloading our buyers with information. We want you to feel confident in your future purchase so we don’t hide anything. Use #{Settings.app.name}’s 4 component Vehicle report conducted by mechanics to find out the details.
       %p Report includes: Mechanical, cosmetic damages, car history, and value summary
       %ul.bullet
         %li Mechanical – 150 point inspection report
@@ -31,37 +26,32 @@
   %hr.arrow
 
   .text-center
-    %span= image_tag 'eye.svg', class: 'img-svg'
+    %h2 Find the car
     %br
-    = button_tag 'CHECK OUT THIS CAR', class: 'btn btn-link'
+    %p Find a car you like from the marketplace or type in the RVR code from a car you saw to find out the details.
     %br
     %br
-    %p Are you satisfied with the car so far? <br />Schedule a time and place to see the car in person prior to purchase.
+    .row
+      .col-xs-12.col-md-6.col-space
+        = image_tag 'rvr-car-1.jpg', class: 'img-responsive align-center', title: 'RVR car'
+      .col-xs-12.col-md-6.col-space
+        = image_tag 'rvr-car-2.jpg', class: 'img-responsive align-center', title: 'RVR car'
+  %hr.arrow
+
+  .text-center
+    %h2 Check out the car
+    %br
+    %p Schedule a time to check out the car in person.
 
   %hr.arrow
 
   .text-center
-    %span= image_tag 'checklist.svg', class: 'img-svg'
+    %h2 Buy the car
     %br
-    %br
-    = button_tag 'DOWNLOAD REPORT', class: 'btn btn-link'
-    %br
-    %br
-    = mail_to "info@#{request.host}", 'MESSAGE US', class: 'btn btn-link', target: '_blank'
-    %br
-    %br
-    %p Interested? More questions? Just talk to us.
-
-  %hr.arrow
-
-  .text-center
-    %span= image_tag 'money.svg', class: 'img-svg'
-    %br
-    %br
-    = button_tag 'BUY THIS CAR!', class: 'btn btn-link'
-    %br
+    %p Contact RideSnap to initiate the transaction and title transfer.
     %br
     %p You can buy anything online, why not a car?
+    %br
     %p
       Pay now with
       %ul.bullet.align-middle
@@ -88,4 +78,4 @@
 
   %hr
 
-  = render 'shared/story_icons_1'
+  = render 'shared/story_icons_2'
