@@ -54,8 +54,11 @@ class Vehicle < ActiveRecord::Base
 
   has_many :rides, dependent: :delete_all
   has_many :users, through: :rides
+
+  has_many :problems, dependent: :delete_all
+  has_many :trouble_codes, through: :problems
+
   has_many :images, dependent: :delete_all
-  has_many :followers, through: :garages
 
   scope :min_price, ->(min) { where('agreed_value >= ?', min.to_i) }
   scope :max_price, ->(max) { where('agreed_value <= ?', max.to_i) }

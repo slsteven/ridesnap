@@ -1,7 +1,7 @@
 module Location
   def self.from_zip(code:)
     # https://developers.google.com/maps/documentation/geocoding/
-    loc = HTTParty.get "http://maps.googleapis.com/maps/api/geocode/json?address=#{code}&sensor=false"
+    loc = HTTParty.get "https://maps.googleapis.com/maps/api/geocode/json?address=#{code}&sensor=false"
     result = loc['results'][0]
     {
          city: result['address_components'][1]['long_name'],
