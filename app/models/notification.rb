@@ -46,8 +46,8 @@ class Notification < ActiveRecord::Base
     ].freeze
   end
 
-  def self.klass(n)
-    case n.upcase
+  def self.klass(n=nil)
+    case n.try(:upcase)
     when 'GEOFENCE'
       Geofence
     when 'IGNITIONSTATUS'

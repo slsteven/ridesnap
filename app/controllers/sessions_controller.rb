@@ -1,9 +1,4 @@
 class SessionsController < ApplicationController
-  # force_ssl [:carvoyant]
-
-  def carvoyant
-
-  end
 
   def create
     @user = User.find_by(email: params[:session][:email].downcase.strip)
