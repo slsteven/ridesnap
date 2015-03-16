@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
   include UsersHelper
+  include SmartListing::Helper::ControllerExtensions
+  helper  SmartListing::Helper
 
   def user_params
     params.require(:user).permit(:name, :email, :phone, :password, :zip_code)

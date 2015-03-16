@@ -15,6 +15,7 @@
 //= require jquery-ui/widget
 //= require best_in_place
 //= require bootstrap-sprockets
+//= require smart_listing
 //= require turbolinks
 //= require lib/moment.min.js
 //= require browser_timezone_rails/application.js
