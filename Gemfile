@@ -86,7 +86,4 @@ gem 'aws-sdk', github: 'aws/aws-sdk-core-ruby'
 gem 'aws-sdk-v1'
 gem 'friendly_id', '~> 5.1.0'
 gem 'oauth2'
-# Pagination
-gem 'kaminari'
-gem 'kaminari-bootstrap'
-# gem 'smart_listing' # this is amazing for lists, includes kaminari pagination
+gem 'smart_listing' # this is amazing for lists, includes kaminari pagination
