@@ -37,10 +37,8 @@ class VehiclesController < ApplicationController
                ['< 75,000', 75000],
                ['< 100,000', 100000] ]
     @types = ['Coupe', 'Sedan'].sort # not using this yet...
-<<<<<<< HEAD
     @menu = 'marketplace'
-=======
-    @menu = 'buy'
+    # @menu = 'buy'
 
     # filtering
     @vehicles = @vehicles.where(make: params[:make]) if params[:make].present?
@@ -57,7 +55,6 @@ class VehiclesController < ApplicationController
       f.js { render layout: false }
       f.html
     end
->>>>>>> origin
   end
 
   def model_query

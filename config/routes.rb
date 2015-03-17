@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   end
 
   root 'pages#home'
-<<<<<<< HEAD
 
   resources :sessions, only: [:create, :destroy]
 
@@ -20,15 +19,6 @@ Rails.application.routes.draw do
   get '/agent'        => 'pages#agent'
   get '/sell'         => 'vehicles#sell'
   get '/buy'        => 'vehicles#buy'
-=======
-  get '/how'                      => 'pages#how'
-  get '/start'                    => 'pages#start'
-  get '/about'                    => 'pages#about'
-  get '/contact'                  => 'pages#contact'
-  get '/faq'                      => 'pages#faq'
-  get '/agent'                    => 'pages#agent'
-  get '/sell'                     => 'vehicles#sell'
->>>>>>> origin
 
   namespace :api, defaults: {format: 'json'} do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do

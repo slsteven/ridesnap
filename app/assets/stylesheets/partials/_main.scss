@@ -204,7 +204,6 @@ ul#how-it-works {
   }
 }
 
-<<<<<<< HEAD
 .bullet {
   display: inline-block;
   text-align: left;
@@ -315,7 +314,9 @@ ul#how-it-works {
         }
       }
     }
-=======
+  }
+}
+
 .external-link {
   @extend .glyphicon;
   @extend .glyphicon-new-window;
@@ -325,6 +326,5 @@ ul#how-it-works {
   &:hover, &:focus, &:active {
     text-decoration: none;
     color: black;
->>>>>>> origin
   }
 }
