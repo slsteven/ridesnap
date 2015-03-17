@@ -21,4 +21,5 @@ test: &test
   database:   ridesnap_test
 
 # heroku takes care of this automagically
-# production: &production
+production: &production
+  <<: *default

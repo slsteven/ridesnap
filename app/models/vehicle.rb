@@ -54,15 +54,8 @@ class Vehicle < ActiveRecord::Base
 
   has_many :rides, dependent: :delete_all
   has_many :users, through: :rides
-  has_many :images, dependent: :delete_all
-  has_many :followers, through: :garages
 
-  scope :min_price, ->(min) { where('agreed_value >= ?', min.to_i) }
-  scope :max_price, ->(max) { where('agreed_value <= ?', max.to_i) }
-  scope :make, ->(make) { where(make: make.downcase) }
-  scope :closest_color, ->(color) { where(closest_color: color.downcase) }
-  scope :year, ->(year) { where(year: year.to_i) }
-  scope :mileage, ->(mileage) { where('mileage <= ?', mileage.to_i) }
+  has_many :images, dependent: :delete_all
 
   validates :make, presence: true
   validates :model, presence: true
@@ -110,13 +103,6 @@ class Vehicle < ActiveRecord::Base
     "#{year} #{make(pretty: true)} #{model(pretty: true)} - #{description}"
   end
 
-  def self.filter(attributes)
-    supported_filters = [:make, :closest_color, :year, :mileage, :min_price, :max_price]
-    attributes.slice(*supported_filters).inject(self) do |scope, (key, value)|
-      value.present? ? scope.send(key, value) : scope
-    end
-  end
-
   # getters for prettified text
   def make(pretty: false)
     mk = read_attribute(:make)
@@ -131,8 +117,9 @@ class Vehicle < ActiveRecord::Base
   end
 
   def base_color
-    return %w(black white grey red yellow green cyan blue magenta).sample if closest_color.nil?
-    return nil unless self.color.present? && self.color.first[1][:primary]
+    unless self.color.present? && self.color.first[1][:primary]
+      return %w(black white grey red yellow green cyan blue magenta).sample
+    end
     color = Color::RGB.from_html(self.color.first[1][:primary]).to_hsl
     hue = color.hue
     sat = color.saturation

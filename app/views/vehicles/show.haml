@@ -26,6 +26,7 @@
 
   %hr.arrow
 
+<<<<<<< HEAD
   .title-grey
     %h1.text-center
       RVR
@@ -34,6 +35,15 @@
         %br
         %h3= link_to @vehicle.external_ad
   .clearfix
+=======
+  .text-center
+    %h1
+      RVR
+      = @vehicle.rvr.upcase
+      - if admin? && @vehicle.external_ad.present?
+        = link_to '', @vehicle.external_ad, target: '_blank', class: 'external-link', title: 'External Ad'
+  .row
+>>>>>>> origin
     .col-xs-12.col-sm-6.hoverable
       .overlay.text-center
         %span= image_tag 'eye.svg', class: 'img-svg'

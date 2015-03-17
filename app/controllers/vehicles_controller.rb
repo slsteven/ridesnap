@@ -17,18 +17,47 @@ class VehiclesController < ApplicationController
   def edit
   end
 
+  def notify
+    @vehicle = Vehicle.find_by_vin(params[:id]) || Vehicle.find(params[:id])
+    params[:notifications].each do |n|
+      Notification.klass(n[:_type]).create(vehicle: @vehicle, details: n)
+    end
+    params[:totalRecords] # TODO check pagination
+    return true
+  end
+
   def index
-    all = Vehicle.all
-    @vehicles = Vehicle.filter(params).page(params[:page]).per(20)
-    all.map(&:make).uniq.compact.sort.each_with_object(@makes=[]){ |m,o| o << [Settings.vehicle_makes[m], m] }
+    @vehicles = Vehicle.listed
+    # build select menus
+    @vehicles.map(&:make).uniq.compact.sort.each_with_object(@makes=[]){ |m,o| o << [Settings.vehicle_makes[m], m] }
+    @vehicles.map(&:closest_color).uniq.reject(&:blank?).sort.each_with_object(@colors=[]){ |c,o| o << [c.capitalize, c] }
     @years = [*Date.today.year-10 .. Date.today.year].reverse # that splat is supposed to be there
-    all.map(&:closest_color).uniq.reject(&:blank?).sort.each_with_object(@colors=[]){ |c,o| o << [c.capitalize, c] }
-    @miles = [['< 25,000', 25000],
-              ['< 50,000', 50000],
-              ['< 75,000', 75000],
-              ['> 100,000', 500000]] # no way there is a 10 year old car with half a million miles
+    @miles = [ ['< 25,000', 25000],
+               ['< 50,000', 50000],
+               ['< 75,000', 75000],
+               ['< 100,000', 100000] ]
     @types = ['Coupe', 'Sedan'].sort # not using this yet...
+<<<<<<< HEAD
     @menu = 'marketplace'
+=======
+    @menu = 'buy'
+
+    # filtering
+    @vehicles = @vehicles.where(make: params[:make]) if params[:make].present?
+    @vehicles = @vehicles.where(year: params[:year].to_i) if params[:year].present?
+    min_p = params[:min_price]
+    max_p = params[:max_price].presence || 1000000
+    @vehicles = @vehicles.where(agreed_value: min_p.to_i .. max_p.to_i)
+    @vehicles = @vehicles.where(closest_color: params[:closest_color]) if params[:closest_color].present?
+    @vehicles = @vehicles.where('mileage < ?', params[:mileage].to_i) if params[:mileage].present?
+
+    smart_listing_create(:vehicles, @vehicles, partial: 'vehicles/listing')
+
+    respond_to do |f|
+      f.js { render layout: false }
+      f.html
+    end
+>>>>>>> origin
   end
 
   def model_query

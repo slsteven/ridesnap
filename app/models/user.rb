@@ -27,7 +27,6 @@ class User < ActiveRecord::Base
 
   has_many :rides
   has_many :vehicles, -> { where(rides: {relation: %w(2 4)}) }, through: :rides
-  has_many :favorites, through: :garages
 
   before_save do
     self.email = email.downcase.strip
