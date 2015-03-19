@@ -16,5 +16,7 @@ ready = ->
 		parent.find('.js-content-images img').removeAttr('style')
 		parent.find('.js-content-comments span').removeAttr('style')
 
+	$('.flexslider').flexslider	animation: "slide", slideshow: false
+
 $(document).ready(ready)
 $(document).on('page:load', ready)

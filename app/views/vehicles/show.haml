@@ -1,15 +1,23 @@
 - provide(:title, "#{@vehicle.make(pretty: true)} #{@vehicle.model(pretty: true)}")
 
 .container{style: 'padding-top:90px'}
-  .owl-carousel
-    - if @vehicle.images.blank?
-      .vehicle-image
-        = image_tag 'blank.jpg', class: 'img-responsive three-four'
-    - @vehicle.images.each do |img|
-      .vehicle-image
-        = image_tag img.try(:image_url), class: 'img-responsive three-four'
-        - if admin?
-          = link_to '', [@vehicle, img], method: :delete, data: { confirm: "You're sure you want to REMOVE this image from the vehicle?" }, class: 'glyphicon glyphicon-remove remove-image', title: 'Remove image', 'aria-label' => "Remove image"
+
+  .flexslider
+    %ul.slides
+      - (1..4).each do |i|
+        %li
+          %img{:src => "/assets/slide#{i}.jpg"}
+          .v-desc.clearfix
+            .pull-left
+              .big-detail
+                2006 BMW 535i
+              .small-detail
+                XXXX Miles
+            .pull-right.text-right
+              .big-detail
+                $ XXXXX
+              .small-detail
+                $ XXX/month
 
   - if admin?
     %br
@@ -23,8 +31,6 @@
           {%=o.name%}
           .progress
             .bar{style: 'width: 0%'}
-
-  %hr.arrow
 
   .title-grey
     %h1.text-center
