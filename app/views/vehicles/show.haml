@@ -1,23 +1,23 @@
 - provide(:title, "#{@vehicle.make(pretty: true)} #{@vehicle.model(pretty: true)}")
 
-.container{style: 'padding-top:90px'}
+.container{style: 'padding-top:100px'}
 
   .flexslider
     %ul.slides
-      - (1..4).each do |i|
+      - (1..8).each do |i|
         %li
           %img{:src => "/assets/slide#{i}.jpg"}
-          .v-desc.clearfix
-            .pull-left
-              .big-detail
-                2006 BMW 535i
-              .small-detail
-                XXXX Miles
-            .pull-right.text-right
-              .big-detail
-                $ XXXXX
-              .small-detail
-                $ XXX/month
+    .v-desc.clearfix
+      .pull-left
+        .big-detail
+          2006 BMW 535i
+        .small-detail
+          XXXX Miles
+      .pull-right.text-right
+        .big-detail
+          $ XXXXX
+        .small-detail
+          $ XXX/month
 
   - if admin?
     %br
@@ -41,7 +41,7 @@
   .clearfix
     .col-xs-12.col-sm-6.hoverable
       .overlay.text-center
-        %span= image_tag 'eye.svg', class: 'img-svg'
+        %span= image_tag 'cogwheels.png', class: 'img-png'
         %h4 Mechanics Report
         %p
           150-point inspection (engine, tires, leaks, etc.)
@@ -51,7 +51,7 @@
       = image_tag 'car.jpg', class: 'img-responsive'
     .col-xs-12.col-sm-6.hoverable
       .overlay.text-center
-        %span= image_tag 'eye.svg', class: 'img-svg'
+        %span= image_tag 'search.png', class: 'img-png'
         %h4 Exteiror and Interior
         %p
           Dents, dings, scratches, rust
@@ -62,7 +62,7 @@
   .clearfix
     .col-xs-12.col-sm-6.hoverable
       .overlay.text-center
-        %span= image_tag 'eye.svg', class: 'img-svg'
+        %span= image_tag 'carfax.png', class: 'img-png'
         %h4 CarFax Report
         %p
           Title status, ownership, maintenance records
@@ -72,7 +72,7 @@
       = image_tag 'engine_2.jpg', class: 'img-responsive'
     .col-xs-12.col-sm-6.hoverable
       .overlay.text-center
-        %span= image_tag 'eye.svg', class: 'img-svg'
+        %span= image_tag 'value.png', class: 'img-png'
         %h4 Value Summary
         %p
           Test driven by a Mechanic
