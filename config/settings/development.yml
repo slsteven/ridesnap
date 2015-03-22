@@ -4,9 +4,10 @@ aws:
 
 carvoyant:
   base_url: https://sandbox-api.carvoyant.com
-  token_url: /sandbox/oauth/token
+  auth_url: https://sandbox-auth.carvoyant.com/OAuth/authorize
+  token_path: /sandbox/oauth/token
   api_version: /sandbox/api
-  callback_url: lvh.me:3000
+  callback_url: https://ridesnap.dev/auth/carvoyant/callback #lvh.me:3000
   client_id: 3z4qenxtm4vjzu5fhtpr88x9
   secret: SxJHyVrfZq
 

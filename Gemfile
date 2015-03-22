@@ -72,7 +72,7 @@ group :production do
   gem 'rails_serve_static_assets'
 end
 
-gem 'httparty' # used for making zipcode requests to google to find city/state
+gem 'httparty' # used for making http requests fun!
 gem 'nokogiri' # scraper... but only using internally to build inline SVGs
 gem 'meta-tags'
 gem 'rails_config'

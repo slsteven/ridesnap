@@ -39,6 +39,7 @@ class Vehicle < ActiveRecord::Base
   include LocationConcern
   include AASM
   include ActionView::Helpers::NumberHelper
+  include Carvoyant
 
   extend FriendlyId
   friendly_id :vin

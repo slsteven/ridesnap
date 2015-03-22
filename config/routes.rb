@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:create, :destroy]
   delete '/signout'               => 'sessions#destroy'
-  get '/auth/:provider/callback'  => "sessions##{:provider}"
+  get '/auth/:provider/callback'  => "sessions#callback"
 
   resources :users, concerns: :paginatable do
     collection do

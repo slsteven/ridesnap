@@ -29,7 +29,7 @@ debug: false
 
 google:
   analytics:
-    enabled: false
+    enabled: true
     key: UA-56542383-1
   api_key: AIzaSyBC4pH2DkIOLKGzTZ3nKxQL9V9HF3FnhVk
 
@@ -49,9 +49,10 @@ edmunds:
 
 carvoyant:
   base_url: https://api.carvoyant.com
-  token_url: /oauth/token
+  auth_url: https://auth.carvoyant.com/OAuth/authorize
+  token_path: /oauth/token
   api_version: /v1/api
-  callback_url: https://ridesnap.dev/auth/carvoyant/callback
+  callback_url: https://ridesnap.co/auth/carvoyant/callback
   client_id: weaswm6t4vc6wrvknda9jptb
   secret: XnY9YQt8Fb
 

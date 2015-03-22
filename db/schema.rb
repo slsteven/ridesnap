@@ -11,11 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310053421) do
+ActiveRecord::Schema.define(version: 20150321035604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "authentications", force: :cascade do |t|
+    t.integer  "vehicle_id"
+    t.string   "type"
+    t.string   "grant"
+    t.jsonb    "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "authentications", ["type"], name: "index_authentications_on_type", using: :btree
+  add_index "authentications", ["vehicle_id"], name: "index_authentications_on_vehicle_id", using: :btree
 
   create_table "cities", force: :cascade do |t|
     t.string   "city"
