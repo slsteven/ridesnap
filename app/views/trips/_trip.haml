@@ -1,0 +1,29 @@
+.panel.panel-default
+  .panel-heading{:role => "tab", :id => "heading-#{trip_counter.to_words}"}
+    %h4.panel-title
+      %a.collapsed{"aria-controls" => "collapse-#{trip_counter.to_words}", "aria-expanded" => "false", "data-parent" => "#trip-list", "data-toggle" => "collapse", :href => "#collapse-#{trip_counter.to_words}"}
+        = "#{trip.started_at.to_formatted_s(:long_ordinal)} for #{distance_of_time_in_words(trip.duration)}"
+  .panel-collapse.collapse{"aria-labelledby" => "heading-#{trip_counter.to_words}", :role => "tabpanel", :id => "collapse-#{trip_counter.to_words}"}
+    .panel-body
+      %h4 Trip Details
+      %ul
+        %li Distance: #{trip.mileage.round(1)} miles
+        %li Duration: #{distance_of_time_in_words(trip.duration)}
+        %li
+          %span{title: "#{trip.mileage.round(1)} miles at #{trip.vehicle.mpg} mpg with an average fuel cost of $#{FuelEconomy.price} per gallon"}
+            Fuel Cost: #{number_to_currency(trip.fuel_cost)}
+        %li Max Speed: #{trip.max_speed.round}mph
+        %li Max RPM: #{trip.rpm[:max].round(-1)}
+        %li Avg RPM: #{trip.rpm[:avg].round(-1)}
+
+      - if trip.driver_behaviors.any?
+        %h4 Driver Behavior
+        %ul
+          - trip.driver_behaviors.each do |b|
+            %li= b.description
+
+      - if trip.trouble_codes.any?
+        %h4 Diagnostic Trouble Codes
+        %ul
+          - trip.trouble_codes.each do |dtc|
+            %li= dtc.description

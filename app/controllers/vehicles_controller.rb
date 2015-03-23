@@ -31,7 +31,7 @@ class VehiclesController < ApplicationController
     # build select menus
     @vehicles.map(&:make).uniq.compact.sort.each_with_object(@makes=[]){ |m,o| o << [Settings.vehicle_makes[m], m] }
     @vehicles.map(&:closest_color).uniq.reject(&:blank?).sort.each_with_object(@colors=[]){ |c,o| o << [c.capitalize, c] }
-    @years = [*Date.today.year-10 .. Date.today.year].reverse # that splat is supposed to be there
+    @years = [*@vehicles.minimum(:year) .. Date.today.year].reverse # that splat is supposed to be there
     @miles = [ ['< 25,000', 25000],
                ['< 50,000', 50000],
                ['< 75,000', 75000],
@@ -104,6 +104,7 @@ class VehiclesController < ApplicationController
       'Transmission', 'Steering', 'Suspension', 'Brake System', 'Electrical System',
       'Convenience Group', 'Air Conditioning', 'Drive Axles', 'Wheels', 'Tires']
     @rides = admin? ? @vehicle.rides : (current_user.try(:rides) || [])
+    @trips = @vehicle.trips
   end
 
   def update

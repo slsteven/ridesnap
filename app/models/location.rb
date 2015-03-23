@@ -17,7 +17,7 @@
 #  index_notifications_on_vehicle_id  (vehicle_id)
 #
 
-class Geofence < Notification
+class Location < Notification
   # CONTINUOUS
   # STATECHANGE
   # INITIAL

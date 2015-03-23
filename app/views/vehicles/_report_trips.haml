@@ -1,0 +1,10 @@
+.modal.fade#report-modal-trip{role: "dialog", 'aria-labelledby' => "Vehicle Trips", 'aria-hidden' => "true"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        = button_tag '&times'.html_safe, class: 'close', 'data-dismiss' => "modal", 'aria-label' => "Close"
+        = image_tag 'black_logo.png', class: 'modal-logo'
+        %h4.modal-title Vehicle Trips
+      .modal-body
+        #trip-list.panel-group{"aria-multiselectable" => "true", :role => "tablist"}
+          = render @trips

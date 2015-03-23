@@ -9,15 +9,20 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  ended_at   :datetime
+#  trip_id    :integer
 #
 # Indexes
 #
+#  index_notifications_on_details     (details)
 #  index_notifications_on_ended_at    (ended_at)
+#  index_notifications_on_trip_id     (trip_id)
 #  index_notifications_on_type        (type)
 #  index_notifications_on_vehicle_id  (vehicle_id)
 #
 
 class Notification < ActiveRecord::Base
+
+  belongs_to :vehicle
 
   def self.data_keys
     [
@@ -48,22 +53,26 @@ class Notification < ActiveRecord::Base
 
   def self.klass(n=nil)
     case n.try(:upcase)
-    when 'GEOFENCE'
-      Geofence
+    when 'GEOFENCE','GEN_WAYPOINT'
+      Location
     when 'IGNITIONSTATUS'
       Ignition
-    when 'LOWBATTERY'
-      Battery
+    when 'LOWBATTERY','GEN_VOLTAGE','GEN_ODOMETER','GEN_RPM','GEN_FUELLEVEL','GEN_FUELRATE','GEN_ENGINE_COOLANT_TEMP','GEN_SPEED'
+      Level
     when 'NUMERICDATAKEY'
       NumericData
     when 'TIMEOFDAY'
       TimeOfDay
-    when 'TROUBLECODE'
+    when 'TROUBLECODE','GEN_DTC'
       TroubleCode
-    when 'VEHICLEHARSHACCEL','VEHICLEHARSHDECEL','VEHICLEHARSHRIGHT','VEHICLEHARSHLEFT','VEHICLEIMPACT'
+    when 'VEHICLEHARSHACCEL','VEHICLEHARSHDECEL','VEHICLEHARSHRIGHT','VEHICLEHARSHLEFT','VEHICLEIMPACT','VEHICLE_EVENT_HARSH_ACCEL','VEHICLE_EVENT_HARSH_DECEL','VEHICLE_EVENT_HARSH_RIGHT','VEHICLE_EVENT_HARSH_LEFT','VEHICLE_EVENT_HARSH_IMPACT'
       DriverBehavior
-    when 'VEHICLECONNECTED','VEHICLEDISCONNECTED','VEHICLETOWED'
+    when 'VEHICLECONNECTED','VEHICLEDISCONNECTED','VEHICLE_EVENT_CONNECTED','VEHICLE_EVENT_DISCONNECTED'
       Connection
+    when 'VEHICLETOWED','VEHICLE_EVENT_TOWED','VEHICLE_EVENT_TOWED_BREADCRUMB'
+      Tow
+    when 'TRIP'
+      Trip
     else
       Notification
     end

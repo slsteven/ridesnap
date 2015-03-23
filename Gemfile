@@ -87,3 +87,4 @@ gem 'aws-sdk-v1'
 gem 'friendly_id', '~> 5.1.0'
 gem 'oauth2'
 gem 'smart_listing' # this is amazing for lists, includes kaminari pagination
+gem 'numbers_and_words'

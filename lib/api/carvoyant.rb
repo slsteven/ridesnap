@@ -68,7 +68,7 @@ module Api::Carvoyant
     # /vehicle/{vehicle-id}/trip/?includeData={true|false}&startTime={startTime}&endTime={endTime}
     # /vehicle/{vehicle-id}/trip/{trip-id}
 
-    res = get_token.get("#{Settings.carvoyant.api_version}/vehicle/#{vehicle_id}/trip/#{trip_id}", opts(params))
+    res = get_token.get("#{Settings.carvoyant.api_version}/vehicle/#{vehicle_id}/trip/#{trip_id}", params: params)
 
     JSON.parse res.body
   end
@@ -111,7 +111,7 @@ module Api::Carvoyant
     # /vehicle/{vehicle-id}/data/
     # /vehicle/{vehicle-id}/data/?key={key-id}
     # /vehicle/{vehicle-id}/data/?mostRecentOnly=true
-    res = get_token.get("#{Settings.carvoyant.api_version}/vehicle/#{vehicle_id}/data", opts(params))
+    res = get_token.get("#{Settings.carvoyant.api_version}/vehicle/#{vehicle_id}/data", params: params)
 
     JSON.parse res.body
   end
@@ -133,6 +133,10 @@ module Api::Carvoyant
       # # # # # # # # # #
       # minimumTime: 0,
       # postUrl: "https://test.carvoyant.com/notify",
+      #   postHeaders: {
+      #   "Authorization" => "Bearer asdfqwerzxcv",
+      #   "X-Sample-Headers" => "Some custom value"
+      # },
       # notificationPeriod: "CONTINUOUS"
 
     JSON.parse res.body

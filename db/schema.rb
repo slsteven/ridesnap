@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150321035604) do
+ActiveRecord::Schema.define(version: 20150323044141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,9 +78,12 @@ ActiveRecord::Schema.define(version: 20150321035604) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "ended_at"
+    t.integer  "trip_id"
   end
 
+  add_index "notifications", ["details"], name: "index_notifications_on_details", using: :gin
   add_index "notifications", ["ended_at"], name: "index_notifications_on_ended_at", using: :btree
+  add_index "notifications", ["trip_id"], name: "index_notifications_on_trip_id", using: :btree
   add_index "notifications", ["type"], name: "index_notifications_on_type", using: :btree
   add_index "notifications", ["vehicle_id"], name: "index_notifications_on_vehicle_id", using: :btree
 
@@ -99,6 +102,16 @@ ActiveRecord::Schema.define(version: 20150321035604) do
   add_index "rides", ["relation"], name: "index_rides_on_relation", using: :btree
   add_index "rides", ["user_id"], name: "index_rides_on_user_id", using: :btree
   add_index "rides", ["vehicle_id"], name: "index_rides_on_vehicle_id", using: :btree
+
+  create_table "trips", force: :cascade do |t|
+    t.integer  "vehicle_id"
+    t.jsonb    "details"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "trips", ["details"], name: "index_trips_on_details", using: :gin
+  add_index "trips", ["vehicle_id"], name: "index_trips_on_vehicle_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -125,7 +138,6 @@ ActiveRecord::Schema.define(version: 20150321035604) do
     t.text     "description"
     t.integer  "mileage"
     t.integer  "condition"
-    t.hstore   "options"
     t.hstore   "preliminary_value"
     t.decimal  "sold_price"
     t.string   "status"
@@ -141,6 +153,8 @@ ActiveRecord::Schema.define(version: 20150321035604) do
     t.string   "external_ad"
     t.jsonb    "report",            default: {}
     t.jsonb    "option_list",       default: {}
+    t.string   "device_id"
+    t.jsonb    "specs"
   end
 
   add_index "vehicles", ["closest_color"], name: "index_vehicles_on_closest_color", using: :btree

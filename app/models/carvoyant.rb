@@ -51,14 +51,14 @@ class Carvoyant < Authentication
     when 'client_credentials'
       client.client_credentials.get_token
     when 'authorization_code'
-      if token.present? && !expired?
-        OAuth2::AccessToken.from_hash(client, token)
+      if token.present?
+        expired? ? OAuth2::AccessToken.from_hash(client, token).refresh! : OAuth2::AccessToken.from_hash(client, token)
       else
-        raise ArgumentError "Token invalid, auth_code cannot be nil" unless auth_code
+        raise ArgumentError.new("Token invalid, auth_code cannot be nil") unless auth_code
         client.auth_code.get_token(auth_code, redirect_uri: Settings.carvoyant.callback_url)
       end
     when 'implicit'
-      raise ArgumentError "Implicit grant, auth_code cannot be nil" unless auth_code
+      raise ArgumentError.new("Implicit grant, auth_code cannot be nil") unless auth_code
       OAuth2::AccessToken.from_kvform(client, auth_code)
     end
     self.token = tok.to_hash
@@ -67,6 +67,8 @@ class Carvoyant < Authentication
 
   def expired?
     DateTime.strptime(token['expires_at'].to_s,'%s') < Time.now.utc
+  rescue
+    true
   end
 
 private

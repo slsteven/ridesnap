@@ -9,10 +9,13 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  ended_at   :datetime
+#  trip_id    :integer
 #
 # Indexes
 #
+#  index_notifications_on_details     (details)
 #  index_notifications_on_ended_at    (ended_at)
+#  index_notifications_on_trip_id     (trip_id)
 #  index_notifications_on_type        (type)
 #  index_notifications_on_vehicle_id  (vehicle_id)
 #
@@ -20,4 +23,21 @@
 class DriverBehavior < Notification
   # INITIAL
   # ONETIME
+  belongs_to :trip
+
+  def description
+    case details['key'].try(:upcase)
+    when 'VEHICLE_EVENT_HARSH_ACCEL'
+      'Harsh acceleration detected'
+    when 'VEHICLE_EVENT_HARSH_DECEL'
+      'Harsh deceleration detected'
+    when 'VEHICLE_EVENT_HARSH_RIGHT'
+      'Harsh right turn detected'
+    when 'VEHICLE_EVENT_HARSH_LEFT'
+      'Harsh left turn detected'
+    when 'VEHICLE_EVENT_HARSH_IMPACT'
+      'Impact detected'
+    end
+  end
+
 end
