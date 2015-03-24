@@ -49,7 +49,7 @@
         - elsif @intent == 'buy'
           %h4= @vehicle.info
           .form-group
-            = hidden_field_tag :vehicle_vin, @vehicle.try(:vin) || params[:vehicle][:vin]
+            = hidden_field_tag 'vehicle[vin]', @vehicle.try(:vin) || params[:vehicle][:vin]
             = label_tag :submit, nil, class: 'sr-only'
             = submit_tag 'Reserve a Test Drive', class: 'btn btn-success btn-wide new-ride-buy', disabled: true, data: { disable_with: 'Scheduling...' }
     - if @intent == 'sell'
@@ -61,7 +61,7 @@
         .row
           .col-sm-4.col-sm-offset-4
             = label_tag :vehicle_vin, nil, class: 'sr-only'
-            = text_field_tag :vehicle_vin, @vehicle.try(:vin) || params[:vehicle][:vin], placeholder: '1A2BC34D5EF678901', class: 'form-control'
+            = text_field_tag 'vehicle[vin]', @vehicle.try(:vin) || params[:vehicle][:vin], placeholder: '1A2BC34D5EF678901', class: 'form-control'
             %span.help-block Don’t know where to find your VIN? Click here.
 
       %hr.arrow
