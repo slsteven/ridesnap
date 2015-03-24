@@ -52,20 +52,22 @@
   .row
     .col-xs-12.col-sm-6.hoverable
       .overlay.text-center
-        %h3 History Report
+        %h3 Value Report
         %p
-          Title status, ownership, maintenance records
+          Title status, Edmunds TMV
+          %sup ®
+          , maintenance records
           %br
-          = link_to 'click to view', '#coming-soon', data: {toggle: 'modal'}
-      = image_tag 'report.jpg', class: 'img-responsive'
+          = link_to 'click to view', '#report-modal-val', data: {toggle: 'modal'}
+      = image_tag 'money.jpg', class: 'img-responsive'
     .col-xs-12.col-sm-6.hoverable
       .overlay.text-center
-        %h3 Trip History
+        %h3 Trip Report
         %p
           Metrics derived from an OBDII reader
           %br
           = link_to 'click to view', '#report-modal-trip', data: {toggle: 'modal'}
-      = image_tag 'money.jpg', class: 'img-responsive'
+      = image_tag 'trip.jpg', class: 'img-responsive'
 
   %hr.arrow
 
@@ -93,6 +95,7 @@
 
 = render 'vehicles/report_mech'
 = render 'vehicles/report_cosm'
+= render 'vehicles/report_value'
 = render 'vehicles/report'
 = render 'vehicles/report_trips'
 = render 'shared/coming_soon'

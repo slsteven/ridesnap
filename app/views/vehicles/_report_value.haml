@@ -1,0 +1,21 @@
+.modal.fade#report-modal-val{role: "dialog", 'aria-labelledby' => "Vehicle Value", 'aria-hidden' => "true"}
+  .modal-dialog
+    .modal-content
+      .modal-header
+        = button_tag '&times'.html_safe, class: 'close', 'data-dismiss' => "modal", 'aria-label' => "Close"
+        = image_tag 'black_logo.png', class: 'modal-logo'
+        %h4.modal-title Value Report
+      .modal-body
+        %h3 Title
+        .alert.alert-success{role: "alert"}
+          %span.glyphicon.glyphicon-ok
+          Clean
+        %h3
+          Edmunds True Market Value
+          %sup ®
+        %ul
+          - @tmv.each do |k,v|
+            %li
+              %h4
+                #{k.to_s.titleize}:
+                %b #{number_to_currency(v, precision: 0)}
