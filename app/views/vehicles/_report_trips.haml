@@ -4,7 +4,7 @@
       .modal-header
         = button_tag '&times'.html_safe, class: 'close', 'data-dismiss' => "modal", 'aria-label' => "Close"
         = image_tag 'black_logo.png', class: 'modal-logo'
-        %h4.modal-title Vehicle Trips
+        %h4.modal-title Rides
       .modal-body
         #trip-list.panel-group{"aria-multiselectable" => "true", :role => "tablist"}
           = render @trips
