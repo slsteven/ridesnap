@@ -121,6 +121,7 @@ class VehiclesController < ApplicationController
     @vehicle.style = params[:vehicle][:style]
     @vehicle.condition = params[:vehicle][:condition].to_i if !params[:vehicle][:condition].blank?
     @vehicle.mileage = params[:vehicle][:mileage]
+    @vehicle.device_id = params[:vehicle][:device_id]
 
     render js: nil, status: :ok, layout: false if @vehicle.save
   end
