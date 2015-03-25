@@ -1,0 +1,38 @@
+.row
+  .col-md-6
+    - @vehicle.report('mechanical').slice("fluid levels","engine","tires").each do |k,v|
+      %h4.text-center= k.upcase
+      .section
+        - v.each do |ke,va|
+          .clearfix.report-option
+            %p.pull-left= ke.titleize
+            - if agent?
+              = form_tag '#', role: 'form', class: 'report-conditions pull-right btn-group', data: {toggle: 'buttons'} do
+                - { 'poor' => 'danger', 'fair' => 'warning', 'good' => 'success' }.each do |key, val|
+                  %label.btn{class: "btn-#{val} #{'active' if va == key}"}
+                    = radio_button_tag "report[#{k}][#{ke}]", key
+                    = key
+            - else
+              .pull-right.report-conditions.none
+                = content_tag :a, 'poor', class: "btn btn-danger #{'active' if va == 'poor'}"
+                = content_tag :a, 'fair', class: "btn btn-warning #{'active' if va == 'fair'}"
+                = content_tag :a, 'good', class: "btn btn-success #{'active' if va == 'good'}"
+
+  .col-md-6
+    - @vehicle.report('mechanical').slice("brakes","suspension","dash and electronics").each do |k,v|
+      %h4.text-center= k.upcase
+      .section
+        - v.each do |ke,va|
+          .clearfix.report-option
+            %p.pull-left= ke.titleize
+            - if agent?
+              = form_tag '#', role: 'form', class: 'report-conditions pull-right btn-group', data: {toggle: 'buttons'} do
+                - { 'poor' => 'danger', 'fair' => 'warning', 'good' => 'success' }.each do |key, val|
+                  %label.btn{class: "btn-#{val} #{'active' if va == key}"}
+                    = radio_button_tag "report[#{k}][#{ke}]", key
+                    = key
+            - else
+              .pull-right.report-conditions.none
+                = content_tag :a, 'poor', class: "btn btn-danger #{'active' if va == 'poor'}"
+                = content_tag :a, 'fair', class: "btn btn-warning #{'active' if va == 'fair'}"
+                = content_tag :a, 'good', class: "btn btn-success #{'active' if va == 'good'}"

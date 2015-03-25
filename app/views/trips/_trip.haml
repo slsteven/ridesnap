@@ -7,14 +7,14 @@
     .panel-body
       %h4 Trip Details
       %ul
-        %li Distance: #{trip.mileage.round(1)} miles
+        %li Distance: #{trip.mileage.try(:round, 1)} miles
         %li Duration: #{distance_of_time_in_words(trip.duration)}
         %li
           %span{title: "#{trip.mileage.round(1)} miles at #{trip.vehicle.mpg} mpg with an average fuel cost of $#{FuelEconomy.price} per gallon"}
             Fuel Cost: #{number_to_currency(trip.fuel_cost)}
-        %li Max Speed: #{trip.max_speed.round}mph
-        %li Max RPM: #{trip.rpm[:max].round(-1)}
-        %li Avg RPM: #{trip.rpm[:avg].round(-1)}
+        %li Max Speed: #{trip.max_speed.try(:round)}mph
+        %li Max RPM: #{trip.rpm[:max].try(:round, -1)}
+        %li Avg RPM: #{trip.rpm[:avg].try(:round, -1)}
 
       - if trip.driver_behaviors.any?
         %h4 Driver Behavior

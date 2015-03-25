@@ -32,42 +32,34 @@
       = @vehicle.rvr.upcase
       - if admin? && @vehicle.external_ad.present?
         = link_to '', @vehicle.external_ad, target: '_blank', class: 'external-link', title: 'External Ad'
-  .row
-    .col-xs-12.col-sm-6.hoverable
-      .overlay.text-center
-        %h3 Mechanical Report
-        %p
-          150-point inspection (engine, tires, leaks, etc.)
-          %br
-          = link_to 'click to view', '#report-modal-mech', data: {toggle: 'modal'}
-      = image_tag 'engine.jpg', class: 'img-responsive'
-    .col-xs-12.col-sm-6.hoverable
-      .overlay.text-center
-        %h3 Cosmetic Report
-        %p
-          Dents, dings, scratches, rust
-          %br
-          = link_to 'click to view', '#report-modal-cosm', data: {toggle: 'modal'}
-      = image_tag 'blank.jpg', class: 'img-responsive'
-  .row
-    .col-xs-12.col-sm-6.hoverable
-      .overlay.text-center
-        %h3 Value Report
-        %p
-          Title status, Edmunds TMV
-          %sup ®
-          , maintenance records
-          %br
-          = link_to 'click to view', '#report-modal-val', data: {toggle: 'modal'}
-      = image_tag 'money.jpg', class: 'img-responsive'
-    .col-xs-12.col-sm-6.hoverable
-      .overlay.text-center
-        %h3 Ride Report
-        %p
-          Metrics derived from an OBDII reader
-          %br
-          = link_to 'click to view', '#report-modal-trip', data: {toggle: 'modal'}
-      = image_tag 'trip.jpg', class: 'img-responsive'
+
+  %div{role: "tabpanel"}
+    %ul.nav.nav-tabs{role:"tablist"}
+      %li.active{role: "presentation"}
+        = link_to 'General Information', '#general', 'aria-controls' => 'general', role: 'tab',  'data-toggle' => 'tab'
+      %li{role: "presentation"}
+        = link_to 'Performance', '#performance', 'aria-controls' => 'performance', role: 'tab',  'data-toggle' => 'tab'
+      %li{role: "presentation"}
+        = link_to 'Maintenance', '#maintenance', 'aria-controls' => 'maintenance', role: 'tab',  'data-toggle' => 'tab'
+      %li{role: "presentation"}
+        = link_to 'Damage Report', '#damage', 'aria-controls' => 'damage', role: 'tab',  'data-toggle' => 'tab'
+      %li{role: "presentation"}
+        = link_to 'Current Status', '#current', 'aria-controls' => 'current', role: 'tab',  'data-toggle' => 'tab'
+      %li{role: "presentation"}
+        = link_to 'Sale Value', '#value', 'aria-controls' => 'value', role: 'tab',  'data-toggle' => 'tab'
+    .tab-content
+      .tab-pane.active.fade.in#general
+        = render 'tab_general'
+      .tab-pane.fade#performance
+        = render 'tab_performance'
+      .tab-pane.fade#maintenance
+        = render 'tab_maintenance'
+      .tab-pane.fade#damage
+        = render 'tab_damage'
+      .tab-pane.fade#current
+        = render 'tab_current'
+      .tab-pane.fade#value
+        = render 'tab_value'
 
   %hr.arrow
 
