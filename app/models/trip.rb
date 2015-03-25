@@ -60,9 +60,10 @@ class Trip < ActiveRecord::Base
   end
 
   def fuel_cost
-     miles = 1.0 / (vehicle.mpg / mileage)
-     FuelEconomy.price * miles
-  rescue 0
+    miles = 1.0 / (vehicle.mpg / mileage)
+    FuelEconomy.price * miles
+  rescue
+    0
   end
 
   def max_speed
