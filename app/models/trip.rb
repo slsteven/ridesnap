@@ -38,6 +38,8 @@ class Trip < ActiveRecord::Base
 
   def ended_at
     DateTime.parse details['endTime']
+  rescue
+    DateTime.now.utc
   end
 
   def duration
