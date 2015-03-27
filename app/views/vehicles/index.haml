@@ -1,13 +1,32 @@
 - provide(:title, 'Market Place')
 
-.jumbotron.black-bg#about1
-  .container.text-center#header-threshold
-    %h1 Browse the Marketplace and find out more details from our RVR.
-    .col-sm-4.col-sm-offset-4
-      = render 'shared/rvr'
-
 .jumbotron.white-bg.row
+  
+  .data-filter
+    .container
+      = render 'shared/rvr'
+      .filter-apply
+        .filter
+          .txt-filter
+            BMW
+          %a.rm-filter x
+        .filter
+          .txt-filter
+            2006
+          %a.rm-filter x
+        .filter
+          .txt-filter
+            Blue
+          %a.rm-filter x
+        .filter
+          .txt-filter
+            Coupe
+          %a.rm-filter x
+
   .container.text-center
+
+    %br
+
     = smart_listing_controls_for :vehicles, class: 'form-inline', role: 'form' do
       .form-group
         = select_tag :make, options_for_select(@makes, params[:make]), prompt: 'All Makes', class: 'form-control'

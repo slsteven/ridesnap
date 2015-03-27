@@ -375,3 +375,11 @@ hr {
 .progress-bar-danger {
     background-color: #d4145a;
 }
+
+.list-group-item, .actions {
+  border: 2px solid #ccC;
+  &:hover {
+    background-color: #e6e7e8;
+    border-color: #666;
+  }
+}
