@@ -1,6 +1,6 @@
 class RemoveGarageTable < ActiveRecord::Migration
   def up
-    drop_table :garages
+    # drop_table :garages
   end
 
   def down

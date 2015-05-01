@@ -12,8 +12,8 @@
       - if admin?
         %p.navbar-text.grey.link= link_to 'refresh token', Carvoyant.first.auth_url, title: "#{Settings.carvoyant.user_account.username}:#{Settings.carvoyant.user_account.password}"
       %ul.nav.navbar-nav.navbar-right
-        %li#how{class: "#{'active' if @menu == 'marketplace'}"}= link_to 'MARKETPLACE', vehicles_url, title: 'MarketPlace'
-        %li{class: "#{'active' if @menu == 'sell'}"}= link_to 'SELL', sell_url, title: "Sell with #{Settings.app.name}", class: 'green'
+        / %li#how{class: "#{'active' if @menu == 'marketplace'}"}= link_to 'MARKETPLACE', vehicles_url, title: 'MarketPlace'
+        %li{class: "#{'active' if @menu == 'sell'}"}= link_to 'Sell', sell_url, title: "Sell with #{Settings.app.name}", class: 'green'
         %li{class: "#{'active' if @menu == 'buy'}"}= link_to 'Buy', buy_url, title: 'Buy', class: 'blue'
         %li{class: ('active' if @menu == 'faq')}= link_to 'FAQs', faq_url, title: 'frequently asked questions'
         %li{class: ('active' if @menu == 'about')}= link_to 'ABOUT', about_url, title: "About #{Settings.app.name}"
