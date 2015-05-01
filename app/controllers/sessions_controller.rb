@@ -1,5 +1,17 @@
 class SessionsController < ApplicationController
 
+  def callback
+    @auth = params[:provider].capitalize.constantize.first_or_initialize
+    code = params[:code] || params[:query_string]
+    @auth.get_token(auth_code: code)
+    if @auth.save
+      flash[:success] = "Authentication successful"
+    else
+      flash[:error] = "Authentication failed"
+    end
+    redirect_to root_url
+  end
+
   def create
     @user = User.find_by(email: params[:session][:email].downcase.strip)
     errors = {email: ['invalid email/password combination'], password: ['']}

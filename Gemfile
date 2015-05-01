@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.2.1'
+ruby '2.2.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2.0'
@@ -72,7 +72,7 @@ group :production do
   gem 'rails_serve_static_assets'
 end
 
-gem 'httparty' # used for making zipcode requests to google to find city/state
+gem 'httparty' # used for making http requests fun!
 gem 'nokogiri' # scraper... but only using internally to build inline SVGs
 gem 'meta-tags'
 gem 'rails_config'
@@ -87,3 +87,4 @@ gem 'aws-sdk-v1'
 gem 'friendly_id', '~> 5.1.0'
 gem 'oauth2'
 gem 'smart_listing' # this is amazing for lists, includes kaminari pagination
+gem 'numbers_and_words'

@@ -25,7 +25,7 @@
         - elsif @intent == 'buy'
           %h4= @vehicle.info
           .form-group
-            = hidden_field_tag :vehicle_vin, @vehicle.try(:vin) || params[:vehicle][:vin]
+            = hidden_field_tag 'vehicle[vin]', @vehicle.try(:vin) || params[:vehicle][:vin]
             = label_tag :submit, nil, class: 'sr-only'
             = submit_tag 'Reserve a Test Drive', class: 'btn btn-success btn-wide new-ride-buy', disabled: true, data: { disable_with: 'Scheduling...' }
         .form-group
@@ -160,11 +160,11 @@
               .th-border Friday 12/26
             %th
               .th-border Saturday 12/27
-            %th 
+            %th
               .th-border Monday 12/28
-            %th 
+            %th
               .th-border Tuesday 12/29
-            %th 
+            %th
               .th-border Friday 12/30
 
         %tbody
@@ -239,9 +239,9 @@
     %h2 About Pre-purchase Car Inspection Service Description
     %br
     %br
-    %p This is a standard 150 point inspection. Mechanic will check all the fluids, hoses, front suspension, brakes, warning lights, interior and exterior lights and body, tires and more. 
+    %p This is a standard 150 point inspection. Mechanic will check all the fluids, hoses, front suspension, brakes, warning lights, interior and exterior lights and body, tires and more.
     %br
-    %p We use this report to provide buyers with complete transparency. 
+    %p We use this report to provide buyers with complete transparency.
     %br
     %p Things you will need during the appointment:
     %br

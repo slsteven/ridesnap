@@ -10,7 +10,6 @@
 #  description       :text
 #  mileage           :integer
 #  condition         :integer
-#  options           :hstore
 #  preliminary_value :hstore
 #  sold_price        :decimal(, )
 #  status            :string
@@ -26,6 +25,9 @@
 #  external_ad       :string
 #  report            :jsonb            default("{}")
 #  option_list       :jsonb            default("{}")
+#  device_id         :string
+#  specs             :jsonb
+#  external_id       :string
 #
 # Indexes
 #
@@ -43,7 +45,7 @@ class Vehicle < ActiveRecord::Base
   extend FriendlyId
   friendly_id :vin
 
-  enum condition: { Outstanding: 5, Clean: 4, Average: 3, Rough: 2, Damaged: 1 }
+  enum condition: { 'Outstanding' => 5, 'Clean' => 4, 'Average' => 3, 'Rough' => 2, 'Damaged' => 1 }
 
   hstore_accessor :preliminary_value,
     ride_snap: :integer,
@@ -55,6 +57,16 @@ class Vehicle < ActiveRecord::Base
   has_many :rides, dependent: :delete_all
   has_many :users, through: :rides
 
+  has_many :notifications
+  has_many :locations
+  has_many :levels
+  has_many :trouble_codes
+  has_many :driver_behaviors
+  has_many :connections
+  has_many :tows
+
+  has_many :trips
+
   has_many :images, dependent: :delete_all
 
   validates :make, presence: true
@@ -62,10 +74,12 @@ class Vehicle < ActiveRecord::Base
   validates :year, presence: true
 
   before_create :build_options
+  before_create :fetch_specs
+
   before_save do
     self.closest_color = base_color
     self.vin ||= Vehicle.generate_vin
-    self.agreed_value ||= self.ride_snap
+    self.agreed_value ||= self.ride_snap rescue nil
   end
   # before_update :update_s3_folder, if: :vin_changed?
 
@@ -101,6 +115,10 @@ class Vehicle < ActiveRecord::Base
 
   def info
     "#{year} #{make(pretty: true)} #{model(pretty: true)} - #{description}"
+  end
+
+  def mpg
+    specs['epa combined mpg'].to_f
   end
 
   # getters for prettified text
@@ -298,6 +316,10 @@ private
       return nil
     end
     true
+  end
+
+  def fetch_specs
+    self.specs = Edmunds.query_specs(style)
   end
 
   def update_s3_folder

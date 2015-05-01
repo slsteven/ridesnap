@@ -31,7 +31,7 @@ class VehiclesController < ApplicationController
     # build select menus
     @vehicles.map(&:make).uniq.compact.sort.each_with_object(@makes=[]){ |m,o| o << [Settings.vehicle_makes[m], m] }
     @vehicles.map(&:closest_color).uniq.reject(&:blank?).sort.each_with_object(@colors=[]){ |c,o| o << [c.capitalize, c] }
-    @years = [*Date.today.year-10 .. Date.today.year].reverse # that splat is supposed to be there
+    @years = [*@vehicles.minimum(:year) .. Date.today.year].reverse # that splat is supposed to be there
     @miles = [ ['< 25,000', 25000],
                ['< 50,000', 50000],
                ['< 75,000', 75000],
@@ -108,7 +108,24 @@ class VehiclesController < ApplicationController
     @inspection_report = ['Body Exterior', 'Body Interior', 'Engine',
       'Transmission', 'Steering', 'Suspension', 'Brake System', 'Electrical System',
       'Convenience Group', 'Air Conditioning', 'Drive Axles', 'Wheels', 'Tires']
+
     @rides = admin? ? @vehicle.rides : (current_user.try(:rides) || [])
+    @trips = @vehicle.trips
+
+    @tmv = Edmunds.typical_value(@vehicle.style)
+  end
+
+  def register
+    @vehicle = Vehicle.find_by_vin(params[:id]) || Vehicle.find_by_id(params[:id])
+    @carvoyant = Carvoyant.first
+    v = if Rails.env.production?
+          @carvoyant.vehicle(method: :post, deviceId: params[:device_id])
+        else
+          @carvoyant.vehicle(method: :post)
+        end
+    @vehicle.update_attribute(:external_id, v['vehicle']['vehicleId'])
+    @vehicle.update_attribute(:device_id, params[:device_id])
+    redirect_to @vehicle
   end
 
   def update
@@ -122,6 +139,7 @@ class VehiclesController < ApplicationController
     @vehicle.style = params[:vehicle][:style]
     @vehicle.condition = params[:vehicle][:condition].to_i if !params[:vehicle][:condition].blank?
     @vehicle.mileage = params[:vehicle][:mileage]
+    @vehicle.device_id = params[:vehicle][:device_id]
 
     render js: nil, status: :ok, layout: false if @vehicle.save
   end

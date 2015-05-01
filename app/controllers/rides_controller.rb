@@ -9,15 +9,14 @@ class RidesController < ApplicationController
     params[:ride] ||= {}
     params[:vehicle][:zip_code] = params[:user][:zip_code] = params[:ride][:zip_code]
     Settings.vehicle_makes.to_hash.each_with_object(@makes=[]){ |(k,v),o| o << [v,k] }
-    params[:vehicle][:vin] = params[:vehicle_vin].presence
+    params[:vehicle][:vin] ||= params[:vehicle_vin].presence
     params[:vehicle][:condition] = params[:vehicle][:condition].present? ? params[:vehicle][:condition].to_i : nil
     @intent = params[:vehicle][:vin] ? 'buy' : 'sell'
     @menu = @intent
 
     @vehicle = Vehicle.where(vin: params[:vehicle][:vin]).first_or_initialize(vehicle_params)
-    @user = User.where(email: params[:user][:email]).first_or_initialize(user_params)
+    Edmunds.vin_to_style(params[:vehicle][:vin]).each{ |k,v| @vehicle.send("#{k}=", v) } if admin? && params[:vehicle][:vin]
 
-    Edmunds.vin_to_style(params[:vehicle][:vin]).each{ |k,v| @vehicle.send("#{k}=", v) } if admin?
     if @vehicle.style.blank?
       flash[:error] = "VIN #{params[:vehicle][:vin]} not found... please try again."
       redirect_to(new_ride_path) and return
@@ -37,6 +36,8 @@ class RidesController < ApplicationController
     if admin? && @vehicle.save
       redirect_to @vehicle and return
     end
+
+    @user = User.where(email: params[:user][:email]).first_or_initialize(user_params)
 
     if @user.save && @vehicle.save
       params[:ride][:relation] = @intent == 'buy' ? 'tester' : 'seller'

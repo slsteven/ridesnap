@@ -20,9 +20,10 @@
 #  index_notifications_on_vehicle_id  (vehicle_id)
 #
 
-class NumericData < Notification
+class Level < Notification
   # CONTINUOUS
   # STATECHANGE
   # INITIAL
   # ONETIME
+  belongs_to :trip
 end

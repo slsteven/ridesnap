@@ -9,6 +9,8 @@
       = link_to image_tag('logo+brand.png'), root_path, class: 'navbar-brand'
     / Collect the nav links, forms, and other content for toggling
     #top-collapse.collapse.navbar-collapse
+      - if admin?
+        %p.navbar-text.grey.link= link_to 'refresh token', Carvoyant.first.auth_url, title: "#{Settings.carvoyant.user_account.username}:#{Settings.carvoyant.user_account.password}"
       %ul.nav.navbar-nav.navbar-right
         %li#how{class: "#{'active' if @menu == 'marketplace'}"}= link_to 'MARKETPLACE', vehicles_url, title: 'MarketPlace'
         %li{class: "#{'active' if @menu == 'sell'}"}= link_to 'SELL', sell_url, title: "Sell with #{Settings.app.name}", class: 'green'

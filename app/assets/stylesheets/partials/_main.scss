@@ -69,6 +69,19 @@ html, body {
 .blue {
   color: #5bc0de !important;
 }
+.grey {
+  color: grey !important;
+}
+
+.link {
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  a:hover, a:active {
+    text-decoration: underline;
+  }
+}
 
 #alerts {
   position: fixed;

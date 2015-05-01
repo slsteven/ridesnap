@@ -35,6 +35,17 @@ module Edmunds
     options
   end
 
+  def self.query_specs(styleid)
+    endpoint = "api/vehicle/v2/styles/#{styleid}/equipment"
+    doc = fetch(endpoint)
+    atts = doc[:equipment].select{ |h| h['name'] == 'Specifications' }[0]['attributes']
+    return doc if doc.kind_of? Integer
+    atts.each_with_object(equipment={}) do |h,o|
+      o[h[:name].downcase] =  h[:value]
+    end
+    equipment
+  end
+
   def self.query_engines(styleid)
     endpoint = "api/vehicle/v2/styles/#{styleid}/engines"
     doc = fetch(endpoint)

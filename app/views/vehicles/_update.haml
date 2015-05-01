@@ -7,6 +7,10 @@
         .col-sm-6
           = f.select :style, options_for_select(@styles, @vehicle.style), {}, class: 'form-control'
       .form-group
+        = f.label :device_id, 'External Device ID', class: 'col-sm-2 col-sm-offset-1 control-label'
+        .col-sm-6
+          = f.text_field :device_id, class: 'form-control'
+      .form-group
         = f.label :condition, nil, class: 'col-sm-2 col-sm-offset-1 control-label'
         .col-sm-6
           = f.select :condition, options_for_select(@conditions, @vehicle_condition), {include_blank: true}, class: 'form-control'
