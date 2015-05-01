@@ -110,6 +110,19 @@ class VehiclesController < ApplicationController
     @tmv = Edmunds.typical_value(@vehicle.style)
   end
 
+  def register
+    @vehicle = Vehicle.find_by_vin(params[:id]) || Vehicle.find_by_id(params[:id])
+    @carvoyant = Carvoyant.first
+    v = if Rails.env.production?
+          @carvoyant.vehicle(method: :post, deviceId: params[:device_id])
+        else
+          @carvoyant.vehicle(method: :post)
+        end
+    @vehicle.update_attribute(:external_id, v['vehicle']['vehicleId'])
+    @vehicle.update_attribute(:device_id, params[:device_id])
+    redirect_to @vehicle
+  end
+
   def update
     @vehicle = Vehicle.find_by_vin(params[:id]) || Vehicle.find(params[:id])
 

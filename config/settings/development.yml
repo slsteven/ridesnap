@@ -7,8 +7,11 @@ carvoyant:
   auth_url: https://sandbox-auth.carvoyant.com/OAuth/authorize
   token_path: /sandbox/oauth/token
   api_version: /sandbox/api
-  callback_url: https://ridesnap.dev/auth/carvoyant/callback #lvh.me:3000
+  callback_url: https://ridesnap.dev/auth/carvoyant/callback # sudo tunnels
   client_id: 3z4qenxtm4vjzu5fhtpr88x9
   secret: SxJHyVrfZq
+  user_account:
+    username: mallanaga
+    password: R!deSn4p
 
 fresh_cars: false

@@ -6,3 +6,14 @@
     %h4.purple Rides
     #trip-list.panel-group{"aria-multiselectable" => "true", :role => "tablist"}
       = render @trips
+  .col-md-6
+    %h4.purple OBDII connection
+    - if @vehicle.external_id
+      %p external vehicle ID: #{@vehicle.external_id}
+      %p device ID: #{@vehicle.device_id}
+    - else
+      = form_tag register_vehicle_path(@vehicle), method: :post do
+        .input-group
+          = text_field_tag :device_id, nil, class: 'form-control', placeholder: "Device ID"
+          %span.input-group-btn
+            = submit_tag 'Register Vehicle', name: nil, class: 'btn btn-default'

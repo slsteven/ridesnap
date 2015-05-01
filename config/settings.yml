@@ -55,6 +55,9 @@ carvoyant:
   callback_url: https://ridesnap.co/auth/carvoyant/callback
   client_id: weaswm6t4vc6wrvknda9jptb
   secret: XnY9YQt8Fb
+  user_account:
+    username: slam
+    password: R!desnap
 
 locals:
   zip_code: 94102

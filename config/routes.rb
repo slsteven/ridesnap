@@ -43,6 +43,7 @@ Rails.application.routes.draw do
     end
     member do
       post 'notify'
+      post 'register'
     end
     resources :images
   end

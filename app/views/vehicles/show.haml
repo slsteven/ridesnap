@@ -32,6 +32,7 @@
       = @vehicle.rvr.upcase
       - if admin? && @vehicle.external_ad.present?
         = link_to '', @vehicle.external_ad, target: '_blank', class: 'external-link', title: 'External Ad'
+    %br
 
   %div{role: "tabpanel"}
     %ul.nav.nav-tabs{role:"tablist"}
@@ -60,10 +61,6 @@
         = render 'tab_current'
       .tab-pane.fade#value
         = render 'tab_value'
-
-  %hr.arrow
-
-  = render 'vehicles/highlights'
 
   - if @rides.any?
     %hr.arrow

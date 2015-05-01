@@ -3,7 +3,6 @@
 # Table name: authentications
 #
 #  id         :integer          not null, primary key
-#  vehicle_id :integer
 #  type       :string
 #  grant      :string
 #  token      :jsonb
@@ -12,8 +11,7 @@
 #
 # Indexes
 #
-#  index_authentications_on_type        (type)
-#  index_authentications_on_vehicle_id  (vehicle_id)
+#  index_authentications_on_type  (type)
 #
 
 class Carvoyant < Authentication
@@ -51,11 +49,10 @@ class Carvoyant < Authentication
     when 'client_credentials'
       client.client_credentials.get_token
     when 'authorization_code'
-      if token.present?
-        expired? ? OAuth2::AccessToken.from_hash(client, token).refresh! : OAuth2::AccessToken.from_hash(client, token)
-      else
-        raise ArgumentError.new("Token invalid, auth_code cannot be nil") unless auth_code
+      if auth_code
         client.auth_code.get_token(auth_code, redirect_uri: Settings.carvoyant.callback_url)
+      else
+        expired? ? OAuth2::AccessToken.from_hash(client, token).refresh! : OAuth2::AccessToken.from_hash(client, token)
       end
     when 'implicit'
       raise ArgumentError.new("Implicit grant, auth_code cannot be nil") unless auth_code

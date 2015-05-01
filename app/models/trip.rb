@@ -23,6 +23,18 @@ class Trip < ActiveRecord::Base
     'VEHICLE_EVENT_TOWED','VEHICLE_EVENT_TOWED_BREADCRUMB'
   ]
 
+
+  # trips = c.trip(vehicle_id: 3524, includeData: true)
+  # ids = Trip.all.map{|t| t.details['id']}
+  # trips['actions'] # looking for 'name' => 'next'
+  # c = Carvoyant.first
+  # trips = c.trip(vehicle_id: 3524, includeData: true, searchOffset: 20) # or whatever the 'uri' equals
+  # trips['trip'].each do |t|
+  #   next if ids.include?(t['id'])
+  #   v.trips << Trip.new(details: t)
+  # end
+
+
   has_many :driver_behaviors
   has_many :connections
   has_many :trouble_codes

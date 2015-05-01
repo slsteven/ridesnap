@@ -27,6 +27,7 @@
 #  option_list       :jsonb            default("{}")
 #  device_id         :string
 #  specs             :jsonb
+#  external_id       :string
 #
 # Indexes
 #
@@ -78,7 +79,7 @@ class Vehicle < ActiveRecord::Base
   before_save do
     self.closest_color = base_color
     self.vin ||= Vehicle.generate_vin
-    self.agreed_value ||= self.ride_snap
+    self.agreed_value ||= self.ride_snap rescue nil
   end
   # before_update :update_s3_folder, if: :vin_changed?
 

@@ -3,7 +3,6 @@
 # Table name: authentications
 #
 #  id         :integer          not null, primary key
-#  vehicle_id :integer
 #  type       :string
 #  grant      :string
 #  token      :jsonb
@@ -12,8 +11,7 @@
 #
 # Indexes
 #
-#  index_authentications_on_type        (type)
-#  index_authentications_on_vehicle_id  (vehicle_id)
+#  index_authentications_on_type  (type)
 #
 
 class Authentication < ActiveRecord::Base
